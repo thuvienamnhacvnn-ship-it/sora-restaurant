@@ -16,12 +16,9 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { Icon } from "@/components/ui/Icon";
 
 type Props = {
   label: string;
-  badge: string;
-  placeholder: string;
   webm: string | null;
   poster: string | null;
   primary: boolean;
@@ -31,8 +28,6 @@ type Props = {
 
 export function Hero360Object({
   label,
-  badge,
-  placeholder,
   webm,
   poster,
   primary,
@@ -112,7 +107,7 @@ export function Hero360Object({
           // eslint-disable-next-line @next/next/no-img-element
           <img src={poster} alt={label} className="relative size-full object-contain" />
         ) : (
-          <Placeholder text={placeholder} />
+          <Placeholder />
         )}
 
         {/* Bóng toả dưới vật thể — CSS, chỉnh được theo từng khổ màn hình */}
@@ -134,16 +129,26 @@ export function Hero360Object({
       <p className="mt-3 rounded-[4px] bg-bg/85 px-2 py-0.5 text-center text-[12px] leading-tight font-semibold tracking-[.08em] text-white uppercase backdrop-blur-[2px]">
         {label}
       </p>
-      <span className="mt-1.5 inline-flex items-center gap-1 rounded-[4px] border border-gold/45 bg-bg/70 px-2 py-0.5 text-[11px] text-gold backdrop-blur-[2px]">
-        <Icon name="globe" size={12} />
-        {badge}
-      </span>
+      {/*
+       * Sếp 05/10/2026: "bỏ mấy cái ký hiệu 360độ trên banner home đi".
+       * Đã gỡ HAI thứ in chữ 360° đè lên banner:
+       *  - huy hiệu `⊕ 360°` từng nằm ngay dưới nhãn món;
+       *  - dòng giữ chỗ "360°-Objekt folgt" trong vòng enso.
+       * Hai chuỗi `home.stage.badge` / `home.stage.placeholder` vẫn còn trong
+       * i18n (file đó agent khác giữ) nhưng KHÔNG còn chỗ nào gọi — đừng thấy
+       * chuỗi rỗi mà gắn lại.
+       * Cơ chế video giữ nguyên: có WebM là chạy, không phải dựng lại.
+       */}
     </div>
   );
 }
 
-/** Bệ giữ chỗ: vòng enso vàng của KIT, không phải ảnh món giả. */
-function Placeholder({ text }: { text: string }) {
+/*
+ * Bệ giữ chỗ: chỉ còn vòng enso vàng của KIT. Trước đây giữa vòng có dòng
+ * "360°-Objekt folgt" — Sếp đã bác (xem chú thích trên). Không thay bằng ảnh
+ * món giả: ảnh banner mới đã vẽ sẵn ba bệ tròn ở đúng chỗ này.
+ */
+function Placeholder() {
   return (
     <div className="grid size-full place-items-center">
       <div
@@ -151,10 +156,6 @@ function Placeholder({ text }: { text: string }) {
         style={{ backgroundImage: "url(/decor/enso_gold.svg)" }}
         aria-hidden="true"
       />
-      {/* Chữ giữ chỗ cũng nằm trên ảnh -> nền riêng, như nhãn và huy hiệu. */}
-      <span className="relative max-w-[80%] rounded-[4px] bg-bg/85 px-1.5 py-0.5 text-center text-[11px] leading-snug text-white backdrop-blur-[2px]">
-        {text}
-      </span>
     </div>
   );
 }

@@ -55,8 +55,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
               <Hero360Object
                 key={obj.id}
                 label={t(obj.labelKey)}
-                badge={t("home.stage.badge")}
-                placeholder={t("home.stage.placeholder")}
                 webm={obj.webm}
                 poster={obj.poster}
                 primary={obj.primary}
@@ -99,8 +97,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           <Hero360Object
             key={obj.id}
             label={t(obj.labelKey)}
-            badge={t("home.stage.badge")}
-            placeholder={t("home.stage.placeholder")}
             webm={obj.webm}
             poster={obj.poster}
             primary={obj.primary}
