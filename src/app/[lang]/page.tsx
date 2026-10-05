@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionFrame } from "@/components/ui/SectionFrame";
-import { CategoryStrip } from "@/components/home/CategoryStrip";
+import { DaiPosterMon } from "@/components/home/DaiPosterMon";
 import { Hero360Object } from "@/components/home/Hero360Object";
 import { ChoSep } from "@/components/ui/ChoSep";
 import { MobileFooter } from "@/components/shell/MobileFooter";
@@ -115,8 +115,11 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       )}
 
       <SectionFrame>
-        <h2 className="sr-only">{t("home.categoryStrip")}</h2>
-        <CategoryStrip locale={lang} dishesLabel={t("common.dishes")} />
+        {/* Sếp 05/10 gửi 6 poster món và bảo đặt vào chân banner, chỉ bo viền
+            vàng. Thay dải 5 thẻ danh mục bằng `DaiPosterMon`; CategoryStrip
+            vẫn nguyên và vẫn chạy ở trang Speisekarte. */}
+        <h2 className="sr-only">{t("common.dishes")}</h2>
+        <DaiPosterMon />
       </SectionFrame>
 
       <SectionFrame>
