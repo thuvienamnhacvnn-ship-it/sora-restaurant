@@ -1,0 +1,248 @@
+{
+  "_nguon": "Chỉ chứa chữ ĐƯỢC PHÉP dùng: nhãn KIT quy định, nhãn nút UI chung đọc từ mockup (spec §13 cho phép), và dữ liệu thật. Câu quảng cáo/tuyên ngôn do AI viết KHÔNG nằm ở đây — component render <ChoSep/>.",
+  "brand": {
+    "name": "SoRa",
+    "tagline": "Japanese & Vietnamese Cuisine",
+    "eyebrow": "JAPANESE & VIETNAMESE CUISINE"
+  },
+  "nav": {
+    "home": "Home",
+    "menu": "Speisekarte",
+    "reservation": "Reservierung",
+    "gallery": "Galerie",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "mobileMore": "Mehr",
+    "mainNav": "Hauptnavigation",
+    "language": "Sprache"
+  },
+  "common": {
+    "todo": "[chờ Sếp gửi]",
+    "todoHint": "Nội dung chờ Sếp duyệt",
+    "more": "Mehr erfahren",
+    "close": "Schließen",
+    "back": "Zurück",
+    "from": "ab",
+    "dishes": "Gerichte",
+    "loading": "Speisekarte wird geladen …",
+    "empty": "Keine Gerichte gefunden.",
+    "phone": "Telefon",
+    "mobile": "Mobil",
+    "landline": "Festnetz",
+    "callUs": "Rufen Sie uns an"
+  },
+  "rail": {
+    "masterChef": "Master Chef",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "support": "Live Support"
+  },
+  "chef": {
+    "eyebrow": "MASTER CHEF ASSISTANT",
+    "title": "Master Chef Assistant",
+    "question": "Was möchtest du heute genießen?",
+    "inputPlaceholder": "Schreib mir, worauf du Lust hast …",
+    "send": "Senden",
+    "chips": {
+      "light": "Etwas Leichtes",
+      "hearty": "Etwas Herzhaftes",
+      "sushi": "Sushi",
+      "vegetarian": "Vegetarisch",
+      "surprise": "Überrasch mich"
+    },
+    "viewDish": "Gericht ansehen",
+    "otherSuggestions": "Andere Vorschläge",
+    "fallback": "Ich kann dazu keine sichere Empfehlung aus den vorhandenen Menüdaten ableiten. Soll ich dich mit unserem Service verbinden?",
+    "notConnected": "Der Assistent ist noch nicht mit einem KI-Dienst verbunden. Vorschläge kommen direkt aus der Speisekarte.",
+    "cta": {
+      "home": "Jetzt fragen",
+      "menu": "Jetzt empfehlen lassen",
+      "reservation": "Jetzt beraten lassen",
+      "gallery": "Galerie entdecken",
+      "about": "Jetzt fragen",
+      "contact": "Jetzt kontaktieren"
+    }
+  },
+  "home": {
+    "h2Line1": "Japan trifft Vietnam.",
+    "h2Line2": "Mitten in Bad Säckingen.",
+    "ctaPrimary": "Tisch reservieren",
+    "ctaSecondary": "Speisekarte entdecken",
+    "stage": {
+      "sushi": "SUSHI PLATTER",
+      "pho": "VIETNAMESE PHỞ",
+      "drink": "SIGNATURE DRINK",
+      "badge": "360°",
+      "placeholder": "360°-Objekt folgt"
+    },
+    "teaser": {
+      "selectionTitle": "CHEF'S SELECTION",
+      "selectionCta": "Jetzt entdecken",
+      "galleryTitle": "GALERIE",
+      "galleryCta": "Zur Galerie",
+      "reservationTitle": "RESERVIERUNG",
+      "reservationCta": "Jetzt reservieren"
+    },
+    "categoryStrip": "Kategorien",
+    "popular": "Beliebte Gerichte"
+  },
+  "menu": {
+    "searchPlaceholder": "Gerichte suchen …",
+    "searchLabel": "Gerichte durchsuchen",
+    "all": "Alle",
+    "categories": "Kategorien",
+    "dietary": {
+      "label": "Ernährung",
+      "vegetarian": "Vegetarisch",
+      "vegan": "Vegan",
+      "glutenfree": "Glutenfrei",
+      "spicy": "Scharf"
+    },
+    "allDishes": "Alle Gerichte anzeigen",
+    "allergens": "Allergene",
+    "variants": "Varianten",
+    "detailTitle": "Gericht im Detail",
+    "resultCount": "{n} Gerichte",
+    "subcategories": "Unterkategorien",
+    "askChef": "Passt das zu mir?",
+    "sortLabel": "Sortieren",
+    "sort": {
+      "nr": "Nummer",
+      "name": "Name",
+      "price": "Preis"
+    },
+    "priceOnRequest": "Preis auf Anfrage",
+    "askChefCategory": "Master Chef fragen",
+    "pieces": "Stk.",
+    "additives": "Zusatzstoffe",
+    "sizes": "Größen",
+    "noImage": "Für dieses Gericht liegt uns noch kein eigenes Foto vor.",
+    "groupPhotoNote": "Beispielfoto der Kategorie – einzelne Gerichte können abweichen."
+  },
+  "reservation": {
+    "title": "TISCH RESERVIEREN",
+    "step1": "1. Datum wählen",
+    "step2": "2. Uhrzeit wählen",
+    "step3": "3. Anzahl der Gäste",
+    "step4": "4. Bereich wählen (optional)",
+    "step5": "5. Besonderer Anlass (optional)",
+    "step6": "6. Anmerkungen (optional)",
+    "guests": "Gäste",
+    "guest": "Gast",
+    "notesPlaceholder": "z. B. Allergien, besondere Wünsche oder weitere Informationen …",
+    "submit": "Reservierung anfragen",
+    "tablePlan": "TISCHPLAN",
+    "openingHours": "ÖFFNUNGSZEITEN",
+    "summary": "IHRE RESERVIERUNG",
+    "summaryDate": "Datum",
+    "summaryTime": "Uhrzeit",
+    "summaryGuests": "Gäste",
+    "summaryArea": "Bereich",
+    "summaryOccasion": "Anlass",
+    "summaryNotes": "Anmerkungen",
+    "notChosen": "—",
+    "prevMonth": "Voriger Monat",
+    "nextMonth": "Nächster Monat",
+    "weekdays": [
+      "Mo",
+      "Di",
+      "Mi",
+      "Do",
+      "Fr",
+      "Sa",
+      "So"
+    ],
+    "months": [
+      "Januar",
+      "Februar",
+      "März",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember"
+    ],
+    "areas": {
+      "dining": "Gastraum",
+      "bar": "Bar"
+    },
+    "occasions": {
+      "birthday": "Geburtstag",
+      "anniversary": "Jahrestag",
+      "business": "Geschäftsessen",
+      "other": "Sonstiges"
+    },
+    "areaHintTitle": "Bereichswunsch, keine Tischvergabe",
+    "areaHint": "Wir zeigen hier keine freien Tische in Echtzeit. Sie wählen nur Ihren Wunschbereich; wir bestätigen den Tisch persönlich.",
+    "noBackendTitle": "Online-Reservierung noch nicht freigeschaltet",
+    "noBackend": "Diese Anfrage kann noch nicht versendet werden. Bitte reservieren Sie telefonisch – wir sind täglich erreichbar.",
+    "selectDateFirst": "Bitte wählen Sie zuerst Datum und Uhrzeit.",
+    "areasNote": "Nur die Bereiche, die auf unseren eigenen Fotos belegt sind. Weitere Bereiche folgen, sobald das Restaurant sie bestätigt hat.",
+    "chefQuestion": "Fragen zu Tischbereich, Allergien, Geburtstag oder großen Gruppen?",
+    "submitHint": "Online-Reservierung in Kürze verfügbar — bitte telefonisch reservieren",
+    "selected": "Ausgewählt"
+  },
+  "gallery": {
+    "filters": {
+      "all": "Alle",
+      "restaurant": "Restaurant",
+      "bar": "Bar",
+      "food": "Speisen",
+      "details": "Details",
+      "video": "Video"
+    },
+    "filterLabel": "Galerie filtern",
+    "videoTitle": "SoRa – Unsere Atmosphäre",
+    "play": "Video abspielen",
+    "zoom": "Bild vergrößern",
+    "prev": "Vorheriges Bild",
+    "next": "Nächstes Bild",
+    "noFood": "Für diesen Filter liegen uns noch keine eigenen Fotos vor.",
+    "videoCaption": "Rundgang durch unser Restaurant – 90 Sekunden, ohne Ton beim Start."
+  },
+  "about": {
+    "philosophy": "UNSERE PHILOSOPHIE",
+    "freshness": "FRISCHE & QUALITÄT",
+    "craft": "HANDWERKSKUNST",
+    "ambience": "UNSER AMBIENTE",
+    "storyTitle": "DIE GESCHICHTE VON",
+    "storyCta": "Unsere Geschichte",
+    "whyTitle": "Warum SoRa?"
+  },
+  "contact": {
+    "eyebrow": "WIR FREUEN UNS AUF SIE",
+    "address": "UNSERE ADRESSE",
+    "hours": "ÖFFNUNGSZEITEN",
+    "phone": "TELEFON",
+    "email": "E-MAIL",
+    "formTitle": "NACHRICHT SENDEN",
+    "name": "Name *",
+    "mail": "E-Mail *",
+    "tel": "Telefonnummer",
+    "subject": "Betreff *",
+    "message": "Nachricht *",
+    "send": "Nachricht senden",
+    "noFormTitle": "Kontaktformular noch nicht freigeschaltet",
+    "noForm": "Uns liegt noch keine E-Mail-Adresse des Restaurants vor, daher können wir Ihre Nachricht nicht zustellen. Bitte rufen Sie uns an.",
+    "route": "Route planen",
+    "map": "Karte",
+    "chefQuestion": "Fragen zu Öffnungszeiten, Reservierung oder Speisekarte?",
+    "whatsappCta": "Jetzt auf WhatsApp schreiben"
+  },
+  "legal": {
+    "imprintTitle": "Impressum",
+    "privacyTitle": "Datenschutzerklärung",
+    "pending": "Die gesetzlich erforderlichen Angaben liegen uns noch nicht vor."
+  },
+  "meta": {
+    "homeDescription": "SoRa – Japanese & Vietnamese Cuisine, Rheinbrückstr. 24, 79713 Bad Säckingen. Täglich 11:00 – 22:30 Uhr."
+  }
+}

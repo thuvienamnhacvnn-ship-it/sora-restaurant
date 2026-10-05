@@ -1,0 +1,46 @@
+{
+  "_nguon": "Đọc trực tiếp từ bìa trước (trang 1) và bìa sau (trang 39) của thực đơn in thật của nhà hàng: E:\\Works\\Sora\\SORA_WEBSITE_CLAUDE_KIT\\05_ASSETS\\menu_refs\\Menu.pdf. Cùng một khối thông tin in hai lần, khớp nhau. KHÔNG lấy từ ảnh mockup AI.",
+  "_ngayDoc": "2026-10-04",
+
+  "name": "SoRa Restaurant",
+  "tagline": "Japanese & Vietnamese Cuisine",
+
+  "address": {
+    "street": "Rheinbrückstr. 24",
+    "postalCode": "79713",
+    "city": "Bad Säckingen",
+    "country": "DE",
+    "_daXacMinh": true
+  },
+
+  "phones": [
+    { "label": "Mobil", "number": "01622 979999", "e164": "+491622979999", "_daXacMinh": true },
+    { "label": "Festnetz", "number": "07761 9982504", "e164": "+4977619982504", "_daXacMinh": true }
+  ],
+  "_ghiChuDienThoai": "`number` là dạng IN RA, nhóm số theo đúng bìa thực đơn. `e164` là dạng MÁY GỌI, không có dấu cách — nút gọi dùng trường này vì Bad Säckingen sát biên Thuỵ Sĩ, khách gọi từ nước ngoài bấm số nội địa 0162… là không nối được. Cách nhóm số (01622/979999 hay 0162 2979999) chỉ ảnh hưởng chỗ IN, không ảnh hưởng e164: bỏ số 0 đầu rồi thêm +49 thì dãy chữ số như nhau.",
+
+  "openingHours": {
+    "text": { "de": "Mo. – So.: 11:00 – 22:30 Uhr", "vi": "Thứ Hai – Chủ Nhật: 11:00 – 22:30" },
+    "schema": [
+      { "days": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], "open": "11:00", "close": "22:30" }
+    ],
+    "_daXacMinh": true,
+    "_ghiChu": "Thực đơn in KHÔNG nói tới ngày nghỉ hay giờ nghỉ trưa. Đừng tự thêm."
+  },
+
+  "email": null,
+  "whatsapp": null,
+  "instagram": null,
+  "facebook": null,
+  "googleMapsUrl": null,
+
+  "_CAN_HOI_SEP": [
+    "email — thực đơn in không có",
+    "số WhatsApp — có thể chính là số mobil 01622 979999 nhưng CHƯA ai xác nhận; KIT bắt buộc có nút WhatsApp nên cần Sếp chốt",
+    "tài khoản Instagram — KIT bắt buộc có nút Instagram",
+    "link Google Maps chính thức (hồ sơ Google Business của quán)",
+    "có Facebook không"
+  ],
+
+  "_KHONG_DUOC_LAM": "Mọi trường đang null thì ẨN khối tương ứng trên web, không điền số giả, không suy đoán."
+}

@@ -1,0 +1,39 @@
+/*
+ * Chuyển động của lớp hoạ tiết. Để trong CSS module vì @keyframes không viết
+ * được bằng style inline — phần còn lại của decor đều là inline style nên
+ * không phải đụng vào globals.css (file đó là vùng chung).
+ *
+ * LUẬT: prefers-reduced-motion -> cánh hoa ĐỨNG YÊN. globals.css đã có khối
+ * reduce chung (animation-duration .001ms) nhưng khối đó chỉ *rút ngắn*, nên
+ * ở đây tắt hẳn animation để cánh nằm đúng vị trí xuất phát, không nhảy về
+ * cuối đường bay.
+ */
+
+.drift {
+  animation: soraDrift var(--dur, 15s) linear var(--delay, 0s) infinite;
+  will-change: transform;
+}
+
+@keyframes soraDrift {
+  0% {
+    transform: translate3d(0, -12px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx, 26px), var(--dy, 190px), 0) rotate(var(--spin, 180deg));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift {
+    animation: none !important;
+    opacity: 0.85;
+  }
+}

@@ -1,0 +1,400 @@
+/*
+ * source("../") là BẮT BUỘC trên máy này, không phải tối ưu.
+ * Thư mục nhà C:\Users\admin bản thân nó là một repo git, nên Tailwind v4 dò
+ * ngược lên tới đó rồi quét cả ổ -> `next dev` treo không bao giờ lên.
+ * "../" tính từ tệp này (src/app/) nên gốc quét là src/.
+ */
+@import "tailwindcss" source("../");
+
+/* ---------------------------------------------------------------------------
+ * Token — chép từ KIT 07_DEV_STARTER/tokens.css + design-tokens.json.
+ * Mọi màu/khoảng cách đi qua đây, không rải mã màu lẻ trong component.
+ * ------------------------------------------------------------------------ */
+@theme {
+  --color-bg: #090806;
+  --color-elevated: #12100d;
+  --color-surface: #18130f;
+  --color-wood: #271a12;
+  --color-gold: #d8b26a;
+  --color-gold-bright: #f0d49a;
+  --color-ivory: #f3e9d2;
+  --color-text: #f7f1e7;
+  --color-muted: #bbae9c;
+  --color-red: #b3121a;
+  --color-red-dark: #781017;
+  --color-sakura: #d98291;
+  --color-green: #71805b;
+  --color-midnight: #24344a;
+  --color-line: #665038;
+
+  /* Bo góc — KIT: nút 4-6px, thẻ 6-10px. Sếp đã chốt 6px, KHÔNG dùng pill. */
+  --radius-btn: 6px;
+  --radius-card: 8px;
+
+  --font-serif: var(--font-lora), "Noto Serif", Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  /* Wordmark "SoRa" là ẢNH nét cọ (public/brand/), không phải webfont.
+     Biến này chỉ còn phục vụ mấy chỗ chữ brush nhỏ chưa có ảnh riêng. */
+  --font-brush: var(--font-lora), Georgia, serif;
+
+  --shadow-card: 0 16px 48px rgba(0, 0, 0, 0.28);
+
+  /* KIT responsive: <=767 mobile · 768-1199 sidebar 88px · >=1200 sidebar đầy đủ.
+     `xl` kéo từ 1280 về 1200.
+     ⚠ Phải khai LẠI CẢ 5 mốc theo thứ tự tăng dần. Tailwind v4 xuất media
+     query theo thứ tự khoá được khai trong @theme, nên nếu chỉ sửa mình `xl`
+     thì nó nhảy lên đầu và `sm:` (40rem) đứng SAU sẽ đè `xl:` ở màn 1440px —
+     đã dính đúng bẫy này với strip 5 danh mục. */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1536px;
+
+  --ease-sora: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+:root {
+  /* Khung chung */
+  --sidebar-w: 256px;
+  --sidebar-w-compact: 88px;
+  --page-pad: 32px;
+  --section-gap: 72px;
+  --content-max: 1720px;
+
+  /* Viền gold 1px, active lên .8 (KIT shape language) */
+  --border-gold: rgba(216, 178, 106, 0.45);
+  --border-gold-strong: rgba(216, 178, 106, 0.8);
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --sidebar-w: var(--sidebar-w-compact);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sidebar-w: 0px;
+    --page-pad: 16px;
+    --section-gap: 48px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* chặn tràn ngang ở khổ 390 — luật của Sếp */
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Vân gỗ/nhiễu rất nhẹ ở nền trang — KIT: pseudo-element 3-6% opacity.
+   Vẽ bằng gradient lặp, không nạp thêm ảnh. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.045;
+  background-image:
+    repeating-linear-gradient(
+      96deg,
+      var(--color-wood) 0px,
+      var(--color-wood) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(
+      4deg,
+      rgba(216, 178, 106, 0.5) 0px,
+      rgba(216, 178, 106, 0.5) 1px,
+      transparent 1px,
+      transparent 23px
+    );
+}
+
+::selection {
+  background: var(--color-red);
+  color: var(--color-text);
+}
+
+/* Vòng focus vàng 2px — KIT accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-gold-bright);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@layer components {
+  .sora-card {
+    background: rgba(18, 16, 13, 0.94);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-card);
+  }
+
+  /* Nút chính đỏ son. Chỉ dùng cho CTA chính — đỏ tối đa 7% diện tích. */
+  .sora-btn-primary {
+    display: inline-flex;
+    white-space: nowrap;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    height: 42px;
+    border-radius: var(--radius-btn);
+    border: 1px solid rgba(240, 212, 154, 0.65);
+    background: linear-gradient(
+      180deg,
+      var(--color-red) 0%,
+      var(--color-red-dark) 100%
+    );
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: transform 200ms var(--ease-sora), filter 200ms var(--ease-sora);
+  }
+  .sora-btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+
+  /* Nút phụ: nền trong mờ + viền gold, đứng được trên ảnh.
+     Đây KHÔNG phải lớp phủ lên ảnh — nó là nền riêng của nút. */
+  .sora-btn-ghost {
+    display: inline-flex;
+    white-space: nowrap;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    height: 42px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--border-gold);
+    background: rgba(9, 8, 6, 0.72);
+    backdrop-filter: blur(8px);
+    color: var(--color-gold-bright);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: transform 200ms var(--ease-sora), border-color 200ms var(--ease-sora);
+  }
+  .sora-btn-ghost:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-gold-strong);
+  }
+
+  .sora-btn-gold {
+    display: inline-flex;
+    white-space: nowrap;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 36px;
+    border-radius: var(--radius-btn);
+    background: linear-gradient(180deg, #ebbb69 0%, #c68939 100%);
+    color: #1a120b;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    transition: filter 200ms var(--ease-sora), transform 200ms var(--ease-sora);
+  }
+  .sora-btn-gold:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+
+  /* Nút viền mảnh dùng trong thẻ teaser / câu chuyện */
+  .sora-btn-outline {
+    display: inline-flex;
+    white-space: nowrap;
+    align-items: center;
+    gap: 8px;
+    padding: 0 14px;
+    height: 32px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--border-gold);
+    color: var(--color-gold-bright);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: border-color 200ms var(--ease-sora), background 200ms var(--ease-sora);
+  }
+  .sora-btn-outline:hover {
+    border-color: var(--border-gold-strong);
+    background: rgba(216, 178, 106, 0.08);
+  }
+
+  /*
+   * Chữ nằm TRÊN ảnh hero.
+   * Mẫu không có lớp phủ nào trên banner (đo `_w-agent/mau/01_home.png`:
+   * vùng ảnh hero sáng TB 69,3 / lệch chuẩn 75,2) — chữ đọc được hoàn toàn
+   * nhờ bóng đổ của chính nó. Hai tầng bóng: một tầng mềm toả rộng để tách
+   * khỏi nền sáng, một tầng sát để giữ nét ở cỡ chữ nhỏ.
+   */
+  .sora-on-photo,
+  /* h1–h4 PHẢI có trong danh sách: tiêu đề hero trang chủ là `<h2.sora-h2>`,
+     bộ chọn cũ chỉ bắt p/span/li/strong/em nên chữ TO NHẤT trên banner lại là
+     chữ duy nhất không có bóng. Lỗi này ẩn suốt vì trước đây có quầng tối đỡ;
+     bỏ quầng tối (Sếp 04/10) là lộ ra ngay — đo được 1,70:1. */
+  .sora-on-photo-block :where(h1, h2, h3, h4, p, span, li, strong, em) {
+    /* Sáu tầng (tăng 04/10). Vì sao tăng: banner trang chủ đổi sang ảnh phòng
+       ăn sáng đèn, bỏ luôn quầng tối sau chữ theo lệnh Sếp -> đo bằng
+       `scripts/do-tuong-phan.mjs` chỉ còn 1,70:1 ở chỗ nền sáng nhất, dưới xa
+       ngưỡng AA 3:1 cho chữ lớn.
+       Hai tầng ôm sát viền (0px/1px) dựng đường biên cứng cho nét chữ, ba tầng
+       giữa lấp vùng sáng ngay quanh chữ, tầng ngoài cùng toả rộng tách khối chữ
+       khỏi nền. Vẫn là bóng của CHÍNH CHỮ — KHÔNG phải lớp phủ trải trên ảnh. */
+    text-shadow:
+      0 0 1px rgba(0, 0, 0, 1),
+      0 1px 2px rgba(0, 0, 0, 1),
+      0 2px 6px rgba(0, 0, 0, 0.98),
+      0 3px 12px rgba(0, 0, 0, 0.95),
+      0 5px 24px rgba(0, 0, 0, 0.9),
+      0 0 56px rgba(0, 0, 0, 0.8);
+  }
+  /* ---------------------------------------------------------------------
+   * <ChoSep> — chỗ giữ cho nội dung Sếp chưa gửi.
+   * Toàn bộ kiểu chữ nằm ở đây chứ không phải class Tailwind trên component:
+   * lớp `utilities` của Tailwind xếp SAU `components`, mà thứ tự lớp thắng cả
+   * độ ưu tiên chọn — để class trên thẻ là luật hero bên dưới không bao giờ ăn.
+   * ------------------------------------------------------------------ */
+  [data-cho-sep] {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--color-muted) 70%, transparent);
+  }
+  [data-cho-sep-nhan] {
+    font-style: italic;
+    color: color-mix(in srgb, var(--color-gold) 70%, transparent);
+  }
+  [data-cho-sep-thanh-boc] {
+    display: block;
+    margin-top: 6px;
+  }
+  [data-cho-sep-thanh] {
+    display: block;
+    height: 9px;
+    margin-top: 6px;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-gold) 10%, transparent);
+  }
+
+  /*
+   * Trong HERO: giữ chỗ phải trông ĐÚNG như chữ thật sẽ có. Sếp duyệt thiết kế
+   * bằng mắt trên trang thật; giữ chỗ mờ hơn thành phẩm là duyệt nhầm một thứ
+   * không tồn tại. Chỉ cụm "[chờ Sếp gửi]" giữ dáng nhạt làm dấu.
+   */
+  .sora-on-photo-block [data-cho-sep] {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-text);
+  }
+  .sora-on-photo-block [data-cho-sep-chu] {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  .sora-on-photo-block [data-cho-sep-nhan] {
+    font-size: 13px;
+    color: color-mix(in srgb, var(--color-gold) 75%, transparent);
+  }
+  /* Thanh giữ chỗ: sáng bằng mức chữ thân sẽ có, không còn gần như tàng hình. */
+  .sora-on-photo-block [data-cho-sep-thanh] {
+    height: 11px;
+    margin-top: 8px;
+    background: color-mix(in srgb, var(--color-text) 34%, transparent);
+  }
+  /* Wordmark là ẢNH trong suốt -> bóng phải là drop-shadow, không text-shadow */
+  .sora-on-photo-img img {
+    filter: drop-shadow(0 3px 16px rgba(0, 0, 0, 0.7))
+      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.85));
+  }
+
+  .sora-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .sora-wordmark {
+    font-family: var(--font-brush);
+    color: var(--color-gold-bright);
+    /* 1.0 làm đuôi chữ p/k của font script đè lên dòng eyebrow bên dưới */
+    line-height: 1.14;
+    font-weight: 400;
+  }
+
+  .sora-h2 {
+    font-family: var(--font-serif);
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: var(--color-ivory);
+  }
+
+  .sora-section-title {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: var(--color-ivory);
+  }
+
+  /* Ô nhập chung cho form đặt bàn + liên hệ */
+  .sora-field {
+    width: 100%;
+    height: 41px;
+    padding: 0 14px;
+    background: #0b0906;
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-btn);
+    color: var(--color-text);
+    font-size: 15px;
+    font-family: var(--font-sans);
+  }
+  .sora-field::placeholder {
+    color: var(--color-muted);
+  }
+  textarea.sora-field {
+    height: auto;
+    padding: 12px 14px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+}
+
+@media (max-width: 767px) {
+  .sora-section-title {
+    font-size: 28px;
+  }
+  .sora-h2 {
+    font-size: 24px;
+  }
+}
+
+/* KIT 07_DEV_STARTER/tokens.css — chép nguyên */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

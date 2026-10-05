@@ -1,0 +1,113 @@
+/*
+ * Chữ nét cọ = ẢNH, không phải font. Mọi cỡ chữ đi qua một biến duy nhất
+ * nên cả bộ luôn cùng một cỡ nét, không bị chữ to chữ nhỏ.
+ *
+ * `--chu-w` / `--chu-h` là số KHÔNG đơn vị (bề ngang/cao của tệp @1x).
+ *
+ * HAI ĐƯỜNG ĐẶT CỠ, và thứ tự ưu tiên:
+ *   1. prop `tiLe` / `caoChuHoa` — ĐƯỜNG CHÍNH. Nhận một số, hoặc một cặp
+ *      `{ dienThoai, mayTinh }` để đổi cỡ ở 768px. Component ghi vào
+ *      `--chu-ti-le-prop` và `--chu-ti-le-prop-mt`; breakpoint nằm Ở ĐÂY
+ *      nên người gọi không phải biết con số 768.
+ *   2. `--chu-ti-le` đặt bằng class — LỐI THOÁT HIỂM, cho ngưỡng lạ mà cặp
+ *      trên không gánh được:
+ *        className="[--chu-ti-le:0.62] lg:[--chu-ti-le:1]"
+ *
+ * Class THẮNG prop ở MỌI khổ màn, cố ý thế và nhất quán: ai lỡ dùng cả hai
+ * thì không có chuyện media query im lặng mất tác dụng vì một prop cố định.
+ *
+ * 768px = đúng ngưỡng site bỏ sidebar chuyển sang top bar (`01_spec.md`).
+ * Đổi ngưỡng thì đổi Ở ĐÂY, không rải ra các trang.
+ */
+
+/*
+ * Hệ số cuối cùng, chốt TRÊN THẺ BỌC chứ không chốt trong `.anh`.
+ *
+ * Vì sao quan trọng: thẻ bọc cũng cần con số này để tự tính bề ngang, mà
+ * biến định nghĩa ở thẻ con thì thẻ cha không với tới. Để trong `.anh` là
+ * thẻ bọc mất cỡ — xem ghi chú ở `.boc`.
+ */
+.boc,
+.bocKhoi {
+  --chu-ti-le-ap: var(--chu-ti-le, var(--chu-ti-le-prop, 1));
+}
+
+/*
+ * Từ 768px trở lên: vế `mayTinh` của prop ăn. `--chu-ti-le` do class đặt
+ * vẫn đứng trước — kể cả khi class chỉ đặt nó trong media query của riêng
+ * nó — nên luật "class thắng prop" giữ nguyên ở mọi khổ.
+ */
+@media (min-width: 768px) {
+  .boc,
+  .bocKhoi {
+    --chu-ti-le-ap: var(
+      --chu-ti-le,
+      var(--chu-ti-le-prop-mt, var(--chu-ti-le-prop, 1))
+    );
+  }
+}
+
+.anh {
+  display: block;
+  /* min(100%, …) = không bao giờ tràn ngang ở 390px */
+  width: min(100%, calc(var(--chu-w) * var(--chu-ti-le-ap) * 1px));
+  height: auto;
+  /* giữ khung đúng tỉ lệ trước khi ảnh tải xong -> không giật layout */
+  aspect-ratio: var(--chu-w) / var(--chu-h);
+  object-fit: contain;
+  /* nét cọ có vân sơn: đừng để trình duyệt làm mượt quá tay khi thu nhỏ */
+  image-rendering: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/*
+ * Bọc inline để đặt được cạnh chữ thường trong một dòng.
+ *
+ * `width` KHÔNG THỪA. Thiếu nó thì lúc trình duyệt đo max-content, cái
+ * `100%` trong công thức của `<img>` là vô định nên nó rơi về **bề ngang
+ * GỐC của tệp** — thẻ bọc đo ra 277px dù ảnh chỉ vẽ 97px, đủ để đẩy nhãn
+ * xuống dòng dù chỗ trống còn thừa. Dính cả trong flex lẫn inline flow.
+ * (sora-dev-galerie bắt được 04/10 ở tiêu đề "DIE GESCHICHTE VON SoRa".)
+ */
+.boc {
+  display: inline-block;
+  /*
+   * `width` XÁC ĐỊNH + `max-width` riêng, KHÔNG gộp thành
+   * `width: min(100%, …)`. Khác nhau ở chỗ: `min(100%, …)` lại vô định mỗi
+   * khi có thẻ bọc ngoài đang tính bề ngang co-vừa-nội-dung, nên thẻ đó lấy
+   * bề ngang GỐC của tệp — lùi một tầng là lỗi quay lại y như cũ.
+   * Số xác định thì mọi tầng bọc ngoài đều tính đúng, mà `max-width: 100%`
+   * vẫn giữ luật không tràn ngang ở 390px.
+   */
+  width: calc(var(--chu-w) * var(--chu-ti-le-ap) * 1px);
+  max-width: 100%;
+  line-height: 0;
+}
+
+/*
+ * Bản khối cho `h1`/`h2`: CỐ Ý không đặt `width`. Thẻ tiêu đề phải chiếm
+ * trọn dòng để `text-align` của trang còn ăn; nó cũng không có hàng xóm
+ * cùng dòng nên không dính lỗi xuống dòng ở trên.
+ */
+.bocKhoi {
+  display: block;
+  max-width: 100%;
+  line-height: 0;
+}
+
+/*
+ * Chữ thật cho máy đọc màn hình + Google khi ảnh chạy ở chế độ `chuThat`.
+ * Vẫn nằm trong luồng DOM, chỉ không nhìn thấy bằng mắt.
+ */
+.anChu {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}

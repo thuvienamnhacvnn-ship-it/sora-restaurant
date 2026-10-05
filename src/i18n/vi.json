@@ -1,0 +1,3 @@
+{
+  "_nguon": "CỐ Ý ĐỂ RỖNG. Sếp chưa duyệt bản dịch tiếng Việt nào, nên mọi khoá tự rơi về de.json (xem src/lib/i18n.ts). Tên món + mô tả tiếng Việt KHÔNG nằm ở đây — chúng đã có sẵn trong data/menu-items.json và đi qua hàm pick(). Khi Sếp gửi bản dịch, thêm đúng những khoá được duyệt vào đây, đừng tự dịch thêm."
+}

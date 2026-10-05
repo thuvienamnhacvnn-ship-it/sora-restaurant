@@ -1,0 +1,111 @@
+[
+  {
+    "id": "suppen",
+    "order": 1,
+    "name": { "de": "Kleine Suppen", "vi": "Súp" },
+    "subtitle": { "de": "Small Soups", "vi": "Súp nhỏ" },
+    "itemCount": 3,
+    "subcategories": [
+      { "id": "kleine-suppen", "name": { "de": "Kleine Suppen", "vi": "Súp nhỏ" }, "order": 1, "itemCount": 3 }
+    ]
+  },
+  {
+    "id": "vorspeisen",
+    "order": 2,
+    "name": { "de": "Vorspeisen", "vi": "Khai vị" },
+    "subtitle": { "de": "Starters", "vi": "Món khai vị" },
+    "itemCount": 8,
+    "subcategories": [
+      { "id": "vorspeisen", "name": { "de": "Vorspeisen", "vi": "Khai vị" }, "order": 1, "itemCount": 8 }
+    ]
+  },
+  {
+    "id": "salate",
+    "order": 3,
+    "name": { "de": "Salate & Mixteller", "vi": "Salad & Đĩa tổng hợp" },
+    "subtitle": { "de": "Salads & Mixed Platters", "vi": "Salad và đĩa tổng hợp" },
+    "itemCount": 4,
+    "subcategories": [
+      { "id": "salate-mixteller", "name": { "de": "Salate & Mixteller", "vi": "Salad & Đĩa tổng hợp" }, "order": 1, "itemCount": 4 }
+    ]
+  },
+  {
+    "id": "hauptgerichte",
+    "order": 4,
+    "name": { "de": "Hauptgerichte", "vi": "Món chính" },
+    "subtitle": { "de": "Main Courses", "vi": "Món chính" },
+    "itemCount": 13,
+    "subcategories": [
+      { "id": "hauptgerichte", "name": { "de": "Hauptgerichte", "vi": "Món chính" }, "order": 1, "itemCount": 4 },
+      { "id": "nudeln-reisgerichte", "name": { "de": "Nudeln & Reisgerichte", "vi": "Mì & Cơm" }, "order": 2, "itemCount": 9 }
+    ]
+  },
+  {
+    "id": "vietnamese-classics",
+    "order": 5,
+    "name": { "de": "Vietnamesische Klassiker", "vi": "Món Việt truyền thống" },
+    "subtitle": { "de": "Vietnamese Classics", "vi": "Món Việt kinh điển" },
+    "itemCount": 4,
+    "subcategories": [
+      { "id": "vietnamesische-klassiker", "name": { "de": "Vietnamesische Klassiker", "vi": "Món Việt truyền thống" }, "order": 1, "itemCount": 4 }
+    ]
+  },
+  {
+    "id": "desserts",
+    "order": 6,
+    "name": { "de": "Desserts", "vi": "Tráng miệng" },
+    "subtitle": { "de": "Desserts", "vi": "Món tráng miệng" },
+    "itemCount": 3,
+    "subcategories": [
+      { "id": "desserts", "name": { "de": "Desserts", "vi": "Tráng miệng" }, "order": 1, "itemCount": 3 }
+    ]
+  },
+  {
+    "id": "sushi",
+    "order": 7,
+    "name": { "de": "Sushi", "vi": "Sushi" },
+    "subtitle": { "de": "Sushi Selections", "vi": "Các loại sushi" },
+    "itemCount": 109,
+    "subcategories": [
+      { "id": "nigiri", "name": { "de": "Nigiri", "vi": "Nigiri" }, "order": 1, "itemCount": 10, "pieces": 2 },
+      { "id": "temaki", "name": { "de": "Temaki", "vi": "Temaki" }, "order": 2, "itemCount": 3, "pieces": 1 },
+      { "id": "maki", "name": { "de": "Maki", "vi": "Maki" }, "order": 3, "itemCount": 18, "pieces": 8 },
+      { "id": "chu-maki", "name": { "de": "Chu Maki", "vi": "Chu Maki" }, "order": 4, "itemCount": 5, "pieces": 8 },
+      { "id": "inside-out", "name": { "de": "Inside Out", "vi": "Inside Out" }, "order": 5, "itemCount": 19, "pieces": 8 },
+      { "id": "crunchy-roll", "name": { "de": "Crunchy Roll", "vi": "Crunchy Roll" }, "order": 6, "itemCount": 8, "pieces": 10 },
+      { "id": "mini-crunchy-roll", "name": { "de": "Mini Crunchy Roll", "vi": "Mini Crunchy Roll" }, "order": 7, "itemCount": 6, "pieces": 8 },
+      { "id": "special-roll", "name": { "de": "Special Roll", "vi": "Special Roll" }, "order": 8, "itemCount": 10, "pieces": 8 },
+      { "id": "sashimi", "name": { "de": "Sashimi", "vi": "Sashimi" }, "order": 9, "itemCount": 5, "pieces": null },
+      { "id": "poke-bowl", "name": { "de": "Poke Bowl", "vi": "Poke Bowl" }, "order": 10, "itemCount": 6, "pieces": null,
+        "note": { "de": "Alle Bowls werden mit Sushi-Reis, Avocado, Gurke, Edamame, Paprika und Sesam-Sauce serviert.", "vi": "Tất cả các bowl được phục vụ với cơm sushi, bơ, dưa leo, edamame, ớt chuông và sốt mè." } },
+      { "id": "sushi-menu-for-one", "name": { "de": "Sushi Menu for One", "vi": "Set sushi 1 người" }, "order": 11, "itemCount": 7, "pieces": null },
+      { "id": "menu-sets", "name": { "de": "Menu Sets", "vi": "Set tổng hợp" }, "order": 12, "itemCount": 6, "pieces": null },
+      { "id": "family-sushi-menu", "name": { "de": "Family Sushi Menu", "vi": "Set sushi gia đình" }, "order": 13, "itemCount": 4, "pieces": null },
+      { "id": "sushi-menu", "name": { "de": "Sushi Menu", "vi": "Set sushi lớn" }, "order": 14, "itemCount": 2, "pieces": null }
+    ]
+  },
+  {
+    "id": "getraenke",
+    "order": 8,
+    "name": { "de": "Getränke", "vi": "Đồ uống" },
+    "subtitle": { "de": "Drinks", "vi": "Thức uống" },
+    "itemCount": 63,
+    "subcategories": [
+      { "id": "limonaden", "name": { "de": "Limonaden", "vi": "Nước chanh nhà làm" }, "order": 1, "itemCount": 5,
+        "note": { "de": "hausgemachte Fruchtsaft-Limonaden", "vi": "Nước trái cây có ga nhà làm" } },
+      { "id": "fruchtsaefte", "name": { "de": "Fruchtsäfte", "vi": "Nước ép trái cây" }, "order": 2, "itemCount": 2 },
+      { "id": "homemades", "name": { "de": "Homemades", "vi": "Đồ uống nhà làm" }, "order": 3, "itemCount": 4 },
+      { "id": "softdrinks", "name": { "de": "Softdrinks", "vi": "Nước ngọt" }, "order": 4, "itemCount": 3 },
+      { "id": "tee", "name": { "de": "Tee", "vi": "Trà" }, "order": 5, "itemCount": 6,
+        "note": { "de": "pro Tasse", "vi": "tính theo tách" } },
+      { "id": "kaffee", "name": { "de": "Kaffee", "vi": "Cà phê" }, "order": 6, "itemCount": 6 },
+      { "id": "longdrinks", "name": { "de": "Longdrinks", "vi": "Longdrink" }, "order": 7, "itemCount": 9 },
+      { "id": "cocktails", "name": { "de": "Cocktails", "vi": "Cocktail" }, "order": 8, "itemCount": 6 },
+      { "id": "weisswein", "name": { "de": "Weißwein", "vi": "Vang trắng" }, "order": 9, "itemCount": 6 },
+      { "id": "rotwein", "name": { "de": "Rotwein", "vi": "Vang đỏ" }, "order": 10, "itemCount": 5 },
+      { "id": "bier-vom-fass", "name": { "de": "Bier vom Fass", "vi": "Bia tươi" }, "order": 11, "itemCount": 2 },
+      { "id": "flaschenbier", "name": { "de": "Flaschenbier", "vi": "Bia chai" }, "order": 12, "itemCount": 6 },
+      { "id": "alkohol-spirituosen", "name": { "de": "Alkohol / Spirituosen", "vi": "Rượu mạnh" }, "order": 13, "itemCount": 3 }
+    ]
+  }
+]

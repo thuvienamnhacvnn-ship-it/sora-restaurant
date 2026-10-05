@@ -1,0 +1,7649 @@
+[
+  {
+    "id": "1-tom-kha-suppe",
+    "nr": "1",
+    "category": "suppen",
+    "subcategory": "Kleine Suppen",
+    "name": {
+      "de": "Tom Kha Suppe",
+      "vi": "Súp Tom Kha"
+    },
+    "description": {
+      "de": "traditionelle Kokosmilch-Suppe mit Champignons, Tomaten, Zucchini, Koriander und einer Zutat nach Wahl",
+      "vi": "Súp nước cốt dừa truyền thống với nấm mỡ, cà chua, bí ngòi, ngò rí và một nguyên liệu tự chọn"
+    },
+    "price": 4.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 4.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 5.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 6.5
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Lachs",
+          "vi": "Cá hồi"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 6.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "003_obj16"
+  },
+  {
+    "id": "2-sup-chua-cay",
+    "nr": "2",
+    "category": "suppen",
+    "subcategory": "Kleine Suppen",
+    "name": {
+      "de": "Sup Chua Cay (scharf)",
+      "vi": "Súp Chua Cay"
+    },
+    "description": {
+      "de": "würzig-säuerliche, angenehm scharfe Suppe mit Zitronengras, Tomaten, Champignons, Zucchini, Koriander und einer Zutat nach Wahl",
+      "vi": "Súp chua cay dịu với sả, cà chua, nấm mỡ, bí ngòi, ngò rí và một nguyên liệu tự chọn"
+    },
+    "price": 4.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 4.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 5.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 6.5
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Lachs",
+          "vi": "Cá hồi"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 6.5
+      }
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "003_obj16"
+  },
+  {
+    "id": "3-miso-suppe",
+    "nr": "3",
+    "category": "suppen",
+    "subcategory": "Kleine Suppen",
+    "name": {
+      "de": "Miso-Suppe",
+      "vi": "Súp Miso"
+    },
+    "description": {
+      "de": "japanische Sojapasten Suppe mit Seealgen, Lauchzwiebeln und einer Zutat nach Wahl",
+      "vi": "Súp tương đậu nành kiểu Nhật với rong biển, hành lá và một nguyên liệu tự chọn"
+    },
+    "price": 4.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "F"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Japanischer Tofu",
+          "vi": "Đậu hũ Nhật"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 4.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Lachs",
+          "vi": "Cá hồi"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 5.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "003_obj16"
+  },
+  {
+    "id": "4-edamame",
+    "nr": "4",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Edamame",
+      "vi": "Edamame"
+    },
+    "description": {
+      "de": "gedämpfte japanische Bohnen mit Meersalz",
+      "vi": "Đậu nành Nhật hấp với muối biển"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "F"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "004_obj20"
+  },
+  {
+    "id": "5-nem-hai-san",
+    "nr": "5",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Nem Hai San",
+      "vi": "Nem Hải Sản"
+    },
+    "pieces": 2,
+    "description": {
+      "de": "hausgemachte Meeresfrüchte-Frühlingsrollen mit Garnelen, Fisch und Tintenfisch, verfeinert mit Karotten, Kohlrabi, Zwiebeln, Lauchzwiebeln, Weißkohl, Glasnudeln und Mu-Err-Pilzen",
+      "vi": "Nem hải sản nhà làm với tôm, cá và mực, thêm cà rốt, su hào, hành tây, hành lá, bắp cải trắng, miến và nấm mèo"
+    },
+    "price": 7.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "C",
+      "D",
+      "N"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp",
+      "fish",
+      "squid"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "004_obj20"
+  },
+  {
+    "id": "6-gyoza",
+    "nr": "6",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Gyoza",
+      "vi": "Gyoza"
+    },
+    "pieces": 5,
+    "description": {
+      "de": "gedämpfte Teigtaschen mit einer herzhaften Füllung aus Hähnchen, Mu-Err-Pilzen und Lauchzwiebeln, serviert mit hausgemachter Sauce",
+      "vi": "Há cảo hấp nhân thịt gà, nấm mèo và hành lá, dùng kèm nước sốt nhà làm"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "F"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "004_obj20"
+  },
+  {
+    "id": "7-ebi-tempura",
+    "nr": "7",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Ebi Tempura",
+      "vi": "Ebi Tempura"
+    },
+    "pieces": 4,
+    "description": {
+      "de": "knusprig frittierte Riesengarnelen im feinen Tempuramantel, serviert mit frischem Salat und Süß-Sauer-Sauce",
+      "vi": "Tôm sú chiên giòn trong lớp bột tempura mỏng, dùng kèm xà lách tươi và sốt chua ngọt"
+    },
+    "price": 7.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "004_obj20"
+  },
+  {
+    "id": "8-chicken-sate",
+    "nr": "8",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Chicken Saté",
+      "vi": "Chicken Saté"
+    },
+    "pieces": 2,
+    "description": {
+      "de": "saftig gegrillte Hähnchenspieße, serviert mit einer fein abgestimmten Erdnusssauce",
+      "vi": "Xiên gà nướng mọng nước, dùng kèm sốt đậu phộng pha vừa vị"
+    },
+    "price": 7.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "L",
+      "E",
+      "F",
+      "3",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "005_obj24"
+  },
+  {
+    "id": "9-mini-fruehlingsrollen",
+    "nr": "9",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Mini-Frühlingsrollen",
+      "vi": "Chả giò chay mini"
+    },
+    "pieces": 8,
+    "description": {
+      "de": "vegetarische Mini-Frühlingsrollen mit feiner Gemüsefüllung, serviert mit Süß-Sauer-Sauce",
+      "vi": "Chả giò chay mini nhân rau củ, dùng kèm sốt chua ngọt"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "L",
+      "E"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "005_obj24"
+  },
+  {
+    "id": "10-goi-cuon-ha-noi",
+    "nr": "10",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Goi Cuon Ha Noi",
+      "vi": "Gỏi Cuốn Hà Nội"
+    },
+    "pieces": 2,
+    "description": {
+      "de": "vietnamesische Sommerrollen mit frischem Salat, Reisnudeln, Koriander und Erdnüssen, serviert mit Hoisin-Sauce und einer Zutat nach Wahl",
+      "vi": "Gỏi cuốn Việt Nam với xà lách tươi, bún, ngò rí và đậu phộng, dùng kèm sốt hoisin và một nguyên liệu tự chọn"
+    },
+    "price": 4.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "L",
+      "E",
+      "F"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 4.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 5.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 6.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "005_obj24"
+  },
+  {
+    "id": "11-suesskartoffelpommes",
+    "nr": "11",
+    "category": "vorspeisen",
+    "subcategory": "Vorspeisen",
+    "name": {
+      "de": "Süßkartoffelpommes",
+      "vi": "Khoai lang chiên"
+    },
+    "description": {
+      "de": "Süßkartoffelpommes mit Ketchup oder Mayonnaise",
+      "vi": "Khoai lang chiên dùng kèm tương cà hoặc mayonnaise"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "C",
+      "J",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "005_obj24"
+  },
+  {
+    "id": "12-glasnudelsalat",
+    "nr": "12",
+    "category": "salate",
+    "subcategory": "Salate & Mixteller",
+    "name": {
+      "de": "Glasnudelsalat",
+      "vi": "Salad miến"
+    },
+    "description": {
+      "de": "leichter Glasnudelsalat mit frischem Salat, Sesamöl, Erdnüssen, Röstzwiebeln und Koriander, verfeinert mit hausgemachtem Dressing und einer Zutat nach Wahl",
+      "vi": "Salad miến thanh nhẹ với xà lách tươi, dầu mè, đậu phộng, hành phi và ngò rí, trộn sốt nhà làm và một nguyên liệu tự chọn"
+    },
+    "price": 9.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "E",
+      "K"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 9.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 10.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 12.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "006_obj28"
+  },
+  {
+    "id": "13-mango-salat",
+    "nr": "13",
+    "category": "salate",
+    "subcategory": "Salate & Mixteller",
+    "name": {
+      "de": "Mango-Salat",
+      "vi": "Salad xoài"
+    },
+    "description": {
+      "de": "fruchtiger Mango-Salat mit knackigem Salat, Sesamöl, Erdnüssen, Röstzwiebeln und Koriander, verfeinert mit hausgemachtem Dressing und einer Zutat nach Wahl",
+      "vi": "Salad xoài thơm trái cây với xà lách giòn, dầu mè, đậu phộng, hành phi và ngò rí, trộn sốt nhà làm và một nguyên liệu tự chọn"
+    },
+    "price": 6.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "E",
+      "K"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 6.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 7.5
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 9.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "006_obj28"
+  },
+  {
+    "id": "14-wakame-salat",
+    "nr": "14",
+    "category": "salate",
+    "subcategory": "Salate & Mixteller",
+    "name": {
+      "de": "Wakame-Salat",
+      "vi": "Salad rong biển Wakame"
+    },
+    "description": {
+      "de": "eingelegter Algensalat mit Sesamsauce",
+      "vi": "Salad rong biển ngâm với sốt mè"
+    },
+    "price": 7.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "F",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "006_obj28"
+  },
+  {
+    "id": "15-sora-mixteller",
+    "nr": "15",
+    "category": "salate",
+    "subcategory": "Salate & Mixteller",
+    "name": {
+      "de": "SoRa Mixteller",
+      "vi": "Đĩa tổng hợp SoRa"
+    },
+    "description": {
+      "de": "1 Stk. Meeresfrüchte-Frühlingsrolle / 3 Stk. Vegetarische Mini-Frühlingsrollen / 3 Stk. Gyoza / 1 Stk. Sommerrolle mit Tofu / 2 Stk. Ebi Tempura / Edamame",
+      "vi": "1 cuốn nem hải sản / 3 cuốn chả giò chay mini / 3 cái gyoza / 1 cuốn gỏi cuốn đậu hũ / 2 con ebi tempura / edamame"
+    },
+    "price": 24.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "K",
+      "L",
+      "N",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp",
+      "fish",
+      "squid",
+      "chicken",
+      "tofu"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "006_obj28"
+  },
+  {
+    "id": "16-rotes-curry",
+    "nr": "16",
+    "category": "hauptgerichte",
+    "subcategory": "Hauptgerichte",
+    "name": {
+      "de": "Rotes Curry",
+      "vi": "Cà ri đỏ"
+    },
+    "description": {
+      "de": "rotes Curry in cremiger Kokosmilch mit frischem Saisongemüse, serviert mit Jasminreis, Beilagensalat und einer Zutat nach Wahl",
+      "vi": "Cà ri đỏ nấu nước cốt dừa béo với rau củ theo mùa, dùng kèm cơm lài, salad ăn kèm và một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.5
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 19.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 17.5
+      },
+      {
+        "code": "K",
+        "name": {
+          "de": "Lachsfilet",
+          "vi": "Phi lê cá hồi"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 18.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp",
+      "duck",
+      "beef",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "007_obj32"
+  },
+  {
+    "id": "17-erdnusssauce",
+    "nr": "17",
+    "category": "hauptgerichte",
+    "subcategory": "Hauptgerichte",
+    "name": {
+      "de": "Erdnusssauce",
+      "vi": "Sốt đậu phộng"
+    },
+    "description": {
+      "de": "cremige Erdnuss-Soße in Kokosmilch mit Gemüse, serviert mit Jasminreis und einer Zutat nach Wahl",
+      "vi": "Sốt đậu phộng béo nấu nước cốt dừa với rau củ, dùng kèm cơm lài và một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "E"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.5
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 19.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 17.5
+      },
+      {
+        "code": "K",
+        "name": {
+          "de": "Lachsfilet",
+          "vi": "Phi lê cá hồi"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 18.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp",
+      "duck",
+      "beef",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "007_obj32"
+  },
+  {
+    "id": "18-hoisin-sauce",
+    "nr": "18",
+    "category": "hauptgerichte",
+    "subcategory": "Hauptgerichte",
+    "name": {
+      "de": "Hoisin-Sauce",
+      "vi": "Sốt hoisin"
+    },
+    "description": {
+      "de": "aromatische, leicht süßliche Hoisin-Sauce mit kräftigem Geschmack, serviert mit frischem Gemüse, Duftreis und einer Zutat nach Wahl",
+      "vi": "Sốt hoisin thơm, hơi ngọt, vị đậm, dùng kèm rau củ tươi, cơm thơm và một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "F",
+      "K"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.5
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 19.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 17.5
+      },
+      {
+        "code": "K",
+        "name": {
+          "de": "Lachsfilet",
+          "vi": "Phi lê cá hồi"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 18.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp",
+      "duck",
+      "beef",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "008_obj36"
+  },
+  {
+    "id": "19-sora-sauce",
+    "nr": "19",
+    "category": "hauptgerichte",
+    "subcategory": "Hauptgerichte",
+    "name": {
+      "de": "SoRa-Sauce",
+      "vi": "Sốt SoRa"
+    },
+    "description": {
+      "de": "dunkle Sauce mit frischem Gemüse, Pak Choi und Spargel, serviert mit Duftreis und einer Zutat nach Wahl",
+      "vi": "Sốt sẫm màu với rau củ tươi, cải thìa và măng tây, dùng kèm cơm thơm và một nguyên liệu tự chọn"
+    },
+    "price": 16.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "E",
+      "I",
+      "10"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Gebratenes Hühnerfleisch",
+          "vi": "Gà xào"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.5
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 19.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 17.5
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Lachsfilet",
+          "vi": "Phi lê cá hồi"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 18.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken",
+      "shrimp",
+      "duck",
+      "beef",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "008_obj36"
+  },
+  {
+    "id": "20-pho-ha-noi",
+    "nr": "20",
+    "category": "vietnamese-classics",
+    "subcategory": "Vietnamesische Klassiker",
+    "name": {
+      "de": "Pho Ha Noi",
+      "vi": "Phở Hà Nội"
+    },
+    "description": {
+      "de": "vietnamesische Reisbandnudelsuppe in kräftiger Rinderbrühe mit Zimt, Sternanis und Ingwer, serviert mit Sojasprossen, Koriander, Thai-Basilikum, Lauchzwiebeln und einer Zutat nach Wahl",
+      "vi": "Phở Việt Nam nước dùng bò đậm đà với quế, hoa hồi và gừng, dùng kèm giá đỗ, ngò rí, húng quế Thái, hành lá và một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "F"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 15.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 17.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "009_obj40"
+  },
+  {
+    "id": "21-bun-nam-bo",
+    "nr": "21",
+    "category": "vietnamese-classics",
+    "subcategory": "Vietnamesische Klassiker",
+    "name": {
+      "de": "Bun Nam Bo",
+      "vi": "Bún Nam Bộ"
+    },
+    "description": {
+      "de": "vietnamesische Reisnudel-Bowl mit frischem Salat, Sojasprossen, Koriander, Erdnüssen, Röstzwiebeln, dazu ein hausgemachtes Limetten-Dressing und einer Zutat nach Wahl",
+      "vi": "Tô bún Việt Nam với xà lách tươi, giá đỗ, ngò rí, đậu phộng, hành phi, nước trộn chanh nhà làm và một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "E",
+      "F"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 15.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 17.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "009_obj40"
+  },
+  {
+    "id": "22-bun-nem-hai-san",
+    "nr": "22",
+    "category": "vietnamese-classics",
+    "subcategory": "Vietnamesische Klassiker",
+    "name": {
+      "de": "Bun Nem Hai San",
+      "vi": "Bún Nem Hải Sản"
+    },
+    "pieces": 3,
+    "description": {
+      "de": "vietnamesische Reisnudel-Bowl mit knusprigen Meeresfrüchte-Frühlingsrollen, frischem Salat, Koriander, Erdnüssen und Röstzwiebeln, serviert mit hausgemachtem Limetten-Dressing",
+      "vi": "Tô bún Việt Nam với nem hải sản chiên giòn, xà lách tươi, ngò rí, đậu phộng và hành phi, dùng kèm nước trộn chanh nhà làm"
+    },
+    "price": null,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "D",
+      "E",
+      "N"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp",
+      "fish",
+      "squid"
+    ],
+    "featured": false,
+    "available": true,
+    "note": "Thực đơn in KHÔNG có giá cho món này (đã phóng to kiểm tra trang 009). Cần nhà hàng cung cấp.",
+    "sourcePage": "009_obj40"
+  },
+  {
+    "id": "23-pho-xao",
+    "nr": "23",
+    "category": "vietnamese-classics",
+    "subcategory": "Vietnamesische Klassiker",
+    "name": {
+      "de": "Pho Xao",
+      "vi": "Phở Xào"
+    },
+    "description": {
+      "de": "Gebratene Reisbandnudeln mit Ei, Gemüse, Erdnüssen, Röstzwiebeln und vietnamesischen Kräutern und einer Zutat nach Wahl",
+      "vi": "Bánh phở xào với trứng, rau củ, đậu phộng, hành phi và rau thơm Việt Nam, kèm một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "C",
+      "E",
+      "F"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 18.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 17.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp",
+      "duck",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "009_obj40"
+  },
+  {
+    "id": "24-flying-singapore",
+    "nr": "24",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Flying Singapore",
+      "vi": "Flying Singapore"
+    },
+    "description": {
+      "de": "fliegende Nudeln mit frischem Salat, gedämpftem Gemüse, Erdnüssen und Kräutersauce, dazu eine Zutat und Sauce nach Wahl (SoRa, Curry- oder Erdnusssauce)",
+      "vi": "Mì \"bay\" với xà lách tươi, rau củ hấp, đậu phộng và sốt rau thơm, kèm một nguyên liệu và một loại sốt tự chọn (sốt SoRa, cà ri hoặc đậu phộng)"
+    },
+    "price": 20.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "I",
+      "E",
+      "F",
+      "L",
+      "10"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Gegrilltes Hühnerfleisch",
+          "vi": "Gà nướng"
+        },
+        "allergens": [],
+        "price": 21.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Gebratenes Hühnerfleisch",
+          "vi": "Gà xào"
+        },
+        "allergens": [],
+        "price": 20.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Ente",
+          "vi": "Vịt"
+        },
+        "allergens": [],
+        "price": 21.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 22.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 21.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken",
+      "duck",
+      "shrimp",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "010_obj44"
+  },
+  {
+    "id": "25-mi-xao",
+    "nr": "25",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Mi Xao",
+      "vi": "Mì Xào"
+    },
+    "description": {
+      "de": "gebratene Nudeln mit Ei, Gemüse, frischem Salat, Mayonnaise und einer Zutat nach Wahl",
+      "vi": "Mì xào với trứng, rau củ, xà lách tươi, mayonnaise và một nguyên liệu tự chọn"
+    },
+    "price": 15.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "C",
+      "F",
+      "J",
+      "2",
+      "5"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 15.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Gebratenes Hühnerfleisch",
+          "vi": "Gà xào"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 18.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 20.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 18.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "duck",
+      "shrimp",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "011_obj48"
+  },
+  {
+    "id": "26-com-rang",
+    "nr": "26",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Com Rang",
+      "vi": "Cơm Rang"
+    },
+    "description": {
+      "de": "gebratener Eierreis mit Gemüse, Sojasprossen, Röstzwiebeln, Lauchzwiebeln, Erdnüssen und einer Zutat nach Wahl",
+      "vi": "Cơm rang trứng với rau củ, giá đỗ, hành phi, hành lá, đậu phộng và một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "C",
+      "E",
+      "F"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Gebratenes Hühnerfleisch",
+          "vi": "Gà xào"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 18.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 20.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "duck",
+      "shrimp",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "011_obj48"
+  },
+  {
+    "id": "27-nasi-goreng",
+    "nr": "27",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Nasi Goreng – Gebratener Reis",
+      "vi": "Nasi Goreng – Cơm chiên"
+    },
+    "description": {
+      "de": "Gebratener Reis mit Gemüse, Ei, Knoblauch, Lauch und Curry.",
+      "vi": "Cơm chiên với rau củ, trứng, tỏi, tỏi tây và cà ri."
+    },
+    "price": 15.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "C",
+      "E"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "mit Tofu",
+          "vi": "với đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 15.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "mit gebratenem Hähnchenfleisch",
+          "vi": "với gà xào"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "mit knusprigem Hähnchenfleisch",
+          "vi": "với gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 18.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "mit knuspriger Ente",
+          "vi": "với vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 20.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "mit Garnelen",
+          "vi": "với tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "mit Rindfleisch",
+          "vi": "với thịt bò"
+        },
+        "allergens": [],
+        "price": 18.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "duck",
+      "shrimp",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "012_obj52"
+  },
+  {
+    "id": "28-bami-goreng",
+    "nr": "28",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Bami Goreng – Gebratene Nudeln",
+      "vi": "Bami Goreng – Mì xào"
+    },
+    "description": {
+      "de": "Gebratene Nudeln mit Gemüse, Ei, Knoblauch, Lauch und Curry.",
+      "vi": "Mì xào với rau củ, trứng, tỏi, tỏi tây và cà ri."
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "C",
+      "E"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "mit Tofu",
+          "vi": "với đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "mit gebratenem Hähnchenfleisch",
+          "vi": "với gà xào"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "mit knusprigem Hähnchenfleisch",
+          "vi": "với gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "mit knuspriger Ente",
+          "vi": "với vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 18.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "mit Garnelen",
+          "vi": "với tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "mit Rindfleisch",
+          "vi": "với thịt bò"
+        },
+        "allergens": [],
+        "price": 18.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "duck",
+      "shrimp",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "012_obj52"
+  },
+  {
+    "id": "29-udon-xao",
+    "nr": "29",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Udon Xao",
+      "vi": "Udon Xào"
+    },
+    "description": {
+      "de": "gebratene Udon-Nudeln mit Sojasprossen, Pak Choi, Knoblauch, Röstzwiebeln, Erdnüssen, Karotten, vietnamesischen Kräutern und einer Zutat nach Wahl",
+      "vi": "Mì udon xào với giá đỗ, cải thìa, tỏi, hành phi, đậu phộng, cà rốt, rau thơm Việt Nam và một nguyên liệu tự chọn"
+    },
+    "price": 14.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "E",
+      "F"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Tofu",
+          "vi": "Đậu hũ"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 14.9
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Hühnerfleisch",
+          "vi": "Thịt gà"
+        },
+        "allergens": [],
+        "price": 16.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Knuspriges Hühnerfleisch",
+          "vi": "Gà giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 17.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Garnelen",
+          "vi": "Tôm"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 21.9
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Knusprige Ente",
+          "vi": "Vịt giòn"
+        },
+        "allergens": [
+          "A1"
+        ],
+        "price": 18.9
+      },
+      {
+        "code": "F",
+        "name": {
+          "de": "Rindfleisch",
+          "vi": "Thịt bò"
+        },
+        "allergens": [],
+        "price": 20.9
+      },
+      {
+        "code": "K",
+        "name": {
+          "de": "Gegrillter Lachs",
+          "vi": "Cá hồi nướng"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 21.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "shrimp",
+      "duck",
+      "beef",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "013_obj56"
+  },
+  {
+    "id": "30-bo-luc-lac",
+    "nr": "30",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Bo Luc Lac",
+      "vi": "Bò Lúc Lắc"
+    },
+    "description": {
+      "de": "kurz gebratene Rindfleischwürfel mit Zwiebeln, Schalotten, Paprika, Sellerie und Ananas, verfeinert mit hausgemachter Sauce und Koriander, serviert mit duftendem Jasminreis",
+      "vi": "Bò cắt hạt lựu xào nhanh với hành tây, hành tím, ớt chuông, cần tây và dứa, thêm sốt nhà làm và ngò rí, dùng kèm cơm lài thơm"
+    },
+    "price": 22.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "D",
+      "E",
+      "F",
+      "I",
+      "L",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "013_obj56"
+  },
+  {
+    "id": "31-tokyo-fly",
+    "nr": "31",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Tokyo Fly",
+      "vi": "Tokyo Fly"
+    },
+    "description": {
+      "de": "gebratene japanische Udon-Nudeln mit Knoblauch, Pak Choi, Sojasprossen, Karotten, Erdnüssen, Röstzwiebeln und vietnamesischen Kräutern, serviert mit 3 großen Garnelen und 150g gegrilltem Rindfleisch",
+      "vi": "Mì udon Nhật xào với tỏi, cải thìa, giá đỗ, cà rốt, đậu phộng, hành phi và rau thơm Việt Nam, dùng kèm 3 con tôm lớn và 150g thịt bò nướng"
+    },
+    "price": 24.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "E",
+      "F"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp",
+      "beef"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "013_obj56"
+  },
+  {
+    "id": "32-grillgerichte",
+    "nr": "32",
+    "category": "hauptgerichte",
+    "subcategory": "Nudeln & Reisgerichte",
+    "name": {
+      "de": "Grillgerichte",
+      "vi": "Món nướng"
+    },
+    "description": {
+      "de": "asiatisch gewürzte Grillgerichte mit gedämpftem Gemüse, frischem Salat und Jasminreis, serviert mit Curry- und Hoisin-Sauce separat als Dip",
+      "vi": "Món nướng tẩm gia vị châu Á với rau củ hấp, xà lách tươi và cơm lài, dùng kèm sốt cà ri và sốt hoisin để riêng làm nước chấm"
+    },
+    "price": 19.5,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "F",
+      "G",
+      "K"
+    ],
+    "variants": [
+      {
+        "code": "A",
+        "name": {
+          "de": "Gegrillter Tofu",
+          "vi": "Đậu hũ nướng"
+        },
+        "allergens": [
+          "F"
+        ],
+        "price": 19.5
+      },
+      {
+        "code": "B",
+        "name": {
+          "de": "Gegrilltes Hühnerfleisch",
+          "vi": "Gà nướng"
+        },
+        "allergens": [],
+        "price": 22.9
+      },
+      {
+        "code": "C",
+        "name": {
+          "de": "Gegrilltes Rindfleisch",
+          "vi": "Bò nướng"
+        },
+        "allergens": [],
+        "price": 24.9
+      },
+      {
+        "code": "D",
+        "name": {
+          "de": "Gegrillter Lachs",
+          "vi": "Cá hồi nướng"
+        },
+        "allergens": [
+          "D"
+        ],
+        "price": 24.5
+      },
+      {
+        "code": "E",
+        "name": {
+          "de": "Gegrillte Garnelen (6 Stk.)",
+          "vi": "Tôm nướng (6 con)"
+        },
+        "allergens": [
+          "B"
+        ],
+        "price": 26.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu",
+      "chicken",
+      "beef",
+      "salmon",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "013_obj56"
+  },
+  {
+    "id": "33-chuoi-chien-gion",
+    "nr": "33",
+    "category": "desserts",
+    "subcategory": "Desserts",
+    "name": {
+      "de": "Chuoi Chien Gion",
+      "vi": "Chuối Chiên Giòn"
+    },
+    "pieces": 5,
+    "description": {
+      "de": "gebackene Banane mit Erdnüssen und Honig, serviert mit cremigem Vanilleeis",
+      "vi": "Chuối chiên với đậu phộng và mật ong, dùng kèm kem vani béo"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "E",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "014_obj60"
+  },
+  {
+    "id": "34-xoi-xoai-nep-than",
+    "nr": "34",
+    "category": "desserts",
+    "subcategory": "Desserts",
+    "name": {
+      "de": "Xoi Xoai Nep Than",
+      "vi": "Xôi Xoài Nếp Than"
+    },
+    "description": {
+      "de": "vietnamesischer schwarzer Klebreis mit frischen Mangostreifen und fruchtiger Mangosauce, verfeinert mit Joghurt und hausgemachter Kokoscremesauce",
+      "vi": "Xôi nếp than Việt Nam với xoài tươi cắt sợi và sốt xoài, thêm sữa chua và sốt kem dừa nhà làm"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "014_obj60"
+  },
+  {
+    "id": "35-kem-vani",
+    "nr": "35",
+    "category": "desserts",
+    "subcategory": "Desserts",
+    "name": {
+      "de": "Kem Vani",
+      "vi": "Kem Vani"
+    },
+    "description": {
+      "de": "2 Kugeln Vanilleeis mit Sahne",
+      "vi": "2 viên kem vani với kem tươi"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "014_obj60"
+  },
+  {
+    "id": "201-sake-nigiri",
+    "nr": "201",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Sake Nigiri",
+      "vi": "Sake Nigiri"
+    },
+    "description": {
+      "de": "Lachs",
+      "vi": "Cá hồi"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "202-maguro-nigiri",
+    "nr": "202",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Maguro Nigiri",
+      "vi": "Maguro Nigiri"
+    },
+    "description": {
+      "de": "Thunfisch",
+      "vi": "Cá ngừ"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "203-ibodai-nigiri",
+    "nr": "203",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Ibodai Nigiri",
+      "vi": "Ibodai Nigiri"
+    },
+    "description": {
+      "de": "Butterfisch",
+      "vi": "Cá bơ"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "butterfish"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "204-ebi-nigiri",
+    "nr": "204",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Ebi Nigiri",
+      "vi": "Ebi Nigiri"
+    },
+    "description": {
+      "de": "Tigergarnelen",
+      "vi": "Tôm sú"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "205-kani-nigiri",
+    "nr": "205",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Kani Nigiri",
+      "vi": "Kani Nigiri"
+    },
+    "description": {
+      "de": "Krebsfleischimitat",
+      "vi": "Thanh cua (surimi)"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "F",
+      "I",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "surimi"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "206-unagi-nigiri",
+    "nr": "206",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Unagi Nigiri",
+      "vi": "Unagi Nigiri"
+    },
+    "description": {
+      "de": "gegrillter Flussaal",
+      "vi": "Lươn nướng"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "eel"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "207-aburi-sake-nigiri",
+    "nr": "207",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Aburi Sake Nigiri",
+      "vi": "Aburi Sake Nigiri"
+    },
+    "description": {
+      "de": "flambierter Lachs",
+      "vi": "Cá hồi áp lửa"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "208-aburi-maguro-nigiri",
+    "nr": "208",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Aburi Maguro Nigiri",
+      "vi": "Aburi Maguro Nigiri"
+    },
+    "description": {
+      "de": "flambierter Thunfisch",
+      "vi": "Cá ngừ áp lửa"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "209-avocado-nigiri",
+    "nr": "209",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Avocado Nigiri",
+      "vi": "Avocado Nigiri"
+    },
+    "description": {
+      "de": "Avocado",
+      "vi": "Bơ"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "210-inari-nigiri",
+    "nr": "210",
+    "category": "sushi",
+    "subcategory": "Nigiri",
+    "pieces": 2,
+    "name": {
+      "de": "Inari Nigiri",
+      "vi": "Inari Nigiri"
+    },
+    "description": {
+      "de": "frittierte Tofutasche",
+      "vi": "Túi đậu hũ chiên"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "F"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "212-sake-temaki",
+    "nr": "212",
+    "category": "sushi",
+    "subcategory": "Temaki",
+    "pieces": 1,
+    "name": {
+      "de": "Sake Temaki",
+      "vi": "Sake Temaki"
+    },
+    "description": {
+      "de": "Lachs, Gurke, Avocado, Keta-Kaviar",
+      "vi": "Cá hồi, dưa leo, bơ, trứng cá hồi"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "213-california-temaki",
+    "nr": "213",
+    "category": "sushi",
+    "subcategory": "Temaki",
+    "pieces": 1,
+    "name": {
+      "de": "California Temaki",
+      "vi": "California Temaki"
+    },
+    "description": {
+      "de": "Surimi, Gurke, Avocado, Keta-Kaviar",
+      "vi": "Surimi, dưa leo, bơ, trứng cá hồi"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "F",
+      "I",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "surimi"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "214-ebi-tempura-temaki",
+    "nr": "214",
+    "category": "sushi",
+    "subcategory": "Temaki",
+    "pieces": 1,
+    "name": {
+      "de": "Ebi Tempura Temaki",
+      "vi": "Ebi Tempura Temaki"
+    },
+    "description": {
+      "de": "Ebi Tempura, Gurke, Mayonnaise, Sesam, Unagisauce",
+      "vi": "Ebi tempura, dưa leo, mayonnaise, mè, sốt unagi"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "F",
+      "K",
+      "I",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "016_obj68"
+  },
+  {
+    "id": "220-sake-maki",
+    "nr": "220",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Maki",
+      "vi": "Sake Maki"
+    },
+    "description": {
+      "de": "Lachs",
+      "vi": "Cá hồi"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "221-sake-avo-maki",
+    "nr": "221",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Avo Maki",
+      "vi": "Sake Avo Maki"
+    },
+    "description": {
+      "de": "Lachs, Avocado",
+      "vi": "Cá hồi, bơ"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "222-tekka-avo-maki",
+    "nr": "222",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Tekka Avo Maki",
+      "vi": "Tekka Avo Maki"
+    },
+    "description": {
+      "de": "Thunfisch, Avocado",
+      "vi": "Cá ngừ, bơ"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "223-california-maki",
+    "nr": "223",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "California Maki",
+      "vi": "California Maki"
+    },
+    "description": {
+      "de": "Surimi, Avocado, Mayonnaise",
+      "vi": "Surimi, bơ, mayonnaise"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "F",
+      "J",
+      "1",
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "surimi"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "224-ebi-maki",
+    "nr": "224",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Ebi Maki",
+      "vi": "Ebi Maki"
+    },
+    "description": {
+      "de": "Garnelen",
+      "vi": "Tôm"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "225-mutsu-maki",
+    "nr": "225",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Mutsu Maki",
+      "vi": "Mutsu Maki"
+    },
+    "description": {
+      "de": "Butterfisch, Masago",
+      "vi": "Cá bơ, trứng cá masago"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "butterfish"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "226-grilled-salmon-maki",
+    "nr": "226",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Grilled Salmon Maki",
+      "vi": "Grilled Salmon Maki"
+    },
+    "description": {
+      "de": "Gegrillter Lachs, Sweet-Sauce",
+      "vi": "Cá hồi nướng, sốt ngọt"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "F",
+      "1"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "227-tuna-spicy-maki",
+    "nr": "227",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Tuna Spicy Maki",
+      "vi": "Tuna Spicy Maki"
+    },
+    "description": {
+      "de": "Thunfisch, Schnittlauch, Chili",
+      "vi": "Cá ngừ, hẹ, ớt"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "228-unagi-maki",
+    "nr": "228",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Unagi Maki",
+      "vi": "Unagi Maki"
+    },
+    "description": {
+      "de": "gegrillter Flussaal, Sweet-Sauce, Sesam",
+      "vi": "Lươn nướng, sốt ngọt, mè"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "F",
+      "K",
+      "1"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "eel"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "229-tekka-maki",
+    "nr": "229",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Tekka Maki",
+      "vi": "Tekka Maki"
+    },
+    "description": {
+      "de": "frischer Thunfisch",
+      "vi": "Cá ngừ tươi"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "017_obj72"
+  },
+  {
+    "id": "230-hot-spicy-tuna-maki",
+    "nr": "230",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Hot Spicy Tuna Maki",
+      "vi": "Hot Spicy Tuna Maki"
+    },
+    "description": {
+      "de": "frischer Thunfisch, scharfe Sauce, getrockneter Lauch",
+      "vi": "Cá ngừ tươi, sốt cay, hành lá sấy"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "231-hot-spicy-ebi-maki",
+    "nr": "231",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Hot Spicy Ebi Maki",
+      "vi": "Hot Spicy Ebi Maki"
+    },
+    "description": {
+      "de": "Mini-Garnelen, scharfe Sauce, getrockneter Lauch",
+      "vi": "Tôm nhỏ, sốt cay, hành lá sấy"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "1",
+      "2",
+      "6"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "232-oshinko-maki",
+    "nr": "232",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Oshinko Maki",
+      "vi": "Oshinko Maki"
+    },
+    "description": {
+      "de": "eingelegter Rettich, Sesam",
+      "vi": "Củ cải muối, mè"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "233-tamago-maki",
+    "nr": "233",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Tamago Maki",
+      "vi": "Tamago Maki"
+    },
+    "description": {
+      "de": "hausgemachtes Omelett nach japanischer Art, Sesam",
+      "vi": "Trứng chiên kiểu Nhật nhà làm, mè"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "C",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "egg"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "240-kappa",
+    "nr": "240",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Kappa",
+      "vi": "Kappa"
+    },
+    "description": {
+      "de": "Gurke, Frischkäse, Sesam",
+      "vi": "Dưa leo, phô mai kem, mè"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G",
+      "K"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "241-avocado-maki",
+    "nr": "241",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Avocado",
+      "vi": "Avocado"
+    },
+    "description": {
+      "de": "Avocado",
+      "vi": "Bơ"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "242-rucola-cheese-maki",
+    "nr": "242",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Rucola Cheese Maki",
+      "vi": "Rucola Cheese Maki"
+    },
+    "description": {
+      "de": "Rucola, Frischkäse, Sweet-Sauce",
+      "vi": "Rau rocket, phô mai kem, sốt ngọt"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "F",
+      "G",
+      "1",
+      "5"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "243-paprika-maki",
+    "nr": "243",
+    "category": "sushi",
+    "subcategory": "Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Paprika",
+      "vi": "Paprika"
+    },
+    "description": {
+      "de": "Paprika, Sesam",
+      "vi": "Ớt chuông, mè"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "K"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "250-sake-rucola-chu-maki",
+    "nr": "250",
+    "category": "sushi",
+    "subcategory": "Chu Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Rucola Chu Maki",
+      "vi": "Sake Rucola Chu Maki"
+    },
+    "description": {
+      "de": "Lachs, Frischkäse, Sweet-Sauce, Rucola",
+      "vi": "Cá hồi, phô mai kem, sốt ngọt, rau rocket"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "F",
+      "G",
+      "1",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "251-spicy-ebi-chu-maki",
+    "nr": "251",
+    "category": "sushi",
+    "subcategory": "Chu Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Spicy Ebi Chu Maki",
+      "vi": "Spicy Ebi Chu Maki"
+    },
+    "description": {
+      "de": "Tiger Garnelen, Mayonnaise, Schnittlauch, Gurke",
+      "vi": "Tôm sú, mayonnaise, hẹ, dưa leo"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "C",
+      "J",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "252-crispy-chicken-chu-maki",
+    "nr": "252",
+    "category": "sushi",
+    "subcategory": "Chu Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Crispy Chicken Chu Maki",
+      "vi": "Crispy Chicken Chu Maki"
+    },
+    "description": {
+      "de": "knuspriges Hühnerfleisch, Frischkäse, Avocado, Gurke",
+      "vi": "Gà giòn, phô mai kem, bơ, dưa leo"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "253-spicy-tuna-chu-maki",
+    "nr": "253",
+    "category": "sushi",
+    "subcategory": "Chu Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Spicy Tuna Chu Maki",
+      "vi": "Spicy Tuna Chu Maki"
+    },
+    "description": {
+      "de": "Thunfisch-Tatar, Chilisauce, Gurke",
+      "vi": "Cá ngừ băm, sốt ớt, dưa leo"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "254-sake-avocado-chu-maki",
+    "nr": "254",
+    "category": "sushi",
+    "subcategory": "Chu Maki",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Avocado Chu Maki",
+      "vi": "Sake Avocado Chu Maki"
+    },
+    "description": {
+      "de": "Lachs, Avocado, Frischkäse",
+      "vi": "Cá hồi, bơ, phô mai kem"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "018_obj76"
+  },
+  {
+    "id": "260-california-io",
+    "nr": "260",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "California I.O.",
+      "vi": "California I.O."
+    },
+    "description": {
+      "de": "Surimi, Avocado, Mayonnaise; außen: Fischrogen, Sesam",
+      "vi": "Surimi, bơ, mayonnaise; bên ngoài: trứng cá, mè"
+    },
+    "price": 9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "1",
+      "B",
+      "C",
+      "D",
+      "F",
+      "J",
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "surimi"
+    ],
+    "featured": false,
+    "available": true,
+    "note": "Mã dị ứng in là \"A,1,B,C,D,F,J,1,2,5,6,10\" — có dấu phẩy sau A và số 1 xuất hiện hai lần; nhiều khả năng ý là A1. Cần nhà hàng xác nhận.",
+    "sourcePage": "019_obj80"
+  },
+  {
+    "id": "261-king-california-io",
+    "nr": "261",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "King California I.O.",
+      "vi": "King California I.O."
+    },
+    "description": {
+      "de": "echtes Krabbenfleisch, Mayonnaise, Avocado, Gurke; außen: Fischrogen, Sesam",
+      "vi": "Thịt cua thật, mayonnaise, bơ, dưa leo; bên ngoài: trứng cá, mè"
+    },
+    "price": 9.2,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "C",
+      "D",
+      "J",
+      "K",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "crab"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "019_obj80"
+  },
+  {
+    "id": "262-sake-avo-io",
+    "nr": "262",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Avo I.O.",
+      "vi": "Sake Avo I.O."
+    },
+    "description": {
+      "de": "Lachs, Avocado; außen: Fischrogen, Sesam",
+      "vi": "Cá hồi, bơ; bên ngoài: trứng cá, mè"
+    },
+    "price": 9.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "019_obj80"
+  },
+  {
+    "id": "263-sake-kappa-io",
+    "nr": "263",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Kappa I.O.",
+      "vi": "Sake Kappa I.O."
+    },
+    "description": {
+      "de": "Lachs, Frischkäse, Gurke; außen: Fischrogen, Sesam",
+      "vi": "Cá hồi, phô mai kem, dưa leo; bên ngoài: trứng cá, mè"
+    },
+    "price": 9.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "019_obj80"
+  },
+  {
+    "id": "264-sake-koriander-io",
+    "nr": "264",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Koriander I.O.",
+      "vi": "Sake Koriander I.O."
+    },
+    "description": {
+      "de": "Lachs, pikante Mayonnaise, Koriander, Gurke; außen: Fischrogen, Sesam",
+      "vi": "Cá hồi, mayonnaise cay, ngò rí, dưa leo; bên ngoài: trứng cá, mè"
+    },
+    "price": 9.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "C",
+      "D",
+      "J",
+      "K",
+      "1",
+      "2",
+      "5",
+      "6"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "265-sake-tempura-io",
+    "nr": "265",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Tempura I.O.",
+      "vi": "Sake Tempura I.O."
+    },
+    "description": {
+      "de": "Lachs-Tempura, Frischkäse, Gurke, Avocado, Sweet-Sauce; außen: Sesam, Tempuraflocken",
+      "vi": "Cá hồi tempura, phô mai kem, dưa leo, bơ, sốt ngọt; bên ngoài: mè, vụn tempura"
+    },
+    "price": 10,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "F",
+      "G",
+      "K",
+      "1",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "266-grilled-salmon-io",
+    "nr": "266",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Grilled Salmon I.O.",
+      "vi": "Grilled Salmon I.O."
+    },
+    "description": {
+      "de": "gegrillter Lachs, Frischkäse, Gurke; außen: Sesam, Schnittlauch",
+      "vi": "Cá hồi nướng, phô mai kem, dưa leo; bên ngoài: mè, hẹ"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "267-hot-spicy-tuna-io",
+    "nr": "267",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Hot Spicy Tuna I.O.",
+      "vi": "Hot Spicy Tuna I.O."
+    },
+    "description": {
+      "de": "Thunfisch, Chili-Sauce, Gurke, Avocado; außen: Sesam, Schnittlauch",
+      "vi": "Cá ngừ, sốt ớt, dưa leo, bơ; bên ngoài: mè, hẹ"
+    },
+    "price": 9.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "K",
+      "1",
+      "2",
+      "6"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "268-tekka-avokado-io",
+    "nr": "268",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Tekka Avokado I.O.",
+      "vi": "Tekka Avokado I.O."
+    },
+    "description": {
+      "de": "Thunfisch, Gurke, Avocado; außen: Fischrogen, Sesam",
+      "vi": "Cá ngừ, dưa leo, bơ; bên ngoài: trứng cá, mè"
+    },
+    "price": 9.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "269-tuna-tempura-io",
+    "nr": "269",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Tuna Tempura I.O.",
+      "vi": "Tuna Tempura I.O."
+    },
+    "description": {
+      "de": "Thunfisch-Tempura, Frischkäse, Avocado, Gurke, Sweet-Sauce; außen: Sesam, Tempuraflocken",
+      "vi": "Cá ngừ tempura, phô mai kem, bơ, dưa leo, sốt ngọt; bên ngoài: mè, vụn tempura"
+    },
+    "price": 10,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "F",
+      "G",
+      "K",
+      "1",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "270-ebi-avo-io",
+    "nr": "270",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Ebi Avo I.O.",
+      "vi": "Ebi Avo I.O."
+    },
+    "description": {
+      "de": "Tiger-Großgarnelen, Frischkäse, Avocado, Gurke; außen: Fischrogen, Sesam",
+      "vi": "Tôm sú lớn, phô mai kem, bơ, dưa leo; bên ngoài: trứng cá, mè"
+    },
+    "price": 10,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "271-ebi-tempura-io",
+    "nr": "271",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Ebi Tempura I.O.",
+      "vi": "Ebi Tempura I.O."
+    },
+    "description": {
+      "de": "Garnelen im knusprigen Teigmantel, Frischkäse, Gurke, Avocado, Sweet-Sauce; außen: Sesam, Tempuraflocken",
+      "vi": "Tôm bọc bột chiên giòn, phô mai kem, dưa leo, bơ, sốt ngọt; bên ngoài: mè, vụn tempura"
+    },
+    "price": 10,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "F",
+      "G",
+      "K",
+      "1",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "272-crispy-chicken-io",
+    "nr": "272",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Crispy Chicken I.O.",
+      "vi": "Crispy Chicken I.O."
+    },
+    "description": {
+      "de": "knuspriges Hühnerfleisch, Frischkäse, Avocado, Gurke, Sweet-Sauce; außen: Sesam, Tempuraflocken",
+      "vi": "Gà giòn, phô mai kem, bơ, dưa leo, sốt ngọt; bên ngoài: mè, vụn tempura"
+    },
+    "price": 10,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "F",
+      "G",
+      "K",
+      "1",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "020_obj84"
+  },
+  {
+    "id": "273-hot-spicy-tuna-io-masago",
+    "nr": "273",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Hot Spicy Tuna I.O.",
+      "vi": "Hot Spicy Tuna I.O."
+    },
+    "description": {
+      "de": "Thunfisch in scharfer Sauce, Gurke, Masago, getrockneter Lauch",
+      "vi": "Cá ngừ sốt cay, dưa leo, trứng cá masago, hành lá sấy"
+    },
+    "price": 9.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "1",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "note": "Trùng tên với món 267 \"Hot Spicy Tuna I.O.\" nhưng khác nguyên liệu và mã dị ứng.",
+    "sourcePage": "021_obj88"
+  },
+  {
+    "id": "274-hot-spicy-ebi-io",
+    "nr": "274",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Hot Spicy Ebi I.O.",
+      "vi": "Hot Spicy Ebi I.O."
+    },
+    "description": {
+      "de": "Garnelen in scharfer Sauce, Rucola, Masago, getrockneter Lauch",
+      "vi": "Tôm sốt cay, rau rocket, trứng cá masago, hành lá sấy"
+    },
+    "price": 9.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "D",
+      "1",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "021_obj88"
+  },
+  {
+    "id": "280-rucola-io",
+    "nr": "280",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Rucola I.O.",
+      "vi": "Rucola I.O."
+    },
+    "description": {
+      "de": "Avocado, Rucola, Philadelphia, Sesam",
+      "vi": "Bơ, rau rocket, phô mai Philadelphia, mè"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "021_obj88"
+  },
+  {
+    "id": "281-avo-io",
+    "nr": "281",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Avo I.O.",
+      "vi": "Avo I.O."
+    },
+    "description": {
+      "de": "Avocado, Philadelphia, Sesam",
+      "vi": "Bơ, phô mai Philadelphia, mè"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "021_obj88"
+  },
+  {
+    "id": "282-avo-tempura-roll-io",
+    "nr": "282",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Avo Tempura Roll I.O.",
+      "vi": "Avo Tempura Roll I.O."
+    },
+    "description": {
+      "de": "Avocado in knusprigen Teigmantel, Frischkäse, Sesam",
+      "vi": "Bơ bọc bột chiên giòn, phô mai kem, mè"
+    },
+    "price": 8.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "G",
+      "K"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "021_obj88"
+  },
+  {
+    "id": "283-veggie-io",
+    "nr": "283",
+    "category": "sushi",
+    "subcategory": "Inside Out",
+    "pieces": 8,
+    "name": {
+      "de": "Veggie I.O.",
+      "vi": "Veggie I.O."
+    },
+    "description": {
+      "de": "verschiedenes Gemüse, Sesam",
+      "vi": "Rau củ các loại, mè"
+    },
+    "price": 9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "K"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "021_obj88"
+  },
+  {
+    "id": "290-ibodai-crunchy-roll",
+    "nr": "290",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Ibodai Crunchy Roll",
+      "vi": "Ibodai Crunchy Roll"
+    },
+    "description": {
+      "de": "Butterfisch, Avocado, Gurke, Masago, Sesam",
+      "vi": "Cá bơ, bơ, dưa leo, trứng cá masago, mè"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "butterfish"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "291-sake-crunchy-roll",
+    "nr": "291",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Sake Crunchy Roll",
+      "vi": "Sake Crunchy Roll"
+    },
+    "description": {
+      "de": "Lachs, Avocado, Gurke, Frischkäse, Sesam",
+      "vi": "Cá hồi, bơ, dưa leo, phô mai kem, mè"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "292-tuna-crunchy-roll",
+    "nr": "292",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Tuna Crunchy Roll",
+      "vi": "Tuna Crunchy Roll"
+    },
+    "description": {
+      "de": "gewürzter Thunfisch, Avocado, Gurke, Sesam",
+      "vi": "Cá ngừ tẩm gia vị, bơ, dưa leo, mè"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "293-black-tiger-crunchy-roll",
+    "nr": "293",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Black Tiger Crunchy Roll",
+      "vi": "Black Tiger Crunchy Roll"
+    },
+    "description": {
+      "de": "Garnelen, Avocado, Gurke, Sesam",
+      "vi": "Tôm, bơ, dưa leo, mè"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "294-crab-crunchy-roll",
+    "nr": "294",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Crab Crunchy Roll",
+      "vi": "Crab Crunchy Roll"
+    },
+    "description": {
+      "de": "echtes Krebsfleisch, Mayonnaise, Gurke, Avocado, Sesam",
+      "vi": "Thịt cua thật, mayonnaise, dưa leo, bơ, mè"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "J",
+      "K",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "crab"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "295-chicken-crunchy-roll",
+    "nr": "295",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Chicken Crunchy Roll",
+      "vi": "Chicken Crunchy Roll"
+    },
+    "description": {
+      "de": "paniertes Hühnerfleisch, Avocado, Gurke, Frischkäse, Sesam",
+      "vi": "Gà tẩm bột chiên, bơ, dưa leo, phô mai kem, mè"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "296-salmon-crunchy-roll",
+    "nr": "296",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Salmon Crunchy Roll",
+      "vi": "Salmon Crunchy Roll"
+    },
+    "description": {
+      "de": "gegrillter Lachs, Frischkäse, Avocado, Gurke, Sesam",
+      "vi": "Cá hồi nướng, phô mai kem, bơ, dưa leo, mè"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "297-buddha-crunchy-roll",
+    "nr": "297",
+    "category": "sushi",
+    "subcategory": "Crunchy Roll",
+    "pieces": 10,
+    "name": {
+      "de": "Buddha Crunchy Roll",
+      "vi": "Buddha Crunchy Roll"
+    },
+    "description": {
+      "de": "Avocado, Tofu, Paprika, Rettich, Sesam, Frischkäse",
+      "vi": "Bơ, đậu hũ, ớt chuông, củ cải, mè, phô mai kem"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "F",
+      "G",
+      "K"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [
+      "tofu"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "022_obj92"
+  },
+  {
+    "id": "300-sake-mini-crunchy-roll",
+    "nr": "300",
+    "category": "sushi",
+    "subcategory": "Mini Crunchy Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Mini Crunchy Roll",
+      "vi": "Sake Mini Crunchy Roll"
+    },
+    "description": {
+      "de": "Lachs, Frischkäse",
+      "vi": "Cá hồi, phô mai kem"
+    },
+    "price": 8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "L",
+      "D",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "023_obj96"
+  },
+  {
+    "id": "301-ebi-mini-crunchy-roll",
+    "nr": "301",
+    "category": "sushi",
+    "subcategory": "Mini Crunchy Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Ebi Mini Crunchy Roll",
+      "vi": "Ebi Mini Crunchy Roll"
+    },
+    "description": {
+      "de": "Garnelen",
+      "vi": "Tôm"
+    },
+    "price": 8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "L",
+      "B"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "023_obj96"
+  },
+  {
+    "id": "302-mutsu-mini-crunchy-roll",
+    "nr": "302",
+    "category": "sushi",
+    "subcategory": "Mini Crunchy Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Mutsu Mini Crunchy Roll",
+      "vi": "Mutsu Mini Crunchy Roll"
+    },
+    "description": {
+      "de": "Butterfisch, Masago",
+      "vi": "Cá bơ, trứng cá masago"
+    },
+    "price": 8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "L",
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "butterfish"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "023_obj96"
+  },
+  {
+    "id": "303-tuna-mini-crunchy-roll",
+    "nr": "303",
+    "category": "sushi",
+    "subcategory": "Mini Crunchy Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Tuna Mini Crunchy Roll",
+      "vi": "Tuna Mini Crunchy Roll"
+    },
+    "description": {
+      "de": "gewürzter Thunfisch",
+      "vi": "Cá ngừ tẩm gia vị"
+    },
+    "price": 8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "L",
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "023_obj96"
+  },
+  {
+    "id": "304-chicken-mini-crunchy-roll",
+    "nr": "304",
+    "category": "sushi",
+    "subcategory": "Mini Crunchy Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Chicken Mini Crunchy Roll",
+      "vi": "Chicken Mini Crunchy Roll"
+    },
+    "description": {
+      "de": "paniertes Hühnerfleisch",
+      "vi": "Gà tẩm bột chiên"
+    },
+    "price": 8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "023_obj96"
+  },
+  {
+    "id": "305-avo-mini-crunchy-roll",
+    "nr": "305",
+    "category": "sushi",
+    "subcategory": "Mini Crunchy Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Avo Mini Crunchy Roll",
+      "vi": "Avo Mini Crunchy Roll"
+    },
+    "description": {
+      "de": "Avocado",
+      "vi": "Bơ"
+    },
+    "price": 7,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "023_obj96"
+  },
+  {
+    "id": "310-sake-special-roll",
+    "nr": "310",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Sake Special Roll",
+      "vi": "Sake Special Roll"
+    },
+    "description": {
+      "de": "Paprika, Avocado-Tempura, Frischkäse, umwickelt mit Lachs",
+      "vi": "Ớt chuông, bơ tempura, phô mai kem, cuốn ngoài bằng cá hồi"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "311-sake-on-fire-special-roll",
+    "nr": "311",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Sake on Fire Special Roll",
+      "vi": "Sake on Fire Special Roll"
+    },
+    "description": {
+      "de": "pikanter Lachs, Gurke, umwickelt mit flambiertem Lachs",
+      "vi": "Cá hồi cay, dưa leo, cuốn ngoài bằng cá hồi áp lửa"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "312-tuna-on-fire-special-roll",
+    "nr": "312",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Tuna on Fire Special Roll",
+      "vi": "Tuna on Fire Special Roll"
+    },
+    "description": {
+      "de": "Avocado, Surimi, Mayonnaise, umwickelt mit flambiertem Thunfisch",
+      "vi": "Bơ, surimi, mayonnaise, cuốn ngoài bằng cá ngừ áp lửa"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "F",
+      "J",
+      "1",
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna",
+      "surimi"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "313-rainbow-special-roll",
+    "nr": "313",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Rainbow Special Roll",
+      "vi": "Rainbow Special Roll"
+    },
+    "description": {
+      "de": "Großgarnelen, Mayonnaise, Avocado, umwickelt mit Lachs, Thunfisch, Butterfisch",
+      "vi": "Tôm lớn, mayonnaise, bơ, cuốn ngoài bằng cá hồi, cá ngừ, cá bơ"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "C",
+      "D",
+      "J",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp",
+      "salmon",
+      "tuna",
+      "butterfish"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "314-green-dragon-special-roll",
+    "nr": "314",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Green Dragon Special Roll",
+      "vi": "Green Dragon Special Roll"
+    },
+    "description": {
+      "de": "Garnelen im knusprigen Teigmantel, Gurke, Mayonnaise, umwickelt mit Avocado",
+      "vi": "Tôm bọc bột chiên giòn, dưa leo, mayonnaise, cuốn ngoài bằng bơ"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "J",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "315-black-dragon-special-roll",
+    "nr": "315",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Black Dragon Special Roll",
+      "vi": "Black Dragon Special Roll"
+    },
+    "description": {
+      "de": "Garnelen im knusprigen Teigmantel, Gurke, Frischkäse, umwickelt mit gegrilltem Flussaal",
+      "vi": "Tôm bọc bột chiên giòn, dưa leo, phô mai kem, cuốn ngoài bằng lươn nướng"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "D",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp",
+      "eel"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "316-king-crab-special-roll",
+    "nr": "316",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "King Crab Special Roll",
+      "vi": "King Crab Special Roll"
+    },
+    "description": {
+      "de": "echtes Krabbenfleisch, Mayonnaise, Avocado, umwickelt mit flambiertem Lachs",
+      "vi": "Thịt cua thật, mayonnaise, bơ, cuốn ngoài bằng cá hồi áp lửa"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "B",
+      "C",
+      "D",
+      "J",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "crab",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "317-gold-dragon-special-roll",
+    "nr": "317",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Gold Dragon Special Roll",
+      "vi": "Gold Dragon Special Roll"
+    },
+    "description": {
+      "de": "shrimp in crispy batter, cucumber, mayonnaise, wrapped with flambéed salmon",
+      "vi": "Tôm bọc bột chiên giòn, dưa leo, mayonnaise, cuốn ngoài bằng cá hồi áp lửa"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "J",
+      "2",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "note": "LỖI IN TRÊN THỰC ĐƠN: dòng mô tả tiếng Đức bị in bằng tiếng Anh. Đã chép nguyên văn vào description.de; cần nhà hàng cấp bản tiếng Đức.",
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "318-salmon-special-roll",
+    "nr": "318",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Salmon Special Roll",
+      "vi": "Salmon Special Roll"
+    },
+    "description": {
+      "de": "frischer Lachs, Avocado, Frischkäse, umwickelt mit Avocado",
+      "vi": "Cá hồi tươi, bơ, phô mai kem, cuốn ngoài bằng bơ"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "319-veggie-special-roll",
+    "nr": "319",
+    "category": "sushi",
+    "subcategory": "Special Roll",
+    "pieces": 8,
+    "name": {
+      "de": "Veggie Special Roll",
+      "vi": "Veggie Special Roll"
+    },
+    "description": {
+      "de": "japanisches Omelett, Avocado, Gurke, Frischkäse, umwickelt mit Gurke",
+      "vi": "Trứng chiên kiểu Nhật, bơ, dưa leo, phô mai kem, cuốn ngoài bằng dưa leo"
+    },
+    "price": 16,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "C",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "egg"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "024_obj100"
+  },
+  {
+    "id": "330-sake-sashimi",
+    "nr": "330",
+    "category": "sushi",
+    "subcategory": "Sashimi",
+    "name": {
+      "de": "Sake Sashimi",
+      "vi": "Sake Sashimi"
+    },
+    "description": {
+      "de": "Lachs",
+      "vi": "Cá hồi"
+    },
+    "price": 12,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "sizes": [
+      {
+        "label": "6 Stk. / pcs",
+        "price": 12
+      },
+      {
+        "label": "10 Stk. / pcs",
+        "price": 18
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "025_obj104"
+  },
+  {
+    "id": "331-maguro-sashimi",
+    "nr": "331",
+    "category": "sushi",
+    "subcategory": "Sashimi",
+    "name": {
+      "de": "Maguro Sashimi",
+      "vi": "Maguro Sashimi"
+    },
+    "description": {
+      "de": "Thunfisch",
+      "vi": "Cá ngừ"
+    },
+    "price": 14,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "sizes": [
+      {
+        "label": "6 Stk. / pcs",
+        "price": 14
+      },
+      {
+        "label": "10 Stk. / pcs",
+        "price": 21
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "025_obj104"
+  },
+  {
+    "id": "332-aburi-sake-sashimi",
+    "nr": "332",
+    "category": "sushi",
+    "subcategory": "Sashimi",
+    "pieces": 6,
+    "name": {
+      "de": "Aburi Sake Sashimi",
+      "vi": "Aburi Sake Sashimi"
+    },
+    "description": {
+      "de": "6 Scheiben flambierter Lachs auf Seetangsalat, Lachs-Tatar und Avocado",
+      "vi": "6 lát cá hồi áp lửa trên salad rong biển, cá hồi băm và bơ"
+    },
+    "price": 15.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "025_obj104"
+  },
+  {
+    "id": "333-aburi-maguro-sashimi",
+    "nr": "333",
+    "category": "sushi",
+    "subcategory": "Sashimi",
+    "pieces": 6,
+    "name": {
+      "de": "Aburi Maguro Sashimi",
+      "vi": "Aburi Maguro Sashimi"
+    },
+    "description": {
+      "de": "6 Scheiben flambierter Thunfisch auf Seetangsalat, Thunfisch-Tatar und Avocado",
+      "vi": "6 lát cá ngừ áp lửa trên salad rong biển, cá ngừ băm và bơ"
+    },
+    "price": 17.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "025_obj104"
+  },
+  {
+    "id": "334-sashimi-mix",
+    "nr": "334",
+    "category": "sushi",
+    "subcategory": "Sashimi",
+    "pieces": 9,
+    "name": {
+      "de": "Sashimi Mix",
+      "vi": "Sashimi Mix"
+    },
+    "description": {
+      "de": "3 Scheiben Lachs, 3 Scheiben Thunfisch und 3 Scheiben Butterfisch auf Seetangsalat und Avocado",
+      "vi": "3 lát cá hồi, 3 lát cá ngừ và 3 lát cá bơ trên salad rong biển và bơ"
+    },
+    "price": 18.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "tuna",
+      "butterfish"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "025_obj104"
+  },
+  {
+    "id": "b1-tofu-bowl",
+    "nr": "B1",
+    "category": "sushi",
+    "subcategory": "Poke Bowl",
+    "name": {
+      "de": "Tofu Bowl",
+      "vi": "Tofu Bowl"
+    },
+    "description": {
+      "de": "Tofu, Mango, Avocado, Gurke, Edamame, Sesam",
+      "vi": "Đậu hũ, xoài, bơ, dưa leo, edamame, mè"
+    },
+    "price": 12.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "F",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tofu"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "026_obj108"
+  },
+  {
+    "id": "b2-salmon-bowl",
+    "nr": "B2",
+    "category": "sushi",
+    "subcategory": "Poke Bowl",
+    "name": {
+      "de": "Salmon Bowl",
+      "vi": "Salmon Bowl"
+    },
+    "description": {
+      "de": "Lachs, Avocado, Gurke, Edamame, Sesam",
+      "vi": "Cá hồi, bơ, dưa leo, edamame, mè"
+    },
+    "price": 15.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "F",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "026_obj108"
+  },
+  {
+    "id": "b3-salmon-tuna-bowl",
+    "nr": "B3",
+    "category": "sushi",
+    "subcategory": "Poke Bowl",
+    "name": {
+      "de": "Salmon Tuna Bowl",
+      "vi": "Salmon Tuna Bowl"
+    },
+    "description": {
+      "de": "Lachs, Thunfisch, Avocado, Gurke, Edamame",
+      "vi": "Cá hồi, cá ngừ, bơ, dưa leo, edamame"
+    },
+    "price": 17.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "F",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "026_obj108"
+  },
+  {
+    "id": "b4-crispy-chicken-bowl",
+    "nr": "B4",
+    "category": "sushi",
+    "subcategory": "Poke Bowl",
+    "name": {
+      "de": "Crispy Chicken Bowl",
+      "vi": "Crispy Chicken Bowl"
+    },
+    "description": {
+      "de": "knuspriges Hähnchen, Avocado, Gurke, Edamame",
+      "vi": "Gà giòn, bơ, dưa leo, edamame"
+    },
+    "price": 14.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "F"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "026_obj108"
+  },
+  {
+    "id": "b5-shrimp-tempura-bowl",
+    "nr": "B5",
+    "category": "sushi",
+    "subcategory": "Poke Bowl",
+    "name": {
+      "de": "Shrimp Tempura Bowl",
+      "vi": "Shrimp Tempura Bowl"
+    },
+    "description": {
+      "de": "Garnelen im knusprigen Teigmantel, Avocado, Gurke, Edamame",
+      "vi": "Tôm bọc bột chiên giòn, bơ, dưa leo, edamame"
+    },
+    "price": 16.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "F"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "026_obj108"
+  },
+  {
+    "id": "b6-duck-bowl",
+    "nr": "B6",
+    "category": "sushi",
+    "subcategory": "Poke Bowl",
+    "name": {
+      "de": "Duck Bowl",
+      "vi": "Duck Bowl"
+    },
+    "description": {
+      "de": "knusprige Ente, Avocado, Gurke, Edamame",
+      "vi": "Vịt giòn, bơ, dưa leo, edamame"
+    },
+    "price": 16.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "F"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "duck"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "026_obj108"
+  },
+  {
+    "id": "m1-sake-menu",
+    "nr": "M1",
+    "category": "sushi",
+    "subcategory": "Sushi Menu for One",
+    "name": {
+      "de": "Sake Menu",
+      "vi": "Sake Menu"
+    },
+    "description": {
+      "de": "8 Stk. Sake Maki / 8 Stk. Sake Avo I.O. / 2 Stk. Sake Nigiri",
+      "vi": "8 miếng Sake Maki / 8 miếng Sake Avo I.O. / 2 miếng Sake Nigiri"
+    },
+    "price": 17,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "027_obj112"
+  },
+  {
+    "id": "m2-sake-lover",
+    "nr": "M2",
+    "category": "sushi",
+    "subcategory": "Sushi Menu for One",
+    "name": {
+      "de": "Sake Lover",
+      "vi": "Sake Lover"
+    },
+    "description": {
+      "de": "8 Stk. Sake Maki / 2 Stk. Sake Nigiri / 10 Stk. Sake Crunchy Roll",
+      "vi": "8 miếng Sake Maki / 2 miếng Sake Nigiri / 10 miếng Sake Crunchy Roll"
+    },
+    "price": 19,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "027_obj112"
+  },
+  {
+    "id": "m3-maki-mix",
+    "nr": "M3",
+    "category": "sushi",
+    "subcategory": "Sushi Menu for One",
+    "pieces": 22,
+    "name": {
+      "de": "Maki Mix",
+      "vi": "Maki Mix"
+    },
+    "description": {
+      "de": "8 Stk. Sake Avo Chu Maki / 8 Stk. Tekka Avo Maki / 6 Stk. Kappa Maki",
+      "vi": "8 miếng Sake Avo Chu Maki / 8 miếng Tekka Avo Maki / 6 miếng Kappa Maki"
+    },
+    "price": 15,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "G"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "027_obj112"
+  },
+  {
+    "id": "m4-sakura-menu",
+    "nr": "M4",
+    "category": "sushi",
+    "subcategory": "Sushi Menu for One",
+    "pieces": 18,
+    "name": {
+      "de": "Sakura Menu",
+      "vi": "Sakura Menu"
+    },
+    "description": {
+      "de": "8 Stk. Spicy Tuna Chu Maki / 8 Stk. Avo Maki / 2 Stk. Sake Nigiri",
+      "vi": "8 miếng Spicy Tuna Chu Maki / 8 miếng Avo Maki / 2 miếng Sake Nigiri"
+    },
+    "price": 15,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D"
+    ],
+    "dietary": [],
+    "spice": "medium",
+    "proteins": [
+      "tuna",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "027_obj112"
+  },
+  {
+    "id": "m5-tokyo-menu",
+    "nr": "M5",
+    "category": "sushi",
+    "subcategory": "Sushi Menu for One",
+    "pieces": 24,
+    "name": {
+      "de": "Tokyo Menu",
+      "vi": "Tokyo Menu"
+    },
+    "description": {
+      "de": "8 Stk. California I.O. / 8 Stk. Sake Maki / 8 Stk. Kappa Maki / 2 Stk. Sake Nigiri",
+      "vi": "8 miếng California I.O. / 8 miếng Sake Maki / 8 miếng Kappa Maki / 2 miếng Sake Nigiri"
+    },
+    "price": 17.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "F",
+      "G",
+      "J",
+      "K",
+      "1",
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "surimi",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "027_obj112"
+  },
+  {
+    "id": "m6-osaka-menu",
+    "nr": "M6",
+    "category": "sushi",
+    "subcategory": "Sushi Menu for One",
+    "pieces": 26,
+    "name": {
+      "de": "Osaka Menu",
+      "vi": "Osaka Menu"
+    },
+    "description": {
+      "de": "8 Stk. Sake Crunchy Mini / 8 Stk. Sake Avo I.O. / 8 Stk. Kappa Maki / 2 Stk. Sake Nigiri",
+      "vi": "8 miếng Sake Crunchy Mini / 8 miếng Sake Avo I.O. / 8 miếng Kappa Maki / 2 miếng Sake Nigiri"
+    },
+    "price": 21,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "027_obj112"
+  },
+  {
+    "id": "m7-koi-menu",
+    "nr": "M7",
+    "category": "sushi",
+    "subcategory": "Sushi Menu for One",
+    "pieces": 26,
+    "name": {
+      "de": "Koi Menu",
+      "vi": "Koi Menu"
+    },
+    "description": {
+      "de": "8 Stk. Sake Avo Maki / 8 Stk. Sake Kappa I.O. / 8 Stk. Kappa Maki / 2 Stk. Sake Nigiri",
+      "vi": "8 miếng Sake Avo Maki / 8 miếng Sake Kappa I.O. / 8 miếng Kappa Maki / 2 miếng Sake Nigiri"
+    },
+    "price": 23,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "027_obj112"
+  },
+  {
+    "id": "m8-hikari-menu",
+    "nr": "M8",
+    "category": "sushi",
+    "subcategory": "Menu Sets",
+    "pieces": 26,
+    "name": {
+      "de": "Hikari Menu",
+      "vi": "Hikari Menu"
+    },
+    "description": {
+      "de": "8 Stk. Chicken Mini Crunchy Roll / 8 Stk. Sake Maki / 8 Stk. Kappa Maki / 2 Stk. Ebi Nigiri",
+      "vi": "8 miếng Chicken Mini Crunchy Roll / 8 miếng Sake Maki / 8 miếng Kappa Maki / 2 miếng Ebi Nigiri"
+    },
+    "price": 18,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "D",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken",
+      "salmon",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "028_obj116"
+  },
+  {
+    "id": "m9-fuji-menu",
+    "nr": "M9",
+    "category": "sushi",
+    "subcategory": "Menu Sets",
+    "pieces": 20,
+    "name": {
+      "de": "Fuji Menu",
+      "vi": "Fuji Menu"
+    },
+    "description": {
+      "de": "8 Stk. Sake Avo I.O. / 8 Stk. Sake Maki / 4 Stk. Maguro Sashimi",
+      "vi": "8 miếng Sake Avo I.O. / 8 miếng Sake Maki / 4 lát Maguro Sashimi"
+    },
+    "price": 20,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "D",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "028_obj116"
+  },
+  {
+    "id": "m10-inside-out-set",
+    "nr": "M10",
+    "category": "sushi",
+    "subcategory": "Menu Sets",
+    "pieces": 16,
+    "name": {
+      "de": "Inside-Out Set",
+      "vi": "Inside-Out Set"
+    },
+    "description": {
+      "de": "4 Stk. Sake Avo I.O / 4 Stk. Tuna Avo I.O / 4 Stk. California I.O / 4 Stk. Ebi Avo I.O",
+      "vi": "4 miếng Sake Avo I.O / 4 miếng Tuna Avo I.O / 4 miếng California I.O / 4 miếng Ebi Avo I.O"
+    },
+    "price": 18,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "J",
+      "K",
+      "1",
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "tuna",
+      "surimi",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "028_obj116"
+  },
+  {
+    "id": "m11-crunchy-mix",
+    "nr": "M11",
+    "category": "sushi",
+    "subcategory": "Menu Sets",
+    "pieces": 20,
+    "name": {
+      "de": "Crunchy Mix",
+      "vi": "Crunchy Mix"
+    },
+    "description": {
+      "de": "10 Stk. Sake Crunchy Roll / 10 Stk. Ebi Mini Crunchy Roll",
+      "vi": "10 miếng Sake Crunchy Roll / 10 miếng Ebi Mini Crunchy Roll"
+    },
+    "price": 25,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "028_obj116"
+  },
+  {
+    "id": "m12-crispy-crunch",
+    "nr": "M12",
+    "category": "sushi",
+    "subcategory": "Menu Sets",
+    "pieces": 18,
+    "name": {
+      "de": "Crispy Crunch",
+      "vi": "Crispy Crunch"
+    },
+    "description": {
+      "de": "10 Stk. Chicken Crunchy Roll / 8 Stk. Sake Mini Crunchy Roll",
+      "vi": "10 miếng Chicken Crunchy Roll / 8 miếng Sake Mini Crunchy Roll"
+    },
+    "price": 19,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "chicken",
+      "salmon"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "028_obj116"
+  },
+  {
+    "id": "m13-buddha-menu",
+    "nr": "M13",
+    "category": "sushi",
+    "subcategory": "Menu Sets",
+    "pieces": 26,
+    "name": {
+      "de": "Buddha Menu",
+      "vi": "Buddha Menu"
+    },
+    "description": {
+      "de": "8 Stk. Veggie I.O. / 8 Stk. Avo Maki / 8 Stk. Kappa Maki / 2 Stk. Inari Nigiri",
+      "vi": "8 miếng Veggie I.O. / 8 miếng Avo Maki / 8 miếng Kappa Maki / 2 miếng Inari Nigiri"
+    },
+    "price": 17.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "F",
+      "G",
+      "K"
+    ],
+    "dietary": [
+      "vegetarian"
+    ],
+    "spice": "none",
+    "proteins": [
+      "tofu"
+    ],
+    "featured": false,
+    "available": true,
+    "note": "dietary suy ra từ thành phần (toàn món chay: Veggie I.O., Avo Maki, Kappa Maki, Inari Nigiri) — thực đơn KHÔNG in biểu tượng lá cho mục này. Cần nhà hàng xác nhận.",
+    "sourcePage": "028_obj116"
+  },
+  {
+    "id": "m14-sushi-sharing",
+    "nr": "M14",
+    "category": "sushi",
+    "subcategory": "Family Sushi Menu",
+    "name": {
+      "de": "Sushi Sharing",
+      "vi": "Sushi Sharing"
+    },
+    "description": {
+      "de": "8 Stk. Sake Avo Maki / 8 Stk. California I.O. / 8 Stk. Sake Maki / 8 Stk. Kappa Maki / 2 Stk. Sake Nigiri / 2 Stk. Maguro Nigiri",
+      "vi": "8 miếng Sake Avo Maki / 8 miếng California I.O. / 8 miếng Sake Maki / 8 miếng Kappa Maki / 2 miếng Sake Nigiri / 2 miếng Maguro Nigiri"
+    },
+    "price": 33,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "C",
+      "D",
+      "F",
+      "G",
+      "J",
+      "K",
+      "1",
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "surimi",
+      "tuna"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "029_obj120"
+  },
+  {
+    "id": "m15-sushi-harmony",
+    "nr": "M15",
+    "category": "sushi",
+    "subcategory": "Family Sushi Menu",
+    "name": {
+      "de": "Sushi Harmony",
+      "vi": "Sushi Harmony"
+    },
+    "description": {
+      "de": "10 Stk. Sake Crunchy Roll / 8 Stk. Sake Avo I.O. / 8 Stk. Ebi Tempura I.O. / 8 Stk. Crispy Chicken I.O.",
+      "vi": "10 miếng Sake Crunchy Roll / 8 miếng Sake Avo I.O. / 8 miếng Ebi Tempura I.O. / 8 miếng Crispy Chicken I.O."
+    },
+    "price": 39,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "D",
+      "F",
+      "G",
+      "K",
+      "1"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "shrimp",
+      "chicken"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "029_obj120"
+  },
+  {
+    "id": "m16-sushi-date",
+    "nr": "M16",
+    "category": "sushi",
+    "subcategory": "Family Sushi Menu",
+    "name": {
+      "de": "Sushi Date",
+      "vi": "Sushi Date"
+    },
+    "description": {
+      "de": "10 Stk. Tuna Crunchy Roll / 8 Stk. Salmon Special Roll / 8 Stk. Sake Maki / 8 Stk. Tekka Avo Maki / 8 Stk. Kappa Maki / 4 Stk. Sake Sashimi / 2 Stk. Maguro Nigiri / 2 Stk. Ebi Nigiri",
+      "vi": "10 miếng Tuna Crunchy Roll / 8 miếng Salmon Special Roll / 8 miếng Sake Maki / 8 miếng Tekka Avo Maki / 8 miếng Kappa Maki / 4 lát Sake Sashimi / 2 miếng Maguro Nigiri / 2 miếng Ebi Nigiri"
+    },
+    "price": 52,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "tuna",
+      "salmon",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "029_obj120"
+  },
+  {
+    "id": "m17-royal-sushi-menu",
+    "nr": "M17",
+    "category": "sushi",
+    "subcategory": "Family Sushi Menu",
+    "name": {
+      "de": "Royal Sushi Menu",
+      "vi": "Royal Sushi Menu"
+    },
+    "description": {
+      "de": "10 Stk. Sake Crunchy Roll / 8 Stk. Sake Avo I.O. / 8 Stk. Avo Mini Crunchy Roll / 8 Stk. Sake Maki / 8 Stk. Kappa Maki / 2 Stk. Sake Nigiri / 2 Stk. Avo Nigiri / 2 Stk. Ebi Nigiri",
+      "vi": "10 miếng Sake Crunchy Roll / 8 miếng Sake Avo I.O. / 8 miếng Avo Mini Crunchy Roll / 8 miếng Sake Maki / 8 miếng Kappa Maki / 2 miếng Sake Nigiri / 2 miếng Avo Nigiri / 2 miếng Ebi Nigiri"
+    },
+    "price": 47,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "B",
+      "D",
+      "G",
+      "K"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "shrimp"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "029_obj120"
+  },
+  {
+    "id": "m18-sora-deluxe-menu",
+    "nr": "M18",
+    "category": "sushi",
+    "subcategory": "Sushi Menu",
+    "name": {
+      "de": "SoRa Deluxe Menu",
+      "vi": "SoRa Deluxe Menu"
+    },
+    "description": {
+      "de": "10 Stk. Sake Crunchy Roll / 8 Stk. Sake Avo I.O. / 8 Stk. California I.O. / 8 Stk. Green Dragon Roll / 8 Stk. Sake Maki / 8 Stk. Tekka Avo Maki / 8 Stk. Ebi Maki / 8 Stk. Kappa Maki / 12 Stk. Sashimi Mix (Sake, Maguro, Ibodai) / 8 Stk. Sake Rucola I.O. / 8 Stk. Sake Nigiri (Sake, Maguro, Ebi, Ibodai)",
+      "vi": "10 miếng Sake Crunchy Roll / 8 miếng Sake Avo I.O. / 8 miếng California I.O. / 8 miếng Green Dragon Roll / 8 miếng Sake Maki / 8 miếng Tekka Avo Maki / 8 miếng Ebi Maki / 8 miếng Kappa Maki / 12 lát Sashimi Mix (cá hồi, cá ngừ, cá bơ) / 8 miếng Sake Rucola I.O. / 8 miếng Nigiri (cá hồi, cá ngừ, tôm, cá bơ)"
+    },
+    "price": 95,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "F",
+      "G",
+      "J",
+      "K",
+      "1",
+      "2",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [
+      "salmon",
+      "tuna",
+      "butterfish",
+      "shrimp",
+      "surimi"
+    ],
+    "featured": false,
+    "available": true,
+    "sourcePage": "030_obj124"
+  },
+  {
+    "id": "m19-sushi-your-way",
+    "nr": "M19",
+    "category": "sushi",
+    "subcategory": "Sushi Menu",
+    "name": {
+      "de": "Sushi Your Way",
+      "vi": "Sushi Your Way"
+    },
+    "description": {
+      "de": "für 4-5 Pers. — 12 Stk. Maki nach Wahl / 16 Stk. Inside-Out Rolls nach Wahl / 8 Stk. Special Rolls nach Wahl / 20 Stk. Crunchy Rolls nach Wahl / 10 Stk. Nigiri nach Wahl / 5 Stk. Sashimi nach Wahl",
+      "vi": "cho 4-5 người — 12 miếng Maki tự chọn / 16 miếng Inside-Out Roll tự chọn / 8 miếng Special Roll tự chọn / 20 miếng Crunchy Roll tự chọn / 10 miếng Nigiri tự chọn / 5 lát Sashimi tự chọn"
+    },
+    "price": 115,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "F",
+      "G",
+      "J",
+      "K",
+      "2",
+      "3",
+      "5",
+      "6",
+      "10"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Thực đơn in \"A,B,C,D,F,G,J,K,,2,3,5,6,10\" (có hai dấu phẩy liền nhau sau K). Đã bỏ dấu phẩy thừa; không có mã nào bị mất vì không đọc được chữ.",
+    "sourcePage": "030_obj124"
+  },
+  {
+    "id": "400-ginger-glow",
+    "nr": "400",
+    "category": "getraenke",
+    "subcategory": "Limonaden",
+    "name": {
+      "de": "Ginger Glow",
+      "vi": "Ginger Glow"
+    },
+    "description": {
+      "de": "frischer Ingwer, Limettenscheiben, Maracujasaft, Soda",
+      "vi": "Gừng tươi, chanh xanh lát, nước chanh dây, soda"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "7"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 6.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "032_obj132"
+  },
+  {
+    "id": "401-lemongrass-breeze",
+    "nr": "401",
+    "category": "getraenke",
+    "subcategory": "Limonaden",
+    "name": {
+      "de": "Lemongrass Breeze",
+      "vi": "Lemongrass Breeze"
+    },
+    "description": {
+      "de": "frisches Zitronengras, Limettenscheiben, Maracujasaft, Soda",
+      "vi": "Sả tươi, chanh xanh lát, nước chanh dây, soda"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "7"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 6.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "032_obj132"
+  },
+  {
+    "id": "402-basil-bloom",
+    "nr": "402",
+    "category": "getraenke",
+    "subcategory": "Limonaden",
+    "name": {
+      "de": "Basil Bloom",
+      "vi": "Basil Bloom"
+    },
+    "description": {
+      "de": "Thai-Basilikum, Limettenscheiben, Cranberrysaft, Soda",
+      "vi": "Húng quế Thái, chanh xanh lát, nước nam việt quất, soda"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 6.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "032_obj132"
+  },
+  {
+    "id": "403-mint-splash",
+    "nr": "403",
+    "category": "getraenke",
+    "subcategory": "Limonaden",
+    "name": {
+      "de": "Mint Splash",
+      "vi": "Mint Splash"
+    },
+    "description": {
+      "de": "Minze, Limettenscheiben, Maracujasaft, Cranberrysaft, Soda",
+      "vi": "Bạc hà, chanh xanh lát, nước chanh dây, nước nam việt quất, soda"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "7"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 6.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "032_obj132"
+  },
+  {
+    "id": "404-jasmine-breeze",
+    "nr": "404",
+    "category": "getraenke",
+    "subcategory": "Limonaden",
+    "name": {
+      "de": "Jasmine Breeze",
+      "vi": "Jasmine Breeze"
+    },
+    "description": {
+      "de": "frische Limetten, Jasmintee, Rohrzucker, Eiswürfel",
+      "vi": "Chanh xanh tươi, trà nhài, đường mía, đá viên"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "4"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 6.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "032_obj132"
+  },
+  {
+    "id": "410-fruchtsaefte",
+    "nr": "410",
+    "category": "getraenke",
+    "subcategory": "Fruchtsäfte",
+    "name": {
+      "de": "Orange / Apfel / Ananas / Rhabarber / Maracuja / Cranberry / Mangonektar / Lychee",
+      "vi": "Cam / Táo / Dứa / Đại hoàng / Chanh dây / Nam việt quất / Nước xoài / Vải"
+    },
+    "description": {
+      "de": "Fruchtsäfte",
+      "vi": "Nước ép trái cây"
+    },
+    "price": 3,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "6",
+      "7"
+    ],
+    "sizes": [
+      {
+        "label": "0,2 L",
+        "price": 3
+      },
+      {
+        "label": "0,4 L",
+        "price": 4.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Mã phụ gia in theo từng vị: Ananas 5,6 · Maracuja 5,7 · Mangonektar 5 · Lychee 5,6,7. Orange / Apfel / Rhabarber / Cranberry không có mã. Trường allergens ở đây là hợp của tất cả các vị.",
+    "sourcePage": "032_obj132"
+  },
+  {
+    "id": "411-fruchtsaftschorle",
+    "nr": "411",
+    "category": "getraenke",
+    "subcategory": "Fruchtsäfte",
+    "name": {
+      "de": "Fruchtsaftschorle",
+      "vi": "Nước ép pha nước khoáng có ga"
+    },
+    "description": {
+      "de": "Saft nach Wahl mit Mineralwasser",
+      "vi": "Nước ép tự chọn pha nước khoáng có ga"
+    },
+    "price": 3.9,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "sizes": [
+      {
+        "label": "0,2 L",
+        "price": 3.9
+      },
+      {
+        "label": "0,4 L",
+        "price": 5.2
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "032_obj132"
+  },
+  {
+    "id": "420-mango-lassi",
+    "nr": "420",
+    "category": "getraenke",
+    "subcategory": "Homemades",
+    "name": {
+      "de": "Mango Lassi",
+      "vi": "Mango Lassi"
+    },
+    "description": {
+      "de": "frische Mango, Mango-Fruchtmark, Naturjoghurt, Milch",
+      "vi": "Xoài tươi, purée xoài, sữa chua không đường, sữa"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G",
+      "3"
+    ],
+    "sizes": [
+      {
+        "label": "0,3 L",
+        "price": 6.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "033_obj136"
+  },
+  {
+    "id": "421-kokos-limette",
+    "nr": "421",
+    "category": "getraenke",
+    "subcategory": "Homemades",
+    "name": {
+      "de": "Kokos-Limette",
+      "vi": "Dừa - Chanh xanh"
+    },
+    "description": {
+      "de": "Limetten, Naturjoghurt, Kokosmilch",
+      "vi": "Chanh xanh, sữa chua không đường, nước cốt dừa"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G"
+    ],
+    "sizes": [
+      {
+        "label": "0,3 L",
+        "price": 6.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "033_obj136"
+  },
+  {
+    "id": "422-apfel-minze",
+    "nr": "422",
+    "category": "getraenke",
+    "subcategory": "Homemades",
+    "name": {
+      "de": "Apfel-Minze",
+      "vi": "Táo - Bạc hà"
+    },
+    "description": {
+      "de": "Apfelsaft, Apfel-Fruchtstücke, frische Minze",
+      "vi": "Nước táo, miếng táo, bạc hà tươi"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "sizes": [
+      {
+        "label": "0,3 L",
+        "price": 6.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "033_obj136"
+  },
+  {
+    "id": "423-ananas-minze",
+    "nr": "423",
+    "category": "getraenke",
+    "subcategory": "Homemades",
+    "name": {
+      "de": "Ananas-Minze",
+      "vi": "Dứa - Bạc hà"
+    },
+    "description": {
+      "de": "Ananassaft, Ananasfrucht, Minze",
+      "vi": "Nước dứa, miếng dứa, bạc hà"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "6"
+    ],
+    "sizes": [
+      {
+        "label": "0,3 L",
+        "price": 6.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "033_obj136"
+  },
+  {
+    "id": "430-softdrinks",
+    "nr": "430",
+    "category": "getraenke",
+    "subcategory": "Softdrinks",
+    "name": {
+      "de": "Cola / Cola Light / Fanta / Sprite / Spezi / Wasser (still / Sprudel)",
+      "vi": "Cola / Cola Light / Fanta / Sprite / Spezi / Nước (không ga / có ga)"
+    },
+    "description": {
+      "de": "Softdrinks",
+      "vi": "Nước ngọt"
+    },
+    "price": 3,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "1",
+      "3",
+      "4",
+      "5",
+      "6",
+      "11"
+    ],
+    "sizes": [
+      {
+        "label": "0,2 L",
+        "price": 3
+      },
+      {
+        "label": "0,4 L",
+        "price": 4.2
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Mã phụ gia in theo từng loại: Cola 1,4,5 · Cola Light 1,3,4,5,11 · Fanta 1,5,6 · Sprite 5 · Spezi 1,4,5 · Wasser không mã. Trường allergens là hợp của tất cả.",
+    "sourcePage": "033_obj136"
+  },
+  {
+    "id": "431-schweppes",
+    "nr": "431",
+    "category": "getraenke",
+    "subcategory": "Softdrinks",
+    "name": {
+      "de": "Schweppes Tonic Water / Ginger Ale / Bitter Lemon",
+      "vi": "Schweppes Tonic Water / Ginger Ale / Bitter Lemon"
+    },
+    "description": {
+      "de": "Schweppes Tonic Water / Ginger Ale / Bitter Lemon",
+      "vi": "Schweppes Tonic Water / Ginger Ale / Bitter Lemon"
+    },
+    "price": 3,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "1",
+      "5",
+      "7",
+      "8"
+    ],
+    "sizes": [
+      {
+        "label": "0,2 L",
+        "price": 3
+      },
+      {
+        "label": "0,4 L",
+        "price": 4.2
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Mã phụ gia in theo từng loại: Tonic Water 5,8 · Ginger Ale 1,5 · Bitter Lemon 5,7,8.",
+    "sourcePage": "033_obj136"
+  },
+  {
+    "id": "432-mineralwasser",
+    "nr": "432",
+    "category": "getraenke",
+    "subcategory": "Softdrinks",
+    "name": {
+      "de": "Mineralwasser Classic / Naturell",
+      "vi": "Nước khoáng Classic / Naturell"
+    },
+    "description": {
+      "de": "Mineralwasser Classic / Naturell",
+      "vi": "Nước khoáng có ga / không ga"
+    },
+    "price": 7.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "sizes": [
+      {
+        "label": "Fl. 0,7 L",
+        "price": 7.9
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "033_obj136"
+  },
+  {
+    "id": "440-frischer-ingwertee",
+    "nr": "440",
+    "category": "getraenke",
+    "subcategory": "Tee",
+    "name": {
+      "de": "Frischer Ingwertee",
+      "vi": "Trà gừng tươi"
+    },
+    "description": {
+      "de": "mit Honig",
+      "vi": "với mật ong"
+    },
+    "price": 4.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "441-pfefferminz-ingwer-tee",
+    "nr": "441",
+    "category": "getraenke",
+    "subcategory": "Tee",
+    "name": {
+      "de": "Frischer Pfefferminz-Ingwer-Tee",
+      "vi": "Trà bạc hà gừng tươi"
+    },
+    "description": {
+      "de": "mit Honig",
+      "vi": "với mật ong"
+    },
+    "price": 4.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "442-zitronengras-limetten-tee",
+    "nr": "442",
+    "category": "getraenke",
+    "subcategory": "Tee",
+    "name": {
+      "de": "Frischer Zitronengras-Limetten-Tee",
+      "vi": "Trà sả chanh tươi"
+    },
+    "description": {
+      "de": "mit Honig",
+      "vi": "với mật ong"
+    },
+    "price": 4.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "443-rosentee",
+    "nr": "443",
+    "category": "getraenke",
+    "subcategory": "Tee",
+    "name": {
+      "de": "Rosentee",
+      "vi": "Trà hoa hồng"
+    },
+    "description": {
+      "de": "mit Rosenknospen",
+      "vi": "với nụ hoa hồng"
+    },
+    "price": 4.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "444-kamillentee",
+    "nr": "444",
+    "category": "getraenke",
+    "subcategory": "Tee",
+    "name": {
+      "de": "Kamillentee",
+      "vi": "Trà hoa cúc"
+    },
+    "description": {
+      "de": "mit Kamillenblüten",
+      "vi": "với hoa cúc"
+    },
+    "price": 4.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "445-jasmin-gruen-schwarztee",
+    "nr": "445",
+    "category": "getraenke",
+    "subcategory": "Tee",
+    "name": {
+      "de": "Jasmintee / Grüntee / Schwarztee",
+      "vi": "Trà nhài / Trà xanh / Trà đen"
+    },
+    "description": {
+      "de": "Jasmintee / Grüntee / Schwarztee",
+      "vi": "Trà nhài / trà xanh / trà đen"
+    },
+    "price": 4.2,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "4"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "450-schwarzer-kaffee",
+    "nr": "450",
+    "category": "getraenke",
+    "subcategory": "Kaffee",
+    "name": {
+      "de": "Schwarzer Kaffee",
+      "vi": "Cà phê đen"
+    },
+    "description": {
+      "de": "schwarzer Kaffee",
+      "vi": "Cà phê đen"
+    },
+    "price": 3.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "4"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "451-espresso",
+    "nr": "451",
+    "category": "getraenke",
+    "subcategory": "Kaffee",
+    "name": {
+      "de": "Espresso",
+      "vi": "Espresso"
+    },
+    "description": {
+      "de": "Espresso",
+      "vi": "Espresso"
+    },
+    "price": 2.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "4"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "452-cappuccino",
+    "nr": "452",
+    "category": "getraenke",
+    "subcategory": "Kaffee",
+    "name": {
+      "de": "Cappuccino",
+      "vi": "Cappuccino"
+    },
+    "description": {
+      "de": "Cappuccino",
+      "vi": "Cappuccino"
+    },
+    "price": 3.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "6",
+      "4"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "453-latte-macchiato",
+    "nr": "453",
+    "category": "getraenke",
+    "subcategory": "Kaffee",
+    "name": {
+      "de": "Latte Macchiato",
+      "vi": "Latte Macchiato"
+    },
+    "description": {
+      "de": "Latte Macchiato",
+      "vi": "Latte Macchiato"
+    },
+    "price": 4.4,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "6",
+      "4"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "454-vietnamesischer-kaffee",
+    "nr": "454",
+    "category": "getraenke",
+    "subcategory": "Kaffee",
+    "name": {
+      "de": "Vietnamesischer Kaffee „Cà Phê“",
+      "vi": "Cà phê phin Việt Nam"
+    },
+    "description": {
+      "de": "Spezialität aus Vietnam – frisch gebrühter Kaffee im kleinen Filter, mit oder ohne Kondensmilch",
+      "vi": "Đặc sản Việt Nam – cà phê pha phin, có hoặc không sữa đặc"
+    },
+    "price": 5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "6",
+      "4"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "455-vietnamesischer-eiskaffee",
+    "nr": "455",
+    "category": "getraenke",
+    "subcategory": "Kaffee",
+    "name": {
+      "de": "Vietnamesischer Eiskaffee",
+      "vi": "Cà phê đá Việt Nam"
+    },
+    "description": {
+      "de": "vietnamesischer Kaffee auf Eis",
+      "vi": "Cà phê Việt Nam dùng với đá"
+    },
+    "price": 5.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "4"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "034_obj140"
+  },
+  {
+    "id": "460-gin-tonic",
+    "nr": "460",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Gin Tonic",
+      "vi": "Gin Tonic"
+    },
+    "description": {
+      "de": "Bombay Sapphire Gin, Schweppes Tonic",
+      "vi": "Gin Bombay Sapphire, Schweppes Tonic"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "3",
+      "8"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "461-whisky-cola",
+    "nr": "461",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Whisky Cola",
+      "vi": "Whisky Cola"
+    },
+    "description": {
+      "de": "Daniel's Whisky, Cola",
+      "vi": "Whisky Daniel's, Cola"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "1",
+      "4",
+      "5"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "462-wodka-lemon",
+    "nr": "462",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Wodka Lemon",
+      "vi": "Wodka Lemon"
+    },
+    "description": {
+      "de": "Wodka, Schweppes Bitter Lemon",
+      "vi": "Vodka, Schweppes Bitter Lemon"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "7",
+      "8"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Thực đơn in trùng món này hai lần: số 462 và số 464, cùng mô tả và cùng giá.",
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "463-whisky-energy",
+    "nr": "463",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Whisky Energy",
+      "vi": "Whisky Energy"
+    },
+    "description": {
+      "de": "Whisky, Redbull",
+      "vi": "Whisky, Red Bull"
+    },
+    "price": 6.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "1",
+      "4",
+      "5",
+      "9"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "464-wodka-lemon",
+    "nr": "464",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Wodka Lemon",
+      "vi": "Wodka Lemon"
+    },
+    "description": {
+      "de": "Wodka, Schweppes Bitter Lemon",
+      "vi": "Vodka, Schweppes Bitter Lemon"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "7",
+      "8"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Trùng hoàn toàn với số 462 trên thực đơn in. Chép nguyên văn; cần nhà hàng quyết định giữ hay bỏ.",
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "465-wodka-cranberry",
+    "nr": "465",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Wodka Cranberry",
+      "vi": "Wodka Cranberry"
+    },
+    "description": {
+      "de": "Wodka, Cranberrysaft",
+      "vi": "Vodka, nước nam việt quất"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "466-campari-orange",
+    "nr": "466",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Campari Orange",
+      "vi": "Campari Orange"
+    },
+    "description": {
+      "de": "Campari, Orangensaft",
+      "vi": "Campari, nước cam"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "1"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "467-aperol-spritz",
+    "nr": "467",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Aperol Spritz",
+      "vi": "Aperol Spritz"
+    },
+    "description": {
+      "de": "Aperol, Soda, frische Maracuja, Himbeere, Prosecco",
+      "vi": "Aperol, soda, chanh dây tươi, mâm xôi, Prosecco"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L",
+      "1"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "468-choya-plum-on-ice",
+    "nr": "468",
+    "category": "getraenke",
+    "subcategory": "Longdrinks",
+    "name": {
+      "de": "Choya Plum on Ice",
+      "vi": "Choya Plum on Ice"
+    },
+    "description": {
+      "de": "Choya-Pflaumenwein, Eiswürfel",
+      "vi": "Rượu mận Choya, đá viên"
+    },
+    "price": 6.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "035_obj144"
+  },
+  {
+    "id": "470-sex-on-the-beach",
+    "nr": "470",
+    "category": "getraenke",
+    "subcategory": "Cocktails",
+    "name": {
+      "de": "Sex On The Beach",
+      "vi": "Sex On The Beach"
+    },
+    "description": {
+      "de": "Wodka, Maracuja, Papaya, Banane, Orange, Ananas",
+      "vi": "Vodka, chanh dây, đu đủ, chuối, cam, dứa"
+    },
+    "price": 7.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "5",
+      "6",
+      "7"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "036_obj148"
+  },
+  {
+    "id": "471-caipirinha",
+    "nr": "471",
+    "category": "getraenke",
+    "subcategory": "Cocktails",
+    "name": {
+      "de": "Caipirinha",
+      "vi": "Caipirinha"
+    },
+    "description": {
+      "de": "Cachaça, Limette, Lime Juice, Brauner Zucker",
+      "vi": "Cachaça, chanh xanh, nước cốt chanh, đường nâu"
+    },
+    "price": 7.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "036_obj148"
+  },
+  {
+    "id": "472-pina-colada",
+    "nr": "472",
+    "category": "getraenke",
+    "subcategory": "Cocktails",
+    "name": {
+      "de": "Pina Colada",
+      "vi": "Pina Colada"
+    },
+    "description": {
+      "de": "Weißer Rum, Kokosnuss, Ananas, Sahne",
+      "vi": "Rum trắng, dừa, dứa, kem tươi"
+    },
+    "price": 7.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "G",
+      "5",
+      "6"
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "036_obj148"
+  },
+  {
+    "id": "473-margarita",
+    "nr": "473",
+    "category": "getraenke",
+    "subcategory": "Cocktails",
+    "name": {
+      "de": "Margarita",
+      "vi": "Margarita"
+    },
+    "description": {
+      "de": "Tequila Sierra, Cointreau, Zitrone",
+      "vi": "Tequila Sierra, Cointreau, chanh vàng"
+    },
+    "price": 7.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "036_obj148"
+  },
+  {
+    "id": "474-mojito",
+    "nr": "474",
+    "category": "getraenke",
+    "subcategory": "Cocktails",
+    "name": {
+      "de": "Mojito",
+      "vi": "Mojito"
+    },
+    "description": {
+      "de": "Rum, Limettensaft, Minze, Rohrzucker, Sodawasser",
+      "vi": "Rum, nước cốt chanh xanh, bạc hà, đường mía, nước soda"
+    },
+    "price": 7.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "036_obj148"
+  },
+  {
+    "id": "475-hanoi-mojito",
+    "nr": "475",
+    "category": "getraenke",
+    "subcategory": "Cocktails",
+    "name": {
+      "de": "Hanoi Mojito",
+      "vi": "Hanoi Mojito"
+    },
+    "description": {
+      "de": "Nếp Mới, vietnamesischer Reisschnaps, Limettensaft, Minze, Rohrzucker, Sodawasser",
+      "vi": "Nếp Mới – rượu gạo Việt Nam, nước cốt chanh xanh, bạc hà, đường mía, nước soda"
+    },
+    "price": 8.9,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "036_obj148"
+  },
+  {
+    "id": "480-pinot-grigio",
+    "nr": "480",
+    "category": "getraenke",
+    "subcategory": "Weißwein",
+    "name": {
+      "de": "Pinot Grigio",
+      "vi": "Pinot Grigio"
+    },
+    "description": {
+      "de": "Weißwein",
+      "vi": "Rượu vang trắng"
+    },
+    "price": 4.3,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.3
+      },
+      {
+        "label": "0,2 L",
+        "price": 6.9
+      },
+      {
+        "label": "0,75 L",
+        "price": 22
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "481-chardonmay",
+    "nr": "481",
+    "category": "getraenke",
+    "subcategory": "Weißwein",
+    "name": {
+      "de": "Chardonmay",
+      "vi": "Chardonmay"
+    },
+    "description": {
+      "de": "Weißwein",
+      "vi": "Rượu vang trắng"
+    },
+    "price": 4.3,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.3
+      },
+      {
+        "label": "0,2 L",
+        "price": 6.9
+      },
+      {
+        "label": "0,75 L",
+        "price": 22
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Thực đơn in \"Chardonmay\" — nhiều khả năng là lỗi chính tả của \"Chardonnay\". Chép nguyên văn; cần nhà hàng xác nhận.",
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "482-rose",
+    "nr": "482",
+    "category": "getraenke",
+    "subcategory": "Weißwein",
+    "name": {
+      "de": "Rosé",
+      "vi": "Rosé"
+    },
+    "description": {
+      "de": "Roséwein",
+      "vi": "Rượu vang hồng"
+    },
+    "price": 4.7,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.7
+      },
+      {
+        "label": "0,2 L",
+        "price": 7.8
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "483-riesling",
+    "nr": "483",
+    "category": "getraenke",
+    "subcategory": "Weißwein",
+    "name": {
+      "de": "Riesling",
+      "vi": "Riesling"
+    },
+    "description": {
+      "de": "Weißwein",
+      "vi": "Rượu vang trắng"
+    },
+    "price": 4.5,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.5
+      },
+      {
+        "label": "0,2 L",
+        "price": 7.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "484-prosecco",
+    "nr": "484",
+    "category": "getraenke",
+    "subcategory": "Weißwein",
+    "name": {
+      "de": "Prosecco",
+      "vi": "Prosecco"
+    },
+    "description": {
+      "de": "Prosecco",
+      "vi": "Prosecco"
+    },
+    "price": 8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,2 L",
+        "price": 8
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "485-weissweinschorle",
+    "nr": "485",
+    "category": "getraenke",
+    "subcategory": "Weißwein",
+    "name": {
+      "de": "Weißweinschorle",
+      "vi": "Vang trắng pha nước khoáng"
+    },
+    "description": {
+      "de": "Weißweinschorle",
+      "vi": "Vang trắng pha nước khoáng có ga"
+    },
+    "price": 4.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,2 L",
+        "price": 4.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "490-doppio-passo-primitivo",
+    "nr": "490",
+    "category": "getraenke",
+    "subcategory": "Rotwein",
+    "name": {
+      "de": "Doppio Passo Primitivo (Italien / Italy)",
+      "vi": "Doppio Passo Primitivo (Ý)"
+    },
+    "description": {
+      "de": "Rotwein aus Italien",
+      "vi": "Rượu vang đỏ Ý"
+    },
+    "price": 4.4,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.4
+      },
+      {
+        "label": "0,2 L",
+        "price": 7.4
+      },
+      {
+        "label": "0,75 L",
+        "price": 22
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "491-primitivo",
+    "nr": "491",
+    "category": "getraenke",
+    "subcategory": "Rotwein",
+    "name": {
+      "de": "Primitivo (Italien / Italy)",
+      "vi": "Primitivo (Ý)"
+    },
+    "description": {
+      "de": "Rotwein aus Italien",
+      "vi": "Rượu vang đỏ Ý"
+    },
+    "price": 4.4,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.4
+      },
+      {
+        "label": "0,2 L",
+        "price": 7.4
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "492-salice-salentino",
+    "nr": "492",
+    "category": "getraenke",
+    "subcategory": "Rotwein",
+    "name": {
+      "de": "Salice Salentino (Italien / Italy)",
+      "vi": "Salice Salentino (Ý)"
+    },
+    "description": {
+      "de": "Rotwein aus Italien",
+      "vi": "Rượu vang đỏ Ý"
+    },
+    "price": 4.4,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.4
+      },
+      {
+        "label": "0,2 L",
+        "price": 7.4
+      },
+      {
+        "label": "0,75 L",
+        "price": 22
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "493-spaetburgunder",
+    "nr": "493",
+    "category": "getraenke",
+    "subcategory": "Rotwein",
+    "name": {
+      "de": "Spätburgunder",
+      "vi": "Spätburgunder"
+    },
+    "description": {
+      "de": "Rotwein",
+      "vi": "Rượu vang đỏ"
+    },
+    "price": 4.4,
+    "priceFrom": true,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,1 L",
+        "price": 4.4
+      },
+      {
+        "label": "0,2 L",
+        "price": 7.4
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "494-rotweinschorle",
+    "nr": "494",
+    "category": "getraenke",
+    "subcategory": "Rotwein",
+    "name": {
+      "de": "Rotweinschorle",
+      "vi": "Vang đỏ pha nước khoáng"
+    },
+    "description": {
+      "de": "Rotweinschorle",
+      "vi": "Vang đỏ pha nước khoáng có ga"
+    },
+    "price": 4.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "0,2 L",
+        "price": 4.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "037_obj152"
+  },
+  {
+    "id": "500-krombacher",
+    "nr": "500",
+    "category": "getraenke",
+    "subcategory": "Bier vom Fass",
+    "name": {
+      "de": "Krombacher",
+      "vi": "Krombacher"
+    },
+    "description": {
+      "de": "Bier vom Fass",
+      "vi": "Bia tươi"
+    },
+    "price": 4.8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 4.8
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "501-alster-radler",
+    "nr": "501",
+    "category": "getraenke",
+    "subcategory": "Bier vom Fass",
+    "name": {
+      "de": "Alster / Radler",
+      "vi": "Alster / Radler"
+    },
+    "description": {
+      "de": "Bier mit Sprite oder Fanta",
+      "vi": "Bia pha Sprite hoặc Fanta"
+    },
+    "price": 4.8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 4.8
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "note": "Mã phụ gia của phần pha: Sprite 6 · Fanta 1,5,6.",
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "510-hefe-weizen-bier",
+    "nr": "510",
+    "category": "getraenke",
+    "subcategory": "Flaschenbier",
+    "name": {
+      "de": "Hefe Weizen Bier",
+      "vi": "Bia lúa mì Hefe Weizen"
+    },
+    "description": {
+      "de": "dunkel / hell / alkoholfrei",
+      "vi": "đen / vàng / không cồn"
+    },
+    "price": 4.8,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A1",
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 4.8
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "511-bier-hell-non-alcoholic",
+    "nr": "511",
+    "category": "getraenke",
+    "subcategory": "Flaschenbier",
+    "name": {
+      "de": "Bier Hell/non alcoholic",
+      "vi": "Bia vàng / không cồn"
+    },
+    "description": {
+      "de": "Bier Hell / non alcoholic",
+      "vi": "Bia vàng / không cồn"
+    },
+    "price": 3.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,33 L",
+        "price": 3.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "512-saigon-bier",
+    "nr": "512",
+    "category": "getraenke",
+    "subcategory": "Flaschenbier",
+    "name": {
+      "de": "Saigon Bier",
+      "vi": "Bia Sài Gòn"
+    },
+    "description": {
+      "de": "Vietnam – hell / alkoholfrei",
+      "vi": "Việt Nam – bia vàng / không cồn"
+    },
+    "price": 4,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,33 L",
+        "price": 4
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "513-hanoi-bier",
+    "nr": "513",
+    "category": "getraenke",
+    "subcategory": "Flaschenbier",
+    "name": {
+      "de": "Hanoi Bier",
+      "vi": "Bia Hà Nội"
+    },
+    "description": {
+      "de": "Hanoi Bier",
+      "vi": "Bia Hà Nội"
+    },
+    "price": 4,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,33 L",
+        "price": 4
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "514-tiger-bier",
+    "nr": "514",
+    "category": "getraenke",
+    "subcategory": "Flaschenbier",
+    "name": {
+      "de": "Tiger Bier",
+      "vi": "Bia Tiger"
+    },
+    "description": {
+      "de": "Singapore",
+      "vi": "Singapore"
+    },
+    "price": 4,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,33 L",
+        "price": 4
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "515-kopfueber-bier",
+    "nr": "515",
+    "category": "getraenke",
+    "subcategory": "Flaschenbier",
+    "name": {
+      "de": "Kopfüber Bier",
+      "vi": "Kopfüber Bier"
+    },
+    "description": {
+      "de": "Asien Bier mit Sprite, Ananas, Cranberry Saft",
+      "vi": "Bia châu Á pha Sprite, dứa, nước nam việt quất"
+    },
+    "price": 7.5,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "A2"
+    ],
+    "sizes": [
+      {
+        "label": "0,5 L",
+        "price": 7.5
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "520-sake",
+    "nr": "520",
+    "category": "getraenke",
+    "subcategory": "Alkohol / Spirituosen",
+    "name": {
+      "de": "Sake",
+      "vi": "Sake"
+    },
+    "description": {
+      "de": "Japanischer Reiswein (kalt oder warm)",
+      "vi": "Rượu gạo Nhật (lạnh hoặc ấm)"
+    },
+    "price": 7,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [
+      "L"
+    ],
+    "sizes": [
+      {
+        "label": "150 ML",
+        "price": 7
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "521-nep-moi",
+    "nr": "521",
+    "category": "getraenke",
+    "subcategory": "Alkohol / Spirituosen",
+    "name": {
+      "de": "Nep Moi",
+      "vi": "Nếp Mới"
+    },
+    "description": {
+      "de": "Vietnamesischer Reisschnaps aus Vietnam",
+      "vi": "Rượu nếp Việt Nam"
+    },
+    "price": 7,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "sizes": [
+      {
+        "label": "150 ML",
+        "price": 7
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  },
+  {
+    "id": "522-vodka",
+    "nr": "522",
+    "category": "getraenke",
+    "subcategory": "Alkohol / Spirituosen",
+    "name": {
+      "de": "Vodka",
+      "vi": "Vodka"
+    },
+    "description": {
+      "de": "Vodka",
+      "vi": "Vodka"
+    },
+    "price": 7,
+    "currency": "EUR",
+    "image": null,
+    "allergens": [],
+    "sizes": [
+      {
+        "label": "150 ML",
+        "price": 7
+      }
+    ],
+    "dietary": [],
+    "spice": "none",
+    "proteins": [],
+    "featured": false,
+    "available": true,
+    "sourcePage": "038_obj156"
+  }
+]
