@@ -11,9 +11,9 @@
  * ở 390px không có đủ chỗ để chữ và ảnh cùng tồn tại mà vẫn đọc được.
  */
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { MasterChefCard } from "@/components/shell/MasterChefCard";
-import { BrushRule, HeroDecor, PetalsSettled } from "@/components/decor/Decor";
+import { BrushRule, FallingPetals, PetalsSettled } from "@/components/decor/Decor";
 import { ChuCo, WordmarkSora, type ChuNhan } from "@/components/chu/ChuCo";
 import { HERO_BANNER, type NavKey } from "@/data/site";
 import type { Locale } from "@/lib/i18n";
@@ -58,6 +58,13 @@ export function PageHero({
   stage?: ReactNode;
 }) {
   const banner = HERO_BANNER[page];
+  /*
+   * Tỉ lệ khung hero = ĐÚNG tỉ lệ ảnh banner, để ảnh hiện trọn, không cắt.
+   * Trang chủ dùng ảnh riêng Sếp gửi 05/10 (1817×770 = 2,36:1, có sẵn ba bệ
+   * tròn cho vật thể 360°); năm trang còn lại dùng bộ 2172×724 = 3:1.
+   * Thêm/đổi ảnh banner thì sửa luôn số ở đây, đừng để lệch.
+   */
+  const tiLeAnh = big ? 1817 / 770 : 3;
 
   return (
     <section className="relative isolate border-b border-gold/40">
@@ -80,8 +87,8 @@ export function PageHero({
        */}
 
       {/* --- Khổ điện thoại: ảnh riêng một khối, không có chữ đè --- */}
-      {/* Khổ điện thoại cũng theo tỉ lệ 3:1 để hiện trọn ảnh, không cắt. */}
-      <div className="relative aspect-[3/1] w-full md:hidden">
+      {/* Khổ điện thoại cũng theo đúng tỉ lệ ảnh để hiện trọn, không cắt. */}
+      <div className="relative w-full md:hidden" style={{ aspectRatio: String(tiLeAnh) }}>
         <Image
           src={`/banner/${banner}-768.webp`}
           alt=""
@@ -123,18 +130,23 @@ export function PageHero({
       </div>
 
       {/*
-       * ---- HOA ĐÀO TRÊN BANNER (Sếp cho gắn lại 05/10) ----
-       * Ghi lại để người sau khỏi lật đi lật lại: 04/10 Sếp bảo bỏ hết, 05/10
-       * bảo gắn lại kèm cánh rơi và cánh đọng ở đáy. Đây là bản đang dùng.
+       * ---- CHỈ CÒN CÁNH RƠI, KHÔNG CÒN TÁN HOA PNG (Sếp 05/10) ----
+       * Sếp: *"vẫn để hoa đào rơi, xoá ảnh hoa đào PNG trên banner đi"*.
        *
-       * Dùng `HeroDecor` (bộ gom) chứ KHÔNG gắn lẻ từng thẻ như bản cũ: bộ này
-       * đã canh để tán hoa và cánh rơi chỉ thả từ x≈580 sang phải, né hẳn cột
-       * chữ. Gắn lẻ là hoa rơi đè lên tiêu đề.
+       * Bỏ `HeroDecor` vì bộ đó gom 4 lớp PNG TĨNH (hai `SakuraCanopy` rủ mép
+       * trên cho điện thoại/desktop, một dải mỏng trên cột chữ ở trang con,
+       * một `SakuraEdge` chạy dọc mép trái) — chính là mấy lớp cần xoá. Chỉ
+       * giữ `FallingPetals`, là thứ duy nhất trong bộ đó không phải PNG dán.
+       *
+       * Vì sao không cần tán hoa nữa: ảnh banner mới đã có sẵn tán hoa đào
+       * thật rủ kín mép trên, dán thêm PNG lên là hai lớp hoa chồng nhau.
+       *
+       * `HeroDecor` giữ lại trong `Decor.tsx` (không ai dùng nữa) phòng khi
+       * Sếp đổi ý — đã lật hai lần trong hai ngày.
        */}
-      <HeroDecor big={big} />
+      <FallingPetals left={0} className="hidden md:block" />
 
-      {/* Cánh đã rơi, nằm đọng rải rác dọc đáy banner. Đặt SAU `HeroDecor` để
-          cánh đọng nằm trên tán hoa chứ không bị tán che. */}
+      {/* Cánh đã rơi, nằm đọng rải rác dọc đáy banner. */}
       <PetalsSettled className="hidden md:block" />
 
       {/*
@@ -150,9 +162,14 @@ export function PageHero({
        * cả ba khổ mà không phải khai ba lần.
        */}
       <div
-        className={`relative flex w-full flex-col justify-center px-[var(--page-pad)] py-9 md:py-0 md:min-h-[calc((100vw-var(--sidebar-w))/3)] ${
-          big ? "md:min-h-[calc((100vw-var(--sidebar-w))/3)]" : ""
-        }`}
+        className="relative flex w-full flex-col justify-center px-[var(--page-pad)] py-9 md:py-0 md:min-h-[var(--hero-h)]"
+        style={
+          {
+            // Chiều cao desktop = bề ngang / tỉ lệ ảnh. `--sidebar-w` tự đổi
+            // theo khổ (0 / 88 / 256px) nên một công thức đúng cho cả ba khổ.
+            "--hero-h": `calc((100vw - var(--sidebar-w)) / ${tiLeAnh})`,
+          } as CSSProperties
+        }
       >
         {/* `md:pr-[88px]` chừa chỗ cho rail tiện ích nổi bên phải. Chỉ đặt trên
             khối NỘI DUNG — ảnh banner vẫn tràn hết mép phải. Thiếu nó thì rail

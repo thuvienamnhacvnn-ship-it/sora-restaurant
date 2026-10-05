@@ -63,7 +63,11 @@ async function logo() {
  * phải tính từ chính ảnh nguồn, đừng khoá cứng tỉ lệ cũ.
  */
 const BANNERS = {
-  home_hero: "ChatGPT Image Oct 4, 2026, 05_55_14 PM-5.png",
+  // Sếp gửi riêng 05/10 — ảnh này có sẵn BA BỆ TRÒN ở tiền cảnh, đúng chỗ ba
+  // vật thể 360° của trang chủ đứng, nên chỉ dùng cho trang chủ.
+  // Tỉ lệ 1817×770 = **2,36:1**, KHÁC bộ 3:1 còn lại → khung hero trang chủ
+  // phải theo tỉ lệ riêng, xem `PageHero.tsx`.
+  home_hero: "Cinematic Cherry Blossom Lounge Display.png",
   speisekarte_hero: "ChatGPT Image Oct 4, 2026, 05_55_10 PM-2.png",
   reservierung_hero: "ChatGPT Image Oct 4, 2026, 05_55_09 PM-1.png",
   galerie_hero: "ChatGPT Image Oct 4, 2026, 05_55_15 PM-6.png",
