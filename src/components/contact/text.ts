@@ -20,4 +20,12 @@ export const CT = {
      được". Tiêu đề quảng cáo của mockup (`LIEBER DIREKT ÜBER WHATSAPP?`)
      KHÔNG lấy. Khối này đang ẩn vì chưa có số. */
   whatsappCta: { de: "Jetzt auf WhatsApp schreiben", vi: null },
+  /* Khối bản đồ nạp theo kiểu "hai cú bấm" (xem MapBlock.tsx). Câu dưới là
+     cách diễn đạt quen thuộc ở Đức: nói rõ bấm vào là nối sang Google và dữ
+     liệu chạy sang đó, không hứa hẹn gì thêm. */
+  mapLoad: { de: "Karte laden", vi: null },
+  mapPrivacy: {
+    de: "Beim Laden der Karte werden Daten an Google übertragen.",
+    vi: null,
+  },
 } satisfies Record<string, Txt>;

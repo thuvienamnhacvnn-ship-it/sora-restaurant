@@ -20,6 +20,8 @@ export const restaurant = {
   instagram: raw.instagram as string | null,
   facebook: raw.facebook as string | null,
   googleMapsUrl: raw.googleMapsUrl as string | null,
+  /** Link mở Google Maps ở tab mới (nút chỉ đường) — không nhúng, không cần đồng ý. */
+  googleMapsPlaceUrl: raw.googleMapsPlaceUrl as string | null,
 };
 
 export const hasEmail = () => Boolean(restaurant.email);

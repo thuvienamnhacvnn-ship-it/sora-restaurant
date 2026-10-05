@@ -5,9 +5,9 @@
  * Còn null nên ẨN HẲN:
  *  - thẻ E-MAIL (và nút gửi của form bị khoá, xem ContactForm)
  *  - dải CTA WhatsApp của mockup
- *  - bản đồ nhúng: chưa có link Google Business chính thức. Thay bằng nút
- *    "Route planen" dựng từ CHÍNH địa chỉ đã xác minh — không bịa toạ độ,
- *    không bịa place-id.
+ *
+ * Bản đồ: ĐÃ CÓ link Google Maps của quán (Sếp gửi 05/10/2026). `MapBlock`
+ * nạp theo kiểu "hai cú bấm" cho đúng DSGVO — lý do viết trong chính file đó.
  */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -31,6 +31,7 @@ import {
   restaurant,
   telHref,
 } from "@/data/restaurant";
+import { CT } from "@/components/contact/text";
 import { CHU_NHAN } from "@/components/chu/ChuCo";
 import { getT, isLocale, pick } from "@/lib/i18n";
 
@@ -145,7 +146,12 @@ export default async function KontaktPage({
               </InfoCard>
             </ul>
 
-            <MapBlock title={t("contact.map")} routeLabel={t("contact.route")} />
+            <MapBlock
+              title={t("contact.map")}
+              routeLabel={t("contact.route")}
+              loadLabel={pick(CT.mapLoad, lang)}
+              privacyNote={pick(CT.mapPrivacy, lang)}
+            />
 
             {/* Dải WhatsApp của mockup ẩn hẳn: chưa có số WhatsApp. */}
             <WhatsAppCta locale={lang} title={t("rail.whatsapp")} />
