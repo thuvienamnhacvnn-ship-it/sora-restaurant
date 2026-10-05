@@ -20,6 +20,16 @@ export type HeroObject = {
   primary: boolean;
 };
 
+/*
+ * Có tệp thật nào chưa? Sếp 05/10 bắt dọn sạch banner trang chủ: không nhãn
+ * tên món, không vòng enso giữ chỗ, không huy hiệu 360°. Nên khi cả ba vật
+ * thể còn `webm`/`poster` null thì KHÔNG dựng khối nào hết — phải hỏi qua hàm
+ * này ở chỗ gọi, chứ để khối rỗng thì `gap`/`mt` vẫn chừa một dải trống trên
+ * banner.
+ */
+export const coVatThe360 = () =>
+  heroObjects.some((o) => o.webm || o.poster);
+
 export const heroObjects: HeroObject[] = [
   { id: "sushi", labelKey: "home.stage.sushi", webm: null, poster: null, primary: true },
   { id: "pho", labelKey: "home.stage.pho", webm: null, poster: null, primary: false },

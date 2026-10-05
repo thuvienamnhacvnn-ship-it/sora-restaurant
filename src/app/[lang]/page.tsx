@@ -17,7 +17,7 @@ import { ChoSep } from "@/components/ui/ChoSep";
 import { MobileFooter } from "@/components/shell/MobileFooter";
 import { Icon } from "@/components/ui/Icon";
 import { GoldLeafEdge } from "@/components/decor/Decor";
-import { heroObjects } from "@/data/hero-objects";
+import { coVatThe360, heroObjects } from "@/data/hero-objects";
 import { getT, href, isLocale } from "@/lib/i18n";
 
 export async function generateMetadata({
@@ -49,7 +49,11 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           question: t("chef.question"),
           cta: t("chef.cta.home"),
         }}
+        /* Chưa có tệp WebM/poster nào thì KHÔNG dựng sân khấu: Sếp 05/10 bắt
+           banner trang chủ sạch, không nhãn món, không vòng tròn giữ chỗ.
+           Khối rỗng vẫn chừa `gap` nên phải cắt từ đây, xem coVatThe360(). */
         stage={
+          !coVatThe360() ? null : (
           <div className="flex w-full items-end justify-center gap-4">
             {heroObjects.map((obj, i) => (
               <Hero360Object
@@ -62,6 +66,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
               />
             ))}
           </div>
+          )
         }
       >
         <h2 className="sora-h2">
@@ -91,7 +96,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
       </PageHero>
 
-      {/* Bệ 360 ở khổ điện thoại: xuống dưới hero, chỉ 1 vật thể tự chạy */}
+      {/* Bệ 360 ở khổ điện thoại: xuống dưới hero, chỉ 1 vật thể tự chạy.
+          Cũng ẩn hẳn khi chưa có tệp — `mt-8` của khối rỗng để lại một dải
+          trống ngay dưới banner. */}
+      {coVatThe360() && (
       <div className="mt-8 grid grid-cols-3 items-end gap-3 px-[var(--page-pad)] md:hidden">
         {heroObjects.map((obj, i) => (
           <Hero360Object
@@ -104,6 +112,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           />
         ))}
       </div>
+      )}
 
       <SectionFrame>
         <h2 className="sr-only">{t("home.categoryStrip")}</h2>

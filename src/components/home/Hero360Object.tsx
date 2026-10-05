@@ -73,6 +73,15 @@ export function Hero360Object({
 
   const showVideo = Boolean(webm) && mayPlay && !videoFailed;
 
+  /*
+   * Chưa có tệp thật thì KHÔNG vẽ gì. Sếp 05/10: "xóa cả tên món ăn và cái
+   * vòng tròn trên home banner đi" — banner phải sạch, không còn chỗ giữ chỗ
+   * nào. Trước đây nhánh này vẽ vòng enso vàng; nay bỏ hẳn.
+   * Chỗ gọi cũng phải hỏi `coVatThe360()` trước, không thì khối bọc rỗng vẫn
+   * chừa khoảng trống.
+   */
+  if (!webm && !poster) return null;
+
   return (
     /* `data-be-360`: mốc neo cho bài kiểm, không có tác dụng gì về hiển thị.
        Cần vì khi chưa có tệp WebM thì component không sinh thẻ <video> nào,
@@ -103,11 +112,9 @@ export function Hero360Object({
             onError={() => setVideoFailed(true)}
             className="relative size-full object-contain"
           />
-        ) : poster ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={poster} alt={label} className="relative size-full object-contain" />
         ) : (
-          <Placeholder />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={poster!} alt={label} className="relative size-full object-contain" />
         )}
 
         {/* Bóng toả dưới vật thể — CSS, chỉnh được theo từng khổ màn hình */}
@@ -126,36 +133,23 @@ export function Hero360Object({
         dưới. Spec §0 cho phép: thẻ/nút có nền riêng đặt trên ảnh KHÔNG phải
         lớp phủ. Không có nền thì chữ trắng trên đèn vàng chỉ đạt 1,6:1.
       */}
-      <p className="mt-3 rounded-[4px] bg-bg/85 px-2 py-0.5 text-center text-[12px] leading-tight font-semibold tracking-[.08em] text-white uppercase backdrop-blur-[2px]">
-        {label}
-      </p>
       {/*
-       * Sếp 05/10/2026: "bỏ mấy cái ký hiệu 360độ trên banner home đi".
-       * Đã gỡ HAI thứ in chữ 360° đè lên banner:
-       *  - huy hiệu `⊕ 360°` từng nằm ngay dưới nhãn món;
-       *  - dòng giữ chỗ "360°-Objekt folgt" trong vòng enso.
-       * Hai chuỗi `home.stage.badge` / `home.stage.placeholder` vẫn còn trong
-       * i18n (file đó agent khác giữ) nhưng KHÔNG còn chỗ nào gọi — đừng thấy
-       * chuỗi rỗi mà gắn lại.
-       * Cơ chế video giữ nguyên: có WebM là chạy, không phải dựng lại.
+       * Banner trang chủ đã dọn sạch theo hai lệnh của Sếp ngày 05/10:
+       *  - "bỏ mấy cái ký hiệu 360độ"  -> gỡ huy hiệu `⊕ 360°` và dòng giữ
+       *    chỗ "360°-Objekt folgt";
+       *  - "xóa cả tên món ăn và cái vòng tròn" -> gỡ nốt nhãn tên món nằm
+       *    dưới mỗi vật thể và vòng enso vàng giữ chỗ.
+       * Nay dưới vật thể KHÔNG còn chữ nào. `label` vẫn nhận vào nhưng chỉ
+       * dùng làm `alt` cho ảnh poster — máy đọc màn hình còn biết đó là món
+       * gì, mắt thường không thấy chữ.
+       *
+       * Ba chuỗi `home.stage.badge` / `home.stage.placeholder` và các
+       * `home.stage.*` nhãn món vẫn nằm trong i18n (file đó agent khác giữ)
+       * nhưng chỉ còn `labelKey` được dùng, và chỉ cho `alt`. Đừng thấy chuỗi
+       * rỗi mà gắn lại lên banner.
+       *
+       * Cơ chế video giữ nguyên: có tệp WebM là chạy, không phải dựng lại.
        */}
-    </div>
-  );
-}
-
-/*
- * Bệ giữ chỗ: chỉ còn vòng enso vàng của KIT. Trước đây giữa vòng có dòng
- * "360°-Objekt folgt" — Sếp đã bác (xem chú thích trên). Không thay bằng ảnh
- * món giả: ảnh banner mới đã vẽ sẵn ba bệ tròn ở đúng chỗ này.
- */
-function Placeholder() {
-  return (
-    <div className="grid size-full place-items-center">
-      <div
-        className="absolute inset-[8%] bg-contain bg-center bg-no-repeat opacity-35"
-        style={{ backgroundImage: "url(/decor/enso_gold.svg)" }}
-        aria-hidden="true"
-      />
     </div>
   );
 }
