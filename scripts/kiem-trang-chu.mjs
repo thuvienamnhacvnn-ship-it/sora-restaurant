@@ -20,7 +20,7 @@
  *    Nó phụ thuộc biến môi trường `SITE_PUBLIC`, tức một lần deploy lỡ tay
  *    đặt biến đó là mất chốt chặn mà KHÔNG có dấu hiệu gì trên màn hình.
  */
-import { moTrinhDuyet, soKetQua } from "./lib/trinh-duyet.mjs";
+import { dungKhung, soKetQua } from "./lib/trinh-duyet.mjs";
 
 const GOC = (process.argv[2] || "http://localhost:3160").replace(/\/$/, "");
 
@@ -34,7 +34,7 @@ const DAI_DANH_MUC = [
   ["getraenke", 63],
 ];
 
-const b = await moTrinhDuyet({ port: 9453 });
+const b = await dungKhung();
 const s = soKetQua();
 
 /* ====================================================================== */
@@ -50,7 +50,7 @@ const MOC = {
   "/de":
     "return document.querySelectorAll('a[href*=\"kategorie=\"]').length === 5 &&" +
     " !!document.querySelector('h1 img');",
-  "/de/speisekarte": "return document.querySelectorAll('[data-so-mon] > li').length === 207;",
+  "/de/speisekarte": "return document.querySelectorAll('[data-so-mon] li[data-mon]').length === 207;",
   "/de/impressum": "return !!document.querySelector('meta[name=robots]') && !!document.querySelector('h1');",
 };
 
@@ -209,9 +209,15 @@ for (const [ten, duongDan] of [
   await b.khoKhung(390, 844, true);
   /* Mốc ở khổ 390 KHÁC khổ máy tính: trang chủ ở 390 chuyển dải danh mục
      xuống 2 cột và đưa bệ 360 xuống dưới hero, nên mốc là "có đủ 3 bệ". */
+  /* Đếm bệ 360 phải lọc theo HIỆN RA, không theo số phần tử trong DOM: ở 390
+     có 6 phần tử `[data-be-360]` — 3 trong hero bị CSS ẩn (`md:` trở lên mới
+     hiện) và 3 ở khối dưới hero. Mốc cũ đòi đúng 3 trong DOM nên KHÔNG BAO
+     GIỜ đạt, và bài kiểm treo 60 giây rồi ghi LỖI-K ở cả hai lượt. Mốc phải
+     đo đúng thứ mục kiểm đo. */
   const moc390 =
     duongDan === "/de"
-      ? "return document.querySelectorAll('[data-be-360]').length === 3 &&" +
+      ? "return [...document.querySelectorAll('[data-be-360]')]" +
+        ".filter(e=>e.getBoundingClientRect().height>0).length === 3 &&" +
         " document.querySelectorAll('a[href*=\"kategorie=\"]').length === 5;"
       : MOC[duongDan] ?? null;
   const san390 = await b
@@ -249,7 +255,10 @@ for (const [ten, duongDan] of [
 await b.khoKhung(390, 844, true);
 const san390ChuBe = await b
   .go(GOC + "/de", {
-    san: "return document.querySelectorAll('[data-be-360]').length === 3;",
+    // HIỆN RA, không phải có trong DOM — xem ghi chú ở `moc390` bên trên.
+    san:
+      "return [...document.querySelectorAll('[data-be-360]')]" +
+      ".filter(e=>e.getBoundingClientRect().height>0).length === 3;",
   })
   .then(() => true)
   .catch((e) => {

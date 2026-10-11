@@ -27,6 +27,43 @@ const CAT_IMAGE: Record<string, string> = {
   getraenke: "/anh/danh-muc/getraenke.webp",
 };
 
+/*
+ * Ảnh VUÔNG cho strip trang chủ — bộ poster Sếp gửi ở `E:/Works/Sora/Nhiệm vụ/`
+ * (A1..A9, 1254×1254), xuất sang `public/anh/nhiem-vu/`. Chỉ dùng khi
+ * `variant="o-vuong"`; trang Speisekarte vẫn ăn `CAT_IMAGE` 4:3 ở trên.
+ *
+ * ⚠ ĐỌC TRƯỚC KHI ĐỔI: mỗi poster ĐÃ IN SẴN CHỮ trong ảnh (tên món + nhóm).
+ * Gán nhầm là chữ trong ảnh chửi nhau với nhãn của thẻ.
+ *   a1 Nem Hai San        – in sẵn "VORSPEISE / STARTER"
+ *   a2 Sake Nigiri        – "SUSHI"
+ *   a3 Flying Singapore   – "NOODLE & RICE DISHES"
+ *   a4 Pho Ha Noi         – "VIETNAMESISCHER KLASSIKER"  (hình là bát súp)
+ *   a5 Sake Avocado Maki  – "Sushi"
+ *   a6 Xoi Xoai Nep Than  – "DESSERT"
+ *   a7 Ebi Tempura        – "VORSPEISE / STARTER"
+ *   a8 Rotes Curry        – "HAUPTGERICHT"
+ *   a9 Sashimi Mix        – "SASHIMI"
+ *
+ * Bộ 9 ảnh KHÔNG có ảnh ĐỒ UỐNG -> nhóm `getraenke` không có khoá ở đây và
+ * tự rơi về ảnh cũ. Cần Sếp gửi thêm một poster đồ uống.
+ */
+/*
+ * CHỈ gán khi chữ IN TRONG ẢNH khớp đúng nhãn của thẻ. Lần gán đầu em đã sai:
+ * cho thẻ "KLEINE SUPPEN" ảnh in "VIETNAMESISCHER KLASSIKER", và thẻ
+ * "VIETNAMESISCHE KLASSIKER" ảnh in "NOODLE & RICE DISHES" — hai thẻ tự chửi
+ * nhau. Thà để ảnh cũ còn hơn gán bừa.
+ *
+ * Hai nhóm CHƯA CÓ ẢNH trong bộ 9 (vẫn dùng ảnh cũ, chờ Sếp gửi thêm):
+ *   - `suppen`    (Kleine Suppen) — cả bộ chỉ có Pho là món nước, mà Pho đã
+ *                 in sẵn "VIETNAMESISCHER KLASSIKER" nên phải để cho nhóm đó.
+ *   - `getraenke` (Getränke)      — bộ 9 không có ảnh đồ uống nào.
+ */
+const CAT_IMAGE_VUONG: Record<string, string> = {
+  sushi: "/anh/nhiem-vu/a2.webp", //           in sẵn "SUSHI"
+  "vietnamese-classics": "/anh/nhiem-vu/a4.webp", // in sẵn "VIETNAMESISCHER KLASSIKER"
+  hauptgerichte: "/anh/nhiem-vu/a8.webp", //   in sẵn "HAUPTGERICHT"
+};
+
 const CAT_ICON: Record<string, IconName> = {
   sushi: "utensils",
   "vietnamese-classics": "leaf",
@@ -45,16 +82,106 @@ export function CategoryStrip({
 }: {
   locale: Locale;
   dishesLabel: string;
-  /** `round` = chevron nằm trong nút tròn (trang Speisekarte, spec §5). */
-  variant?: "plain" | "round";
+  /**
+   * `round`   = chevron trong nút tròn (trang Speisekarte, spec §5).
+   * `o-vuong` = ảnh VUÔNG, chữ nằm trong NHÃN ĐÈ lên ảnh (trang chủ, Sếp
+   *             05/10). Kiểu này cao bằng đúng bề ngang thẻ nên hàng thẻ gọn
+   *             lại, đủ chỗ khoá trang chủ trong một màn hình.
+   */
+  variant?: "plain" | "round" | "o-vuong";
 }) {
   const cats = stripCategories();
   if (cats.length === 0) return null;
 
+  /*
+   * Thẻ giữ ĐÚNG HÌNH VUÔNG — đừng kéo cho cao bằng chỗ trống.
+   *
+   * Đã thử cho thẻ `h-full` để lấp hết khoảng đen (05/10): thẻ cao ra nhưng
+   * bề ngang bị `max-w` chặn nên MẤT HÌNH VUÔNG, và `object-fit:cover` cắt
+   * mất chữ in trong poster ("Sake N…", "Kotes C…"). Đúng cái Sếp vừa cấm.
+   *
+   * Số học của khung này: 5 thẻ vuông trên hàng rộng 1184 thì mỗi thẻ chỉ cao
+   * được (1184 − 4×12)/5 = 227px. Banner 395px + thẻ 227px = 622 trong màn
+   * 900px → dư ~278px là CHUYỆN ĐƯƠNG NHIÊN, không phải lỗi. Muốn hết dư thì
+   * phải đổi một ràng buộc: bớt số cột, hoặc bỏ khoá một-màn-hình.
+   * Chỗ dư đó xử lý bằng cách đẩy hàng thẻ xuống đáy (xem `page.tsx`).
+   */
+  if (variant === "o-vuong") {
+    return (
+      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
+        {cats.map((cat) => {
+          const anh = CAT_IMAGE_VUONG[cat.id] ?? CAT_IMAGE[cat.id];
+          return (
+            <li key={cat.id}>
+              <Link
+                href={`${href("/speisekarte", locale)}?kategorie=${cat.id}`}
+                className="group relative block aspect-square overflow-hidden rounded-[var(--radius-card)] border border-gold/45 bg-elevated transition-colors hover:border-gold/80"
+              >
+                {anh ? (
+                  <Image
+                    src={anh}
+                    alt=""
+                    fill
+                    sizes="(max-width: 639px) 50vw, (max-width: 1199px) 33vw, 220px"
+                    style={{ objectFit: "cover" }}
+                    className="transition-transform duration-300 group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 grid place-items-center"
+                  >
+                    <Icon
+                      name={CAT_ICON[cat.id] ?? "utensils"}
+                      size={34}
+                      className="text-gold/80"
+                    />
+                  </span>
+                )}
+
+                {/*
+                 * NHÃN đè lên ảnh (Sếp 05/10: "Text sẽ nằm ở 1 label trên ảnh").
+                 * Đặt SÁT ĐÁY vì mọi poster trong bộ đều in chữ ở NỬA TRÊN —
+                 * để nhãn lên trên là hai lớp chữ chồng nhau.
+                 * Nền nhãn là dải tối ôm sát chân thẻ, KHÔNG phải lớp phủ cả
+                 * ảnh: luật của Sếp cấm phủ màu lên ảnh.
+                 */}
+                <span className="absolute inset-x-0 bottom-0 flex items-center gap-2 bg-[linear-gradient(0deg,rgba(9,8,6,.93)_0%,rgba(9,8,6,.78)_62%,transparent_100%)] px-3 pt-6 pb-2.5">
+                  <span className="min-w-0 flex-1">
+                    {/* Cho xuống 2 dòng thay vì cắt cụt: "VIETNAMESISCHE
+                        KLASSIKER" dài 24 ký tự, `truncate` biến nó thành
+                        "VIETNAMESISCH…" — khách không đọc ra nhóm nào. */}
+                    <span className="block text-[14px] leading-[1.15] font-semibold tracking-[.04em] text-gold-bright uppercase [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                      {pick(cat.name, locale)}
+                    </span>
+                    <span className="mt-0.5 block text-[11px] text-ivory/70">
+                      {cat.itemCount} {dishesLabel}
+                    </span>
+                  </span>
+                  <Icon
+                    name="chevron-right"
+                    size={16}
+                    className="shrink-0 text-gold transition-transform group-hover:translate-x-0.5"
+                  />
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
   return (
     // grid-cols-N của Tailwind đã là repeat(N, minmax(0,1fr)) — đúng luật,
     // không được thay bằng `1fr` trần.
-    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
+    //
+    // 4 CỘT Ở DẢI 1200–1599, 5 cột từ 1600 (sửa 07/10). Năm cột ở 1280 cho
+    // mỗi thẻ 162px, trừ đệm và mũi tên thì cột chữ còn **89px** — không cỡ
+    // chữ đọc được nào nhét vừa "VIETNAMESISCHE KLASSIKER" trong đó, và thẻ
+    // `overflow-hidden` nên nó bị cắt cụt thật. Bốn cột trả lại 134px và
+    // cũng chia 8 nhóm thành 4+4 thay vì 5+3.
+    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4 min-[1600px]:grid-cols-5">
       {cats.map((cat) => (
         <li key={cat.id}>
           <Link
@@ -93,8 +220,30 @@ export function CategoryStrip({
               </span>
             )}
             <span className="flex flex-1 items-center gap-2 px-4 py-3">
-              <span className="min-w-0 flex-1">
-                <span className="block text-[17px] leading-tight font-semibold tracking-[.05em] text-gold-bright uppercase">
+              <span className="@container min-w-0 flex-1">
+                {/*
+                 * Tên nhóm phải VỪA CỘT, không được để thẻ cắt cụt.
+                 *
+                 * Thẻ có `overflow-hidden` (bo góc), nên một từ dài hơn cột là
+                 * mất chữ thật: đo 07/10 ở `/de/speisekarte`,
+                 * "VIETNAMESISCHE KLASSIKER" cần 164px mà cột chỉ 121px @1440
+                 * và 89px @1280 -> hiện ra "VIETNAMESISC".
+                 *
+                 * Chữa bằng HAI thay đổi đi cùng nhau:
+                 *  1. cỡ chữ co theo cột — đo thật: "VIETNAMESISCHE" cần
+                 *     9,65px bề ngang cho mỗi 1px cỡ chữ, nên cột/9,65 =
+                 *     10cqw (chừa sẵn vài px), trần 17px như mẫu;
+                 *  2. bớt một cột ở dải 1200–1599 (xem `grid-cols` bên dưới),
+                 *     vì chỉ riêng co chữ thì ở 1280 cột còn 89px -> phải hạ
+                 *     xuống 9px mới vừa, dưới xa mức đọc được.
+                 *
+                 * KHÔNG dùng `hyphens: auto`: đã thử và đo — Chrome hồ sơ mới
+                 * **không có sẵn từ điển ngắt từ tiếng Đức** (tải theo nhu cầu
+                 * qua component updater), nên chữ vẫn tràn y nguyên. Một cách
+                 * chữa chỉ chạy trên máy đã tải từ điển thì không phải cách
+                 * chữa. Cũng không dùng `break-words`: cắt trần giữa từ.
+                 */}
+                <span className="block text-[min(17px,10cqw)] leading-tight font-semibold tracking-[.05em] text-gold-bright uppercase">
                   {pick(cat.name, locale)}
                 </span>
                 <span className="mt-1 block truncate text-[13px] text-muted">

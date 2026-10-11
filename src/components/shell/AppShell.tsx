@@ -3,9 +3,9 @@
  * mấy mảnh client (sidebar / mobile nav / rail / drawer).
  */
 import type { ReactNode } from "react";
+import { CartProvider } from "@/components/cart/CartProvider";
 import { DesktopSidebar } from "./DesktopSidebar";
-import { MobileNav } from "./MobileNav";
-import { RightUtilityRail } from "./RightUtilityRail";
+import { MobileNav } from "./MobileAppNav";
 import { MasterChefProvider } from "@/components/chef/MasterChef";
 import { CHU_NHAN, coChuNetCo } from "@/components/chu/ChuCo";
 import { NAV, type NavKey } from "@/data/site";
@@ -51,6 +51,7 @@ export function AppShell({
   };
 
   return (
+    <CartProvider locale={locale}>
     <MasterChefProvider
       locale={locale}
       strings={{
@@ -95,24 +96,31 @@ export function AppShell({
         }}
       />
 
+      {/*
+       * `flow-root` CHẶN MARGIN COLLAPSING — không phải trang trí.
+       *
+       * Bệnh (đo 07/10): `/de/impressum` và `/de/datenschutz` có thanh cuộn
+       * CHẾT đúng 40px ở mọi cỡ desktop — `scrollHeight = clientHeight + 40`,
+       * cuộn xuống chẳng lộ ra gì vì nội dung đã hết từ y≈507 trên trang dài
+       * 940px.
+       *
+       * Cơ chế: ở `md` trở lên khối này KHÔNG có `padding-top` (`md:pt-0`) nên
+       * `margin-top: 40px` của con đầu tiên (`LegalPage` mở bằng
+       * `SectionFrame !mt-10`) **trượt xuyên qua mép trên** và đẩy chính khối
+       * này xuống y=40 — trong khi nó vẫn chiếm đủ `min-h-dvh`. Tổng cao thành
+       * 100dvh + 40. Khổ điện thoại không dính vì `pt-14` đã chặn sẵn.
+       *
+       * `display: flow-root` lập một BFC: lề của con ở lại BÊN TRONG, không
+       * đẩy cha. Chữa đúng nguyên nhân cho MỌI trang có con đầu mang lề trên,
+       * thay vì trừ bù 40px ở một chỗ khác rồi trang sau lại dính lại.
+       */}
       <main
         id="inhalt"
-        className="relative min-h-dvh pt-14 pb-20 md:ml-[var(--sidebar-w)] md:pt-0 md:pb-0"
+        className="sora-app-main relative flow-root min-h-dvh pt-14 pb-[calc(5rem+env(safe-area-inset-bottom))] md:ml-[var(--sidebar-w)] md:pt-0 md:pb-0"
       >
         {children}
       </main>
-
-      <RightUtilityRail
-        locale={locale}
-        labels={{
-          masterChef: t("rail.masterChef"),
-          whatsapp: t("rail.whatsapp"),
-          instagram: t("rail.instagram"),
-          support: t("rail.support"),
-          close: t("common.close"),
-          callUs: t("common.callUs"),
-        }}
-      />
     </MasterChefProvider>
+    </CartProvider>
   );
 }

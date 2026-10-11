@@ -2,7 +2,7 @@
 
 /*
  * Sidebar trái cố định.
- *  >=1200px: 256px đầy đủ (KIT `sidebar.desktop`)
+ *  >=1200px: 250px đầy đủ (KIT `sidebar.desktop`)
  *  768-1199px: 88px, chỉ icon (KIT "compact sidebar 88px icon-first")
  *  <768px: không có, nhường cho top bar + bottom nav
  *
@@ -13,6 +13,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SoRaLogo } from "./SoRaLogo";
+import { RightUtilityRail } from "./RightUtilityRail";
+import { SidebarSocial } from "./SidebarSocial";
 import {
   BrushPill,
   CornerSakura,
@@ -20,7 +22,7 @@ import {
 } from "@/components/decor/Decor";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { NAV, LEGAL_NAV, type NavKey } from "@/data/site";
-import { href, type Locale, LOCALES } from "@/lib/i18n";
+import { getT, href, type Locale, LOCALES } from "@/lib/i18n";
 
 const NAV_ICON: Record<NavKey, IconName> = {
   home: "home",
@@ -48,10 +50,11 @@ export function DesktopSidebar({
   languageLabel: string;
 }) {
   const pathname = usePathname();
+  const t = getT(locale);
 
   return (
     <aside
-      className="fixed inset-y-0 left-0 z-40 hidden w-[var(--sidebar-w)] flex-col border-r border-gold/25 bg-elevated md:flex"
+      className="sora-menu-trai fixed inset-y-0 left-0 z-40 hidden w-[var(--sidebar-w)] flex-col border-r border-gold/25 bg-elevated md:flex"
       aria-label={navLabel}
     >
       {/*
@@ -76,74 +79,76 @@ export function DesktopSidebar({
        * phải một cành góc đơn độc mà là **cành góc + dải hoa chạy dọc mép** —
        * đúng thứ `PageHero` đã dùng. Thêm `SakuraEdge` nối tiếp xuống.
        */}
-      <SeigaihaWash size={44} opacity={0.042} className="z-0" />
       {/*
-       * MỘT cành liền, không phải cành góc + dải chạy dọc.
+       * KHUNG CẮT cho cả lớp hoạ tiết sidebar.
        *
-       * Thử `SakuraEdge` trước (18:58) — số khớp mẫu (lệch −6%) nhưng NHÌN thì
-       * sai: nó lát ảnh theo kiểu lật chéo nên ra một vệt xám nhoè dọc mép,
-       * không ra hoa. Mẫu là một cành duy nhất từ góc trên chảy xuống, nhìn rõ
-       * từng bông. Nên phóng to chính cành góc cho nó với tới y≈215 thay vì
-       * chắp thêm lớp thứ hai.
+       * Vì sao cần: `CornerSakura` giữ tỉ lệ 3:1, nên muốn cành với tới y≈215
+       * như mẫu thì phải đặt width 780 — mà sidebar chỉ rộng 256 và `aside`
+       * không cắt tràn. Hậu quả đo được: cành thò **212px sang vùng hero** và
+       * vẽ đè lên chữ "SoRa", dòng eyebrow và "Japan trifft Vietnam."
+       * (đo bằng cách chụp 2 lần có/không hoạ tiết: 9,7–18,5% diện tích ô chữ
+       * bị vẽ đè, lệch màu tối đa 221).
        *
-       * Cao = width/ratio (ratio 3,0). Muốn đáy ở y≈215 với top −45 thì cần
-       * cao ≈ 260 → width ≈ 780. Phần dày của tệp `wide` nằm ở MÉP TRÁI nên
-       * đẩy `offsetX` âm sâu: hoa bám mép sidebar, phần thưa tràn ra ngoài.
-       */}
-      <CornerSakura
-        corner="tl"
-        art="wide"
-        width={780}
-        offsetX={-312}
-        offsetY={-45}
-        opacity={0.8}
-        className="z-0 max-xl:hidden"
-      />
-      {/*
-       * Cành dưới: GIỮ NGUYÊN cỡ và tệp của trưởng nhóm, chỉ dời lên 51px.
-       *
-       * Đo trên mẫu (dải mép trái x 0..59): cụm hoa ở **y 700–768**; bản cũ
-       * `offsetY={122}` đặt nó ở y 753–819 — **thấp hơn 53px**. `corner="bl"`
-       * tính từ đáy nên tăng offsetY là dời LÊN: 122 → 173.
-       *
-       * Đã thử phóng to (`wide`, width 420) cho giống "cành có thân" như mẫu —
-       * HỎNG: cành chạy chéo hết bề ngang sidebar, phạm đúng mục Never của KIT
-       * (*"Sakura phủ kín mọi section"*). Mẫu là một cụm GỌN ở góc dưới-trái.
-       * Khác biệt còn lại so với mẫu là hình dáng cành, không sửa được bằng
-       * tham số — cần đúng tệp cành mà mockup đã dùng.
-       */}
-      {/*
-       * Soi `05_ASSETS/mockups/01_home.png` + `06_kontakt.png` ở ĐỘ PHÂN GIẢI
-       * GỐC (hai trang giống hệt nhau): cành vào từ MÉP TRÁI, có thân gỗ chạy
-       * chéo lên, hoa chỉ chiếm **x 0–115, y 666–786**, KHÔNG chạm dòng DE|VI,
-       * và tan dần chứ không có cạnh cắt.
-       *
-       * Phải dùng `wide`, không phải `branch`: theo chính bảng `CORNER_ART`,
-       * `wide` dày ở mép TRÁI và TRỐNG ở mép phải — tức cành vào từ trái, phần
-       * còn lại trong suốt nên không có vết cắt. `branch` thì dày ở mép PHẢI
-       * (đo lại: hoa đặc nhất ở 60–70% bề ngang tệp), đặt ở góc dưới-trái là
-       * hoa dồn sai phía rồi bị xén.
-       *
-       * Cao = width/3,0 = 110px; đáy hộp đặt ở y≈786 → offsetY = 941−786 = 155.
+       * Cắt ở đây chứ không đặt `overflow-hidden` lên `aside`: `aside` là
+       * khung của người khác, lớp hoạ tiết là của tôi — tự dọn phần tràn của
+       * mình. Mẫu cũng cắt gọn ở mép sidebar chứ không cho hoa tràn sang.
        */}
       <span
         aria-hidden="true"
-        data-decor=""
-        className="pointer-events-none absolute left-0 z-0 select-none max-xl:hidden"
-        style={{
-          bottom: 90,
-          width: 210,
-          height: 215,
-          backgroundImage: "url(/decor/sakura-sidebar-bottom.webp)",
-          backgroundSize: "100% 100%",
-          backgroundRepeat: "no-repeat",
-          // Tệp này cắt thẳng từ ảnh mẫu nên NỀN TỐI đi kèm, không có alpha.
-          // `lighten` lấy giá trị sáng hơn giữa nền và ảnh: nền tối của ảnh
-          // thua nền tối của sidebar nên biến mất, chỉ còn hoa. Nhờ vậy không
-          // phải tách nền — mà tách nền thì thân gỗ nâu sẫm sẽ mất theo.
-          mixBlendMode: "lighten",
-        }}
-      />
+        className="pointer-events-none absolute inset-0 overflow-hidden select-none"
+      >
+        <SeigaihaWash size={44} opacity={0.042} className="z-0" />
+        {/*
+         * MỘT cành liền, không phải cành góc + dải chạy dọc.
+         *
+         * Thử `SakuraEdge` trước (18:58) — số khớp mẫu (lệch −6%) nhưng NHÌN thì
+         * sai: nó lát ảnh theo kiểu lật chéo nên ra một vệt xám nhoè dọc mép,
+         * không ra hoa. Mẫu là một cành duy nhất từ góc trên chảy xuống, nhìn rõ
+         * từng bông. Nên phóng to chính cành góc cho nó với tới y≈215 thay vì
+         * chắp thêm lớp thứ hai.
+         *
+         * Cao = width/ratio (ratio 3,0). Muốn đáy ở y≈215 với top −45 thì cần
+         * cao ≈ 260 → width ≈ 780. Phần dày của tệp `wide` nằm ở MÉP TRÁI nên
+         * đẩy `offsetX` âm sâu: hoa bám mép sidebar, phần thưa tràn ra ngoài.
+         */}
+        <CornerSakura
+          corner="tl"
+          art="wide"
+          width={780}
+          offsetX={-312}
+          offsetY={-45}
+          opacity={0.8}
+          className="z-0 max-xl:hidden"
+        />
+        {/*
+         * Cành dưới: GIỮ NGUYÊN cỡ và tệp của trưởng nhóm, chỉ dời lên 51px.
+         *
+         * Đo trên mẫu (dải mép trái x 0..59): cụm hoa ở **y 700–768**; bản cũ
+         * `offsetY={122}` đặt nó ở y 753–819 — **thấp hơn 53px**. `corner="bl"`
+         * tính từ đáy nên tăng offsetY là dời LÊN: 122 → 173.
+         *
+         * Đã thử phóng to (`wide`, width 420) cho giống "cành có thân" như mẫu —
+         * HỎNG: cành chạy chéo hết bề ngang sidebar, phạm đúng mục Never của KIT
+         * (*"Sakura phủ kín mọi section"*). Mẫu là một cụm GỌN ở góc dưới-trái.
+         * Khác biệt còn lại so với mẫu là hình dáng cành, không sửa được bằng
+         * tham số — cần đúng tệp cành mà mockup đã dùng.
+         */}
+        {/*
+         * Soi `05_ASSETS/mockups/01_home.png` + `06_kontakt.png` ở ĐỘ PHÂN GIẢI
+         * GỐC (hai trang giống hệt nhau): cành vào từ MÉP TRÁI, có thân gỗ chạy
+         * chéo lên, hoa chỉ chiếm **x 0–115, y 666–786**, KHÔNG chạm dòng DE|VI,
+         * và tan dần chứ không có cạnh cắt.
+         *
+         * Phải dùng `wide`, không phải `branch`: theo chính bảng `CORNER_ART`,
+         * `wide` dày ở mép TRÁI và TRỐNG ở mép phải — tức cành vào từ trái, phần
+         * còn lại trong suốt nên không có vết cắt. `branch` thì dày ở mép PHẢI
+         * (đo lại: hoa đặc nhất ở 60–70% bề ngang tệp), đặt ở góc dưới-trái là
+         * hoa dồn sai phía rồi bị xén.
+         *
+         * Cao = width/3,0 = 110px; đáy hộp đặt ở y≈786 → offsetY = 941−786 = 155.
+         */}
+
+      </span>
 
       <Link
         href={href("/", locale)}
@@ -171,7 +176,7 @@ export function DesktopSidebar({
               className={`relative flex h-11 items-center gap-3.5 px-7 text-[17px] transition-colors xl:px-7 ${
                 active ? "text-text" : "text-muted hover:text-gold-bright"
               } max-xl:justify-center max-xl:px-0`}
-              title={item.key}
+              title={labels[item.key]}
             >
               {/*
                * decor: vệt cọ đỏ nền mục đang chọn. Mẫu cho thấy vệt chạy
@@ -191,6 +196,8 @@ export function DesktopSidebar({
       </nav>
 
       <div className="relative mt-auto px-5 pb-6 max-xl:px-2">
+        <RightUtilityRail locale={locale} labels={{ masterChef: t("rail.masterChef"), whatsapp: t("rail.whatsapp"), instagram: t("rail.instagram"), support: t("rail.support"), close: t("common.close"), callUs: t("common.callUs") }} />
+        <SidebarSocial />
         {/* DE | VI */}
         <div
           className="flex items-center justify-center gap-2 border-b border-gold/25 pb-3 text-[13px] tracking-[.1em]"

@@ -38,7 +38,15 @@ import styles from "./chu.module.css";
  * `v1/`: khách đang mở trang cũ vẫn trỏ về `v1`, ghi đè là họ thấy chữ
  * nửa cũ nửa mới. Quy trình đầy đủ: `_w-agent/06_chu.md` §6.
  */
-const PHIEN_BAN = "v1";
+/*
+ * v2 (11/10/2026): CẮT LẠI 20 nhãn `nav-de-*` / `nav-vi-*`. Bản v1 cắt theo
+ * dải ngang nên chém cụt nét vươn lên/thả xuống (các dòng trong tấm gốc chồng
+ * lấn nhau) — phóng lên banner trang con là lộ "cụt chân chữ". v2 tách theo
+ * mực nối liền, chừa lề trong suốt 8px quanh mọi nét: không điểm đục nào chạm
+ * mép tệp. Dụng cụ: `_w-agent/lam-lai/v2/chu/cat-lai.mjs`. Các tệp khác chép
+ * nguyên từ v1.
+ */
+const PHIEN_BAN = "v2";
 const BASE = `/chu/${PHIEN_BAN}`;
 
 /**

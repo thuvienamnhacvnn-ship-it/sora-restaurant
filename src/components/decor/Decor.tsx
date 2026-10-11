@@ -211,10 +211,34 @@ export function SakuraEdge({
         backgroundRepeat: "repeat-x",
         backgroundPosition: "top center",
         backgroundSize: `${tile}px auto`,
+        /*
+         * HAI LỚP MẶT NẠ, giao nhau — một cho BỀ DÀY, một cho CHIỀU DÀI.
+         *
+         * Bẫy: cả hai gradient viết theo trục CỦA CHÍNH PHẦN TỬ, mà phần tử
+         * đã bị `scaleX(-1) rotate(±90deg)` lật chéo. Nên `to bottom` ở đây
+         * hiện ra trên màn là chiều NGANG (bề dày dải), còn `to right` mới là
+         * chiều DỌC trên màn (chiều dài dải).
+         *
+         * Trước chỉ có lớp thứ nhất, tức **không có gì làm mờ theo chiều
+         * dài**: hết `run` là dải hoa bị cắt bằng một đường ngang thẳng tắp
+         * giữa nền đen, nhìn như ảnh bị crop (đo ở Kontakt: dải chạy y
+         * 254→814 trên trang cao 1140). Lớp thứ hai cho hai đầu tắt dần trong
+         * 12% chiều dài.
+         *
+         * `maskComposite: intersect` là cú pháp chuẩn; `WebkitMaskComposite:
+         * source-in` là bản cũ cho WebKit. Phải khai cả hai, và phải
+         * `no-repeat` không thì lớp mặt nạ lặp lại theo `backgroundSize`.
+         */
         maskImage:
-          "linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%)",
+          "linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%), linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%)",
+        maskRepeat: "no-repeat",
+        maskSize: "100% 100%",
+        maskComposite: "intersect",
         WebkitMaskImage:
-          "linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%)",
+          "linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%), linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%)",
+        WebkitMaskRepeat: "no-repeat",
+        WebkitMaskSize: "100% 100%",
+        WebkitMaskComposite: "source-in",
       }}
     />
   );
@@ -315,6 +339,48 @@ const PETAL_SPRITE = [
  */
 const PETAL_SHEET = "sakura-petals-do.webp";
 
+/*
+ * NÉ CỘT CHỮ.
+ *
+ * Cột chữ hero nằm bên trái, mà cánh hoa trải hết bề ngang. Đo bằng cách chụp
+ * hero hai lần (một lần ẩn cột chữ) rồi lấy hiệu — tức đo CHỖ CHỮ THẬT SỰ TÔ
+ * MỰC, không bị đánh lừa bởi phần trong suốt quanh ảnh wordmark. Ở khổ 1440,
+ * quy về toạ độ trong hero: mực chữ chậm nhất kết thúc ở x 495 (trang chủ),
+ * các trang con đều sớm hơn. Nên lấy 500, chuyển mềm qua 160px nữa.
+ *
+ * ⚠ MẶC ĐỊNH TẮT, và đó là một lần sửa sai.
+ * Tôi từng để mặc định BẬT cho "an toàn". Nhưng lớp cánh hoa còn được dùng ở
+ * một chỗ thứ hai — dải phủ cái bệ PNG dưới chân banner trang chủ, chỗ Sếp
+ * dặn thẳng *"hoa đào trên banner home thì cho rơi lên cả cái bệ PNG"*. Ở đó
+ * KHÔNG có chữ nào, mà mặc định của tôi lại lặng lẽ xoá sạch cánh hoa ở nửa
+ * trái cái bệ. Bật mặc định cho chỗ này là tắt mất yêu cầu của Sếp ở chỗ kia.
+ * Nên: ai đặt cánh hoa ĐÈ LÊN cột chữ thì tự truyền `neChu={NE_CHU_HERO}`
+ * (xem `PageHero`); chỗ không có chữ thì để yên.
+ *
+ * ⚠ ĐỪNG GỠ MẶT NẠ NÀY VÌ ĐO LẠI THẤY 0%.
+ * Lý do nó tồn tại là HÌNH HỌC, không phải một con số: `FallingPetals` thả
+ * cánh ở 19% và 37% bề ngang, mà cột chữ hero chiếm tới x 495 — nên trong
+ * chu kỳ bay, cánh CHẮC CHẮN có lúc đi xuyên qua dòng tiêu đề. Đo một khoảnh
+ * khắc thì phần lớn thời gian ra 0%, vì đúng lúc chụp cánh đang ở chỗ khác.
+ * (Con số 18,5% tôi từng dẫn ra để biện minh cho mặt nạ này là SAI — lúc đó
+ * công cụ của tôi quên dừng animation trước khi chụp ảnh nền, nên cánh bay
+ * giữa hai lần chụp và chênh lệch bị quy oan thành "đè lên chữ". Mặt nạ vẫn
+ * đúng, nhưng đúng vì lý do khác với lý do tôi viết ban đầu.)
+ * Muốn kiểm thật thì quét nhiều pha: dừng animation rồi đặt `animation-delay`
+ * âm để nhảy tới từng mốc trong chu kỳ, đo ở mỗi mốc.
+ */
+export const NE_CHU_HERO = 500;
+
+function matNaNeChu(neChu: number, lePx: number): React.CSSProperties {
+  if (!neChu) return {};
+  // Gradient tính theo hộp của CHÍNH thẻ, nên phải trừ đi phần thẻ đã dịch
+  // sang phải; nếu thẻ bắt đầu sau vùng chữ rồi thì khỏi cần mặt nạ.
+  const bat = neChu - lePx;
+  if (bat <= 0) return {};
+  const g = `linear-gradient(to right, transparent 0px, transparent ${bat}px, #000 ${bat + 160}px, #000 100%)`;
+  return { maskImage: g, WebkitMaskImage: g };
+}
+
 /** Một cánh cắt ra khỏi sprite, bay chậm xuống rồi lặp lại. */
 function Petal({
   i,
@@ -338,29 +404,44 @@ function Petal({
   spin: number;
 }) {
   const p = PETAL_SPRITE[i % PETAL_SPRITE.length];
+  // Biên độ tạt ngang suy TỪ CỠ CÁNH, không đặt tay: cánh càng nhỏ càng nhẹ,
+  // gió đưa càng xa. Để tay thì sớm muộn cũng có cánh to bay như lá lúa.
+  const sway = Math.round(26 + (0.34 - scale) * 190);
+  // Chu kỳ lật LỆCH hẳn chu kỳ rơi (không phải bội số) — trùng pha là lộ máy móc.
+  const durLat = +(dur * 0.63 + 1.7).toFixed(2);
   return (
     <span
       aria-hidden="true"
       data-decor=""
-      className={`pointer-events-none absolute select-none ${styles.drift}`}
+      className={`pointer-events-none absolute select-none ${styles.roi}`}
       style={
         {
           left,
           top,
           width: p.w * scale,
           height: p.h * scale,
-          backgroundImage: `url(${BASE}/${PETAL_SHEET})`,
-          backgroundSize: `${900 * scale}px ${900 * scale}px`,
-          backgroundPosition: `-${p.x * scale}px -${p.y * scale}px`,
-          backgroundRepeat: "no-repeat",
           "--dur": `${dur}s`,
           "--delay": `${delay}s`,
           "--dx": `${dx}px`,
           "--dy": `${dy}px`,
-          "--spin": `${spin}deg`,
+          "--sway": `${sway}px`,
         } as React.CSSProperties
       }
-    />
+    >
+      <span
+        className={styles.lat}
+        style={
+          {
+            backgroundImage: `url(${BASE}/${PETAL_SHEET})`,
+            backgroundSize: `${900 * scale}px ${900 * scale}px`,
+            backgroundPosition: `-${p.x * scale}px -${p.y * scale}px`,
+            "--spin": `${spin}deg`,
+            "--dur-lat": `${durLat}s`,
+            "--delay": `${delay}s`,
+          } as React.CSSProperties
+        }
+      />
+    </span>
   );
 }
 
@@ -404,27 +485,33 @@ const MUA_CANH: [number, number, number, number, number, number, number, number,
 export function FallingPetals({
   className = "",
   left = 0,
+  neChu = 0,
+  dense = false,
 }: {
   className?: string;
-  /** Mép trái vùng được phép rơi — dùng để né hẳn cột chữ. */
+  dense?: boolean;
+  /** Mép trái vùng được phép rơi. */
   left?: number | string;
+  /** Xem `NE_CHU_HERO`. Mặc định tắt — chỉ bật ở chỗ cánh hoa đè lên chữ. */
+  neChu?: number;
 }) {
+  const lePx = typeof left === "number" ? left : 0;
   return (
     <span
       aria-hidden="true"
       data-decor=""
-      className={`pointer-events-none absolute inset-y-0 right-0 select-none overflow-hidden ${className}`}
-      style={{ left }}
+      className={`pointer-events-none absolute inset-y-0 right-0 select-none overflow-hidden ${styles.gio} ${className}`}
+      style={{ left, ...matNaNeChu(neChu, lePx) }}
     >
-      {MUA_CANH.map((c, k) => (
+      {(dense ? [...MUA_CANH, ...MUA_CANH] : MUA_CANH).map((c, k) => (
         <Petal
           key={k}
           i={c[0]}
-          left={`${c[1]}%`}
-          top={c[2]}
+          left={`${dense ? (c[1] + (k >= MUA_CANH.length ? 37 : 0)) % 100 : c[1]}%`}
+          top={dense ? -20 : c[2]}
           scale={c[3]}
           dur={c[4]}
-          delay={c[5]}
+          delay={dense ? -(c[5] + k * .47) : c[5]}
           dx={c[6]}
           dy={c[7]}
           spin={c[8]}
@@ -933,7 +1020,14 @@ export function HangingLantern({
  *
  * `pointer-events-none` ở lớp ngoài nên không ăn cú bấm nào.
  */
-export function PetalsSettled({ className = "" }: { className?: string }) {
+export function PetalsSettled({
+  className = "",
+  neChu = 0,
+}: {
+  className?: string;
+  /** Xem `NE_CHU_HERO`. Mặc định tắt — chỉ bật ở chỗ cánh hoa đè lên chữ. */
+  neChu?: number;
+}) {
   // [sprite, trái %, cách đáy px, cỡ, xoay độ, độ mờ]
   const canh: [number, number, number, number, number, number][] = [
     [0, 2, 3, 0.46, 24, 0.95],
@@ -963,6 +1057,7 @@ export function PetalsSettled({ className = "" }: { className?: string }) {
       aria-hidden="true"
       data-decor=""
       className={`pointer-events-none absolute inset-x-0 bottom-0 h-[120px] select-none overflow-hidden ${className}`}
+      style={matNaNeChu(neChu, 0)}
     >
       {canh.map(([i, trai, day, co, xoay, mo], k) => {
         const p = PETAL_SPRITE[i % PETAL_SPRITE.length];

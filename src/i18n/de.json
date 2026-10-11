@@ -18,6 +18,7 @@
     "closeMenu": "Menü schließen",
     "mobileMore": "Mehr",
     "mainNav": "Hauptnavigation",
+    "skipToContent": "Zum Inhalt springen",
     "language": "Sprache"
   },
   "common": {
@@ -33,7 +34,8 @@
     "phone": "Telefon",
     "mobile": "Mobil",
     "landline": "Festnetz",
-    "callUs": "Rufen Sie uns an"
+    "callUs": "Rufen Sie uns an",
+    "discover": "Entdecken"
   },
   "rail": {
     "masterChef": "Master Chef",
@@ -88,7 +90,9 @@
       "reservationCta": "Jetzt reservieren"
     },
     "categoryStrip": "Kategorien",
-    "popular": "Beliebte Gerichte"
+    "popular": "Beliebte Gerichte",
+    "heroTagline": "Authentisch ✦ Modern ✦ Unvergesslich",
+    "heroRail": "Genuss ✦ Eine Leidenschaft"
   },
   "menu": {
     "searchPlaceholder": "Gerichte suchen …",
@@ -121,7 +125,25 @@
     "additives": "Zusatzstoffe",
     "sizes": "Größen",
     "noImage": "Für dieses Gericht liegt uns noch kein eigenes Foto vor.",
-    "groupPhotoNote": "Beispielfoto der Kategorie – einzelne Gerichte können abweichen."
+    "groupPhotoNote": "Beispielfoto der Kategorie – einzelne Gerichte können abweichen.",
+    "tabs": {
+      "suppen": "Suppen",
+      "vorspeisen": "Vorspeisen",
+      "salate": "Salate",
+      "hauptgerichte": "Hauptgerichte",
+      "vietnamese-classics": "Vietnam-Klassiker",
+      "desserts": "Desserts",
+      "sushi": "Sushi",
+      "getraenke": "Getränke"
+    },
+    "chefBadge": "Chef Empfehlung",
+    "popularTitle": "Beliebte Gerichte",
+    "clearSearch": "Suche löschen",
+    "resetFilters": "Filter zurücksetzen",
+    "emptyHint": "Bitte prüfen Sie die Schreibweise oder setzen Sie die Filter zurück.",
+    "searchAllCategories": "In allen Kategorien suchen",
+    "allGroups": "Alle Gruppen",
+    "disclaimer": "Alle Preisangaben in Euro inkl. MwSt. · Irrtümer sowie Druck- und Satzfehler vorbehalten. · Alle Angaben ohne Gewähr. · Abbildungen dienen nur zur Illustration und können vom Original abweichen."
   },
   "reservation": {
     "title": "TISCH RESERVIEREN",

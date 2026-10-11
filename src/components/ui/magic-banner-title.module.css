@@ -1,0 +1,16 @@
+/*
+ * Tiêu đề nét cọ trên banner.
+ *
+ * Bề ngang = nhỏ nhất của ba trần:
+ *   1. `--magic-max-width`  — phần trăm bề ngang banner (không tràn ngang)
+ *   2. cỡ thiết kế          — bề ngang tệp × hệ số `desktop` / `mobile`
+ *   3. 56% CHIỀU CAO banner — `56cqh × tỉ lệ ảnh`. Banner là khung
+ *      `container-type: size` (globals.css) nên banner co thấp (trang một màn,
+ *      màn 657px) thì chữ co theo, không bao giờ cao hơn banner rồi bị cắt.
+ *      Ngoài banner có khai khung (hero Speisekarte) `cqh` rơi về chiều cao
+ *      màn hình — trần này khi đó không bao giờ chạm tới, vô hại.
+ */
+.title { position: relative; width: min(var(--magic-max-width, 100%), var(--magic-mobile-width), calc(56cqh * var(--magic-ratio))); margin-inline: auto; }
+.letters { position: relative; }
+.letters img { margin-inline: auto; filter: drop-shadow(0 3px 3px #000c); }
+@media(min-width:768px) { .title { width: min(var(--magic-max-width, 100%), var(--magic-desktop-width), calc(56cqh * var(--magic-ratio))); } }

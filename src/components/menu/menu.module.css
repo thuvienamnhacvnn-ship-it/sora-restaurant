@@ -1,0 +1,1598 @@
+/*
+ * Trang Speisekarte — làm lại 07/10.
+ * Sếp: «ảnh món ăn quá nhỏ, cách sắp xếp thì lộn xộn».
+ *
+ * Bản cũ: 207 món đổ thành cột chữ, ảnh món 56×42px, trang dài 12 màn.
+ * Bản này: ba chế độ xem (tổng quan · một nhóm · tìm/lọc), ảnh món 4:3 lớn,
+ * mọi điều khiển ≥ 40px. Spec: `_w-agent/lam-lai/01_spec.md` mục B.
+ *
+ * ---- MỐC CO GIÃN: @container, KHÔNG phải @media ----
+ * Bề ngang nội dung của trang này không đi theo bề ngang màn hình: sidebar
+ * chiếm 256px (≥1200) hoặc 88px (768–1199), rail phải chiếm thêm 102px. Màn
+ * 1280 chỉ còn 858px nội dung, màn 1199 lại còn 945px. Viết mốc theo màn hình
+ * là sai ở đúng các khổ đó, nên mọi mốc bố cục hỏi bề ngang THẬT của khối:
+ *
+ *   < 620px   điện thoại (và màn 768–873)   một cột, thẻ ngang
+ *   ≥ 620px   máy tính hẹp                  thanh lọc hai hàng, thẻ dọc
+ *   ≥ 760px                                 4 thẻ danh mục / 4 thẻ nhóm một hàng
+ *   ≥ 840px                                 lưới món 4 cột
+ *   ≥ 960px                                 đầy đủ (1440 → 1018px)
+ *
+ * `@media` chỉ còn dùng cho thứ thật sự thuộc về màn hình: `top` của thanh
+ * dính (né header điện thoại) và hộp chi tiết món (nằm ở lớp trên cùng).
+ *
+ * LUẬT THẨM MỸ áp cho cả tệp: không lớp màu/gradient nào phủ lên ảnh; chữ
+ * không nằm trên ảnh món; không glow/shine; hover chỉ đổi màu viền + phóng ảnh
+ * ≤ 1.02; bo nút 6px, bo thẻ 8px; viền 1px vàng .45.
+ */
+
+.goc {
+  container-type: inline-size;
+}
+
+/* Thuộc tính `hidden` phải thắng mọi `display` khai bên dưới — 8 bảng nhóm
+   luôn nằm trong DOM, bảng không xem chỉ ẩn bằng `hidden`. */
+.goc [hidden] {
+  display: none !important;
+}
+
+/* Mốc cuộn về đầu danh sách. Khổ điện thoại có header cố định 56px. */
+.neo {
+  height: 0;
+  scroll-margin-top: 56px;
+}
+
+@media (min-width: 768px) {
+  .neo {
+    scroll-margin-top: 0;
+  }
+}
+
+/* ===========================================================================
+ * THANH LỌC
+ * ======================================================================== */
+
+/*
+ * Hai dáng dính khác nhau, cùng một DOM:
+ *
+ *  - điện thoại: CHỈ ô tìm + hàng tab dính (`.thanhDinh`, cao 108px). Chip chế
+ *    độ ăn nằm dưới, trôi theo trang. Bản cũ dính cả cụm cao 260px = 31% màn.
+ *    `.thanhLoc` là `display: contents` để `.thanhDinh` dính theo cả trang chứ
+ *    không bị nhốt trong hộp cha.
+ *  - máy tính: cả `.thanhLoc` dính, là lưới hai hàng (tìm + chip | tab);
+ *    `.thanhDinh` đổi vai thành `display: contents`.
+ *
+ * Không có hộp viền bao quanh (mẫu không có). Nền gần trùng nền trang, chỉ để
+ * món cuộn bên dưới không lộ qua.
+ */
+.thanhLoc {
+  display: contents;
+}
+
+.thanhDinh {
+  position: sticky;
+  top: 56px; /* header điện thoại `fixed h-14` */
+  z-index: 20; /* dưới z-40 của nav, dưới hộp chi tiết món */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-inline: calc(-1 * var(--page-pad));
+  padding: 8px var(--page-pad);
+  background: rgba(10, 9, 7, 0.96);
+  backdrop-filter: blur(6px);
+}
+
+@media (min-width: 768px) {
+  .thanhDinh {
+    top: 0;
+  }
+}
+
+.cheDoAn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.hangNhomCon {
+  margin-top: 12px;
+}
+
+@container (min-width: 620px) {
+  .thanhLoc {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    grid-template-areas:
+      "tim an"
+      "tab tab";
+    gap: 12px 16px;
+    padding: 12px 0;
+    background: rgba(10, 9, 7, 0.96);
+    backdrop-filter: blur(6px);
+  }
+
+  .thanhDinh {
+    display: contents;
+  }
+
+  .oTim {
+    grid-area: tim;
+  }
+
+  .hangTab {
+    grid-area: tab;
+  }
+
+  .cheDoAn {
+    grid-area: an;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+
+  .hangNhomCon {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+}
+
+/* ---- Ô tìm ---- */
+.oTim {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+.oTimIcon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.oTimNhap {
+  height: 44px;
+  padding: 0 44px 0 42px;
+  font-size: 15px;
+}
+
+/* Nút xoá riêng (44px, có nhãn) thay cho dấu × tí hon của trình duyệt. */
+.oTimNhap::-webkit-search-cancel-button {
+  display: none;
+  appearance: none;
+}
+
+.oTimXoa {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-muted);
+}
+
+.oTimXoa:hover {
+  color: var(--color-gold-bright);
+}
+
+/* ---- Hàng cuộn ngang (tab nhóm, chip nhóm con) ---- */
+.oCuon {
+  position: relative;
+  min-width: 0;
+}
+
+/* Mờ dần hai mép — CHỈ hiện khi phía đó còn nội dung (`HangCuon` đo vị trí
+   cuộn thật rồi bật qua `data-trai` / `data-phai`). Màu trùng nền thanh lọc. */
+.oCuon[data-phai]::after,
+.oCuon[data-trai]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 48px;
+  pointer-events: none;
+}
+
+.oCuon[data-phai]::after {
+  right: 0;
+  background: linear-gradient(to right, rgba(10, 9, 7, 0), rgba(10, 9, 7, 0.96) 70%);
+}
+
+.oCuon[data-trai]::before {
+  left: 0;
+  background: linear-gradient(to left, rgba(10, 9, 7, 0), rgba(10, 9, 7, 0.96) 70%);
+}
+
+.nutCuon {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(216, 178, 106, 0.45);
+  border-radius: 999px;
+  background: rgba(10, 9, 7, 0.92);
+  color: var(--color-gold-bright);
+  transition: border-color 200ms ease;
+}
+
+.nutCuon:hover {
+  border-color: rgba(216, 178, 106, 0.85);
+}
+
+.nutCuonTrai {
+  left: 0;
+}
+
+.nutCuonPhai {
+  right: 0;
+}
+
+/* Màn cảm ứng: vuốt là đủ, nút còn che mất chip đầu/cuối. */
+@media (pointer: coarse) {
+  .nutCuon {
+    display: none;
+  }
+}
+
+.hangCuon {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.hangCuon::-webkit-scrollbar {
+  display: none;
+}
+
+/* Vòng focus vẽ VÀO TRONG nút: hàng cuộn có `overflow` nên vòng focus vẽ ra
+   ngoài (mặc định offset 2px) sẽ bị cắt mất. */
+.hangCuon > :focus-visible {
+  outline-offset: -3px;
+}
+
+/*
+ * Tab nhóm. `flex: 1 0 auto`: ở 1440 chín tab giãn đều cho kín 1018px (không
+ * cắt, không cuộn); ở 1280 vẫn vừa một dòng nhờ nhãn NGẮN; hẹp hơn thì giữ
+ * cỡ tự nhiên và cuộn ngang.
+ */
+.tab {
+  flex: 1 0 auto;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(216, 178, 106, 0.45);
+  border-radius: var(--radius-btn);
+  background: #0e0a05;
+  color: #d9d8d2;
+  font-size: 14px;
+  white-space: nowrap;
+  transition:
+    border-color 180ms var(--ease-sora),
+    background-color 180ms var(--ease-sora);
+}
+
+.tab:hover {
+  border-color: var(--border-gold-strong);
+}
+
+.tab[aria-selected="true"] {
+  border-color: rgba(216, 178, 106, 0.65);
+  background: var(--color-red);
+  color: #fff;
+}
+
+@container (min-width: 620px) {
+  .tab {
+    padding: 0 10px;
+  }
+}
+
+/* Chip bật/tắt: chế độ ăn, nhóm con. */
+.chip {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(216, 178, 106, 0.5);
+  border-radius: var(--radius-btn);
+  color: var(--color-muted);
+  font-size: 14px;
+  white-space: nowrap;
+  transition:
+    border-color 180ms var(--ease-sora),
+    background-color 180ms var(--ease-sora),
+    color 180ms var(--ease-sora);
+}
+
+.chip:hover {
+  border-color: var(--border-gold-strong);
+  color: var(--color-gold-bright);
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--color-gold-bright);
+  background: rgba(216, 178, 106, 0.16);
+  color: var(--color-gold-bright);
+}
+
+.chipLui {
+  color: var(--color-gold-bright);
+}
+
+/* ===========================================================================
+ * DÙNG CHUNG: ô lưới, tên món, giá, nhãn
+ * ======================================================================== */
+
+.oThe {
+  display: grid;
+  min-width: 0;
+}
+
+.so {
+  font-size: 12px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: rgba(216, 178, 106, 0.75);
+}
+
+.ten {
+  display: block;
+  min-width: 0;
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  line-height: 1.3;
+  color: var(--color-ivory);
+  overflow-wrap: anywhere;
+}
+
+/* Gạch nối tự động CHỈ cho tiếng Đức (thẻ mang `lang="de"`). */
+.tenDe {
+  hyphens: auto;
+}
+
+/* Chữ Việt: chỉ ngắt ở dấu cách; chữ hoa có dấu chồng nên giãn chữ vừa phải. */
+.tenVi {
+  hyphens: manual;
+  overflow-wrap: break-word;
+}
+
+.gia {
+  margin-left: auto;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gold-bright);
+}
+
+.giaHoi {
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.nhan {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.nhanMuc {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* ===========================================================================
+ * THẺ MÓN
+ * ======================================================================== */
+
+/*
+ * Một tín hiệu khung duy nhất: viền vàng 1px trên nền `surface` (hallmark f6:
+ * không viền + bóng + ribbon cùng lúc). Cả thẻ là MỘT nút mở hộp chi tiết.
+ *
+ * Mặc định (điện thoại) cả hai kiểu đều là thẻ NGANG: ảnh 128×96 bên trái —
+ * gấp 2,7 lần mỗi chiều so với ảnh 48×36 của bản cũ.
+ */
+.the {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  text-align: left;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  transition: border-color 200ms var(--ease-sora);
+}
+
+.the:hover {
+  border-color: var(--border-gold-strong);
+}
+
+.theKhongAnh {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.theAnh {
+  display: block;
+  align-self: start;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.theAnh img,
+.danhMucAnh img,
+.theNhomAnh img,
+.chefAnh img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.theThan {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 6px 8px 6px 12px;
+}
+
+.theDau {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 8px;
+}
+
+.theMota {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Nhãn trái · giá phải, dính đáy thẻ để các thẻ cùng hàng thẳng nhau. */
+.theChan {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4px 8px;
+  margin-top: auto;
+  padding-top: 2px;
+}
+
+@container (min-width: 620px) {
+  .theNgang {
+    grid-template-columns: 140px minmax(0, 1fr);
+  }
+
+  .theNgang.theKhongAnh {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Thẻ DỌC: ảnh 4:3 phủ kín bề ngang thẻ, chữ ở dải nền riêng bên dưới. */
+  .theDoc {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .theDoc .theAnh {
+    border-radius: 0;
+  }
+
+  .theDoc .theThan {
+    gap: 6px;
+    padding: 14px 14px 12px;
+  }
+
+  .theDoc .ten {
+    font-size: 17px;
+  }
+
+  .theDoc .theMota {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
+
+/* Phóng ảnh khi rê chuột: ≤ 1.02, chỉ ảnh, khung không nhúc nhích. */
+@media (prefers-reduced-motion: no-preference) {
+  .theAnh img,
+  .danhMucAnh img,
+  .theNhomAnh img {
+    transition: transform 280ms var(--ease-sora);
+  }
+
+  .the:hover .theAnh img,
+  .danhMuc:hover .danhMucAnh img,
+  .theNhom:hover .theNhomAnh img {
+    transform: scale(1.02);
+  }
+}
+
+/* ---- Lưới thẻ ngang: Beliebte Gerichte + kết quả tìm ---- */
+.luoiNgang {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+@container (min-width: 620px) {
+  .luoiNgang {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@container (min-width: 960px) {
+  .luoiNgang {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .luoiKetQua {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/*
+ * ---- Lưới thẻ dọc của một nhóm món ăn ----
+ * `data-cot` = số cột đã chọn theo số món (không để thẻ mồ côi).
+ * `--tran` = bề ngang ảnh GỐC nhỏ nhất trong lưới (trần 440px): cột không bao
+ * giờ rộng hơn thế, nên không ảnh nào bị phóng quá cỡ gốc ở màn thường. Màn
+ * rất rộng thì lưới dừng ở trần và căn trái, không kéo giãn ảnh.
+ */
+.luoiMon {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+@container (min-width: 620px) {
+  .luoiMon {
+    grid-template-columns: repeat(2, minmax(0, var(--tran, 440px)));
+    gap: 16px;
+  }
+
+  .luoiMon[data-cot="1"] {
+    grid-template-columns: minmax(0, var(--tran, 440px));
+  }
+
+  .luoiMon[data-cot="3"] {
+    grid-template-columns: repeat(3, minmax(0, var(--tran, 440px)));
+  }
+}
+
+@container (min-width: 840px) {
+  .luoiMon[data-cot="4"] {
+    grid-template-columns: repeat(4, minmax(0, var(--tran, 440px)));
+  }
+}
+
+/* ===========================================================================
+ * HÀNG MÓN (bảng sushi / đồ uống, món không ảnh)
+ * ======================================================================== */
+
+.bangMon {
+  border-top: 1px solid rgba(216, 178, 106, 0.14);
+}
+
+.bangMonDuoiLuoi {
+  margin-top: 16px;
+}
+
+.oDong {
+  /* không xé một món ra hai cột */
+  break-inside: avoid;
+}
+
+/*
+ * Ba cột: SỐ · (tên + mô tả + nhãn) · GIÁ. Lưới chứ không flex để giá của mọi
+ * món trong bảng nằm trên MỘT đường dọc, bất kể tên dài mấy dòng.
+ * `3.2ch` đủ cho số món 3 chữ số (lớn nhất 3 chữ số + chữ cái).
+ */
+.dong {
+  display: grid;
+  grid-template-columns: 3.2ch minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(216, 178, 106, 0.14);
+  transition: background-color 180ms var(--ease-sora);
+}
+
+.dong:hover {
+  background: rgba(216, 178, 106, 0.065);
+}
+
+.dong > .so {
+  text-align: right;
+}
+
+.dongChu {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.dongChu .ten {
+  font-size: 16px;
+}
+
+.dongMota {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-muted);
+  overflow-wrap: break-word;
+}
+
+@container (min-width: 960px) {
+  .bangMonHaiCot {
+    column-count: 2;
+    column-gap: 28px;
+    column-rule: 1px solid rgba(216, 178, 106, 0.14);
+  }
+}
+
+/* ===========================================================================
+ * TỔNG QUAN
+ * ======================================================================== */
+
+.tongQuan {
+  margin-top: 16px;
+}
+
+.khoi {
+  margin-top: 24px;
+}
+
+.khoiDau {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-bottom: 14px;
+}
+
+.khoiTua {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--color-ivory);
+}
+
+.khoiVach {
+  flex-shrink: 0;
+  width: 3px;
+  height: 28px;
+  border-radius: 1px;
+  background: var(--color-red);
+}
+
+.lienKet {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  font-size: 14px;
+  color: var(--color-gold);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lienKet:hover {
+  color: var(--color-gold-bright);
+}
+
+@container (min-width: 620px) {
+  .tongQuan {
+    margin-top: 12px;
+  }
+
+  .khoiTua {
+    font-size: 26px;
+  }
+}
+
+/* ---- Băng "Chef Empfehlung" ---- */
+.chef {
+  display: flex;
+  flex-direction: column;
+}
+
+.chefAnh {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 7px 7px 0 0;
+}
+
+.chefChu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  padding: 18px 16px 16px;
+}
+
+.chefHuyHieu {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--radius-btn);
+  background: #f8ca80;
+  color: #1a120b;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chefTen {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 1.25;
+  color: var(--color-ivory);
+  overflow-wrap: anywhere;
+}
+
+.chefMota {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.chefChan {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.chefGia {
+  margin-left: 0;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.chefNut {
+  height: 44px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+@container (min-width: 620px) {
+  /* Ảnh trái 39% (trần 440px = không vượt cỡ gốc 560 của ảnh), cao hết thẻ. */
+  .chef {
+    display: grid;
+    grid-template-columns: min(39%, 440px) minmax(0, 1fr);
+    min-height: 240px;
+  }
+
+  .chefAnh {
+    aspect-ratio: auto;
+    min-height: 240px;
+    border-radius: 7px 0 0 7px;
+    /* Mép phải ảnh tan vào nền thẻ — làm trong suốt chính bức ảnh, KHÔNG phủ
+       lớp màu nào lên nó. */
+    mask-image: linear-gradient(to right, #000 85%, transparent);
+  }
+
+  .chefAnh img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .chefChu {
+    padding: 24px 28px;
+  }
+
+  .chefTen {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+}
+
+/* ---- Thẻ danh mục ---- */
+.luoiDanhMuc {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.danhMuc,
+.theNhom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  transition: border-color 200ms var(--ease-sora);
+}
+
+.danhMuc:hover,
+.theNhom:hover {
+  border-color: var(--border-gold-strong);
+}
+
+/* 16:9 — đúng tỉ lệ gốc 640×360 của ảnh danh mục, không cắt. */
+.danhMucAnh {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* Dải chữ có nền riêng DƯỚI ảnh — chữ không nằm trên ảnh. */
+.danhMucChu {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-height: 60px;
+  padding: 10px 12px;
+}
+
+.danhMucHaiDong {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.danhMucTen,
+.theNhomTen {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-gold-bright);
+  overflow-wrap: anywhere;
+}
+
+.danhMucPhu,
+.theNhomPhu {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-muted);
+}
+
+.danhMucMuiTen {
+  display: none;
+  flex-shrink: 0;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-gold);
+  border-radius: 999px;
+  color: var(--color-gold-bright);
+}
+
+@container (min-width: 760px) {
+  .luoiDanhMuc {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 960px) {
+  .danhMucTen,
+  .theNhomTen {
+    font-size: 15px;
+  }
+
+  .danhMucMuiTen {
+    display: grid;
+  }
+}
+
+/* ===========================================================================
+ * BẢNG MỘT NHÓM
+ * ======================================================================== */
+
+.bang {
+  margin-top: 20px;
+}
+
+.tua {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 20px;
+}
+
+.tuaChu {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--color-ivory);
+}
+
+.tuaSo {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: var(--color-muted);
+}
+
+.tuaVach {
+  flex: 1;
+  min-width: 24px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(216, 178, 106, 0.45), rgba(216, 178, 106, 0));
+}
+
+/* Nút phụ viền vàng — "Master Chef fragen", "Filter zurücksetzen". */
+.nutPhu {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(216, 178, 106, 0.5);
+  border-radius: var(--radius-btn);
+  color: var(--color-gold-bright);
+  font-size: 14px;
+  white-space: nowrap;
+  transition:
+    border-color 180ms var(--ease-sora),
+    background-color 180ms var(--ease-sora);
+}
+
+.nutPhu:hover {
+  border-color: var(--border-gold-strong);
+  background: rgba(216, 178, 106, 0.08);
+}
+
+.nutLon {
+  justify-content: center;
+  height: 44px;
+  font-size: 14px;
+}
+
+.tieuMuc + .tieuMuc {
+  margin-top: 36px;
+}
+
+.tieuMucTua {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.tieuMucChu {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold-bright);
+}
+
+/* Chữ Việt in hoa có dấu chồng: giãn chữ ≤ .08em (đặt SAU các luật trên). */
+.tieuMucChu.tenVi,
+.danhMucTen.tenVi,
+.theNhomTen.tenVi {
+  letter-spacing: 0.06em;
+}
+
+@container (min-width: 620px) {
+  .bang {
+    margin-top: 24px;
+  }
+
+  .tuaChu {
+    font-size: 30px;
+  }
+
+  .tieuMucChu {
+    font-size: 18px;
+  }
+}
+
+/* ---- Bước 1: lưới thẻ nhóm con (Sushi 14, Getränke 13) ---- */
+.luoiNhom {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.theNhomAnh {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+/* Nhóm chưa có ảnh: nền thẻ + hoạ tiết enso mờ. Không mượn ảnh nhóm khác. */
+.theNhomTrong {
+  position: relative;
+  background: var(--color-elevated);
+}
+
+.theNhomTrong::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/decor/enso_gold.svg") center / 96px no-repeat;
+  opacity: 0.35;
+}
+
+.theNhomChu {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px 12px;
+}
+
+@container (min-width: 480px) {
+  .luoiNhom {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 760px) {
+  .luoiNhom {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 960px) {
+  /* 13 nhóm xếp 4 cột thì trơ một thẻ ở hàng cuối -> 5 cột (5 + 5 + 3). */
+  .luoiNhom[data-cot="5"] {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ---- Bước 2: ảnh nhóm lớn + bảng món ---- */
+.nhomCon {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+/* Ảnh không bao giờ rộng hơn cỡ gốc (`--rong-anh`, trần 400px). */
+.nhomConHinh {
+  width: min(100%, var(--rong-anh, 400px));
+  margin: 0;
+}
+
+.nhomConAnh {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-card);
+}
+
+.nhomConAnh img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nhomConChuThich {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.nhomConBang {
+  min-width: 0;
+}
+
+.nhomConTua {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-bottom: 10px;
+}
+
+.nhomConGhiChu {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+@container (min-width: 760px) {
+  .nhomCon {
+    grid-template-columns: min(40%, var(--rong-anh, 400px)) minmax(0, 1fr);
+    align-items: start;
+    gap: 28px;
+  }
+
+  .nhomConKhongAnh {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Ảnh nhóm đứng yên khi cuộn bảng món dài (Inside Out 19 món). `top` =
+     chiều cao thanh lọc khi có hàng nhóm con (172px) + một nhịp. */
+  .nhomConHinh {
+    position: sticky;
+    top: 188px;
+    width: 100%;
+  }
+}
+
+/* ===========================================================================
+ * TÌM / LỌC
+ * ======================================================================== */
+
+.ketQua {
+  margin-top: 20px;
+}
+
+.ketQuaDau {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+}
+
+.ketQuaSo {
+  font-size: 15px;
+  color: var(--color-ivory);
+}
+
+.ketQuaPhamVi {
+  color: var(--color-muted);
+}
+
+.sapXep {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+  color: var(--color-muted);
+}
+
+.sapXepO {
+  width: auto;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+/* Không có kết quả: thông điệp + hành động, không để trống. */
+.rong {
+  max-width: 440px;
+  margin: 32px auto 0;
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid rgba(216, 178, 106, 0.3);
+  border-radius: var(--radius-card);
+  background: var(--color-elevated);
+}
+
+.rongIcon {
+  margin: 0 auto;
+  color: rgba(216, 178, 106, 0.5);
+}
+
+.rongTua {
+  margin-top: 16px;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--color-ivory);
+}
+
+.rongGoiY {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  text-wrap: pretty;
+  color: var(--color-muted);
+}
+
+.rongNut {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Miễn trừ in ở chân thực đơn thật. */
+.mienTru {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(216, 178, 106, 0.2);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* ===========================================================================
+ * HỘP CHI TIẾT MÓN — `<dialog>` gốc, nằm ở lớp trên cùng nên dùng @media
+ * ======================================================================== */
+
+.hop {
+  width: min(100% - 32px, 560px);
+  max-width: none;
+  max-height: min(88dvh, 780px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-card);
+  background: var(--color-elevated);
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+}
+
+/* Nền đặc, không blur nặng. */
+.hop::backdrop {
+  background: rgba(9, 8, 6, 0.88);
+}
+
+.hop[open] {
+  display: flex;
+}
+
+/* Có ảnh: hộp rộng ra vừa đủ ảnh ở CỠ GỐC + cột chữ. */
+.hopCoAnh {
+  width: min(100% - 32px, calc(var(--rong-anh, 520px) + 484px));
+}
+
+.hopRuot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Nút đóng 44px, luôn thấy (nằm ngoài vùng cuộn). */
+.hopDong {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-btn);
+  background: var(--color-elevated);
+  color: var(--color-muted);
+}
+
+.hopDong:hover {
+  color: var(--color-gold-bright);
+  border-color: var(--border-gold-strong);
+}
+
+/* Ảnh ở đúng cỡ gốc, không bao giờ phóng to hơn. */
+.hopAnh {
+  width: min(100%, var(--rong-anh, 520px));
+  overflow: hidden;
+  border: 1px solid rgba(216, 178, 106, 0.25);
+  border-radius: 6px;
+}
+
+.hopAnh img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hopChu {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hopNhom {
+  padding-right: 52px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.hopTen {
+  margin-top: 2px;
+  padding-right: 52px;
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--color-ivory);
+  overflow-wrap: anywhere;
+}
+
+.hopSo {
+  margin-right: 8px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: rgba(216, 178, 106, 0.75);
+}
+
+.hopMota {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.hopGia {
+  display: flex;
+  margin-top: 12px;
+}
+
+.hopGia .gia {
+  margin-left: 0;
+  font-size: 22px;
+}
+
+.hopGia .giaHoi {
+  font-size: 16px;
+}
+
+.hopMuc {
+  margin-top: 18px;
+}
+
+.hopTuaMuc {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.hopBang {
+  margin-top: 6px;
+}
+
+.hopBang li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(216, 178, 106, 0.15);
+  font-size: 14.5px;
+}
+
+.hopMa {
+  flex-shrink: 0;
+  width: 1.4em;
+  color: var(--color-muted);
+}
+
+.hopTenDong {
+  flex: 1;
+  min-width: 0;
+}
+
+.hopMaNho {
+  margin-left: 4px;
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.hopGiaDong {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gold-bright);
+}
+
+.hopNhan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.hopChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid rgba(216, 178, 106, 0.35);
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.hopDiUng {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 8px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.hopMaDiUng {
+  margin-right: 6px;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.hopChef {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  height: 44px;
+  margin-top: 22px;
+  padding: 0 16px;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-btn);
+  color: var(--color-gold-bright);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    border-color 180ms var(--ease-sora),
+    background-color 180ms var(--ease-sora);
+}
+
+.hopChef:hover {
+  border-color: var(--border-gold-strong);
+  background: rgba(216, 178, 106, 0.08);
+}
+
+@media (min-width: 768px) {
+  .hopRuot {
+    padding: 24px;
+  }
+
+  /* Hai cột: ảnh trái (co lại được khi màn hẹp, không bao giờ giãn quá cỡ
+     gốc) · chữ phải. */
+  .hopCoAnh .hopRuot {
+    grid-template-columns: minmax(0, var(--rong-anh, 520px)) minmax(300px, 1fr);
+    align-items: start;
+    gap: 28px;
+  }
+}
+
+/* Điện thoại: tấm trượt đáy, cao tối đa 92% màn; ảnh nằm DƯỚI hàng nút đóng. */
+@media (max-width: 767px) {
+  .hop {
+    width: 100%;
+    max-height: 92dvh;
+    margin: auto 0 0;
+    border-width: 1px 0 0;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .hopCoAnh {
+    width: 100%;
+  }
+
+  .hopRuot {
+    padding: 64px 16px 24px;
+    justify-items: center;
+  }
+
+  .hopChu {
+    justify-self: stretch;
+  }
+
+  .hopNhom,
+  .hopTen {
+    padding-right: 0;
+  }
+}
+
+/* Menu controls sit directly on the restaurant banner. */
+.menuHero { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; min-height: 330px; padding: 26px var(--page-pad) 20px; border-bottom: 1px solid var(--border-gold); }
+.menuHeroImage { object-fit: cover; object-position: center top; z-index: -2; filter: brightness(.5); }
+.menuHeroTitle { position: relative; flex: 1; display: grid; place-items: center; margin-bottom: 22px; }
+.menuHero .thanhLoc { position: relative; top: auto; display: grid; grid-template-columns: minmax(0,320px) minmax(0,1fr); grid-template-areas: 'tim an' 'tab tab'; gap: 12px 16px; padding: 0; background: transparent; backdrop-filter: none; }
+.menuHero .thanhDinh { position: static; display: contents; margin: 0; padding: 0; background: transparent; backdrop-filter: none; }
+.menuHero .oTim { grid-area: tim; }
+.menuHero .hangTab { grid-area: tab; }
+.menuHero .cheDoAn { grid-area: an; margin: 0; justify-content: flex-end; }
+.menuHero .hangNhomCon { grid-column: 1 / -1; margin: 0; }
+.menuHero .tab, .menuHero .chip { background: #0b0907d9; }
+.menuHero .tab[aria-selected='true'], .menuHero .chip[aria-pressed='true'] { background: #d8b26a; color: #120d07; }
+.menuBody { padding: 10px var(--page-pad) 32px; }
+.menuBody .tongQuan, .menuBody .tongQuan > .khoi:first-child { margin-top: 0; }
+.menuHero { min-height: 370px; }
+.menuHeroTitle { position: absolute; inset: 0; margin: 0; padding: 0 var(--page-pad); pointer-events: none; }
+.menuHero .thanhLoc { margin-top: auto; }
+@media(max-width:767px) { .menuHero { min-height: 330px; padding-top: 20px; padding-bottom: 16px; } .menuHero .thanhLoc { grid-template-columns: minmax(0,1fr); grid-template-areas: 'tim' 'tab' 'an'; } .menuHero .cheDoAn { justify-content: flex-start; } .menuHeroTitle { margin-bottom: 22px; } .menuBody { padding-top: 8px; } }
+@media(max-width:767px) { .menuHero { min-height: 410px; } .menuHeroTitle { margin-bottom: 0; } }
+.oThe, .oDong { position: relative; }
+.theChan { padding-right: 50px; min-height: 38px; }
+.dong { padding-right: 58px !important; }
+.oDong > button:last-child { bottom: 50%; transform: translateY(50%); right: 8px; }
+
+/* Each row fills the available width, including a short final row. */
+@container (min-width: 620px) {
+  .luoiMon { display: flex !important; flex-wrap: wrap; gap: 16px; }
+  .luoiMon > .oThe { flex: 1 1 calc((100% - 16px) / 2); min-width: 0; }
+  .luoiMon[data-cot="1"] > .oThe { flex-basis: 100%; }
+  .luoiMon[data-cot="3"] > .oThe { flex-basis: calc((100% - 32px) / 3); }
+  .theDoc .theAnh { max-height: 330px; width: 100%; }
+  .luoiKetQua { display: flex !important; flex-wrap: wrap; }
+  .luoiKetQua > .oThe { flex: 1 1 calc((100% - 16px) / 2); }
+}
+@container (min-width: 840px) {
+  .luoiMon[data-cot="4"] > .oThe { flex-basis: calc((100% - 48px) / 4); }
+}
+/* 11/10: câu miễn trừ nằm trong <KhungThongBao>; chỉ còn lề trên. */
+.mienTruKhung { margin-top: 32px; }
+/* 11/10: khối đầu cách chân banner đúng `--sau-banner`, như mọi trang con. */
+.menuBody { padding-top: var(--sau-banner); }
+/* 11/10: điện thoại — tiêu đề nét cọ căn giữa PHẦN TRỐNG phía trên ô tìm, không căn giữa cả banner:
+   căn cả banner thì đuôi chữ ("Thực đơn" cao 100px) chui xuống dưới ô tìm kiếm. 176px = ô tìm + hàng tab + hàng chip + đệm. */
+@media(max-width:767px) { .menuHeroTitle { top: 40px; bottom: 176px; } }
+/* 11/10: mọi chế độ xem (tổng quan / một danh mục / kết quả tìm) đều bắt đầu sát chân banner như nhau —
+   trước, xem một danh mục thì khối đầu còn mang margin-top 24px nên khe thành 40px. */
+.menuBody > :first-child, .menuBody > :first-child > :first-child { margin-top: 0; }
+/* Các bảng danh mục đều nằm sẵn trong DOM, bảng không xem mang [hidden]: bảng HIỆN đầu tiên không lề trên. */
+.menuBody > div > .bang { margin-top: 0; }
+.menuBody > div > .bang:not([hidden]) ~ .bang:not([hidden]) { margin-top: 24px; }

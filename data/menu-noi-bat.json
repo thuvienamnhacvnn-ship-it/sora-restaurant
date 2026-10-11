@@ -1,0 +1,12 @@
+{
+  "_ghiChu": "TẠM, CHỜ SẾP CHỐT (07/10). Món nào được gắn 'Chef Empfehlung' và món nào nằm ở khối 'Beliebte Gerichte' trên trang Speisekarte. Chỉ ghi ID món (cột `id` trong menu-items.json) — tên, mô tả, giá, ảnh đều lấy từ dữ liệu thực đơn, KHÔNG gõ vào đây. Để `chef` rỗng (\"\") hoặc `beliebt` rỗng ([]) thì khối tương ứng tự ẩn. Món ghi ở đây phải có ảnh riêng trong menu-images.json; món không có ảnh sẽ bị bỏ qua.",
+  "chef": "30-bo-luc-lac",
+  "beliebt": [
+    "20-pho-ha-noi",
+    "10-goi-cuon-ha-noi",
+    "5-nem-hai-san",
+    "6-gyoza",
+    "25-mi-xao",
+    "1-tom-kha-suppe"
+  ]
+}

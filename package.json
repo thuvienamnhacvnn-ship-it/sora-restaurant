@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack -p 3160",
+    "dev": "next dev --webpack -H 127.0.0.1 -p 3160",
     "build": "next build --webpack",
     "start": "next start -p 3160",
     "lint": "eslint"

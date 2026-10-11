@@ -10,8 +10,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionFrame } from "@/components/ui/SectionFrame";
-import { ReservationForm } from "@/components/reservation/ReservationForm";
-import { ChoSep } from "@/components/ui/ChoSep";
+import { ReservationForm } from "@/components/reservation/ReservationExperience";
+import { ChoSepAn } from "@/components/ui/ChoSep";
 import { MobileFooter } from "@/components/shell/MobileFooter";
 import { CHU_NHAN } from "@/components/chu/ChuCo";
 import { getT, isLocale } from "@/lib/i18n";
@@ -53,11 +53,13 @@ export default async function ReservierungPage({
           question: t("reservation.chefQuestion"),
           cta: t("chef.cta.reservation"),
         }}
-      >
-        <ChoSep note="Hero-Text Reservierung (4 Zeilen)" lines={4} className="max-w-[420px]" />
-      </PageHero>
+      />
+      {/* Chữ hero + sơ đồ mặt bằng chưa có -> không vẽ gì ra trang, chỉ để
+          dấu ẩn cho QA đếm. Xem `ChoSepAn`. */}
+      <ChoSepAn note="Hero-Text Reservierung (4 Zeilen)" />
+      <ChoSepAn note="Tischplan: echter Grundriss des Restaurants + bestätigte Bereiche" />
 
-      <SectionFrame>
+      <SectionFrame sauHero>
         <ReservationForm
           locale={lang}
           s={{

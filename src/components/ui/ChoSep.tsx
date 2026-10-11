@@ -19,6 +19,19 @@
  * Mỗi chỗ đều có `note` để QA và Sếp biết chính xác đang thiếu đoạn nào.
  * Đếm nhanh số chỗ còn thiếu: grep -rn "<ChoSep" src/
  */
+/**
+ * Dấu giữ chỗ ẨN — dùng ở các trang con từ đợt làm lại 07/10.
+ *
+ * Sếp chê trang trông như bản nháp vì dòng "[chờ Sếp gửi]" + thanh xám lộ ra
+ * cho khách. Bố cục mới phải đẹp khi chữ còn trống, nên chỗ chờ KHÔNG vẽ gì
+ * ra trang. Cơ chế đếm giữ nguyên: thẻ vẫn mang `data-cho-sep` trong DOM
+ * (grep "<ChoSep" và `querySelectorAll("[data-cho-sep]")` vẫn ra đủ), chỉ
+ * là `hidden`. Có chữ thật thì thay thẻ này bằng đoạn văn.
+ */
+export function ChoSepAn({ note }: { note: string }) {
+  return <span hidden data-cho-sep={note} data-cho-sep-an="" />;
+}
+
 export function ChoSep({
   note,
   lines = 1,

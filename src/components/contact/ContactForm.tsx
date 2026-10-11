@@ -10,7 +10,8 @@
  */
 
 import { Icon } from "@/components/ui/Icon";
-import { hasEmail, restaurant, telHref } from "@/data/restaurant";
+import type { Locale } from "@/lib/i18n";
+import { hasEmail, phoneLabel, restaurant, telHref } from "@/data/restaurant";
 import { CornerSakura, GoldWaveCorner } from "@/components/decor/Decor";
 
 export type ContactFormStrings = {
@@ -25,7 +26,16 @@ export type ContactFormStrings = {
   noForm: string;
 };
 
-export function ContactForm({ s }: { s: ContactFormStrings }) {
+export function ContactForm({
+  locale,
+  s,
+}: {
+  /* Cần `locale` chỉ để gọi `phoneLabel()`: nhãn loại số lưu trong JSON là
+     tiếng Đức ("Mobil"/"Festnetz"), in thẳng ra thì trang `/vi` còn sót hai
+     chữ Đức ở ngay dưới nút gửi. */
+  locale: Locale;
+  s: ContactFormStrings;
+}) {
   const canSend = hasEmail();
 
   return (
@@ -40,7 +50,6 @@ export function ContactForm({ s }: { s: ContactFormStrings }) {
        * ở `app/[lang]/kontakt/page.tsx`.
        */}
       <CornerSakura corner="tr" width={186} offsetX={-1} offsetY={-1} opacity={1} className="-z-10" />
-      <CornerSakura corner="tl" width={102} offsetX={18} offsetY={-1} opacity={1} className="-z-10" />
       <GoldWaveCorner corner="bl" size={108} opacity={0.42} className="-z-10" />
       <span className="grid size-[38px] place-items-center rounded-full border border-gold/45 text-gold">
         <Icon name="mail" size={20} />
@@ -66,10 +75,23 @@ export function ContactForm({ s }: { s: ContactFormStrings }) {
           <textarea rows={5} required className="sora-field" />
         </label>
 
+        {/*
+         * CHƯA GỬI ĐƯỢC THÌ KHÔNG ĐƯỢC LÀ NÚT CHÍNH (07/10).
+         *
+         * Trước đây nút này luôn `sora-btn-gold` — vàng đặc, nổi nhất thẻ —
+         * trong khi ngay dưới nó là ô báo "chưa mở form, hãy gọi điện". Một
+         * nút mời bấm mà bấm không được là lời hứa suông; người dùng thử rồi
+         * mới đọc ra là không dùng được.
+         *
+         * Có e-mail (`canSend`) thì nó trở lại làm nút chính ngay, không phải
+         * sửa lại chỗ này.
+         */}
         <button
           type="submit"
           disabled={!canSend}
-          className="sora-btn-gold mt-4 h-11 w-full justify-center text-[15px] tracking-[.08em] uppercase disabled:cursor-not-allowed disabled:opacity-45"
+          className={`${
+            canSend ? "sora-btn-gold" : "sora-btn-ghost"
+          } mt-4 h-11 w-full justify-center text-[15px] tracking-[.08em] uppercase disabled:cursor-not-allowed disabled:opacity-45`}
         >
           <Icon name="send" size={17} />
           {s.send}
@@ -86,17 +108,29 @@ export function ContactForm({ s }: { s: ContactFormStrings }) {
             {s.noFormTitle}
           </p>
           <p className="mt-1.5 text-[14px] leading-relaxed text-text">{s.noForm}</p>
-          <ul className="mt-3 space-y-1">
+          {/*
+           * GỌI ĐIỆN LÀ HÀNH ĐỘNG CHÍNH ở trạng thái này — nên nó mang dáng
+           * nút chính, còn nút gửi ở trên lùi về kiểu phụ. Hai số là số THẬT
+           * in trên bìa thực đơn, không phải số mẫu.
+           *
+           * Nhãn loại số xuống DÒNG RIÊNG thay vì `ml-2` chạy tiếp: cột thẻ
+           * hẹp lại ở 1280/1366 thì nhãn đẩy số ra ngoài viền thẻ (đo được
+           * lòi 35px với `Festnetz`), hoặc tự rớt xuống dòng trông như một từ
+           * lạc. Xuống dòng có chủ ý thì ở cỡ nào cũng đọc ra là nhãn.
+           */}
+          <ul className="mt-3 space-y-2">
             {restaurant.phones.map((p) => (
               <li key={p.number}>
                 <a
                   href={telHref(p)}
-                  className="inline-flex items-center gap-2 text-[16px] text-gold-bright"
+                  className="sora-btn-primary h-11 w-full justify-center text-[16px]"
                 >
                   <Icon name="phone" size={16} />
                   {p.number}
                 </a>
-                <span className="ml-2 text-[12px] text-muted">{p.label}</span>
+                <span className="mt-1 block text-center text-[12px] text-muted">
+                  {phoneLabel(p, locale)}
+                </span>
               </li>
             ))}
           </ul>

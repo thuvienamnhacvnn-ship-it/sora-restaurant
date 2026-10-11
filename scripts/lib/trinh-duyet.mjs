@@ -15,6 +15,7 @@
  *    nguyên bản của prototype rồi `dispatchEvent(new Event('input'))`.
  */
 import http from "node:http";
+import net from "node:net";
 import os from "node:os";
 import fs from "node:fs";
 import path from "node:path";
@@ -50,21 +51,70 @@ export const cho = (ms) => new Promise((r) => setTimeout(r, ms));
 /*
  * Hạn chờ mặc định cho mọi phép `choTới`.
  *
- * 60 giây nghe như nhiều, nhưng đây KHÔNG phải thời gian chờ — chờ theo điều
- * kiện thì trang sẵn sàng lúc nào là đi tiếp lúc đó, thường dưới 3 giây. Đây
- * là hạn để BÁO HỎNG. Đặt chặt (25s) thì trên máy 4 nhân đang mở sẵn ~67 tiến
- * trình Chrome, bài kiểm chết vì máy chậm chứ không vì web sai — đã gặp thật:
- * "trang không tải xong trong 25000ms". Báo hỏng vì máy chậm cũng là báo sai.
- * Nới bằng `KIEM_HAN_MS=120000` nếu máy đang dựng gì nặng.
+ * Đây KHÔNG phải thời gian chờ — chờ theo điều kiện thì trang sẵn sàng lúc nào
+ * là đi tiếp lúc đó. Đây là hạn để BÁO HỎNG.
+ *
+ * 120 giây là con số ĐO RA, không phải đoán. Đo thời gian React gắn xong trên
+ * máy này lúc đang tải (`next dev` + ~67 tiến trình Chrome của Sếp):
+ *
+ *     /de/ueber-uns   35,2 s     /de             18,7 s
+ *     /de/impressum   17,3 s     /vi/ueber-uns   15,0 s
+ *
+ * Worst case 35 s, nên hạn 60 s chỉ gấp 1,7 lần — quá sát, và đã hỏng thật ba
+ * lần: `kiem-chu-song-ngu` lượt 3 ra LỖI-K ở `/de/ueber-uns`, `kiem-trang-chu`
+ * ra 3 LỖI-K ở `/de`. **Báo hỏng vì máy chậm cũng là báo sai.** 120 s cho hệ
+ * số 3,4 lần. Nới thêm bằng `KIEM_HAN_MS=240000` khi máy đang dựng gì nặng.
  */
-const HAN_MAC_DINH = Number(process.env.KIEM_HAN_MS) || 60000;
+const HAN_MAC_DINH = Number(process.env.KIEM_HAN_MS) || 120000;
 
-export async function moTrinhDuyet({ port = 9440, rong = 1440, cao = 900 } = {}) {
+/*
+ * Xin hệ điều hành một cổng TRỐNG thay vì ghim số cố định.
+ *
+ * Ghim cổng là tài nguyên DÙNG CHUNG giữa các lượt chạy: một tiến trình Chrome
+ * của lượt trước còn giữ cổng thì lượt sau mở không được, và lỗi rơi ra ở chỗ
+ * khởi tạo — ngoài mọi vùng bắt lỗi. Triệu chứng đã thấy: `kiem-trang.mjs`
+ * chết ở dòng `moTrinhDuyet(...)`, mã thoát 1, trong khi chẳng kiểm được gì;
+ * và cả tôi lẫn `sora-dev-datban` đều phải đi dọn Chrome kẹt bằng tay.
+ *
+ * `listen(0)` để hệ điều hành chọn, đọc số rồi nhả ra. Vẫn còn một khe hở lý
+ * thuyết giữa lúc nhả và lúc Chrome chiếm, nhưng khe đó cỡ milli-giây và
+ * không dùng chung giữa các lượt — khác hẳn một con số ghim cứng.
+ */
+export async function congTrong() {
+  return new Promise((ok, loi) => {
+    const sv = net.createServer();
+    sv.unref();
+    sv.on("error", loi);
+    sv.listen(0, "127.0.0.1", () => {
+      const p = sv.address().port;
+      sv.close(() => ok(p));
+    });
+  });
+}
+
+/*
+ * ⚠ KHÔNG nhận `rong`/`cao` ở đây. Trước đây có, với mặc định 1440×900, nhưng
+ * **không dòng nào dùng tới** — cỡ cửa sổ do `khoKhung(rộng, cao)` đặt sau.
+ * Tham số nhận vào rồi bỏ qua còn tệ hơn không có: người gọi truyền 1280×720
+ * và yên trí mình đang kiểm ở cỡ đó, trong khi trình duyệt vẫn 1440×900. Đúng
+ * họ với lỗi 06/10 — kiểm ở một cỡ rồi tưởng đã kiểm đủ.
+ *
+ * Cỡ màn lấy từ `lib/co-man.mjs`, đặt bằng `khoKhung`.
+ */
+export async function moTrinhDuyet({ port } = {}) {
+  // Không ghim cổng. Người gọi truyền `port` thì tôn trọng, nhưng không script
+  // nào nên truyền — xem ghi chú ở `congTrong()`.
+  port = port ?? (await congTrong());
   if (!CHROME)
     throw new Error(
       "không tìm thấy Chrome/Chromium. Đặt CHROME_BIN=/đường/dẫn rồi chạy lại.\n" +
         "  đã thử: " + UNG_VIEN.join(", ")
     );
+
+  const hoSo = path.join(
+    os.tmpdir(),
+    "sora-kiem-" + Date.now() + "-" + process.pid + "-" + Math.random().toString(36).slice(2, 8)
+  );
 
   const docJson = (p) =>
     new Promise((r, j) =>
@@ -87,11 +137,32 @@ export async function moTrinhDuyet({ port = 9440, rong = 1440, cao = 900 } = {})
       // Trên VPS chạy bằng root trong container không có sandbox -> Chrome
       // không lên. Chỉ thêm cờ này ngoài Windows, không nới lỏng máy của Sếp.
       ...(process.platform === "win32" ? [] : ["--no-sandbox", "--disable-dev-shm-usage"]),
-      "--user-data-dir=" + path.join(os.tmpdir(), "sora-kiem-" + Date.now()),
+      /* Hồ sơ RIÊNG mỗi lượt: `Date.now()` + pid + một đoạn ngẫu nhiên.
+         Chỉ `Date.now()` là chưa đủ — hai lượt khởi động trong cùng một
+         milli-giây sẽ dùng chung hồ sơ. Dùng chung hồ sơ thì Chrome phục vụ
+         bản đã đệm: trưởng nhóm mất bốn lượt chụp ảnh vì đúng chuyện này. */
+      "--user-data-dir=" + hoSo,
       "about:blank",
     ],
     { stdio: "ignore" }
   );
+
+  /* Đóng Chrome KỂ CẢ khi ở trên ném lỗi hoặc script thoát giữa đường.
+     `process.once('exit')` chạy cả khi `process.exit()` được gọi, nên không
+     cần mỗi script tự nhớ `finally`. Dọn luôn thư mục hồ sơ tạm. */
+  const donDep = () => {
+    try {
+      chrome.kill();
+    } catch {
+      /* đã chết rồi */
+    }
+    try {
+      fs.rmSync(hoSo, { recursive: true, force: true });
+    } catch {
+      /* Chrome còn giữ tệp -> để hệ điều hành dọn thư mục tạm */
+    }
+  };
+  process.once("exit", donDep);
 
   let ver = null;
   for (let i = 0; i < 200 && !ver; i++) {
@@ -218,12 +289,31 @@ export async function moTrinhDuyet({ port = 9440, rong = 1440, cao = 900 } = {})
    * Dò React đã gắn bằng `__reactFiber$`/`__reactProps$`: React 19 vẫn gắn
    * hai khoá này lên chính phần tử DOM khi hydrate xong. Không có khoá nào
    * tức mới chỉ là HTML từ máy chủ.
+   *
+   * ⚠ `__reactContainer$` nằm trên `document`, KHÔNG nằm trên `main` hay
+   * `body`. App Router gọi `hydrateRoot(document, …)`, nên gốc là `document`.
+   * Bản đầu tôi kiểm trên `main || body` — đo ra CẢ HAI đều 0 trên cả bốn
+   * tuyến, tức **nhánh đó chưa bao giờ chạy** và phép nhận biết hydrate suốt
+   * thời gian qua đứng trên MỘT chân (chỉ nhánh đếm `__reactProps$`). Trên
+   * `/de/ueber-uns` nhánh ấy đúng lúc phát hiện chỉ thấy **1** phần tử, trong
+   * khi các tuyến khác 20–30 — mong manh.
+   *
+   * ĐỪNG DỌN nhánh `document`: nó là nhánh đúng và là nhánh chắc chắn nhất
+   * (có trên cả bốn tuyến đo được). Giữ cả hai để một cái hỏng vẫn còn cái kia.
    */
+  const DO_HYDRATE =
+    "const tuongTac=[...document.querySelectorAll('button,a,input,select')];" +
+    "const coProps=tuongTac.filter(e=>Object.keys(e).some(k=>" +
+    "  k.startsWith('__reactProps$')||k.startsWith('__reactFiber$'))).length;" +
+    "const goc=Object.keys(document).filter(k=>k.startsWith('__reactContainer$')).length;" +
+    "return { readyState: document.readyState, soTuongTac: tuongTac.length, coProps, goc };";
+
   const REACT_DA_GAN =
-    "const g=document.querySelector('main') || document.body;" +
-    "return [...document.querySelectorAll('button,a,input,select')].some(e=>" +
-    "  Object.keys(e).some(k=>k.startsWith('__reactProps$')||k.startsWith('__reactFiber$'))" +
-    ") || Object.keys(g).some(k=>k.startsWith('__reactContainer$'));";
+    "const tuongTac=[...document.querySelectorAll('button,a,input,select')];" +
+    "const coProps=tuongTac.some(e=>Object.keys(e).some(k=>" +
+    "  k.startsWith('__reactProps$')||k.startsWith('__reactFiber$')));" +
+    "const goc=Object.keys(document).some(k=>k.startsWith('__reactContainer$'));" +
+    "return coProps || goc;";
 
   const go = async (url, tuyChon = {}) => {
     // Vẫn nhận tham số thứ hai là SỐ cho mấy chỗ gọi kiểu cũ.
@@ -233,15 +323,36 @@ export async function moTrinhDuyet({ port = 9440, rong = 1440, cao = 900 } = {})
     loiConsole = [];
     await cmd("Page.navigate", { url });
 
+    /*
+     * Quá hạn thì in SỐ ĐO ĐƯỢC, không chỉ in "không đạt trong Nms".
+     * "Không đạt trong 120000ms" không phân biệt được web CHẬM với web CHẾT —
+     * trưởng nhóm đã phải tự đi đoán một lần. Kèm `readyState`, số phần tử
+     * tương tác, bao nhiêu cái đã có `__reactProps$`, và gốc React có chưa:
+     *   coProps 0 / soTuongTac 0   -> trang chưa dựng gì (web chết / 404)
+     *   coProps 0 / soTuongTac 28  -> HTML có rồi, hydrate chưa tới (web chậm)
+     */
+    const quaHan = async (viec) => {
+      let d = null;
+      try {
+        d = await js(DO_HYDRATE);
+      } catch {
+        d = null;
+      }
+      const soLieu = d
+        ? ` [readyState=${d.readyState} tươngTác=${d.soTuongTac} cóProps=${d.coProps} gốcReact=${d.goc}]`
+        : " [không đọc được trang — Chrome mất kết nối?]";
+      throw new Error(viec + " trong " + hanMs + "ms: " + url + soLieu);
+    };
+
     const xong = await choTới("return document.readyState === 'complete';", hanMs);
-    if (!xong) throw new Error("trang không tải xong trong " + hanMs + "ms: " + url);
+    if (!xong) await quaHan("trang không tải xong");
 
     const ganRoi = await choTới(REACT_DA_GAN, hanMs);
-    if (!ganRoi) throw new Error("React không gắn xong trong " + hanMs + "ms: " + url);
+    if (!ganRoi) await quaHan("React không gắn xong");
 
     if (san) {
       const co = await choTới(san, hanMs);
-      if (!co) throw new Error("điều kiện `san` không đạt trong " + hanMs + "ms: " + url);
+      if (!co) await quaHan("điều kiện `san` không đạt");
     }
     // Một nhịp ngắn cho effect chạy nốt sau khi gắn.
     await cho(350);
@@ -341,8 +452,12 @@ export async function moTrinhDuyet({ port = 9440, rong = 1440, cao = 900 } = {})
     );
 
   const dong = () => {
-    ws.close();
-    chrome.kill();
+    try {
+      ws.close();
+    } catch {
+      /* đã đóng */
+    }
+    donDep();
   };
 
   return {
@@ -359,6 +474,42 @@ export async function moTrinhDuyet({ port = 9440, rong = 1440, cao = 900 } = {})
     dong,
     loiConsole: () => loiConsole,
   };
+}
+
+/*
+ * Dựng khung (mở trình duyệt) sao cho KHÔNG BAO GIỜ thoát với mã 1.
+ *
+ * Mã 1 nghĩa là "trang sai, phải sửa web". Khung chết thì chẳng kiểm được gì,
+ * nên nó phải là `LỖI-K` / mã 3. Trước đây `const b = await moTrinhDuyet(...)`
+ * nằm NGOÀI mọi vùng bắt lỗi: Chrome không mở được là script chết mang mã 1,
+ * tức tự khai là web sai trong khi chưa đo một thứ gì.
+ *
+ * Gắn luôn hai cái lưới cho mọi ngoại lệ lọt ra sau đó — cũng về mã 3.
+ */
+export function veMa3(nhan) {
+  return (e) => {
+    console.error("\n    LỖI-K " + nhan + "\n");
+    console.error(String(e && e.stack ? e.stack : e));
+    console.error(
+      "\n  Bài kiểm KHÔNG chạy được tới chỗ cần kiểm — chưa kết luận gì về trang."
+    );
+    process.exit(3);
+  };
+}
+
+/** Hai cái lưới cho mọi ngoại lệ lọt ra ngoài — đều về mã 3, không về mã 1. */
+export function luoiMa3() {
+  process.on("uncaughtException", veMa3("ngoại lệ không bắt được"));
+  process.on("unhandledRejection", veMa3("promise bị bỏ rơi"));
+}
+
+export async function dungKhung(tuyChon = {}) {
+  luoiMa3();
+  try {
+    return await moTrinhDuyet(tuyChon);
+  } catch (e) {
+    veMa3("không dựng được trình duyệt")(e);
+  }
 }
 
 /*

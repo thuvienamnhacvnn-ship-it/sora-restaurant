@@ -19,7 +19,7 @@
  *     quan trọng hơn: lỗi chức năng thì nhìn thấy, còn một địa chỉ email bịa
  *     thì trông như trang hoàn chỉnh. Nên có cả mục kiểm dạng "PHẢI KHÔNG CÓ".
  */
-import { moTrinhDuyet, soKetQua, cho } from "./lib/trinh-duyet.mjs";
+import { dungKhung, soKetQua, cho } from "./lib/trinh-duyet.mjs";
 
 const GOC = (process.argv[2]?.startsWith("http") ? process.argv[2] : "http://localhost:3160").replace(/\/$/, "");
 const CHON = process.argv.slice(process.argv[2]?.startsWith("http") ? 3 : 2);
@@ -34,10 +34,14 @@ const DIEN_THOAI_THAT = ["01622979999", "077619982504"];
 const E164_THAT = ["+491622979999", "+4977619982504"];
 const PHO_THAT = "Rheinbrückstr. 24";
 const THANH_PHO_THAT = "79713 Bad Säckingen";
+/* Mã hồ sơ Google của quán (Sếp gửi link 07/10): nửa sau của
+   `0x479049f0aef4b16b:0x3a0b3ebdcecff2bc` đổi sang thập phân. Khai lại ở đây
+   làm chốt chặn — link bản đồ trỏ sang một hồ sơ khác là bài kiểm HỎNG. */
+const CID_THAT = "4182505663883113148";
 
 const chiSo = (s) => String(s).replace(/[^\d]/g, "");
 
-const b = await moTrinhDuyet({ port: 9443 });
+const b = await dungKhung();
 const s = soKetQua();
 
 /*
@@ -84,14 +88,13 @@ const MOC = {
   reservierung:
     "return document.querySelectorAll('button[aria-pressed]').length > 20 &&" +
     " document.querySelectorAll('dt').length >= 6 &&" +
-    " !!document.querySelector('button[type=submit]');",
+    " !!document.querySelector('[data-tom-tat] a[href^=\"tel:\"]');",
   kontakt:
-    "const f=document.querySelector('form');" +
-    "return !!f && f.querySelectorAll('input').length === 4 && !!f.querySelector('textarea') &&" +
-    " !!document.querySelector('a[href^=\"tel:\"]');",
+    "return !!document.querySelector('[data-the-goi-dien] a[href^=\"tel:\"]') &&" +
+    " document.querySelectorAll('address').length >= 1;",
   galerie:
     "return document.querySelectorAll('[role=group] button').length === 6 &&" +
-    " document.querySelectorAll('button[aria-label*=\"vergr\"]').length === 7;",
+    " document.querySelectorAll('button[aria-label*=\"vergr\"]').length === 13;",
   "ueber-uns":
     "return document.querySelectorAll('h3').length >= 4 &&" +
     " document.querySelectorAll('[data-cho-sep]').length >= 5;",
@@ -137,10 +140,21 @@ if (lam("reservierung")) reservierung: {
   // Khung giờ sinh từ giờ mở cửa THẬT 11:00–22:30, bước 30', chốt sớm 30'
   // => 11:00…22:00 = 23 ô. Con số này là hệ quả của dữ liệu thật, nên nó đổi
   // tức là ai đó sửa giờ mở cửa.
-  const gio = await b.js(
-    "const ds=[...document.querySelectorAll('button')].map(e=>e.textContent.trim()).filter(x=>/^\\d{2}:\\d{2}$/.test(x));" +
-      "return { so: ds.length, dau: ds[0], cuoi: ds[ds.length-1] };"
-  );
+  // Làm lại 07/10: 23 khung chia BA TAB BUỔI, mỗi lần hiện một buổi -> bấm
+  // lần lượt từng tab rồi gom lại. Tổng vẫn phải đúng 23.
+  const soTab = await b.js("return document.querySelectorAll('[role=tab]').length;");
+  const gomGio = [];
+  for (let i = 0; i < soTab; i++) {
+    await b.js("document.querySelectorAll('[role=tab]')[" + i + "].click(); return 1;");
+    await cho(350);
+    gomGio.push(
+      ...(await b.js(
+        "return [...document.querySelectorAll('[data-luoi-gio] button')].map(e=>e.textContent.trim()).filter(x=>/^\\d{2}:\\d{2}$/.test(x));"
+      ))
+    );
+  }
+  const gio = { so: gomGio.length, dau: gomGio[0], cuoi: gomGio[gomGio.length - 1] };
+  s.ghi("lưới giờ chia 3 buổi, mỗi buổi ≤ 9 ô", soTab === 3, soTab + " tab");
   s.ghi("khung giờ sinh từ giờ mở cửa thật", gio.so === 23 && gio.dau === "11:00" && gio.cuoi === "22:00",
     gio.so + " ô, " + gio.dau + "→" + gio.cuoi);
 
@@ -176,21 +190,30 @@ if (lam("reservierung")) reservierung: {
   const ngay = await docTomTat("Datum");
   s.ghi("chọn ngày -> tóm tắt đổi", ngay !== "—" && ngay !== "KHÔNG THẤY DÒNG", ngay);
 
+  await b.bamChu("[role=tab]", "Abend");
   await b.bamChu("button", "19:30");
   s.ghi("chọn giờ -> tóm tắt đổi", (await docTomTat("Uhrzeit")) === "19:30", await docTomTat("Uhrzeit"));
 
-  await b.nhapO("select", "5");
+  // Bộ đếm − | số | + (trước là <select>): 2 -> 5 là ba cú bấm "+".
+  for (let i = 0; i < 3; i++) await b.bam("button[aria-label='Mehr Gäste']", 250);
+  const khoaDuoi = await b.js(
+    "const t=document.querySelector(\"button[aria-label='Weniger Gäste']\"); return !!t && !t.disabled;"
+  );
+  s.ghi("bộ đếm khách có nút bớt", khoaDuoi === true);
   s.ghi("đổi số khách -> tóm tắt đổi", (await docTomTat("Gäste")) === "5 Gäste", await docTomTat("Gäste"));
 
-  // Khu vực có HAI nút điều khiển (thẻ ảnh + sơ đồ khu) cùng một trạng thái.
-  // Bấm một chỗ thì chỗ kia phải sáng theo, không thì người dùng thấy hai
-  // câu trả lời khác nhau cho cùng câu hỏi.
+  // Làm lại 07/10: khu vực chỉ còn MỘT chỗ chọn (thẻ ảnh thật ở bước 4);
+  // sơ đồ vẽ nét đã gỡ vì chưa có mặt bằng thật.
   await b.bamChu("button", "Gastraum");
   const khu = await b.js(
     "const ds=[...document.querySelectorAll('button[aria-pressed]')].filter(e=>/Gastraum/.test(e.textContent));" +
       "return { so: ds.length, bat: ds.filter(e=>e.getAttribute('aria-pressed')==='true').length };"
   );
-  s.ghi("chọn khu -> cả hai nút cùng sáng", khu.so === 2 && khu.bat === 2, khu.bat + "/" + khu.so + " nút sáng");
+  s.ghi("chọn khu -> thẻ ảnh sáng (một chỗ chọn duy nhất)", khu.so === 1 && khu.bat === 1, khu.bat + "/" + khu.so + " nút sáng");
+  const anhKhu = await b.js(
+    "return [...document.querySelectorAll('[data-khu-vuc] img')].map(e=>Math.round(e.getBoundingClientRect().width));"
+  );
+  s.ghi("ảnh khu vực đủ lớn (≥ 150px ở khổ này)", anhKhu.length === 2 && anhKhu.every((w) => w >= 150), anhKhu.join(" / ") + "px");
   s.ghi("chọn khu -> tóm tắt đổi", (await docTomTat("Bereich")) === "Gastraum", await docTomTat("Bereich"));
 
   await b.bamChu("button", "Geburtstag");
@@ -202,14 +225,16 @@ if (lam("reservierung")) reservierung: {
   s.ghi("ghi chú -> tóm tắt đổi", (await docTomTat("Anmerkungen")) === "Zwei Kinderstühle bitte", await docTomTat("Anmerkungen"));
 
   // --- toàn vẹn dữ liệu ---
+  // Làm lại 07/10: chưa có nơi nhận -> KHÔNG có nút gửi nào (kể cả nút khoá);
+  // hành động chính là hai nút gọi ngay dưới bảng tóm tắt, kèm câu giải thích.
   const gui = await b.js(
-    "const n=document.querySelector('button[type=submit]');" +
-      "const id=n && n.getAttribute('aria-describedby');" +
-      "const g=id && document.getElementById(id);" +
-      "return { tat: !!n && n.disabled, coGiaiThich: !!g && g.textContent.trim().length > 20 };"
+    "const g=document.getElementById('res-goi-hint');" +
+      "return { nutGui: document.querySelectorAll('button[type=submit]').length," +
+      " coGiaiThich: !!g && g.textContent.trim().length > 20," +
+      " nutGoi: document.querySelectorAll('[data-tom-tat] a[href^=\"tel:\"]').length };"
   );
-  s.ghi("nút gửi VÔ HIỆU (chưa có hệ thống đặt bàn)", gui.tat === true);
-  s.ghi("nút gửi có câu giải thích kèm theo", gui.coGiaiThich === true);
+  s.ghi("KHÔNG có nút gửi giả (chưa có hệ thống đặt bàn)", gui.nutGui === 0, gui.nutGui + " nút submit");
+  s.ghi("có câu giải thích + 2 nút gọi dưới bảng tóm tắt", gui.coGiaiThich === true && gui.nutGoi === 2, JSON.stringify(gui));
 
   const dt = await kiemDienThoai();
   s.ghi("hiện đủ hai số điện thoại THẬT", dt.duSo, dt.chuoiHien || "KHÔNG CÓ");
@@ -235,17 +260,22 @@ if (lam("kontakt")) kontakt: {
   s.muc("06 Kontakt");
   if (!(await moTrang("kontakt", "/de/kontakt"))) break kontakt;
 
-  const form = await b.js(
-    "const f=document.querySelector('form'); if(!f) return { co:false };" +
-      "const o=[...f.querySelectorAll('input')]; const n=f.querySelector('button[type=submit]');" +
-      "const id=f.getAttribute('aria-describedby'); const g=id && document.getElementById(id);" +
-      "return { co:true, soO:o.length, buocPhai:o.filter(e=>e.required).length, coTextarea:!!f.querySelector('textarea')," +
-      " nutTat:!!n && n.disabled, coGiaiThich:!!g && /E-Mail-Adresse/.test(g.textContent) };"
+  // Làm lại 07/10: chưa có e-mail -> KHÔNG dựng form chết; cột phải là thẻ
+  // gọi điện. (Chiều "có e-mail -> hiện form" do `kiem-khoi-an.mjs` giữ.)
+  const the = await b.js(
+    "const c=document.querySelector('[data-the-goi-dien]'); if(!c) return { co:false };" +
+      "const tr=document.querySelector('ul.grid'); " +
+      "const cot=c.parentElement.firstElementChild;" +
+      "return { co:true, form: document.querySelectorAll('form').length," +
+      " goi: c.querySelectorAll('a[href^=\"tel:\"]').length," +
+      " caoNut: Math.min(...[...c.querySelectorAll('a')].map(e=>Math.round(e.getBoundingClientRect().height)))," +
+      " datBan: !!c.querySelector('a[href$=\"/reservierung\"]')," +
+      " lechDay: Math.round(Math.abs(c.getBoundingClientRect().bottom - cot.getBoundingClientRect().bottom)) };"
   );
-  s.ghi("có form 4 ô + vùng nhập dài", form.co && form.soO === 4 && form.coTextarea, form.soO + " ô");
-  s.ghi("ô bắt buộc được đánh dấu required", form.buocPhai === 3, form.buocPhai + "/4 ô bắt buộc");
-  s.ghi("nút gửi VÔ HIỆU (chưa có hộp thư nhận)", form.nutTat === true);
-  s.ghi("nói rõ lý do không gửi được", form.coGiaiThich === true);
+  s.ghi("KHÔNG có form chết khi chưa có e-mail", the.co && the.form === 0, the.form + " form");
+  s.ghi("thẻ gọi điện: 2 nút gọi + link đặt bàn", the.co && the.goi === 2 && the.datBan === true, JSON.stringify(the));
+  s.ghi("nút trong thẻ gọi điện cao ≥ 44px", the.co && the.caoNut >= 44, the.caoNut + "px");
+  s.ghi("hai cột cao bằng nhau (trước lệch 373px)", the.co && the.lechDay <= 1, "lệch " + the.lechDay + "px");
 
   // --- toàn vẹn dữ liệu: ba thứ PHẢI KHÔNG CÓ ---
   const bia = await b.js(
@@ -267,12 +297,36 @@ if (lam("kontakt")) kontakt: {
     "const a=[...document.querySelectorAll('a[href*=\"google.com/maps\"]')][0];" +
       "return a ? decodeURIComponent(a.getAttribute('href')) : 'KHÔNG THẤY';"
   );
-  s.ghi("nút chỉ đường tìm theo địa chỉ thật",
-    chiDuong.includes(PHO_THAT) && !/place_id|cid=/.test(chiDuong), chiDuong.slice(0, 90));
+  s.ghi("link Google Maps trỏ đúng hồ sơ quán, không tham số theo dõi",
+    chiDuong.includes("cid=" + CID_THAT) && !/entry=|g_ep=/.test(chiDuong), chiDuong.slice(0, 90));
+
+  // Bản đồ phải THẤY NGAY (Sếp 07/10) mà chưa gọi Google: ảnh tĩnh trong dự
+  // án + ghim + dòng ghi công OpenStreetMap (bắt buộc theo ODbL).
+  const tinh = await b.js(
+    "const k=document.querySelector('[data-ban-do]'); if(!k) return { co:false };" +
+      "const im=k.querySelector('img[src*=\"kontakt-karte\"]');" +
+      "const q=im ? im.getBoundingClientRect() : { width:0, height:0 };" +
+      "return { co:true, kieu:k.getAttribute('data-ban-do'), daTai: !!im && im.complete && im.naturalWidth > 0," +
+      " rong: Math.round(q.width), cao: Math.round(q.height)," +
+      " ghiCong: /OpenStreetMap/.test(k.textContent)," +
+      " ngoai: performance.getEntriesByType('resource').filter(r=>/google|openstreetmap|gstatic/.test(r.name)).length };"
+  );
+  s.ghi("bản đồ tĩnh hiện sẵn khi mở trang", tinh.co && tinh.kieu === "tinh" && tinh.daTai && tinh.cao >= 200,
+    JSON.stringify(tinh));
+  s.ghi("có dòng ghi công OpenStreetMap", tinh.ghiCong === true);
+  s.ghi("mở trang KHÔNG gọi Google / máy chủ bản đồ ngoài", tinh.ngoai === 0, tinh.ngoai + " yêu cầu");
 
   const dtK = await kiemDienThoai();
   s.ghi("hiện số điện thoại thật", dtK.duSo, dtK.chuoiHien || "KHÔNG CÓ");
   s.ghi("nút gọi dùng dạng quốc tế +49 hợp lệ", dtK.duE164, dtK.chuoiHref || "KHÔNG CÓ");
+
+  // Bản đồ "hai cú bấm": bấm rồi mới được có iframe, và phải trỏ đúng địa chỉ.
+  await b.bamChu("button", "Interaktive Karte laden");
+  const banDo = await b.js(
+    "const i=document.querySelector('iframe'); return i ? decodeURIComponent(i.getAttribute('src')) : 'KHÔNG THẤY';"
+  );
+  s.ghi("bấm 'Interaktive Karte laden' -> iframe Google của đúng hồ sơ quán",
+    /maps\.google\.com/.test(banDo) && banDo.includes("cid=" + CID_THAT), banDo.slice(0, 80));
 
   await kiemChung("kontakt", "/de/kontakt");
 }
@@ -309,7 +363,8 @@ if (lam("galerie")) galerie: {
   const loc = await b.js("return document.querySelectorAll('[role=group][aria-label*=filter] button, [role=group][aria-label*=Galerie] button').length;");
   s.ghi("có đủ 6 bộ lọc (KIT, mockup chỉ vẽ 5)", loc === 6, loc + " nút");
 
-  s.ghi("Alle: 7 ảnh thật + 1 ô video", (await demAnh()) === 7 && (await demVideo()) === 1,
+  // Làm lại 07/10: "Alle" = 7 ảnh quán + 6 ảnh món thật (public/mon) + video.
+  s.ghi("Alle: 13 ảnh thật (7 quán + 6 món) + 1 ô video", (await demAnh()) === 13 && (await demVideo()) === 1,
     (await demAnh()) + " ảnh, " + (await demVideo()) + " video");
 
   for (const [nhan, mong] of [["Restaurant", 3], ["Bar", 4], ["Details", 2]]) {
@@ -324,8 +379,12 @@ if (lam("galerie")) galerie: {
     "return { anh: document.querySelectorAll('button[aria-label*=\"vergr\"]').length," +
       " bao: /noch keine eigenen Fotos/.test(document.body.innerText) };"
   );
-  s.ghi("lọc Speisen: 0 ảnh, nói thẳng là chưa có",
-    speisen.anh === 0 && speisen.bao === true, JSON.stringify(speisen));
+  // 10 ảnh món 560×420 + 6 ảnh nhóm, đều là ảnh in trên thực đơn của quán.
+  const nguon = await b.js(
+    "return [...document.querySelectorAll('button[aria-label*=\"vergr\"] img')].every(e=>/%2Fmon%2F|\\/mon\\//.test(e.getAttribute('src')||''));"
+  );
+  s.ghi("lọc Speisen: 16 ảnh món thật từ /mon, không câu báo rỗng",
+    speisen.anh === 16 && speisen.bao === false && nguon === true, JSON.stringify(speisen) + " nguon=" + nguon);
 
   await b.bamChu("[role=group] button", "Video");
   s.ghi("lọc Video: chỉ còn ô video", (await demAnh()) === 0 && (await demVideo()) === 1,
@@ -392,17 +451,23 @@ if (lam("ueber-uns")) ueberUns: {
     so.mon && so.sushi && so.uong, JSON.stringify(so));
   s.ghi("dải số liệu ghi địa chỉ đã xác minh", so.pho === true);
 
-  /* Chỗ giữ nội dung: PHẢI còn thấy được. Câu quảng cáo trong mockup là chữ
-     AI (spec §13) — nếu số này về 0 mà `vi.json`/`de.json` không có chữ mới
-     thì nghĩa là ai đó đã chép chữ bịa vào. */
+  /* Chỗ giữ nội dung: dấu PHẢI còn trong DOM nhưng KHÔNG vẽ ra trang (làm
+     lại 07/10 — Sếp chê dòng "[chờ Sếp gửi]" + thanh xám lộ cho khách). Câu
+     quảng cáo trong mockup là chữ AI (spec §13) — nếu số dấu về 0 mà
+     `vi.json`/`de.json` không có chữ mới thì ai đó đã chép chữ bịa vào. */
   const cho_ = await b.js(
     "const ds=[...document.querySelectorAll('[data-cho-sep]')];" +
       "return { so: ds.length, cst: getComputedStyle(ds[0]||document.body).fontSize," +
       " moTa: ds.map(e=>e.getAttribute('data-cho-sep')).slice(0,3) };"
   );
-  s.ghi("chỗ giữ nội dung còn hiện, có mô tả",
+  s.ghi("chỗ giữ nội dung còn dấu trong DOM, có mô tả",
     cho_.so >= 5 && cho_.moTa.every((x) => x && x.length > 3),
     cho_.so + " chỗ · " + cho_.moTa.join(" | ").slice(0, 60));
+  const loCho = await b.js(
+    "return { chu: /chờ Sếp gửi/.test(document.body.innerText)," +
+      " hien: [...document.querySelectorAll('[data-cho-sep]')].filter(e=>e.getBoundingClientRect().height>0).length };"
+  );
+  s.ghi("KHÔNG lộ chữ giữ chỗ ra cho khách", loCho.chu === false && loCho.hien === 0, JSON.stringify(loCho));
 
   // Luật Sếp: không phủ màu lên ảnh, không dán chữ lên mặt người.
   const anh = await b.js(

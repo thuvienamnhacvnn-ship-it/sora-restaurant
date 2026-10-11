@@ -12,10 +12,10 @@
  * thực đơn. Không hứa cái mình không có.
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
-import { MasterChefTrigger } from "@/components/chef/MasterChef";
-import { restaurant, telHref, hasWhatsapp, hasInstagram } from "@/data/restaurant";
+import Link from "next/link";
+import { restaurant, telHref, phoneLabel } from "@/data/restaurant";
 import { pick, type Locale } from "@/lib/i18n";
 
 export type RailLabels = {
@@ -38,49 +38,40 @@ export function RightUtilityRail({
   labels: RailLabels;
 }) {
   const [support, setSupport] = useState(false);
+  const railRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!support) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setSupport(false); triggerRef.current?.focus(); }
+    };
+    const outside = (event: PointerEvent) => {
+      if (!railRef.current?.contains(event.target as Node)) setSupport(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", outside);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", outside);
+    };
+  }, [support]);
 
   return (
     <>
       {/* Desktop */}
-      <div className="fixed top-1/2 right-[18px] z-40 hidden w-[84px] -translate-y-1/2 flex-col items-center gap-[22px] md:flex">
+      <div ref={railRef} className="relative z-40 mb-4 flex items-start justify-center gap-2 max-xl:flex-col max-xl:items-center">
         <RailItem label={labels.masterChef}>
-          <MasterChefTrigger className={`${BTN} text-gold-bright`} aria-label={labels.masterChef}>
+          <Link href={`/${locale}/master-chef`} className={`${BTN} text-gold-bright`} aria-label={labels.masterChef}>
             <Icon name="chef" size={22} />
-          </MasterChefTrigger>
+          </Link>
         </RailItem>
-
-        {hasWhatsapp() && (
-          <RailItem label={labels.whatsapp}>
-            <a
-              href={`https://wa.me/${restaurant.whatsapp}`}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={labels.whatsapp}
-              className={`${BTN} text-[#25D366]`}
-            >
-              <Icon name="whatsapp" size={22} />
-            </a>
-          </RailItem>
-        )}
-
-        {hasInstagram() && (
-          <RailItem label={labels.instagram}>
-            <a
-              href={`https://instagram.com/${restaurant.instagram}`}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={labels.instagram}
-              className={`${BTN} text-[#E1306C]`}
-            >
-              <Icon name="instagram" size={22} />
-            </a>
-          </RailItem>
-        )}
 
         <RailItem label={labels.support}>
           <button
             type="button"
             aria-expanded={support}
+            ref={triggerRef}
+            aria-controls={support ? "sora-phone-support" : undefined}
             aria-label={labels.support}
             onClick={() => setSupport((s) => !s)}
             className={`${BTN} text-gold`}
@@ -90,8 +81,11 @@ export function RightUtilityRail({
         </RailItem>
 
         {support && (
-          <div className="sora-card absolute top-0 right-[90px] w-64 p-4 shadow-card">
-            <p className="sora-eyebrow text-[11px]">{labels.callUs}</p>
+          <div id="sora-phone-support" role="region" aria-label={labels.callUs} className="sora-card sora-dialog-enter absolute bottom-full left-0 mb-3 w-64 p-4 shadow-card">
+            <div className="flex items-center justify-between gap-2">
+              <p className="sora-eyebrow text-[11px]">{labels.callUs}</p>
+              <button type="button" aria-label={labels.close} onClick={() => { setSupport(false); triggerRef.current?.focus(); }} className="grid size-8 place-items-center rounded border border-gold/30 text-gold"><Icon name="x" size={16} /></button>
+            </div>
             <ul className="mt-2 space-y-2">
               {restaurant.phones.map((p) => (
                 <li key={p.number}>
@@ -102,7 +96,7 @@ export function RightUtilityRail({
                     <Icon name="phone" size={16} className="text-gold" />
                     <span>{p.number}</span>
                   </a>
-                  <span className="pl-6 text-[11px] text-muted">{p.label}</span>
+                  <span className="pl-6 text-[11px] text-muted">{phoneLabel(p, locale)}</span>
                 </li>
               ))}
             </ul>
@@ -113,22 +107,16 @@ export function RightUtilityRail({
         )}
       </div>
 
-      {/* Điện thoại: nút tròn Ø56 góc phải dưới, nằm trên bottom nav */}
-      <MasterChefTrigger
-        className="fixed right-4 bottom-[72px] z-40 grid size-14 place-items-center rounded-full border border-gold/60 bg-bg text-gold-bright shadow-card md:hidden"
-        aria-label={labels.masterChef}
-      >
-        <Icon name="chef" size={26} />
-      </MasterChefTrigger>
+
     </>
   );
 }
 
 function RailItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex w-[84px] flex-col items-center gap-1">
+    <div className="flex w-[74px] flex-col items-center gap-1">
       {children}
-      <span className="w-[84px] text-center text-[10px] leading-tight text-muted">{label}</span>
+      <span className="w-[74px] text-center text-[10px] leading-tight text-muted">{label}</span>
     </div>
   );
 }

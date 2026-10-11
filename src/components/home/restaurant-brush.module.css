@@ -1,0 +1,18 @@
+.name { display: flex; flex-direction: column; align-items: center; gap: 0; font-size: clamp(19px,5.6vw,24px); line-height: 1; max-width: 100%; }
+.wordmark { --chu-tran: clamp(108px,30vw,128px); }
+
+/* "Restaurant" bằng font serif (Playfair) — thay kiểu ghép sprite cũ bị đè chữ.
+   Chữ hoa + giãn cách rộng = subtitle logo thanh lịch, hợp wordmark cọ phía trên.
+   `text-indent` bù phần giãn cách dồn sang phải để khối chữ căn giữa đúng. */
+.word {
+  margin-top: .34em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .6em;
+  line-height: 1;
+  letter-spacing: .34em;
+  text-indent: .34em;
+  text-transform: uppercase;
+  color: var(--color-gold-bright);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .55);
+}

@@ -1,0 +1,10 @@
+.logo { display: inline-block; position: relative; flex-shrink: 0; aspect-ratio: 1; vertical-align: middle; isolation: isolate; }
+.poster, .video, .canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.video, .canvas { opacity: 0; }
+.logo[data-ready=true] .poster { opacity: 0; }
+.logo[data-ready=true][data-mode=native] .video, .logo[data-ready=true][data-mode=packed] .canvas { opacity: 1; }
+.logo[data-mode=packed] .video { opacity: .001; }
+@media(prefers-reduced-motion:reduce) {
+ .logo[data-ready=true] .poster { opacity: 1; }
+ .logo .video, .logo .canvas { opacity: 0 !important; }
+}

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated screenshots and one-off visual analysis scripts are not app code.
+    "_w-agent/**",
   ]),
 ]);
 

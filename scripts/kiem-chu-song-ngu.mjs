@@ -21,7 +21,7 @@
  * dung), nên phần CÂU CHỮ trên trang VI đang là tiếng Đức — đó là đúng thiết
  * kế. Bài này chỉ xét NHÃN nét cọ, thứ đã có đủ cả hai bản.
  */
-import { moTrinhDuyet, soKetQua } from "./lib/trinh-duyet.mjs";
+import { dungKhung, soKetQua } from "./lib/trinh-duyet.mjs";
 
 const GOC = (process.argv[2] || "http://localhost:3160").replace(/\/$/, "");
 
@@ -45,7 +45,7 @@ const TUYEN = [
   ["kontakt", "contact"],
 ];
 
-const b = await moTrinhDuyet({ port: 9447 });
+const b = await dungKhung();
 const s = soKetQua();
 
 for (const ngonNgu of ["de", "vi"]) {

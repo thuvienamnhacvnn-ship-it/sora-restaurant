@@ -23,6 +23,7 @@ export function PhotoTile({
   className = "",
   sizes,
   priority = false,
+  position = "center 42%",
 }: {
   photo: Photo;
   onOpen: () => void;
@@ -30,6 +31,9 @@ export function PhotoTile({
   className?: string;
   sizes: string;
   priority?: boolean;
+  /** `object-position`. Mặc định giữ phần giữa-trên của ảnh quán (ảnh dọc);
+   *  ảnh món 4:3 thì truyền `center` — đĩa nằm giữa khung. */
+  position?: string;
 }) {
   return (
     <button
@@ -46,11 +50,11 @@ export function PhotoTile({
         priority={priority}
         loading={priority ? undefined : "lazy"}
         className="transition-transform duration-300 ease-[var(--ease-sora)] group-hover:scale-[1.02]"
-        style={{ objectFit: "cover", objectPosition: "center 42%" }}
+        style={{ objectFit: "cover", objectPosition: position }}
       />
       <span
         aria-hidden="true"
-        className="absolute right-2.5 bottom-2.5 grid size-[29px] place-items-center rounded-full border border-gold/45 bg-[rgba(9,8,6,.7)] text-gold-bright transition-colors group-hover:border-gold/80"
+        className="absolute right-2.5 bottom-2.5 grid size-[32px] place-items-center rounded-full border border-gold/45 bg-[rgba(9,8,6,.7)] text-gold-bright transition-colors group-hover:border-gold/80"
       >
         <Icon name="zoom-in" size={15} />
       </span>

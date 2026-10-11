@@ -5,14 +5,19 @@
  * Chỉ dữ liệu ĐÃ XÁC MINH: địa chỉ, giờ mở cửa, điện thoại.
  */
 import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
+import s from "./mobile-app.module.css";
 import { LEGAL_NAV } from "@/data/site";
-import { addressLines, restaurant, telHref } from "@/data/restaurant";
+import { addressLines, restaurant, telHref, phoneLabel } from "@/data/restaurant";
 import { getT, href, pick, type Locale } from "@/lib/i18n";
 
 export function MobileFooter({ locale }: { locale: Locale }) {
   const t = getT(locale);
   return (
-    <footer className="mt-[var(--section-gap)] border-t border-gold/25 px-[var(--page-pad)] py-7 md:hidden">
+    <footer className={s.footer} data-mobile-footer>
+      <details className={s.footerDetails}>
+        <summary><span><strong>SoRa</strong><small>{locale === "vi" ? "Địa chỉ · giờ mở cửa · liên hệ" : "Adresse · Öffnungszeiten · Kontakt"}</small></span><Icon name="chevron-down" size={19} /></summary>
+        <div className={s.footerInfo}>
       <address className="space-y-0.5 text-[14px] not-italic text-muted">
         {addressLines().map((line) => (
           <p key={line}>{line}</p>
@@ -34,20 +39,22 @@ export function MobileFooter({ locale }: { locale: Locale }) {
           <li key={p.number} className="flex items-center">
             <a
               href={telHref(p)}
-              className="inline-flex min-h-6 items-center text-[14px] text-gold-bright"
+              className="inline-flex min-h-11 items-center text-[14px] text-gold-bright"
             >
               {p.number}
             </a>
-            <span className="ml-2 text-[12px] text-muted/70">{p.label}</span>
+            <span className="ml-2 text-[12px] text-muted/70">{phoneLabel(p, locale)}</span>
           </li>
         ))}
       </ul>
+        </div>
+      </details>
       <nav className="mt-4 flex gap-5 text-[12px] text-muted/70">
         {LEGAL_NAV.map((l) => (
           <Link
             key={l.key}
             href={href(l.path, locale)}
-            className="inline-flex min-h-6 items-center"
+            className="inline-flex min-h-11 items-center"
           >
             {t(`nav.${l.key}`)}
           </Link>

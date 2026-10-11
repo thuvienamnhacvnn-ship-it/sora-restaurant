@@ -19,11 +19,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
-import { SectionFrame } from "@/components/ui/SectionFrame";
-import { ChoSep } from "@/components/ui/ChoSep";
+import { ChoSepAn } from "@/components/ui/ChoSep";
 import { MobileFooter } from "@/components/shell/MobileFooter";
 import { DecorAnchor, SakuraEdge } from "@/components/decor/Decor";
 import { GalleryBrowser } from "@/components/gallery/GalleryBrowser";
+import { foodPhotos } from "@/components/gallery/food";
 import { CHU_NHAN } from "@/components/chu/ChuCo";
 import { getT, isLocale } from "@/lib/i18n";
 
@@ -62,35 +62,6 @@ export default async function GaleriePage({
        * (dùng chung cả 6 trang). Bản cũ đặt ở đây với `-z-10` nên từ lúc hero
        * bỏ mask, ảnh banner tràn kín và che mất nó hoàn toàn — gỡ đi.
        */}
-      <div className="relative isolate">
-        <PageHero
-          page="gallery"
-          locale={lang}
-          wordmark={nhan.chu}
-          chef={{
-            eyebrow: t("chef.eyebrow"),
-            question: t("chef.question"),
-            cta: t("chef.cta.gallery"),
-          }}
-        >
-          <ChoSep note="Untertitel Galerie (1 Zeile)" className="max-w-[420px]" />
-          <ChoSep
-            note="Einleitungstext Galerie (3 Zeilen)"
-            lines={3}
-            className="mt-3 max-w-[345px]"
-          />
-        </PageHero>
-
-        {/*
-         * decor: cành hoa bám mép phải cuối hero ĐÃ GỠ. Sếp ra lệnh 04/10
-         * "bỏ hết hoa đào khỏi banner, trang chủ lẫn trang con — ảnh banner
-         * đứng một mình", và phép đo điểm ảnh cho thấy cành này vẽ lên 2,0%
-         * diện tích `banner/galerie_hero` (lệch màu tối đa 477). Cột hoa ở
-         * MÁNG LỀ dưới đây thì giữ — nó nằm trên nền trang, không trên ảnh.
-         */
-        }
-      </div>
-
       <DecorAnchor>
         <SakuraEdge
           side="left"
@@ -105,9 +76,32 @@ export default async function GaleriePage({
         />
       </DecorAnchor>
 
-      <SectionFrame>
-        <h2 className="sr-only">{t("nav.gallery")}</h2>
         <GalleryBrowser
+          hero={<div className="relative isolate">
+        <PageHero
+          page="gallery"
+          locale={lang}
+          wordmark={nhan.chu}
+          chef={{
+            eyebrow: t("chef.eyebrow"),
+            question: t("chef.question"),
+            cta: t("chef.cta.gallery"),
+          }}
+        />
+        {/* Phụ đề + đoạn giới thiệu chưa có -> không vẽ gì, chỉ dấu ẩn. */}
+        <ChoSepAn note="Untertitel Galerie (1 Zeile)" />
+        <ChoSepAn note="Einleitungstext Galerie (3 Zeilen)" />
+
+        {/*
+         * decor: cành hoa bám mép phải cuối hero ĐÃ GỠ. Sếp ra lệnh 04/10
+         * "bỏ hết hoa đào khỏi banner, trang chủ lẫn trang con — ảnh banner
+         * đứng một mình", và phép đo điểm ảnh cho thấy cành này vẽ lên 2,0%
+         * diện tích `banner/galerie_hero` (lệch màu tối đa 477). Cột hoa ở
+         * MÁNG LỀ dưới đây thì giữ — nó nằm trên nền trang, không trên ảnh.
+         */
+        }
+      </div>}
+          foodPhotos={foodPhotos()}
           strings={{
             filters: {
               all: t("gallery.filters.all"),
@@ -128,7 +122,6 @@ export default async function GaleriePage({
             noFood: t("gallery.noFood"),
           }}
         />
-      </SectionFrame>
 
       <MobileFooter locale={lang} />
     </>

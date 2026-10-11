@@ -7,33 +7,133 @@
  * reduce chung (animation-duration .001ms) nhưng khối đó chỉ *rút ngắn*, nên
  * ở đây tắt hẳn animation để cánh nằm đúng vị trí xuất phát, không nhảy về
  * cuối đường bay.
+ *
+ * ============================================================================
+ * CÁNH HOA RƠI CÓ GIÓ (Sếp 05/10: "phải bay tự nhiên, có yếu tố của gió")
+ * ============================================================================
+ *
+ * Bản cũ `soraDrift` là MỘT đoạn thẳng, `linear`, xoay đều — rơi như hòn sỏi,
+ * nhìn ra máy móc ngay. Bản này tách làm BA tầng chuyển động chồng lên nhau,
+ * đúng cách một cánh hoa thật rơi:
+ *
+ *   1. `soraRoi`  (thẻ ngoài)  — đường rơi ZIG-ZAG. Cánh dạt sang một bên, bị
+ *      cản lại, tạt ngược về, mỗi nhịp một biên độ khác. Mỗi chặng có
+ *      `ease-in-out` riêng nên cánh CHẬM LẠI ở hai đầu mỗi lần tạt — đó chính
+ *      là cảm giác không khí cản. Chặng rơi dọc thì chia không đều (20/38/56/
+ *      74/90%) nên tốc độ rơi lúc nhanh lúc chậm.
+ *
+ *   2. `soraLat`  (thẻ trong)  — cánh LẬT. `rotateY` quay quanh trục dọc nên
+ *      có lúc cánh gần như nhìn từ cạnh (mỏng đi rồi bè ra), cộng `rotate`
+ *      nghiêng dần. Phải để RIÊNG một thẻ và CHU KỲ KHÁC chu kỳ rơi, không thì
+ *      lật và dạt trùng pha, lại thành máy móc.
+ *
+ *   3. `soraGio`  (cả lớp)     — GIÓ THỔI chung, chu kỳ dài 13 giây, đẩy toàn
+ *      bộ đàn cánh dạt cùng chiều rồi lặng. Đây là thứ làm mắt tin là có gió
+ *      thật chứ không phải từng cánh tự bay lung tung.
  */
 
-.drift {
-  animation: soraDrift var(--dur, 15s) linear var(--delay, 0s) infinite;
+/* ---- 1 · Đường rơi zig-zag ---- */
+.roi {
+  animation: soraRoi var(--dur, 15s) var(--delay, 0s) infinite;
+  will-change: transform, opacity;
+  /* Để `rotateY` của thẻ trong ra chiều sâu thật, không chỉ bẹt ngang. */
+  perspective: 420px;
+}
+
+@keyframes soraRoi {
+  0% {
+    transform: translate3d(0, -14px, 0);
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  8% {
+    opacity: 1;
+  }
+  20% {
+    transform: translate3d(var(--sway, 26px), calc(var(--dy, 190px) * 0.2), 0);
+    animation-timing-function: ease-in-out;
+  }
+  38% {
+    transform: translate3d(calc(var(--sway, 26px) * -0.62), calc(var(--dy, 190px) * 0.38), 0);
+    animation-timing-function: ease-in-out;
+  }
+  56% {
+    transform: translate3d(calc(var(--sway, 26px) * 1.28), calc(var(--dy, 190px) * 0.56), 0);
+    animation-timing-function: ease-in-out;
+  }
+  74% {
+    transform: translate3d(calc(var(--sway, 26px) * -0.44), calc(var(--dy, 190px) * 0.74), 0);
+    animation-timing-function: ease-in-out;
+  }
+  90% {
+    transform: translate3d(calc(var(--sway, 26px) * 0.92), calc(var(--dy, 190px) * 0.9), 0);
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate3d(var(--dx, 26px), var(--dy, 190px), 0);
+    opacity: 0;
+  }
+}
+
+/* ---- 2 · Cú lật quanh trục dọc ---- */
+.lat {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  animation: soraLat var(--dur-lat, 7s) linear var(--delay, 0s) infinite;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+@keyframes soraLat {
+  0% {
+    transform: rotate(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotate(calc(var(--spin, 180deg) * 0.3)) rotateY(150deg);
+  }
+  50% {
+    transform: rotate(calc(var(--spin, 180deg) * 0.58)) rotateY(300deg);
+  }
+  75% {
+    transform: rotate(calc(var(--spin, 180deg) * 0.82)) rotateY(480deg);
+  }
+  100% {
+    transform: rotate(var(--spin, 180deg)) rotateY(720deg);
+  }
+}
+
+/* ---- 3 · Gió thổi chung cả đàn ---- */
+.gio {
+  animation: soraGio 13s ease-in-out infinite;
   will-change: transform;
 }
 
-@keyframes soraDrift {
-  0% {
-    transform: translate3d(0, -12px, 0) rotate(0deg);
-    opacity: 0;
-  }
-  12% {
-    opacity: 1;
-  }
-  88% {
-    opacity: 1;
-  }
+@keyframes soraGio {
+  0%,
   100% {
-    transform: translate3d(var(--dx, 26px), var(--dy, 190px), 0) rotate(var(--spin, 180deg));
-    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    transform: translate3d(14px, 0, 0);
+  }
+  55% {
+    transform: translate3d(-9px, 0, 0);
+  }
+  78% {
+    transform: translate3d(18px, 0, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .drift {
+  .roi,
+  .lat,
+  .gio {
     animation: none !important;
+  }
+  .roi {
     opacity: 0.85;
   }
 }

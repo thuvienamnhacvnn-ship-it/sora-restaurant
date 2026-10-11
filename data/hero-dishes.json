@@ -1,0 +1,121 @@
+{
+  "_ghiChu": "12 đĩa hiện trên bàn ở hero trang chủ. Nguồn: E:\\Works\\Sora\\SORA_WEBSITE_CLAUDE_KIT\\Food run\\Food run new (07/10/2026). Ảnh PNG nền trong, đã xuất sang public/dishes/*.webp. Phân nhóm do đội đọc từ ảnh — Sếp soát lại giúp, sai thì sửa thẳng trường category ở đây, không phải sửa code.",
+  "_nhom": [
+    "sushi",
+    "hauptgerichte",
+    "vietnamesische-kueche",
+    "dessert",
+    "getraenke"
+  ],
+  "dishes": [
+    {
+      "id": "sushi-sashimi-mix",
+      "category": "sushi",
+      "de": "Sushi & Sashimi Mix",
+      "vi": "Sushi & sashimi thập cẩm",
+      "foot": 16.27,
+      "width": 1100,
+      "height": 1100
+    },
+    {
+      "id": "thunfisch-tataki",
+      "category": "sushi",
+      "de": "Thunfisch-Tataki",
+      "vi": "Cá ngừ tataki",
+      "foot": 8.73,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "tempura-platte",
+      "category": "hauptgerichte",
+      "de": "Tempura-Platte",
+      "vi": "Tempura chiên giòn",
+      "foot": 8.36,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "curry-rot-haehnchen",
+      "category": "hauptgerichte",
+      "de": "Rotes Curry mit Hähnchen",
+      "vi": "Cà ri đỏ gà",
+      "foot": 8.12,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "ente-curry",
+      "category": "hauptgerichte",
+      "de": "Ente im Curry",
+      "vi": "Vịt cà ri",
+      "foot": 8.61,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "rind-pak-choi",
+      "category": "hauptgerichte",
+      "de": "Rind mit Pak Choi",
+      "vi": "Bò xào cải thìa",
+      "foot": 12,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "garnelen-reis",
+      "category": "hauptgerichte",
+      "de": "Garnelen mit Reis",
+      "vi": "Tôm rang cơm",
+      "foot": 8.97,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "ente-gemuese",
+      "category": "hauptgerichte",
+      "de": "Ente mit Gemüse",
+      "vi": "Vịt xào rau",
+      "foot": 8.36,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "pho-rind",
+      "category": "vietnamesische-kueche",
+      "de": "Phở mit Rind",
+      "vi": "Phở bò",
+      "foot": 15.27,
+      "width": 1100,
+      "height": 1100
+    },
+    {
+      "id": "gebratene-nudeln-garnelen",
+      "category": "vietnamesische-kueche",
+      "de": "Gebratene Nudeln mit Garnelen",
+      "vi": "Mì xào tôm",
+      "foot": 18.64,
+      "width": 1100,
+      "height": 1100
+    },
+    {
+      "id": "fruehlingsrollen",
+      "category": "vietnamesische-kueche",
+      "de": "Frühlingsrollen",
+      "vi": "Nem rán",
+      "foot": 11.52,
+      "width": 1100,
+      "height": 825
+    },
+    {
+      "id": "dessert-teller",
+      "category": "dessert",
+      "de": "Dessert-Teller",
+      "vi": "Đĩa tráng miệng",
+      "foot": 8.24,
+      "width": 1100,
+      "height": 825
+    }
+  ],
+  "_thieu": "Nhóm getraenke chưa có đĩa nào trong bộ 12 — bấm vào thẻ GETRÄNKE hiện tại sẽ không có món riêng để hiện."
+}

@@ -1,3 +1,239 @@
 {
-  "_nguon": "CỐ Ý ĐỂ RỖNG. Sếp chưa duyệt bản dịch tiếng Việt nào, nên mọi khoá tự rơi về de.json (xem src/lib/i18n.ts). Tên món + mô tả tiếng Việt KHÔNG nằm ở đây — chúng đã có sẵn trong data/menu-items.json và đi qua hàm pick(). Khi Sếp gửi bản dịch, thêm đúng những khoá được duyệt vào đây, đừng tự dịch thêm."
+  "_nguon": "NHÃN GIAO DIỆN tiếng Việt. Chỉ chứa chữ CHỨC NĂNG — nút bấm, nhãn ô nhập, tiêu đề mục, trạng thái, nhãn cho máy đọc màn hình. KHÔNG chứa câu quảng cáo, không chứa lời kể về quán: những thứ đó vẫn nằm trong <ChoSep/> chờ Sếp duyệt, và luật 'chưa ai được tự dịch nội dung' vẫn giữ nguyên cho chúng. Tên món + mô tả món KHÔNG nằm ở đây (đã có trong data/menu-items.json, đi qua pick()). Khoá nào thiếu ở đây thì tự rơi về de.json — xem src/lib/i18n.ts.",
+  "_conThieu": "CẦN SẾP DUYỆT, đang cố ý để rơi về tiếng Đức: home.h2Line1 + home.h2Line2 (khẩu hiệu trang chủ 'Japan trifft Vietnam. / Mitten in Bad Säckingen.'), gallery.videoTitle ('SoRa – Unsere Atmosphäre'), contact.eyebrow ('WIR FREUEN UNS AUF SIE'), about.storyTitle + about.whyTitle. Đây là CÂU QUẢNG CÁO chứ không phải nhãn, nên không tự dịch. Thêm 07/10: home.heroTagline (\"Authentisch ✦ Modern ✦ Unvergesslich\") và home.heroRail (\"Genuss ✦ Eine Leidenschaft\") — hai câu khẩu hiệu trang chủ v2, đang cố ý để rơi về tiếng Đức.",
+  "nav": {
+    "home": "Trang chủ",
+    "menu": "Thực đơn",
+    "reservation": "Đặt bàn",
+    "gallery": "Bộ sưu tập",
+    "about": "Về chúng tôi",
+    "contact": "Liên hệ",
+    "imprint": "Thông tin pháp lý",
+    "privacy": "Bảo mật dữ liệu",
+    "openMenu": "Mở menu",
+    "closeMenu": "Đóng menu",
+    "mobileMore": "Thêm",
+    "mainNav": "Điều hướng chính",
+    "skipToContent": "Bỏ qua, đến nội dung",
+    "language": "Ngôn ngữ"
+  },
+  "common": {
+    "more": "Tìm hiểu thêm",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "from": "từ",
+    "dishes": "món",
+    "loading": "Đang tải thực đơn …",
+    "empty": "Không tìm thấy món nào.",
+    "phone": "Điện thoại",
+    "mobile": "Di động",
+    "landline": "Bàn",
+    "callUs": "Gọi cho chúng tôi",
+    "discover": "Khám phá"
+  },
+  "rail": {
+    "support": "Hỗ trợ trực tiếp"
+  },
+  "chef": {
+    "question": "Hôm nay bạn muốn dùng gì?",
+    "inputPlaceholder": "Nhắn cho tôi biết bạn đang thèm gì …",
+    "send": "Gửi",
+    "chips": {
+      "light": "Món nhẹ",
+      "hearty": "Món đậm đà",
+      "vegetarian": "Món chay",
+      "surprise": "Gợi ý giúp tôi"
+    },
+    "viewDish": "Xem món",
+    "otherSuggestions": "Gợi ý khác",
+    "fallback": "Tôi chưa thể đưa ra gợi ý chắc chắn từ dữ liệu thực đơn hiện có. Bạn có muốn tôi nối máy với nhân viên không?",
+    "notConnected": "Trợ lý chưa được nối với dịch vụ AI. Các gợi ý lấy thẳng từ thực đơn.",
+    "cta": {
+      "home": "Hỏi ngay",
+      "menu": "Nhận gợi ý món",
+      "reservation": "Nhận tư vấn",
+      "gallery": "Xem bộ sưu tập",
+      "about": "Hỏi ngay",
+      "contact": "Liên hệ ngay"
+    }
+  },
+  "home": {
+    "ctaPrimary": "Đặt bàn",
+    "ctaSecondary": "Khám phá thực đơn",
+    "stage": {
+      "placeholder": "Vật thể 360° sẽ có sau"
+    },
+    "teaser": {
+      "selectionCta": "Khám phá ngay",
+      "galleryCta": "Tới bộ sưu tập",
+      "reservationCta": "Đặt bàn ngay"
+    },
+    "categoryStrip": "Nhóm món",
+    "popular": "Món được gọi nhiều"
+  },
+  "menu": {
+    "searchPlaceholder": "Tìm món …",
+    "searchLabel": "Tìm trong thực đơn",
+    "all": "Tất cả",
+    "categories": "Nhóm món",
+    "dietary": {
+      "label": "Chế độ ăn",
+      "vegetarian": "Chay",
+      "vegan": "Thuần chay",
+      "glutenfree": "Không gluten",
+      "spicy": "Cay"
+    },
+    "allDishes": "Xem tất cả các món",
+    "allergens": "Chất gây dị ứng",
+    "variants": "Lựa chọn",
+    "detailTitle": "Chi tiết món",
+    "resultCount": "{n} món",
+    "subcategories": "Nhóm nhỏ",
+    "askChef": "Món này hợp với tôi không?",
+    "sortLabel": "Sắp xếp",
+    "sort": {
+      "nr": "Số thứ tự",
+      "name": "Tên món",
+      "price": "Giá"
+    },
+    "priceOnRequest": "Giá liên hệ",
+    "askChefCategory": "Hỏi Master Chef",
+    "pieces": "miếng",
+    "additives": "Phụ gia",
+    "sizes": "Cỡ",
+    "noImage": "Món này chúng tôi chưa có ảnh riêng.",
+    "groupPhotoNote": "Ảnh minh hoạ của nhóm món – từng món có thể khác.",
+    "tabs": {
+      "suppen": "Súp",
+      "vorspeisen": "Khai vị",
+      "salate": "Salad",
+      "hauptgerichte": "Món chính",
+      "vietnamese-classics": "Món Việt",
+      "desserts": "Tráng miệng",
+      "sushi": "Sushi",
+      "getraenke": "Đồ uống"
+    },
+    "chefBadge": "Bếp trưởng gợi ý",
+    "popularTitle": "Món được yêu thích",
+    "clearSearch": "Xoá tìm kiếm",
+    "resetFilters": "Xoá bộ lọc",
+    "emptyHint": "Hãy kiểm tra lại chính tả hoặc xoá bộ lọc.",
+    "searchAllCategories": "Tìm trong tất cả nhóm món",
+    "allGroups": "Tất cả nhóm",
+    "disclaimer": "Giá tính bằng Euro, đã gồm thuế GTGT. · Có thể có sai sót và lỗi in ấn. · Mọi thông tin không kèm bảo đảm. · Hình ảnh chỉ mang tính minh hoạ và có thể khác với món thật."
+  },
+  "reservation": {
+    "title": "ĐẶT BÀN",
+    "step1": "1. Chọn ngày",
+    "step2": "2. Chọn giờ",
+    "step3": "3. Số khách",
+    "step4": "4. Chọn khu vực (không bắt buộc)",
+    "step5": "5. Dịp đặc biệt (không bắt buộc)",
+    "step6": "6. Ghi chú (không bắt buộc)",
+    "guests": "khách",
+    "guest": "khách",
+    "notesPlaceholder": "ví dụ: dị ứng, yêu cầu riêng hoặc thông tin thêm …",
+    "submit": "Gửi yêu cầu đặt bàn",
+    "tablePlan": "SƠ ĐỒ BÀN",
+    "openingHours": "GIỜ MỞ CỬA",
+    "summary": "ĐẶT BÀN CỦA BẠN",
+    "summaryDate": "Ngày",
+    "summaryTime": "Giờ",
+    "summaryGuests": "Số khách",
+    "summaryArea": "Khu vực",
+    "summaryOccasion": "Dịp",
+    "summaryNotes": "Ghi chú",
+    "prevMonth": "Tháng trước",
+    "nextMonth": "Tháng sau",
+    "weekdays": [
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "CN"
+    ],
+    "months": [
+      "Tháng 1",
+      "Tháng 2",
+      "Tháng 3",
+      "Tháng 4",
+      "Tháng 5",
+      "Tháng 6",
+      "Tháng 7",
+      "Tháng 8",
+      "Tháng 9",
+      "Tháng 10",
+      "Tháng 11",
+      "Tháng 12"
+    ],
+    "areas": {
+      "dining": "Phòng ăn",
+      "bar": "Quầy bar"
+    },
+    "occasions": {
+      "birthday": "Sinh nhật",
+      "anniversary": "Kỷ niệm",
+      "business": "Tiệc công việc",
+      "other": "Khác"
+    },
+    "areaHintTitle": "Chọn khu vực mong muốn, chưa xếp bàn cụ thể",
+    "areaHint": "Chúng tôi không hiển thị bàn trống theo thời gian thực. Bạn chỉ chọn khu vực mong muốn; chúng tôi sẽ xác nhận bàn trực tiếp.",
+    "noBackendTitle": "Đặt bàn trực tuyến chưa mở",
+    "noBackend": "Yêu cầu này chưa gửi đi được. Bạn vui lòng đặt bàn qua điện thoại – chúng tôi nghe máy tất cả các ngày.",
+    "selectDateFirst": "Bạn vui lòng chọn ngày và giờ trước.",
+    "areasNote": "Chỉ gồm những khu vực có trong ảnh thật của quán. Các khu khác sẽ bổ sung khi nhà hàng xác nhận.",
+    "chefQuestion": "Cần hỏi về khu vực bàn, dị ứng, sinh nhật hay đoàn đông?",
+    "submitHint": "Đặt bàn trực tuyến sắp có — bạn vui lòng gọi điện để đặt bàn",
+    "selected": "Đã chọn"
+  },
+  "gallery": {
+    "filters": {
+      "all": "Tất cả",
+      "restaurant": "Nhà hàng",
+      "bar": "Quầy bar",
+      "food": "Món ăn",
+      "details": "Chi tiết",
+      "video": "Video"
+    },
+    "filterLabel": "Lọc bộ sưu tập",
+    "play": "Phát video",
+    "zoom": "Phóng to ảnh",
+    "prev": "Ảnh trước",
+    "next": "Ảnh sau",
+    "noFood": "Với bộ lọc này chúng tôi chưa có ảnh riêng.",
+    "videoCaption": "Dạo một vòng nhà hàng – 90 giây, mở đầu không có tiếng."
+  },
+  "about": {
+    "philosophy": "TRIẾT LÝ CỦA CHÚNG TÔI",
+    "freshness": "TƯƠI & CHẤT LƯỢNG",
+    "craft": "TAY NGHỀ",
+    "ambience": "KHÔNG GIAN CỦA CHÚNG TÔI",
+    "storyCta": "Câu chuyện của chúng tôi"
+  },
+  "contact": {
+    "address": "ĐỊA CHỈ",
+    "hours": "GIỜ MỞ CỬA",
+    "phone": "ĐIỆN THOẠI",
+    "email": "E-MAIL",
+    "formTitle": "GỬI TIN NHẮN",
+    "name": "Họ tên *",
+    "mail": "E-Mail *",
+    "tel": "Số điện thoại",
+    "subject": "Tiêu đề *",
+    "message": "Nội dung *",
+    "send": "Gửi tin nhắn",
+    "noFormTitle": "Biểu mẫu liên hệ chưa mở",
+    "noForm": "Chúng tôi chưa có địa chỉ e-mail của nhà hàng nên chưa chuyển được tin nhắn của bạn. Bạn vui lòng gọi điện.",
+    "route": "Chỉ đường",
+    "map": "Bản đồ",
+    "chefQuestion": "Cần hỏi về giờ mở cửa, đặt bàn hay thực đơn?",
+    "whatsappCta": "Nhắn WhatsApp ngay"
+  },
+  "legal": {
+    "imprintTitle": "Thông tin pháp lý",
+    "privacyTitle": "Chính sách bảo mật dữ liệu",
+    "pending": "Chúng tôi chưa có các thông tin bắt buộc theo luật."
+  }
 }

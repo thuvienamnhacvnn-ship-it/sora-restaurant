@@ -9,7 +9,8 @@
  * Mẫu không có khổ điện thoại; bố cục này theo KIT §Responsive + spec §4.4.
  */
 
-import { useEffect, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
+import { useModalFocus } from "@/components/ui/useModalFocus";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SoRaLogo } from "./SoRaLogo";
@@ -22,8 +23,8 @@ const NAV_ICON: Record<NavKey, IconName> = {
   menu: "utensils",
   reservation: "calendar",
   gallery: "images",
-  about: "sparkles",
-  contact: "mail",
+  about: "users",
+  contact: "phone",
 };
 
 const BOTTOM: NavKey[] = ["home", "menu", "reservation", "gallery"];
@@ -47,6 +48,10 @@ export function MobileNav({
 }) {
   const pathname = usePathname();
   const [sheet, setSheet] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const panelId = useId();
+  const closeSheet = useCallback(() => setSheet(false), []);
+  useModalFocus(sheet, panelRef, closeSheet);
 
   // Đổi trang thì đóng tấm trượt. Chỉnh trong render chứ không trong effect.
   const [lastPath, setLastPath] = useState(pathname);
@@ -54,13 +59,6 @@ export function MobileNav({
     setLastPath(pathname);
     setSheet(false);
   }
-
-  useEffect(() => {
-    if (!sheet) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSheet(false);
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [sheet]);
 
   const isActive = (path: string) => {
     const target = href(path, locale);
@@ -83,6 +81,7 @@ export function MobileNav({
           <button
             type="button"
             aria-expanded={sheet}
+            aria-controls={sheet ? panelId : undefined}
             aria-label={sheet ? labels.closeMenu : labels.openMenu}
             onClick={() => setSheet((s) => !s)}
             className="grid size-9 place-items-center rounded-[6px] border border-gold/45 text-gold"
@@ -94,7 +93,7 @@ export function MobileNav({
 
       <nav
         aria-label={labels.openMenu}
-        className="fixed inset-x-0 bottom-0 z-40 grid h-16 grid-cols-5 border-t border-gold/25 bg-elevated/95 backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid h-[calc(4rem+env(safe-area-inset-bottom))] grid-cols-5 border-t border-gold/25 bg-elevated/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {BOTTOM.map((key) => {
           const item = NAV.find((n) => n.key === key)!;
@@ -117,6 +116,7 @@ export function MobileNav({
           type="button"
           onClick={() => setSheet(true)}
           aria-expanded={sheet}
+          aria-controls={sheet ? panelId : undefined}
           className="flex flex-col items-center justify-center gap-1 text-[10px] text-muted"
         >
           <Icon name="menu" size={21} />
@@ -132,12 +132,19 @@ export function MobileNav({
             onClick={() => setSheet(false)}
             className="absolute inset-0 bg-black/60"
           />
-          <div className="absolute inset-x-0 bottom-0 max-h-[82vh] overflow-y-auto rounded-t-[12px] border-t border-gold/45 bg-elevated px-5 pt-5 pb-8">
+          <div ref={panelRef} id={panelId} role="dialog" aria-modal="true" aria-label={labels.openMenu} tabIndex={-1} className="sora-dialog-enter absolute inset-x-0 bottom-0 max-h-[82dvh] overflow-y-auto rounded-t-[12px] border-t border-gold/45 bg-elevated px-5 pt-5 pb-[calc(2rem+env(safe-area-inset-bottom))]">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <p className="font-serif text-lg text-ivory">{labels.openMenu}</p>
+              <button type="button" onClick={closeSheet} aria-label={labels.closeMenu} className="grid size-11 place-items-center rounded-[6px] border border-gold/45 text-gold">
+                <Icon name="x" size={20} />
+              </button>
+            </div>
             <ul className="space-y-1">
               {NAV.map((item) => (
                 <li key={item.key}>
                   <Link
                     href={href(item.path, locale)}
+                    onClick={closeSheet}
                     aria-current={isActive(item.path) ? "page" : undefined}
                     className={`flex h-11 items-center gap-3 rounded-[6px] px-3 ${
                       isActive(item.path)
@@ -159,6 +166,7 @@ export function MobileNav({
                   <Link
                     href={`/${code}${pathname.replace(/^\/(de|vi)(?=\/|$)/, "")}`}
                     hrefLang={code}
+                    onClick={closeSheet}
                     className={code === locale ? "text-gold-bright" : "text-muted"}
                   >
                     {code.toUpperCase()}
@@ -169,7 +177,7 @@ export function MobileNav({
 
             <div className="mt-4 flex justify-center gap-5 text-[12px] text-muted/70">
               {LEGAL_NAV.map((l) => (
-                <Link key={l.key} href={href(l.path, locale)}>
+                <Link key={l.key} href={href(l.path, locale)} onClick={closeSheet}>
                   {labels.legal[l.key]}
                 </Link>
               ))}

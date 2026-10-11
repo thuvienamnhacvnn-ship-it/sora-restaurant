@@ -1,0 +1,27 @@
+{
+  "_nguon": "scripts/do-mat-be.mjs — ĐỪNG sửa tay, chạy lại script",
+  "anh": "public/decor/be-trung-bay-v6.webp",
+  "w": 2172,
+  "h": 313,
+  "heDia": 0.85,
+  "tru": [
+    {
+      "tam": 49.8,
+      "rong": 16.3,
+      "mat": 57.8,
+      "dep": 0.203
+    },
+    {
+      "tam": 66.6,
+      "rong": 15.4,
+      "mat": 57.8,
+      "dep": 0.203
+    },
+    {
+      "tam": 81.9,
+      "rong": 15.4,
+      "mat": 57.8,
+      "dep": 0.203
+    }
+  ]
+}

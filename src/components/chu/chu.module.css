@@ -4,7 +4,7 @@
  *
  * `--chu-w` / `--chu-h` là số KHÔNG đơn vị (bề ngang/cao của tệp @1x).
  *
- * HAI ĐƯỜNG ĐẶT CỠ, và thứ tự ưu tiên:
+ * BA ĐƯỜNG ĐẶT CỠ, và thứ tự ưu tiên:
  *   1. prop `tiLe` / `caoChuHoa` — ĐƯỜNG CHÍNH. Nhận một số, hoặc một cặp
  *      `{ dienThoai, mayTinh }` để đổi cỡ ở 768px. Component ghi vào
  *      `--chu-ti-le-prop` và `--chu-ti-le-prop-mt`; breakpoint nằm Ở ĐÂY
@@ -12,6 +12,9 @@
  *   2. `--chu-ti-le` đặt bằng class — LỐI THOÁT HIỂM, cho ngưỡng lạ mà cặp
  *      trên không gánh được:
  *        className="[--chu-ti-le:0.62] lg:[--chu-ti-le:1]"
+ *   3. `--chu-tran` đặt bằng class — TRẦN BỀ NGANG, nhận ĐỘ DÀI (hai đường
+ *      trên chỉ nhận SỐ nên không viết được theo `cqh`/`vw`). Xem ghi chú ở
+ *      `.boc` phía dưới.
  *
  * Class THẮNG prop ở MỌI khổ màn, cố ý thế và nhất quán: ai lỡ dùng cả hai
  * thì không có chuyện media query im lặng mất tác dụng vì một prop cố định.
@@ -62,6 +65,22 @@
 }
 
 /*
+ * ĐƯỜNG THỨ BA ĐẶT CỠ: `--chu-tran` — TRẦN BỀ NGANG, nhận ĐỘ DÀI.
+ *
+ * Vì sao cần thêm (07/10): hai đường trên nhận một SỐ (`tiLe`/`caoChuHoa`),
+ * nên không viết được cỡ theo `cqh`/`vw`. Hero trang chủ cần đúng thứ đó —
+ * nét cọ phải co theo chiều cao banner, xem `.sora-hero-khoa` ở globals.css.
+ * Mặc định `100%` nên không ai truyền thì hành vi y như cũ.
+ *
+ * ⚠ ĐỪNG chữa bằng `max-w-[…]` của Tailwind trên thẻ bọc. Đã thử: `.bocKhoi`
+ * ở đây và `.md\:max-w-[…]` đều là MỘT class, nên ai thắng chỉ phụ thuộc thứ
+ * tự tệp trong bundle — CSS module ra sau nên `max-width: 100%` thắng và lệnh
+ * thu **im lặng không có tác dụng** (đo ra ảnh vẫn đúng 339px, không thu một
+ * px). Biến CSS thì không có cuộc tranh chấp nào: nó là tham số của chính
+ * luật `max-width` dưới đây, không phải một luật đối thủ.
+ */
+
+/*
  * Bọc inline để đặt được cạnh chữ thường trong một dòng.
  *
  * `width` KHÔNG THỪA. Thiếu nó thì lúc trình duyệt đo max-content, cái
@@ -81,7 +100,7 @@
    * vẫn giữ luật không tràn ngang ở 390px.
    */
   width: calc(var(--chu-w) * var(--chu-ti-le-ap) * 1px);
-  max-width: 100%;
+  max-width: var(--chu-tran, 100%);
   line-height: 0;
 }
 
@@ -92,7 +111,7 @@
  */
 .bocKhoi {
   display: block;
-  max-width: 100%;
+  max-width: var(--chu-tran, 100%);
   line-height: 0;
 }
 

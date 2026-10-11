@@ -1,7 +1,7 @@
 "use client";
 
 /*
- * Modal chi tiết món. Chỉ hiện trường CÓ THẬT trong dataset:
+ * Hộp chi tiết món. Chỉ hiện trường CÓ THẬT trong dataset:
  * mô tả, biến thể (Tofu/Gà/Tôm…), cỡ, mã dị ứng, chế độ ăn, độ cay.
  * Không sao đánh giá, không nút giỏ hàng (`onlineOrdering: false`).
  *
@@ -10,14 +10,26 @@
  * đơn in, xem `src/data/allergens.ts`.
  *
  * `note` trong dataset là GHI CHÚ NỘI BỘ — cấm hiện cho khách, không render.
+ *
+ * ---- KHUNG: `<dialog>` GỐC (làm lại 07/10) ----
+ * Nguồn kho: hyperui application/modals/3-dark.html — `dialog[closedby=any]`
+ * mở bằng `showModal()`. Trình duyệt tự lo: khoá focus trong hộp, Esc đóng,
+ * trả focus về nút đã mở, phần trang phía sau trơ. Bản cũ là `div` cố định +
+ * tự nghe phím Esc, không khoá focus (Tab chạy ra sau lớp nền).
+ *
+ * ẢNH: hiện ở đúng cỡ GỐC, không bao giờ phóng to hơn (ảnh cắt từ thực đơn in,
+ * rộng 324–560px). Món không có ảnh riêng thì KHÔNG dựng ô ảnh — hộp thu về
+ * một cột chữ. Ảnh NHÓM không dùng ở đây: đĩa thập cẩm dán cạnh "Sake Nigiri"
+ * là khách tưởng gọi ra như thế (luật ở `src/data/menu-images.ts`).
  */
 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, type CSSProperties } from "react";
 import Image from "next/image";
+import { DishPurchase } from "@/components/cart/DishPurchase";
 import { Icon } from "@/components/ui/Icon";
-import { MasterChefTrigger } from "@/components/chef/MasterChef";
+import { useMasterChef } from "@/components/chef/MasterChef";
 import {
-  displayPrice,
+  categoryById,
   formatPrice,
   itemDescription,
   itemName,
@@ -25,7 +37,10 @@ import {
 } from "@/data/menu";
 import { explainAllergens } from "@/data/allergens";
 import { pick, type Locale } from "@/lib/i18n";
-import type { MenuStrings } from "./MenuBrowser";
+import { anhMon, kichThuocAnh } from "./du-lieu";
+import { GiaMon } from "./TheMon";
+import type { MenuStrings } from "./kieu";
+import s from "./menu.module.css";
 
 export function DishDetailModal({
   item,
@@ -38,178 +53,187 @@ export function DishDetailModal({
   strings: MenuStrings;
   onClose: () => void;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
-  const price = displayPrice(item, locale);
+  const chef = useMasterChef();
 
   const codes = explainAllergens(item.allergens, locale);
   const allergens = codes.filter((c) => c.kind === "allergen" || c.kind === "unknown");
   const additives = codes.filter((c) => c.kind === "additive");
 
+  const src = anhMon(item);
+  const kt = src ? kichThuocAnh(src) : null;
+  const mota = itemDescription(item, locale);
+
+  /* `item.subcategory` trong dữ liệu là tên TIẾNG ĐỨC -> tra lại nhóm con để
+     in đúng tên theo ngôn ngữ đang xem. */
+  const nhomCon = categoryById(item.category)?.subcategories.find(
+    (x) => x.name.de === item.subcategory
+  );
+
+  /* KHÔNG gọi `close()` lúc dọn effect: React StrictMode chạy effect hai lần,
+     `close()` ở lần dọn đầu sẽ bắn sự kiện `close` -> `onClose` -> hộp vừa mở
+     đã tự đóng. Gỡ thẻ `<dialog>` khỏi DOM là trình duyệt tự rút nó khỏi lớp
+     trên cùng. */
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onKey);
-    ref.current?.querySelector<HTMLElement>("[data-autofocus]")?.focus();
-    return () => document.removeEventListener("keydown", onKey);
-  }, [onClose]);
+    const d = ref.current;
+    if (d && !d.open) d.showModal();
+  }, []);
+
+  /* Đóng bằng `close()` của chính thẻ dialog (nó bắn sự kiện `close` ->
+     `onClose`) chứ không gỡ thẳng khỏi DOM: chỉ `close()` mới trả focus về
+     nút món vừa bấm — người dùng bàn phím không bị ném về đầu trang. */
+  const dong = () => {
+    const d = ref.current;
+    if (d?.open) d.close();
+    else onClose();
+  };
+
+  /* Hỏi Master Chef: phải ĐÓNG hộp này trước. `<dialog>` mở bằng showModal()
+     nằm ở lớp trên cùng và làm trơ mọi thứ khác — ngăn kéo Master Chef mở ra
+     phía sau sẽ không bấm được. */
+  const hoiChef = () => {
+    dong();
+    chef.open(undefined, item.category);
+  };
 
   return (
-    <div className="fixed inset-0 z-[80] grid place-items-center p-4">
-      <button
-        type="button"
-        aria-label={strings.detail.close}
-        onClick={onClose}
-        className="absolute inset-0 bg-black/60"
-      />
-      <div
-        ref={ref}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        className="sora-card relative max-h-[86vh] w-full max-w-[640px] overflow-y-auto p-5 shadow-card"
-      >
-        <div className="flex items-start gap-3">
-          <div className="min-w-0 flex-1">
-            <p className="text-[12px] text-muted/70">
-              {item.subcategory} · {strings.detail.title}
-            </p>
-            <h2
-              id={titleId}
-              lang="de"
-              className="mt-0.5 font-serif text-[24px] leading-snug break-words text-ivory"
-            >
-              <span className="mr-2 text-[16px] text-muted/60">{item.nr}</span>
-              {itemName(item, locale)}
-            </h2>
-          </div>
-          <button
-            type="button"
-            data-autofocus
-            onClick={onClose}
-            aria-label={strings.detail.close}
-            className="grid size-9 shrink-0 place-items-center rounded-[6px] border border-gold/45 text-muted hover:text-gold"
-          >
-            <Icon name="x" size={18} />
-          </button>
-        </div>
+    <dialog
+      ref={ref}
+      /* `closedby="any"`: bấm ra nền là đóng (Chrome ≥ 134). React 19 chưa
+         khai kiểu cho thuộc tính này nên truyền qua spread. Trình duyệt cũ
+         hơn đã có `onClick` bên dưới lo. */
+      {...{ closedby: "any" }}
+      aria-labelledby={titleId}
+      onClose={onClose}
+      onClick={(e) => {
+        // Bấm trúng CHÍNH thẻ dialog = bấm vào nền (ruột hộp là thẻ con).
+        if (e.target === e.currentTarget) dong();
+      }}
+      className={`${s.hop} ${src ? s.hopCoAnh : ""}`}
+      style={
+        kt
+          ? ({ "--rong-anh": `${Math.min(kt.rong, 520)}px` } as CSSProperties)
+          : undefined
+      }
+    >
+      <div className={s.hopRuot}>
+        <button
+          type="button"
+          onClick={dong}
+          aria-label={strings.detail.close}
+          className={s.hopDong}
+        >
+          <Icon name="x" size={20} />
+        </button>
 
-        {/* Ảnh lớn — chưa có ảnh món nào, để khung rỗng nói rõ là chưa có */}
-        {item.image ? (
-          <div className="relative mt-4 h-[220px] overflow-hidden rounded-[6px] border border-gold/20">
+        {src && kt && (
+          <div className={s.hopAnh}>
             <Image
-              src={item.image}
+              src={src}
               alt={itemName(item, locale)}
-              fill
-              sizes="640px"
-              style={{ objectFit: "cover" }}
+              width={kt.rong}
+              height={kt.cao}
+              sizes={`(max-width: 767px) 100vw, ${Math.min(kt.rong, 520)}px`}
+              loading="eager"
             />
           </div>
-        ) : (
-          <div className="mt-4 grid h-[120px] place-items-center gap-1 rounded-[6px] border border-gold/20 bg-elevated text-gold/25">
-            <Icon name="utensils" size={34} />
-            <span className="text-[11px] text-muted/60">
-              {strings.detail.noImage}
-            </span>
-          </div>
         )}
 
-        {itemDescription(item, locale) && (
-          <p className="mt-4 text-[15px] leading-relaxed text-text">
-            {itemDescription(item, locale)}
+        <div className={s.hopChu}>
+          <p className={s.hopNhom}>
+            {nhomCon ? pick(nhomCon.name, locale) : item.subcategory} ·{" "}
+            {strings.detail.title}
           </p>
-        )}
+          <h2
+            id={titleId}
+            lang={locale}
+            className={`${s.hopTen} ${locale === "de" ? s.tenDe : ""}`}
+          >
+            <span className={s.hopSo}>{item.nr}</span>
+            {itemName(item, locale)}
+          </h2>
 
-        <p className="mt-3 text-[20px] font-semibold text-gold-bright">
-          {price.onRequest ? (
-            <span className="text-[16px] italic">{strings.priceOnRequest}</span>
-          ) : (
-            <>
-              {price.from ? "ab " : ""}
-              {price.text}
-            </>
-          )}
-        </p>
+          {mota && <p className={s.hopMota}>{mota}</p>}
 
-        {item.variants && item.variants.length > 0 && (
-          <div className="mt-4">
-            <p className="sora-eyebrow text-[11px]">{strings.detail.variants}</p>
-            <ul className="mt-2 divide-y divide-gold/15">
-              {item.variants.map((v) => (
-                <li
-                  key={v.code}
-                  className="flex items-center gap-3 py-1.5 text-[14px]"
-                >
-                  <span className="w-5 shrink-0 text-muted/70">{v.code}</span>
-                  <span className="min-w-0 flex-1 text-text">
-                    {pick(v.name, locale)}
-                    {v.allergens && v.allergens.length > 0 && (
-                      <sup className="ml-1 text-[10px] text-muted/70">
-                        {v.allergens.join(",")}
-                      </sup>
-                    )}
-                  </span>
-                  {typeof v.price === "number" && (
-                    <span className="shrink-0 text-gold-bright">
-                      {formatPrice(v.price, locale)}
+          <p className={s.hopGia}>
+            <GiaMon item={item} locale={locale} strings={strings} />
+          </p>
+
+          {item.variants && item.variants.length > 0 && (
+            <div className={s.hopMuc}>
+              <p className={s.hopTuaMuc}>{strings.detail.variants}</p>
+              <ul className={s.hopBang}>
+                {item.variants.map((v) => (
+                  <li key={v.code}>
+                    <span className={s.hopMa}>{v.code}</span>
+                    <span className={s.hopTenDong}>
+                      {pick(v.name, locale)}
+                      {v.allergens && v.allergens.length > 0 && (
+                        <sup className={s.hopMaNho}>{v.allergens.join(",")}</sup>
+                      )}
                     </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                    {typeof v.price === "number" && (
+                      <span className={s.hopGiaDong}>
+                        {formatPrice(v.price, locale)}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        {item.sizes && item.sizes.length > 0 && (
-          <div className="mt-4">
-            <p className="sora-eyebrow text-[11px]">{strings.detail.sizes}</p>
-            <ul className="mt-2 divide-y divide-gold/15">
-              {item.sizes.map((s) => (
-                <li
-                  key={s.label}
-                  className="flex items-center justify-between py-1.5 text-[14px]"
-                >
-                  <span className="text-text">{s.label}</span>
-                  <span className="text-gold-bright">
-                    {formatPrice(s.price, locale)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+          {item.sizes && item.sizes.length > 0 && (
+            <div className={s.hopMuc}>
+              <p className={s.hopTuaMuc}>{strings.detail.sizes}</p>
+              <ul className={s.hopBang}>
+                {item.sizes.map((z) => (
+                  <li key={z.label}>
+                    <span className={s.hopTenDong}>{z.label}</span>
+                    <span className={s.hopGiaDong}>
+                      {formatPrice(z.price, locale)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          {item.dietary.includes("vegetarian") && (
-            <Chip icon="leaf" tone="green" text={strings.dietary.vegetarian} />
+          {(item.dietary.length > 0 || item.spice !== "none") && (
+            <div className={s.hopNhan}>
+              {item.dietary.includes("vegetarian") && (
+                <Chip icon="leaf" tone="green" text={strings.dietary.vegetarian} />
+              )}
+              {item.dietary.includes("vegan") && (
+                <Chip icon="leaf" tone="green" text={strings.dietary.vegan} />
+              )}
+              {item.dietary.includes("glutenfree") && (
+                <Chip icon="wheat" tone="green" text={strings.dietary.glutenfree} />
+              )}
+              {item.spice !== "none" && (
+                <Chip icon="flame" tone="red" text={strings.dietary.spicy} />
+              )}
+            </div>
           )}
-          {item.dietary.includes("vegan") && (
-            <Chip icon="leaf" tone="green" text={strings.dietary.vegan} />
+
+          {/* Mã dị ứng ĐÃ GIẢI NGHĨA, tách riêng dị ứng và phụ gia */}
+          {allergens.length > 0 && (
+            <CodeList title={strings.detail.allergens} items={allergens} />
           )}
-          {item.dietary.includes("glutenfree") && (
-            <Chip icon="wheat" tone="green" text={strings.dietary.glutenfree} />
+          {additives.length > 0 && (
+            <CodeList title={strings.detail.additives} items={additives} />
           )}
-          {item.spice !== "none" && (
-            <Chip icon="flame" tone="red" text={strings.dietary.spicy} />
-          )}
+
+          <DishPurchase key={item.id} item={item} locale={locale} close={dong} />
+          <button type="button" onClick={hoiChef} className={s.hopChef}>
+            <Icon name="chef" size={16} />
+            {strings.detail.askChef}
+            <Icon name="arrow-right" size={15} />
+          </button>
         </div>
-
-        {/* Mã dị ứng ĐÃ GIẢI NGHĨA, tách riêng dị ứng và phụ gia */}
-        {allergens.length > 0 && (
-          <CodeList title={strings.detail.allergens} items={allergens} />
-        )}
-        {additives.length > 0 && (
-          <CodeList title={strings.detail.additives} items={additives} />
-        )}
-
-        <MasterChefTrigger
-          className="sora-btn-outline mt-5"
-          category={item.category}
-        >
-          {strings.detail.askChef}
-          <Icon name="arrow-right" size={14} />
-        </MasterChefTrigger>
       </div>
-    </div>
+    </dialog>
   );
 }
 
@@ -221,12 +245,12 @@ function CodeList({
   items: { code: string; text: string }[];
 }) {
   return (
-    <div className="mt-4">
-      <p className="sora-eyebrow text-[11px]">{title}</p>
-      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+    <div className={s.hopMuc}>
+      <p className={s.hopTuaMuc}>{title}</p>
+      <ul className={s.hopDiUng}>
         {items.map((a) => (
-          <li key={a.code} className="text-[13px] text-muted">
-            <span className="mr-1.5 font-semibold text-gold">{a.code}</span>
+          <li key={a.code}>
+            <span className={s.hopMaDiUng}>{a.code}</span>
             {a.text}
           </li>
         ))}
@@ -245,10 +269,10 @@ function Chip({
   text: string;
 }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-[4px] border border-gold/35 px-2 py-0.5 text-[12px] text-muted">
+    <span className={s.hopChip}>
       <Icon
         name={icon}
-        size={13}
+        size={14}
         className={tone === "red" ? "text-red" : "text-green"}
       />
       {text}

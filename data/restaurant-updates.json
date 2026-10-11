@@ -1,0 +1,28 @@
+{
+  "newDishIds": [],
+  "offers": [
+    {
+      "id": "eroeffnung",
+      "kind": "opening",
+      "title": "Ein neuer Lieblingsort. 10 % für dich.",
+      "label": "Zur Eröffnung",
+      "summary": "Feiere die Eröffnung mit uns und genieße 10 % Eröffnungsrabatt.",
+      "durationDays": 30,
+      "startsOn": null,
+      "discountPercent": 10,
+      "image": "/anh/restaurant-05.webp"
+    },
+    {
+      "id": "sushi-geschenk",
+      "kind": "sushi",
+      "title": "Mehr Sushi. Ein Geschenk von uns.",
+      "label": "Sushi & Friends",
+      "summary": "Bei einer Sushi-Bestellung über 100 € schenken wir dir ein Gericht im Wert von 15 €.",
+      "durationDays": 30,
+      "startsOn": null,
+      "thresholdEuro": 100,
+      "giftValueEuro": 15,
+      "image": "/anh/danh-muc/sushi.webp"
+    }
+  ]
+}

@@ -47,3 +47,7 @@ _w-agent/
 # `AGENTS.md` được `next dev` tự sinh lại nên phải ignore, không thì cây luôn bẩn.
 /CLAUDE.md
 /AGENTS.md
+
+# Tệp tạm, thử nghiệm
+/.tmp-cmp/
+/public/mobile-preview.html

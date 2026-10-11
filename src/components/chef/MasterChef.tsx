@@ -15,7 +15,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useId,
   useMemo,
   useRef,
@@ -24,6 +23,7 @@ import {
 } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
+import { useModalFocus } from "@/components/ui/useModalFocus";
 import {
   categoryById,
   displayPrice,
@@ -67,7 +67,7 @@ const CHIP_ORDER: ChipKey[] = ["light", "hearty", "sushi", "vegetarian", "surpri
 
 /** Lọc món cho từng chip — chỉ dùng trường có thật trong dataset.
  *  `nonce` tăng mỗi lần bấm "Andere Vorschläge" để ra bộ khác. */
-function suggest(
+export function suggest(
   chip: ChipKey,
   nonce: number,
   category?: string | null
@@ -138,15 +138,7 @@ export function MasterChefProvider({
     openerRef.current?.focus?.();
   }, []);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-    };
-    document.addEventListener("keydown", onKey);
-    panelRef.current?.querySelector<HTMLElement>("[data-autofocus]")?.focus();
-    return () => document.removeEventListener("keydown", onKey);
-  }, [isOpen, close]);
+  useModalFocus(isOpen, panelRef, close);
 
   const results = useMemo(
     () => (chip ? suggest(chip, nonce, category) : []),
@@ -180,7 +172,8 @@ export function MasterChefProvider({
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            className="absolute right-0 bottom-0 flex max-h-[88vh] w-full flex-col border-t border-gold/45 bg-elevated md:top-0 md:bottom-0 md:max-h-none md:w-[440px] md:border-t-0 md:border-l"
+            tabIndex={-1}
+            className="sora-dialog-enter absolute right-0 bottom-0 flex max-h-[88dvh] w-full flex-col border-t border-gold/45 bg-elevated pb-[env(safe-area-inset-bottom)] md:top-0 md:bottom-0 md:max-h-none md:w-[440px] md:border-t-0 md:border-l"
           >
             {/* Đầu drawer */}
             <div className="flex items-start gap-3 border-b border-gold/25 px-5 py-4">
@@ -235,7 +228,7 @@ export function MasterChefProvider({
               </div>
 
               {/* Câu trả lời — máy đọc màn hình phải nghe được */}
-              <div aria-live="polite" className="mt-5 space-y-3">
+              <div aria-live="polite" aria-busy={dangHoi} className="mt-5 space-y-3">
                 {showFallback && (
                   <p className="rounded-[6px] border border-gold/30 bg-surface px-4 py-3 text-[14px] leading-relaxed text-text">
                     {strings.fallback}
@@ -293,6 +286,7 @@ export function MasterChefProvider({
                 e.preventDefault();
                 const cauHoi = freeText.trim();
                 if (!cauHoi || dangHoi) return;
+                setShowFallback(false);
                 setChip(null);
                 setFreeText("");
                 setAiTraLoi(null);
@@ -324,11 +318,13 @@ export function MasterChefProvider({
                 value={freeText}
                 onChange={(e) => setFreeText(e.target.value)}
                 placeholder={strings.inputPlaceholder}
+                aria-label={strings.inputPlaceholder}
+                maxLength={1000}
                 className="sora-field min-h-[41px] flex-1"
               />
               <button
                 type="submit"
-                disabled={dangHoi}
+                disabled={dangHoi || !freeText.trim()}
                 className="sora-btn-gold h-[41px] shrink-0 disabled:opacity-50"
                 aria-label={strings.send}
               >

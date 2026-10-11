@@ -17,14 +17,29 @@ export function MasterChefCard({
   eyebrow,
   question,
   cta,
+  gon = false,
+  nutCao = false,
 }: {
   eyebrow: string;
   question: string;
   cta: string;
+  /** Trang con (spec làm lại A4): ô icon 72px thay 95px để chữ rộng hơn.
+   *  Trang chủ không truyền -> giữ nguyên 95px. */
+  gon?: boolean;
+  /**
+   * Nút cao 44px (chuẩn vùng chạm) thay 30px. CHỈ `PageHero` của trang con
+   * truyền. Là prop RIÊNG chứ không gộp vào `gon`: trang chủ mới (`HomeHero`)
+   * cũng dùng `gon`, gộp vào là đổi luôn thẻ ở trang chủ — đã lỡ một lần 07/10.
+   */
+  nutCao?: boolean;
 }) {
   return (
     <div className="sora-card pointer-events-auto flex w-[360px] max-w-full overflow-hidden bg-bg/90 backdrop-blur-[10px]">
-      <div className="grid w-[95px] shrink-0 place-items-center border-r border-gold/25 bg-elevated">
+      <div
+        className={`grid shrink-0 place-items-center border-r border-gold/25 bg-elevated ${
+          gon ? "w-[72px]" : "w-[95px]"
+        }`}
+      >
         <Image
           src="/icons/master_chef.svg"
           alt=""
@@ -41,7 +56,9 @@ export function MasterChefCard({
         <p className="mt-1.5 font-serif text-[14px] leading-snug text-text">
           {question}
         </p>
-        <MasterChefTrigger className="sora-btn-gold mt-2.5 h-[30px] text-[12px]">
+        <MasterChefTrigger
+          className={`sora-btn-gold mt-2.5 ${nutCao ? "h-11 text-[13px]" : "h-[30px] text-[12px]"}`}
+        >
           {cta}
           <Icon name="arrow-right" size={14} />
         </MasterChefTrigger>

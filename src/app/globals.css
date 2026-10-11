@@ -32,6 +32,22 @@
   --radius-card: 8px;
 
   --font-serif: var(--font-lora), "Noto Serif", Georgia, serif;
+  /*
+   * Serif TIÊU ĐỀ của trang chủ v2 (07/10). Playfair Display 500 — đo nét
+   * trên ảnh mẫu ra stem/cap 0,20 và tương phản ≈5:1 (`01_spec.md` §3.2).
+   * KHÁC `--font-serif` (Lora) cố ý: 5 trang con giữ Lora, chỉ trang chủ đổi,
+   * nên không màn nào trộn hai serif.
+   */
+  --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
+  /*
+   * Năm chữ Hán trên thẻ danh mục (寿司 主菜 越南 甘味 飲物) — KHÔNG nạp
+   * webfont: bộ Noto Serif JP tải về cả trăm tệp con, nặng cho máy Sếp mà
+   * chỉ dùng 10 ký tự. Dùng serif CJK có sẵn trong hệ điều hành; thiếu hết
+   * thì rơi về `--font-serif` chứ không bao giờ ra ô vuông, vì mọi font hệ
+   * thống hiện đại đều có sẵn 5 chữ này.
+   */
+  --font-cjk: "Noto Serif JP", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN",
+    "MS PMincho", "Songti SC", "SimSun", var(--font-lora), serif;
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   /* Wordmark "SoRa" là ẢNH nét cọ (public/brand/), không phải webfont.
      Biến này chỉ còn phục vụ mấy chỗ chữ brush nhỏ chưa có ảnh riêng. */
@@ -55,17 +71,150 @@
 }
 
 :root {
+  /*
+   * Bệ trưng bày dịch xuống bao nhiêu. Xem ghi chú ở .sora-be-trung-bay.
+   *
+   * Khai bằng SỐ KHÔNG ĐƠN VỊ rồi mới nhân ra phần trăm, vì `--be-hang` bên
+   * dưới cũng cần đúng con số này. Trước đây 118% viết ở đây và `* 1.18` viết
+   * ở `--be-hang` — hai nơi phải nhớ sửa cùng nhau, mà quên một chỗ thì bệ đè
+   * lên hàng thẻ **không một phép kiểm nào biết**. Đúng dạng lỗi đã làm hỏng
+   * bố cục hôm nay (ảnh bệ ở tệp này, số đo ở tệp kia).
+   */
+  --be-dich-so: 1.18;
+  --be-dich: calc(var(--be-dich-so) * 100%);
+  /*
+   * Phần bệ THÒ XUỐNG dưới mép banner, tính bằng px.
+   *
+   * Bệ được `translateY(--be-dich)` nên nó chiếm chỗ NGOÀI dòng chảy bố cục —
+   * hàng thẻ danh mục không biết nó ở đó và chui lên nằm dưới bệ. Phải chừa
+   * đúng bằng ngần này bằng `margin-top` cho khối thẻ.
+   *   chiều cao ảnh bệ = (bề ngang nội dung) / tỉ lệ ảnh
+   *   phần thò xuống   = chiều cao × --be-dich-so
+   *
+   * `--be-ti-le` KHÔNG đặt giá trị ở đây: `page.tsx` gắn thẳng tỉ lệ thật của
+   * ảnh bệ (`BE_TRU.w / BE_TRU.h`) vào khối. Số dự phòng 6.96 chỉ để trang
+   * không vỡ nếu khối đó biến mất.
+   */
+  --be-ti-le: 6.96;
+  --be-ho: 28px;
+  --be-hang: calc(
+    (100vw - var(--sidebar-w)) / var(--be-ti-le) * var(--be-dich-so) + var(--be-ho)
+  );
   /* Khung chung */
-  --sidebar-w: 256px;
+  /*
+   * 256 -> 250 (07/10, `_w-agent/trang-chu-v2/02_chot.md` §3-A).
+   * Mục 5 lời Sếp ghi thẳng "Sidebar: 250px" và "Main content:
+   * calc(100vw - 250px)". Ảnh mẫu toàn trang đo ra 264 quy đổi, nhưng chỗ
+   * nào Sếp ghi số rõ ràng thì theo Sếp (thứ tự ưu tiên: lời Sếp > ảnh mẫu).
+   * Mọi khối khác đi qua biến này nên không phải sửa chỗ nào khác; riêng
+   * thuộc tính `sizes` của ảnh banner trong `PageHero` có chép tay con số
+   * này, đã sửa kèm.
+   */
+  --sidebar-w: 250px;
   --sidebar-w-compact: 88px;
   --page-pad: 32px;
   --section-gap: 72px;
   --content-max: 1720px;
+  /*
+   * LÀN RIÊNG CỦA CỘT NÚT NỔI (`RightUtilityRail`) — 84px bề dày + 18px cách
+   * mép phải màn. Đo thật 07/10 ở 1440: hộp rail chiếm x 1338–1422.
+   *
+   * VÌ SAO PHẢI CÓ MỘT CON SỐ DÙNG CHUNG. Trước đây mỗi khung section tự chừa
+   * `88px` viết tay — THIẾU 14px so với 102px mà cột nút thật sự chiếm, nên nó
+   * lấn vào nội dung 14px ở MỌI cỡ desktop, MỌI vị trí cuộn (đo ở 1280/1366/
+   * 1440/1600/1920 đều đúng 14px). Ghi chú cũ trong `kontakt/page.tsx` nói rail
+   * bắt đầu ~1359px là SAI — nó bắt đầu ở 1338px.
+   *
+   * CÁCH DÙNG: khung nội dung lấy `padding-right: page-pad + rail-lane`. Nhờ
+   * vậy mép nội dung cách MÉP TRÁI CỦA RAIL đúng `--page-pad`, y như mép trái
+   * nội dung cách mép trái vùng nội dung — tức cụm nội dung nằm GIỮA khoảng
+   * trống THẬT (khoảng trống thật = bề ngang màn − thanh bên − làn rail), chứ
+   * không phải giữa khoảng trống tính từ mép màn. Đó là chữ "đều" của Sếp.
+   *
+   * ⚠ Dưới 768px rail biến thành nút tròn nổi (FAB) nên làn này PHẢI về 0 —
+   * xem khối `max-width: 767px` bên dưới. Để nguyên 102px là ăn mất 102px lề
+   * trên điện thoại.
+   *
+   * MỘT LUẬT, CÓ ĐIỀU KIỆN — đọc kèm `.sora-khoa-mot-man` ở cuối tệp:
+   *     chừa làn KHI VÀ CHỈ KHI nội dung có thể đi qua dải dọc của rail.
+   * Trang cuộn được thì sớm muộn mọi khối đều trôi qua dải đó, nên chừa.
+   * Trang khoá đúng một màn thì không khối nào tới được đó, chừa là lấy mất
+   * 102px bề ngang mà không đổi lấy gì — và trái lệnh Sếp 05/10 ("giãn cách
+   * đều các ảnh RA"). Điều kiện viết ở ĐÚNG chỗ khoá màn, nên không ai phải
+   * nhớ "trang nào số mấy": thêm trang khoá màn mới là nó tự đúng.
+   */
+  --rail-lane: 102px;
+  /*
+   * HỆ SỐ THU CỦA CỤM CHỮ HERO TRANG CHỦ — mặc định 1px = "không thu".
+   *
+   * Là một ĐỘ DÀI chứ không phải số, để nhân được: `calc(34 * var(--hero-thu))`
+   * ra 34px khi không thu. Mọi chỗ dùng đều bọc `min(giá-trị-gốc, …)` nên biến
+   * này chỉ có thể làm NHỎ đi, không bao giờ làm to hơn mẫu.
+   *
+   * Giá trị thật đặt ở `.sora-hero-khoa` (cuối tệp), tính từ chiều cao khung
+   * hero bằng `cqh`. Khai mặc định ở đây là CHỐT CHẶN: năm trang con cũng dùng
+   * chung mấy class `md:mt-[min(…)]` trong `PageHero`, mà một `var()` không
+   * tồn tại thì cả khai báo đó **mất hiệu lực** (margin về 0) chứ không rơi về
+   * giá trị cũ — lỗi im lặng, không ai thấy cho tới lúc nhìn ảnh.
+   */
+  --hero-thu: 1px;
 
   /* Viền gold 1px, active lên .8 (KIT shape language) */
   --border-gold: rgba(216, 178, 106, 0.45);
   --border-gold-strong: rgba(216, 178, 106, 0.8);
 }
+
+@media (min-width: 1440px) {
+  :root {
+    /*
+     * Chỉ đổi MỘT số; `--be-dich` và `--be-hang` tự theo.
+     *
+     * 0,85 -> 0,58 (Sếp 06/10: *"đẩy cao toàn bộ bệ đỡ thức ăn và các món ăn
+     * lên trên banner, đang bị tụt"*). Ở 0,85 bệ chỉ đè lên banner 15% — nhìn
+     * ra là nó rơi xuống mảng đen dưới banner chứ không phải vắt qua chân
+     * banner như Sếp chốt 05/10 ("1 nửa đè lên banner, 1 nửa nằm ra ngoài").
+     *
+     * VÌ SAO ĐÚNG 0,58, KHÔNG PHẢI SỐ ƯỚM:
+     * Đo alpha của chính ảnh bệ (`be-trung-bay-v5.webp`, nửa trái chỗ không có
+     * trụ): mặt bàn vàng bắt đầu ở **42% chiều cao ảnh**, phía trên là trong
+     * suốt. Muốn MÉP TRÊN MẶT BÀN trùng đúng mép dưới banner thì
+     *     dịch = (1 − 0,42) × chiều cao = 0,58 × chiều cao.
+     * Số này không phụ thuộc bề ngang màn, nên một giá trị đúng cho mọi khổ
+     * từ 1440 lên: mặt bàn luôn nằm đúng đường ranh, trụ và vầng sáng thò
+     * xuống dưới, ba đĩa nằm trọn trên banner.
+     *
+     * TRẦN TRÊN, đừng nâng tiếp mà không đo lại: ảnh bệ vẽ đè LÊN hero (z-20,
+     * đứng sau hero trong DOM mà hero có `isolate` nên hero không thể vượt
+     * lên). Ở 1440 hai nút hero kết thúc ở y=388 còn mép mặt bàn ở y=396 —
+     * chỉ còn 8px. Nâng thêm là **dải vàng phủ lên hai nút**. Muốn nâng nữa
+     * thì phải đưa khối bệ vào TRONG `PageHero` để cụm chữ vẽ đè lên bệ, chứ
+     * không phải sửa số này.
+     *
+     * ---- 07/10: TRẦN TRÊN ĐÃ GỠ, 0,58 -> 0,12 ----
+     * Sếp: *"đẩy cao cái bàn thức ăn lên"*. Thứ chặn không phải cái bệ mà là
+     * NỬA TRÁI MẶT BÀN — phần không có trụ nào, chỉ chạy ngang qua hai nút.
+     * Đã cho nó mờ hẳn đi bằng `mask-image` ở `img.sora-be-trung-bay`, mép
+     * mực trái nay ở 43% bề ngang (x≈741 ở 1440) trong khi nút cuối hết ở
+     * x=744 — hết chồng, nên nâng được tới sát đáy banner.
+     *
+     * 0,12 = bệ nằm 88% TRÊN banner, chỉ còn chân trụ nhú xuống dưới mép —
+     * đúng dáng mẫu `_w-agent/mau/01_home.png` (ba bệ nằm trọn trong banner),
+     * vẫn giữ một nhịp "vắt qua chân banner" Sếp chốt 05/10.
+     */
+    --be-dich-so: 0.12;
+  }
+}
+
+/*
+ * DƯỚI 1440 GIỮ NGUYÊN 1,18 — cố ý, không phải quên.
+ *
+ * Khung hero khoá cứng theo tỉ lệ ảnh (`(100vw − sidebar) / 3`), nên màn càng
+ * hẹp banner càng thấp trong khi cụm chữ hero cao gần như không đổi. Đo ở
+ * 1280: banner hết ở y=342 mà hai nút đã chạy tới y=382 — **cụm chữ vốn đã
+ * thò xuống dưới banner**. Kéo bệ lên ở khổ đó là dải vàng cắt ngang hai nút.
+ * Mốc 1440 không phải số tròn chọn bừa: giải ra (100vw − 256)/3 ≥ 395 thì
+ * W ≥ 1441, tức 1440 đúng là chỗ banner bắt đầu cao hơn cụm chữ.
+ */
 
 @media (max-width: 1199px) {
   :root {
@@ -78,6 +227,8 @@
     --sidebar-w: 0px;
     --page-pad: 16px;
     --section-gap: 48px;
+    /* Rail đã thành FAB góc dưới, không còn làn dọc nào để chừa. */
+    --rail-lane: 0px;
   }
 }
 
@@ -140,6 +291,148 @@ body::before {
     background: rgba(18, 16, 13, 0.94);
     border: 1px solid var(--border-gold);
     border-radius: var(--radius-card);
+    /* Cần cho vòng sáng ::after bám theo. `isolate` để vòng sáng không trồi
+       lên trên nội dung của thẻ khác. */
+    position: relative;
+    isolation: isolate;
+  }
+
+  /*
+   * ÁNH SÁNG TRÊN VIỀN VÀNG (Sếp 05/10) — dùng chung cho mọi khung `.sora-card`
+   * (23 chỗ trong site), nên không phải gắn tay từng nơi.
+   *
+   * Vì sao làm bằng `opacity` chứ không chạy gradient quanh viền: máy của Sếp
+   * là CPU 4 nhân đời 2014. Gradient chạy vòng (conic + @property) phải VẼ LẠI
+   * cả viền mỗi khung hình, nhân với 23 khung là giật. `opacity` thì GPU lo,
+   * gần như không tốn gì. Hiệu ứng ra là viền vàng "thở" sáng lên rồi dịu đi.
+   *
+   * Vòng sáng nằm ở `-1px` để trùm đúng lên nét viền thật, `inherit` bán kính
+   * để không bị lệch ở góc bo.
+   */
+  .sora-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    border: 1px solid var(--color-gold-bright);
+    box-shadow:
+      0 0 14px rgba(216, 178, 106, 0.4),
+      inset 0 0 10px rgba(216, 178, 106, 0.16);
+    opacity: 0.22;
+    pointer-events: none;
+    animation: soraVienTho 5.5s var(--ease-sora) infinite;
+  }
+
+  @keyframes soraVienTho {
+    0%,
+    100% {
+      opacity: 0.16;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  /*
+   * Thẻ ảnh poster ở chân banner trang chủ (Sếp 05/10, bản 2).
+   *
+   * Sếp bỏ hiệu ứng phát sáng, đổi thành PHÓNG ẢNH 3× KHI RÊ CHUỘT:
+   * "khung vẫn giữ nguyên, chỉ ảnh trong khung là zoom".
+   *
+   * Nên KHUNG (`.sora-poster`) không được biến hình tí nào — không nâng,
+   * không phóng, không đổi viền. Chỉ thẻ `<img>` BÊN TRONG mới phóng, và
+   * khung đã có `overflow-hidden` nên phần ảnh thừa bị cắt gọn trong khung.
+   */
+  /*
+   * Hai nút trên hero trang chủ: BẰNG NHAU và ngắn lại (Sếp 05/10).
+   *
+   * Bề ngang chốt cứng nên hai nút luôn bằng nhau bất kể nhãn dài ngắn — quan
+   * trọng vì bản DE và bản VI có độ dài chữ khác nhau. Cỡ chữ 13px + giãn chữ
+   * hẹp hơn mặc định để nhãn dài nhất ("Speisekarte entdecken") vẫn một dòng.
+   * Đổi nhãn dài hơn nữa thì nới `width` ở ĐÂY, đừng để nút tự co giãn lại.
+   */
+  a.sora-nut-hero {
+    /*
+     * CHIA ĐÔI bề ngang cột, không chốt px.
+     *
+     * Đã thử chốt 252px rồi 228px: cả hai đều xuống dòng ở khổ 1440 (cột chữ
+     * ở đó chỉ rộng 456px = (1440−256−64−88−32)×0,48 − 24). Chốt px là cứ đổi
+     * khổ màn hay đổi ngôn ngữ lại phải dò lại một lần.
+     *
+     * `flex:1 1 0` cho hai nút luôn BẰNG NHAU và luôn vừa cột, mọi bề rộng.
+     * Thẻ bọc phải có `flex-nowrap` thì mới không cho chúng rớt dòng.
+     */
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 10px;
+    /*
+     * 11,5px + giãn chữ 0,02em là mức vừa đủ cho nhãn DÀI NHẤT
+     * ("Speisekarte entdecken", 21 ký tự) nằm một dòng trong nút hẹp nhất
+     * (~222px ở khổ 1440). Ở 15px/0,08em mặc định thì cần 294px → tràn 60px.
+     *
+     * Bộ chọn phải là `a.sora-nut-hero`, KHÔNG phải `.sora-nut-hero`:
+     * `.sora-btn-ghost` khai SAU trong cùng tệp và cùng độ ưu tiên (0,1,0)
+     * nên nó đè hết. Thêm `a` lên thành (0,1,1) mới thắng. Đã vấp 05/10 —
+     * luật trông như không có tác dụng gì.
+     */
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+  }
+  /* `min-width:0` ở trên cho phép flex co cả CON bên trong — đo được icon
+     nút 1 bẹp còn 10px, icon nút 2 còn 0px (biến mất hẳn). Khoá lại. */
+  a.sora-nut-hero svg {
+    flex-shrink: 0;
+  }
+  /*
+   * KHỔ ĐIỆN THOẠI: mỗi nút MỘT HÀNG.
+   *
+   * `flex: 1 1 0` ở trên nghĩa là bề ngang cơ sở bằng 0, nên dù thẻ bọc có
+   * `flex-wrap` hai nút vẫn **không bao giờ xuống dòng** — chúng chỉ co lại
+   * cho vừa. Ở 390px cột chỉ 358px -> 173px mỗi nút, trong khi nhãn dài nhất
+   * ("Speisekarte entdecken") cần 177px: đo được chữ lòi ra khỏi nút 4px,
+   * mất hẳn đệm phải. Ép cơ sở 100% thì nó buộc phải rớt dòng, mỗi nút rộng
+   * cả hàng — thừa chỗ, và hero điện thoại cao theo nội dung nên không vỡ.
+   * Khổ máy tính KHÔNG áp: ở đó hero khoá chiều cao, rớt dòng là lọt khung.
+   */
+  @media (max-width: 767px) {
+    a.sora-nut-hero {
+      flex-basis: 100%;
+    }
+  }
+
+  .sora-poster img {
+    transition: transform 320ms var(--ease-sora);
+    /*
+     * Phóng vào ĐÚNG GIỮA ĐĨA, không phóng vào tâm hình (Sếp 05/10).
+     *
+     * 50% / 58% không phải số áng chừng: đo trọng tâm 4% điểm ảnh rực nhất
+     * (chính là đồ ăn — nền bokeh thì tối, chữ thì hẹp) trên cả 6 poster,
+     * ra trung bình x 48% · y 54%. Lấy 58% thay vì 54% để cửa sổ phóng tụt
+     * xuống thêm chút, gạt dòng chữ ở đầu ảnh ra ngoài khung.
+     *
+     * Từng tấm lệch nhau (a4 ở y 40%, a6 ở y 63%) nên một điểm chung không
+     * thể khớp tuyệt đối; ở mức 2× cửa sổ còn rộng nửa ảnh nên cả sáu đĩa
+     * vẫn nằm trọn trong khung.
+     */
+    transform-origin: 50% 58%;
+    will-change: transform;
+  }
+  .sora-poster:hover img,
+  .sora-poster:focus-visible img {
+    transform: scale(2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sora-card::after {
+      animation: none;
+      opacity: 0.3;
+    }
+    .sora-poster:hover img,
+    .sora-poster:focus-visible img {
+      transform: none;
+    }
   }
 
   /* Nút chính đỏ son. Chỉ dùng cho CTA chính — đỏ tối đa 7% diện tích. */
@@ -378,13 +671,149 @@ body::before {
   }
 }
 
-@media (max-width: 767px) {
-  .sora-section-title {
-    font-size: 28px;
+/*
+ * ⚠ PHẢI NẰM TRONG `@layer components`, đừng gỡ ra (07/10).
+ *
+ * Khối này trước đây để TRẦN, ngoài mọi layer. Trong CSS, luật KHÔNG layer
+ * luôn thắng luật trong layer — kể cả `@layer utilities` của Tailwind. Hệ
+ * quả: mọi class cỡ chữ đặt trên `.sora-section-title` / `.sora-h2` ở khổ
+ * điện thoại **im lặng không có tác dụng**. Đã cắn thật: `text-[…]` trên tiêu
+ * đề thẻ teaser không ăn, chữ "RESERVIERUNG" vẫn 28px và lòi 53px sang phần
+ * ảnh, mà nhìn class thì tưởng đã sửa rồi.
+ */
+@layer components {
+  @media (max-width: 767px) {
+    .sora-section-title {
+      font-size: 28px;
+    }
+    .sora-h2 {
+      font-size: 24px;
+    }
   }
-  .sora-h2 {
-    font-size: 24px;
+}
+
+/*
+ * BỆ TRƯNG BÀY — neo PHẢI và thu lại, không trải hết bề ngang.
+ *
+ * Vì sao: hàng nút hero có bề ngang CỐ ĐỊNH (`max-w-[480px]`), còn bệ thì co
+ * giãn theo màn. Màn càng hẹp, mép trái bệ càng lùi sang trái và **đè lên nút
+ * `Speisekarte entdecken`** — đo ở 1440: nút ở x 522–744, bệ #1 ở x 701–955,
+ * chồng 43px, chữ cụt thành `SPEISEKARTE ENTDECK`. Ở 1280 còn tệ hơn vì bệ
+ * lùi thêm.
+ *
+ * Chọn dời BỆ chứ không thu NÚT: cặp nút là thứ Sếp vừa duyệt hôm nay (*"hai
+ * nút bằng nhau và ngắn lại"*), mà `Speisekarte entdecken` lại là cụm từ dài
+ * cố định — hẹp thêm là hoặc chữ nhỏ đi, hoặc rớt dòng, hoặc cụt kiểu khác.
+ * Bệ thì không có vị trí "đúng" nào cả, nó là vật trang trí chồng lên banner.
+ *
+ * `62%` neo phải: mép trái bệ luôn nằm sau hàng nút ở CẢ BA cỡ đã kiểm
+ * (1280 / 1440 / 1920) — xem bảng đo trong `_w-agent/02_dev-giao-dien.md`
+ * lượt 26. Đừng đổi số này mà không đo lại cả ba cỡ.
+ *
+ * Dải mặt bàn của ảnh bệ vì thế không chạm mép trái nữa — KHÔNG sao: banner
+ * phía dưới đã có sẵn mặt bàn phản chiếu chạy hết bề ngang, bệ chỉ nằm chồng
+ * lên đó. Đã nhìn ảnh chụp để chắc, không suy luận.
+ *
+ * Ba đĩa món tự đi theo vì chúng định vị bằng % CỦA KHỐI NÀY, không phải của
+ * màn hình — nên chỉ cần đổi một chỗ.
+ */
+/*
+ * ⚠ ĐỪNG thêm dịch NGANG vào đây (`translateX`).
+ *
+ * Đĩa #3 từng đè lên rail tiện ích bên phải, và cách chữa hiển nhiên là dời
+ * cả khối bệ sang trái. Đã làm, đo thì sạch ở cả 5 cỡ màn, **nhưng nhìn thì
+ * hỏng**: ảnh bệ rời khỏi mép phải màn và để lại một vệt cắt dọc rất rõ — mặt
+ * bàn vàng đang sáng đứt phựt vào nền tối. Mặt nạ mờ dần cũng không cứu được:
+ * trong ảnh gốc, bên phải trụ #3 chỉ còn 35px mặt bàn, vùng mờ nào đủ dài để
+ * không lộ cũng ăn vào chính cái trụ.
+ *
+ * Nên việc dời nằm TRONG ẢNH (`scripts/dich-tru-be.mjs`): mặt bàn vẫn trải
+ * hết bề ngang, chỉ cụm trụ lùi vào. Cần dời thêm thì sửa `DICH` ở script đó
+ * rồi chạy lại `do-mat-be.mjs`, đừng đụng vào đây.
+ */
+.sora-be-trung-bay {
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: translateY(var(--be-dich));
+}
+
+/*
+ * Mép TRÁI của ảnh bệ phải mờ dần, không được cắt thẳng.
+ *
+ * Thu bệ còn 72% thì dải mặt bàn của nó dừng giữa chừng và để lại một **vệt
+ * cắt dọc rất rõ** trên nền đen — nhìn ra ngay là ảnh bị xén. Tôi tự tạo ra
+ * lỗi này khi chữa lỗi nút cụt, và chỉ thấy khi phóng to ảnh chụp.
+ *
+ * `maskImage` ≠ lớp phủ: nó chọn phần nào CỦA CHÍNH ẢNH được vẽ, không bôi
+ * thêm màu lên ảnh — đúng luật Sếp. Mờ dần trong 14% bề ngang khối, tức mặt
+ * bàn tan vào nền đen thay vì đứt ngang.
+ *
+ * CHỈ áp cho ảnh bệ, KHÔNG áp cho khối chứa đĩa: đĩa đầu tiên nằm ở 37,6% bề
+ * ngang khối, ngoài vùng mờ, nhưng nếu mask cả khối thì sau này dời đĩa sang
+ * trái là nó bị mờ theo mà không ai hiểu vì sao.
+ */
+/*
+ * MẶT NẠ MỜ DẦN NỬA TRÁI (Sếp 07/10: *"đẩy cao cái bàn thức ăn lên"*).
+ *
+ * VÌ SAO PHẢI CÓ NÓ MỚI ĐẨY CAO ĐƯỢC. Đo alpha của chính ảnh bệ: mặt bàn vàng
+ * trải **hết bề ngang** (cột nào cũng có mực từ 42% chiều cao xuống), còn ba
+ * trụ chỉ nằm trong khoảng 43%–88% bề ngang. Ảnh bệ lại vẽ ĐÈ lên hero (z-20,
+ * đứng sau hero trong DOM mà hero có `isolate` nên hero không vượt lên được).
+ * Nên hễ nâng bệ lên là nửa trái mặt bàn — phần KHÔNG có trụ, tức phần chẳng
+ * để làm gì — cắt ngang hai nút `TISCH RESERVIEREN` / `SPEISEKARTE ENTDECKEN`.
+ * Đó chính là trần 0,58 của hôm qua.
+ *
+ * Bỏ hẳn phần thừa đó đi thì trần biến mất. Mốc 43% lấy từ số đo trụ #1
+ * (`be-tru.json`: tâm 49,8% − nửa bề ngang 8,15% = mép trái 41,6%), nên mặt nạ
+ * tan hết TRƯỚC khi chạm trụ đầu tiên — không ăn mất tí trụ nào.
+ *
+ * `mask-image` KHÔNG phải lớp phủ: nó chọn phần nào CỦA CHÍNH ẢNH được vẽ,
+ * không bôi thêm màu lên ảnh — đúng luật Sếp.
+ *
+ * Mờ DẦN chứ không cắt thẳng: cắt thẳng để lại một vệt dọc rất rõ trên nền
+ * đen (đã dính một lần khi thu bệ còn 72%). Ở đây có tới 24%–43% bề ngang để
+ * tan, và banner phía dưới sẵn có quầy bar chạy dọc đáy nên mặt bàn vàng tan
+ * vào đó chứ không đứt ngang.
+ *
+ * CHỈ áp cho ẢNH bệ, KHÔNG áp cho khối chứa đĩa — đĩa #1 ở 49,8% nằm ngoài
+ * vùng mờ, nhưng mask cả khối thì sau này dời đĩa sang trái là nó mờ theo mà
+ * không ai hiểu vì sao.
+ */
+img.sora-be-trung-bay {
+  /* KHÔNG mặt nạ. Đã thử cho nửa trái mặt bàn mờ đi để né hai nút hero —
+     vùng tan chỉ còn 2,2% bề ngang (26px) trước khi chạm trụ #1, quá ngắn,
+     ra một vệt dọc thấy rõ. Chỗ chữa đúng là THỨ TỰ VẼ, không phải xén ảnh:
+     xem ghi chú "KHÔNG isolate" trong `components/ui/PageHero.tsx`. */
+}
+
+/*
+ * Ba đĩa trên bệ ở banner trang chủ (`components/home/BeMonAn.tsx`).
+ *
+ * Đĩa đi LÊN và hiện dần, kèm phóng rất nhẹ từ 0,94 — đọc ra "được đặt lên
+ * bệ" chứ không phải "chớp hiện ra". Dịch 14px là đủ thấy; nhiều hơn thì ở
+ * khung hero chỉ cao ~190px sẽ thành nhảy.
+ *
+ * KHÔNG dùng `filter`/`box-shadow` để tạo quầng: luật Sếp cấm glow, và đĩa
+ * đã có sẵn quầng sáng của bệ in trong chính ảnh banner.
+ *
+ * `prefers-reduced-motion` được khối bên dưới rút còn 0,001ms, nên người tắt
+ * hiệu ứng vẫn thấy đủ ba đĩa, chỉ không thấy chúng chuyển động. Component
+ * còn tự dừng hẳn việc đổi bộ trong trường hợp đó.
+ */
+@keyframes soraBeMonVao {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sora-be-mon-vao {
+  animation: soraBeMonVao var(--be-mon-thoi, 620ms) var(--ease-sora, ease-out) both;
 }
 
 /* KIT 07_DEV_STARTER/tokens.css — chép nguyên */
@@ -397,4 +826,1082 @@ body::before {
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/*
+ * Thẻ danh mục ở chân banner trang chủ (`DaiPosterMon`).
+ *
+ * CỐ Ý KHÔNG phóng ảnh khi rê chuột: khung vàng nằm TRONG ảnh còn chữ và nút
+ * đặt theo phần trăm — phóng ảnh là chữ lệch khỏi khung. Chỉ nâng thẻ lên
+ * một chút và thắp sáng, giống `.sora-poster`.
+ */
+.sora-the-danh-muc {
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+.sora-the-danh-muc:hover,
+.sora-the-danh-muc:focus-visible {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sora-the-danh-muc {
+    transition: none;
+  }
+  .sora-the-danh-muc:hover,
+  .sora-the-danh-muc:focus-visible {
+    transform: none;
+  }
+}
+
+/*
+ * TRANG CHỦ KHOÁ TRONG MỘT MÀN HÌNH — nhưng CHỈ khi màn đủ cao.
+ *
+ * Sếp 05/10: "home page khoá cứng 1 trang duy nhất". Giữ nguyên ý đó, nhưng
+ * khoá vô điều kiện thì ở màn THẤP (1280×720, 1366×768) không đủ chỗ cho cả
+ * ba thứ: cụm chữ + hai nút CTA, bệ trưng bày trải hết bề ngang, và hàng thẻ
+ * danh mục. Đo ở 5 cỡ 06/10: muốn bệ không che nút thì phải đẩy bệ xuống
+ * ≥103% ở 1366 nhưng ≤90% ở 1920, còn ở 1280×720 thì khoảng hợp lệ RỖNG —
+ * không có giá trị nào đúng. Ép khoá là bệ đè lên nút hoặc đè lên hàng thẻ,
+ * đúng cái Sếp bác ("bị cái Bệ PNG che khuất hết rồi").
+ *
+ * Nên: khoá từ 820px chiều cao trở lên; thấp hơn thì cho cuộn. Màn Sếp hay
+ * dùng vẫn khoá như cũ.
+ */
+@media (min-width: 768px) and (min-height: 820px) {
+  .sora-khoa-mot-man {
+    height: 100svh;
+    overflow: hidden;
+    /*
+     * KHOÁ MỘT MÀN -> KHÔNG CHỪA LÀN RAIL. Xem dẫn giải ở `--rail-lane`.
+     *
+     * Điều kiện nằm ở ĐÂY chứ không viết tay "trang chủ thì 0": cái quyết
+     * định không phải là tên trang mà là **trang này có cuộn được không**.
+     * Khoá màn thì nội dung đứng yên và không khối nào đi qua dải dọc của
+     * rail — đo thật ở 1440: hàng thẻ y 610+, dải rail y 379–521, không
+     * chạm nhau. Màn thấp hơn 820px thì chính trang này VẪN CUỘN (1024×768
+     * cuộn 227px) nên hàng thẻ trôi vào đúng dải đó -> ở những cỡ ấy luật
+     * mặc định 102px vẫn có hiệu lực, đúng như phải thế.
+     */
+    --rail-lane: 0px;
+  }
+}
+
+/*
+ * ============================================================================
+ *  CỤM CHỮ HERO TRANG CHỦ CO THEO CHIỀU CAO BANNER
+ * ============================================================================
+ *
+ * BỆNH (đo 07/10, `scripts/do-can-doi.mjs`): khung hero khoá cứng theo tỉ lệ
+ * ảnh — cao = (100vw − thanh bên) / 3 — nên màn càng hẹp banner càng thấp,
+ * trong khi cụm chữ cao gần như cố định 382px. Khối chữ căn giữa theo chiều
+ * dọc nên phần dư thò ra CẢ HAI ĐẦU, và nửa thò lên nằm **trên gốc trang**:
+ *
+ *     1024×768  đỉnh chữ ký ở y −54,7  (mất 29% chiều cao nét cọ)
+ *     1280×720  đỉnh chữ ký ở y −40,6  (mất 21%)
+ *     1366×768  đỉnh chữ ký ở y  −5,9
+ *
+ * `top` âm lúc `scrollY = 0` là **mất vĩnh viễn**, không cuộn ngược lên được.
+ * Chữ ký nét cọ là nhãn thương hiệu của quán -> mức CHẶN.
+ *
+ * BA ĐƯỜNG ĐÃ LOẠI, ghi lại để không ai đi lại:
+ *   1. Cho khung hero `min-h` ở màn thấp — ĐÚNG cho 5 trang con (xem
+ *      `PageHero.tsx`), SAI cho trang chủ: trang chủ `CAT_DAY = 1` nên khung
+ *      đã cao đúng bằng ảnh, nới thêm là một dải ĐEN giữa chân banner và bệ
+ *      trưng bày (82px ở 1280, 109px ở 1024). Lại đúng cái lỗi "mảng đen
+ *      trống" Sếp chê.
+ *   2. Chỉ thu ảnh chữ ký — khối căn giữa nên thu X px chỉ kéo đỉnh xuống X/2;
+ *      bù 41px phải thu 82px, nét cọ còn 107px (−43%), hỏng thương hiệu.
+ *   3. Chỉ rút khoảng cách dọc — cả 4 khe cộng lại chỉ có 43px, không đủ cho
+ *      109px phải bù ở 1024.
+ *
+ * ĐƯỜNG ĐÃ CHỌN: thu CẢ CỤM theo đúng một hệ số, lấy mốc là chính cỡ 1440×900
+ * của mẫu — tức cụm chữ giữ nguyên tỉ lệ so với banner ở mọi khổ, thay vì giữ
+ * nguyên số px. Ở ≥1440 mọi thứ chạm trần nên **giao diện không đổi một px**.
+ *
+ * CÁCH RA SỐ 313.6 VÀ 80 (đo ở 1440×900, khung hero cao 394,7px):
+ *   phần CO ĐƯỢC   S = chữ ký 189 + H2 2 dòng 81,6 + 4 khe (8+7+12+16) 43
+ *                    = 313,6px
+ *   phần KHÔNG CO  F = dòng eyebrow + chỉ vàng 26 + hai nút CTA 42 = 68px
+ *                    (nút giữ nguyên vì 42px đã sát sàn vùng bấm 44px của
+ *                     thước đo; cỡ chữ nút cũng đã ở mức tối thiểu)
+ *   chừa thở       B = 12px (6px trên + 6px dưới)
+ *   => S' = chiều-cao-khung − F − B = 100cqh − 80px
+ *   => hệ số = S'/S, viết thành độ dài `--hero-thu` để nhân trực tiếp.
+ * Thay số 1440: S' = 314,7 ≈ S -> hệ số 1,0035, mọi `min()` chạm trần. ✓
+ *
+ * `container-type: size` cho `cqh` = 1% chiều cao khung hero. CHỈ đặt từ 768px:
+ * dưới mốc đó khung hero cao theo nội dung (`py-9`), mà `contain: size` trên
+ * khung cao-tự-động thì chiều cao coi như 0 -> `cqh` = 0 -> cả cụm chữ biến
+ * mất. Mọi chỗ dùng `--hero-thu` cũng phải là biến thể `md:`.
+ */
+@media (min-width: 768px) {
+  .sora-hero-khoa {
+    container-type: size;
+    --hero-thu: calc((100cqh - 87.1px) / 306.6);
+  }
+}
+
+/* ===========================================================================
+ *  TRANG CHỦ v2 — 07/10/2026
+ *
+ *  Nguồn số đo: `_w-agent/trang-chu-v2/02_chot.md` (bản chốt) + ảnh mẫu toàn
+ *  trang `mau/mau-0-toan-trang.png` (1672×941). Mọi % dưới đây đo THẲNG trên
+ *  ảnh mẫu rồi quy ra, không ướm mắt — chỗ nào đo được thì ghi kèm toạ độ.
+ *
+ *  Quy đổi ảnh mẫu -> màn 1920: ×1,1483 (1920/1672).
+ *  Ngân sách dọc ở 1920×1080:  hero 558 + 28 + thẻ 436 + 28 = 1050 ≤ 1080.
+ * ======================================================================== */
+
+.sora-tc {
+  /* Lề trong vùng nội dung: ảnh mẫu x 257→1643 trên nền 230→1672 => 27/29px,
+     chốt 28 (02_chot §1). */
+  --tc-pad: 28px;
+  /* Khe giữa các thẻ: ảnh mẫu 14px => 16 ở 1920 (02_chot §2). */
+  --tc-khe: 16px;
+  /*
+   * Tỉ lệ thẻ nhỏ, đo trên ảnh mẫu: 372,5 × 180 => **2,07**. Khớp đúng tỉ lệ
+   * của 5 ảnh thẻ rời Sếp gửi (2,066) — bộ ảnh đó vẽ sẵn cho đúng ô này.
+   *
+   * CHIỀU CAO KHỐI THẺ SUY RA TỪ ĐÂY, không chốt cứng 436px.
+   * Trước đây khoá `height: min(436px, 100%)` cho cả khối: ở màn thấp
+   * (1366×768, 1440×900) phần chỗ còn lại dưới hero nhỏ hơn 436 nên hai hàng
+   * thẻ bị bóp ngắn lại, tỉ lệ rơi từ 2,07 xuống 1,9 và chữ trong thẻ — vốn
+   * tính theo `cqw` của bề NGANG — tràn xuống dưới 20px (do-hop.cjs bắt được ở
+   * cả 1366, 1440 và 390).
+   * Nay: hàng của lưới để `auto`, thẻ nhỏ giữ `aspect-ratio`, khối thẻ cao
+   * theo đó, còn thẻ SUSHI tự kéo cao bằng cả lưới (ô lưới mặc định `stretch`).
+   * Ở 1920 ra đúng 434,5/2,07 × 2 + 16 = **436** như bảng chốt — con số cũ giờ
+   * là KẾT QUẢ chứ không còn là tham số phải nhớ.
+   */
+  --tc-the-ti-le: 2.07;
+  /*
+   * HỆ SỐ CO CỦA CỤM CHỮ HERO — là một ĐỘ DÀI để nhân trực tiếp:
+   * `calc(44 * var(--tc-k))` ra 44px khi hero đúng 558px.
+   *
+   * Mặc định 1px = "không co". Giá trị thật đặt ở `.sora-tc-hero` bằng `cqh`.
+   * Khai mặc định ở đây là CHỐT CHẶN: một `var()` không tồn tại thì CẢ khai
+   * báo mất hiệu lực (font-size về mặc định) chứ không rơi về giá trị cũ —
+   * lỗi im lặng. Bài học đã ghi ở `--hero-thu` phía trên.
+   */
+  --tc-k: 1px;
+}
+
+@media (max-width: 767px) {
+  .sora-tc {
+    --tc-pad: 16px;
+    --tc-khe: 12px;
+  }
+}
+
+/*
+ * KHOÁ MỘT MÀN — chỉ từ 1200px trở lên (khác `.sora-khoa-mot-man` cũ, khoá
+ * từ 768px). Lý do: từ 768–1199 bố cục mới xếp SUSHI chiếm cả hàng rồi mới
+ * tới lưới 2×2 (02_chot §3-K) nên khối thẻ cao gấp đôi — ép vào một màn là
+ * cắt mất nguyên hàng thẻ. Dưới 1200 cho cuộn, đúng như trang vẫn làm ở màn
+ * thấp.
+ *
+ * `--rail-lane: 0` theo đúng luật đã ghi ở `--rail-lane`: khoá màn thì không
+ * khối nào trôi qua dải dọc của cột nút nổi nên không phải chừa làn.
+ *
+ * `max-aspect-ratio: 1.8` là CHỐT CHẶN cho màn RỘNG mà THẤP.
+ * Khối thẻ cao theo BỀ NGANG (tỉ lệ thẻ 2,07), còn chỗ chừa cho nó lại theo
+ * CHIỀU CAO màn. Màn càng rộng so với cao thì hai thứ đó càng xa nhau: ở
+ * 1920×900 thẻ cần 436px mà chỉ còn 380px — khoá màn là cắt mất đáy thẻ.
+ * Giải bất phương trình "thẻ vừa chỗ còn lại" ra đúng quanh tỉ lệ 1,8, nên
+ * 1920×1080 (1,78) và 1600×900 (1,78) vẫn khoá, còn 1920×900 (2,13) thì cho
+ * cuộn. Thà cuộn một chút còn hơn cụt mất hàng thẻ.
+ */
+@media (min-width: 1200px) and (min-height: 820px) and (max-aspect-ratio: 1.8) {
+  .sora-tc-khoa {
+    height: 100svh;
+    overflow: hidden;
+    --rail-lane: 0px;
+  }
+}
+
+/* ----------------------------------------------------------------- HERO -- */
+
+.sora-tc-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(216, 178, 106, 0.4);
+  background: var(--color-bg);
+}
+
+@media (min-width: 768px) {
+  .sora-tc-hero {
+    /* 558px = 51,6% của 1080 (ảnh mẫu: đáy hero ở y≈486/941). Trần 558 để
+       màn rất cao không thổi hero phình ra; sàn 360 cho màn 720. */
+    height: clamp(360px, 51.6svh, 558px);
+    /* `cqh` = 1% chiều cao hero. CHỈ đặt từ 768px: dưới mốc đó hero cao theo
+       nội dung, mà `contain: size` trên khung cao-tự-động thì chiều cao coi
+       như 0 -> `cqh` = 0 -> cả cụm chữ biến mất. */
+    container-type: size;
+    --tc-k: calc(100cqh / 558);
+  }
+}
+
+/* Lớp 1 — ảnh nhà hàng. KHÔNG phủ màu, không gradient: đo vùng chữ trên ảnh
+   gốc ra trung vị lum 23, chỉ 11,6% px vượt 120 (01_spec §4). Chữ đọc được
+   nhờ bóng đổ của chính chữ (`.sora-on-photo-block`). */
+.sora-tc-hero-nen {
+  object-fit: cover;
+  /* 42%: giữ được tán hoa đào mép trên VÀ dải marble ở đáy — hai thứ mục 6
+     lời Sếp gọi tên. Cắt 25% thì giữ thêm đèn lồng nhưng mất gần hết marble
+     và vùng chữ sáng thêm (14,3% px > lum 120 so với 11,6%). */
+  object-position: center 42%;
+  z-index: 0;
+}
+
+/* Lớp 2 — đĩa sushi PNG nền trong, góc phải dưới, tràn nhẹ xuống mép hero
+   (mục 7 lời Sếp: "1 platter đẹp, góc phải, scale lớn, có khoảng thở"). */
+.sora-tc-dia {
+  position: absolute;
+  z-index: 1;
+  /* Đo trên ảnh mẫu: đĩa chiếm x 795→1195 / 1442 và y 283→445 / 486, tức
+     rộng 27,7% bề ngang hero, mép phải cách lề phải 17,1%, đáy cách đáy hero
+     8,4%. Giữ nguyên ba con số đó, chỉ hạ `bottom` xuống 1% cho đĩa tràn
+     nhẹ qua mép như 02_chot §4 dặn — `mau-2` là đĩa chữ nhật tỉ lệ 1,38 nên
+     cao hơn đĩa trong ảnh mẫu, không thể khớp cả hai chiều. */
+  right: 15%;
+  bottom: 1%;
+  width: 28%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Lớp 3 — cột chữ. Neo ĐÁY: trên ảnh mẫu hai nút kết thúc ở y=483/486, tức
+   cụm chữ dán sát mép dưới hero, còn khoảng trống dồn lên trên. */
+.sora-tc-hero-chu {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  /* trái 5,9% = 85/1442 trên ảnh mẫu; đáy 3,3% = 16/486 */
+  padding: calc(20 * var(--tc-k)) 0 calc(18 * var(--tc-k)) 5.9%;
+  width: 46%;
+  min-width: 0;
+}
+
+.sora-tc-wordmark {
+  display: block;
+  margin-bottom: calc(10 * var(--tc-k));
+}
+
+.sora-tc-eyebrow {
+  font-family: var(--font-sans);
+  font-size: calc(15 * var(--tc-k));
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+/* Gạch dưới eyebrow: ảnh mẫu là một vệt ĐỎ son nhoè hai đầu, không phải
+   đường vàng (ảnh mẫu x 85→437, y≈292). */
+.sora-tc-gach-do {
+  display: block;
+  width: calc(352 / 1442 * 100%);
+  max-width: 100%;
+  height: 2px;
+  margin-top: calc(9 * var(--tc-k));
+  background: linear-gradient(
+    90deg,
+    rgba(168, 23, 23, 0) 0%,
+    #c41e20 18%,
+    #e02828 50%,
+    #a81717 82%,
+    rgba(168, 23, 23, 0) 100%
+  );
+}
+
+.sora-tc-tieu-de {
+  margin-top: calc(16 * var(--tc-k));
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: calc(44 * var(--tc-k));
+  /* 1,14 là bước dòng đo trên ảnh mẫu (50/44), nhưng Playfair có vùng mực
+     cao hơn thế: do-hop.cjs bắt được chữ cao hơn hộp 4px ở cả 1920 và 1440
+     (dấu Ä của "Säckingen" đội lên, đuôi g thò xuống). 1,2 vừa đủ ôm. */
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  color: var(--color-ivory);
+}
+
+.sora-tc-phu {
+  margin-top: calc(13 * var(--tc-k));
+  font-family: var(--font-sans);
+  font-size: calc(13 * var(--tc-k));
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.sora-tc-nut-hang {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(15 * var(--tc-k));
+  margin-top: calc(18 * var(--tc-k));
+  max-width: 100%;
+}
+
+/* Hai nút hero. Cỡ đo trên ảnh mẫu: cao 47/486 -> 54 ở 1920; nút 1 rộng 240,
+   nút 2 rộng 247. Để nhãn tự quyết bề ngang (đổi DE/VI là đổi độ dài) nhưng
+   khoá chiều cao + đệm ngang. */
+.sora-tc-nut {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(10 * var(--tc-k));
+  height: calc(48 * var(--tc-k));
+  padding: 0 calc(20 * var(--tc-k));
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: calc(12.5 * var(--tc-k));
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    transform 200ms var(--ease-sora),
+    border-color 200ms var(--ease-sora),
+    filter 200ms var(--ease-sora);
+}
+.sora-tc-nut--do {
+  background: linear-gradient(180deg, #c41e20 0%, #a81717 100%);
+  border: 1px solid rgba(218, 174, 88, 0.65);
+  color: #fff7ea;
+}
+.sora-tc-nut--vien {
+  /* Nền TRONG, không blur: luật cấm glassmorphism. Nền ảnh ở đây đã đủ tối. */
+  background: rgba(9, 8, 6, 0.42);
+  border: 1px solid #d8ad58;
+  color: #f0d292;
+}
+.sora-tc-nut:hover {
+  transform: translateY(-2px);
+}
+.sora-tc-nut--do:hover {
+  filter: brightness(1.08);
+}
+.sora-tc-nut--vien:hover {
+  border-color: #f0d292;
+}
+.sora-tc-nut svg,
+.sora-tc-nut .sora-tc-mui-ten {
+  flex-shrink: 0;
+}
+.sora-tc-nut .sora-tc-mui-ten {
+  transition: transform 200ms var(--ease-sora);
+}
+.sora-tc-nut:hover .sora-tc-mui-ten {
+  transform: translateX(5px);
+}
+
+/* Dải chữ dọc trang trí mép phải hero (ảnh mẫu x≈1395–1415, y 140–310).
+   Dựng bằng `writing-mode`, KHÔNG phải ảnh. */
+.sora-tc-doc {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: calc(14 * var(--tc-k));
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: var(--font-sans);
+  font-size: calc(10 * var(--tc-k));
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(233, 224, 212, 0.62);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* -------------------------------------------------------- KHU DANH MỤC -- */
+
+.sora-tc-dm {
+  padding: var(--tc-pad);
+  /* Chừa làn cột nút nổi KHI trang còn cuộn được; khoá một màn thì
+     `--rail-lane` đã về 0 (xem `.sora-tc-khoa`). */
+  padding-right: calc(var(--tc-pad) + var(--rail-lane));
+}
+
+@media (min-width: 1200px) {
+  .sora-tc-dm {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
+/* Ảnh mẫu: SUSHI x 257→870 = 613 · khe 14 · lưới 884→1643 = 759.
+   Quy ra 1920: 713 / 16 / 885. Viết thẳng bằng `fr` theo đúng hai con số đó
+   nên tỉ lệ ĐÚNG ở mọi bề ngang, không phải chọn lại số tròn. */
+.sora-tc-luoi {
+  display: grid;
+  grid-template-columns: minmax(0, 713fr) minmax(0, 885fr);
+  gap: var(--tc-khe);
+  width: 100%;
+}
+
+.sora-tc-luoi-nho {
+  display: grid;
+  /* `repeat(2, 1fr)` đúng mục 11 lời Sếp. Ảnh mẫu vẽ hai cột LỆCH nhau
+     (427/318) nhưng đó là ảnh AI; lời Sếp đứng trên ảnh mẫu. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Hàng `auto` chứ không `1fr`: chiều cao do `aspect-ratio` của thẻ quyết
+     định, xem dẫn giải ở `--tc-the-ti-le`. */
+  grid-template-rows: auto auto;
+  gap: var(--tc-khe);
+  min-width: 0;
+}
+
+/* Tỉ lệ thẻ nhỏ là thứ KHOÁ chiều cao cả khu danh mục. Thẻ SUSHI không khai
+   tỉ lệ: nó là một ô lưới nên tự kéo cao bằng lưới 2×2 bên cạnh (`stretch`),
+   ra đúng 713×436 = 1,635 ở 1920 như bảng chốt. */
+.sora-the-dm--nho {
+  aspect-ratio: var(--tc-the-ti-le);
+  /*
+   * `min-height` là CHỐT CHẶN khi thẻ hẹp mà chữ dài.
+   * Ở 1280 thẻ nhỏ chỉ rộng 262px nên "VIETNAMESISCHE KÜCHE" xuống 2 dòng, mà
+   * tỉ lệ 2,07 chỉ cho 126px chiều cao — cụm chữ cao hơn hộp 4px (do-hop.cjs).
+   * `fit-content` cho ô lưới cao thêm đúng phần thiếu; thẻ bên cạnh tự kéo
+   * theo (ô lưới mặc định `stretch`) nên hai thẻ vẫn bằng nhau, và tỉ lệ 2,07
+   * vẫn giữ ở mọi khổ còn dư chỗ.
+   */
+  min-height: fit-content;
+}
+
+/* ------------------------------------------------------------- MỘT THẺ -- */
+
+.sora-the-dm {
+  position: relative;
+  /* Thẻ là hộp FLEX, không phải khối thường — để `.content` tự kéo cao bằng
+     thẻ thay vì phải khai `height: 100%`. Khai `height: 100%` thì chiều cao
+     con phụ thuộc chiều cao cha, mà `min-height: fit-content` của cha lại
+     phụ thuộc chiều cao con: vòng tròn, trình duyệt giải ra **0px** và chốt
+     chặn mất tác dụng im lặng (đo ở 1280: `min-height` tính ra `0px`).
+     `.visual` nằm ngoài dòng chảy (`position: absolute`) nên hộp flex này chỉ
+     có đúng một món: cụm chữ. */
+  display: flex;
+  min-width: 0;
+  /* ⚠ KHÔNG khai `min-height: 0` ở đây.
+     `.sora-the-dm--nho` đặt `min-height: fit-content` làm chốt chặn cho thẻ
+     hẹp (xem ở đó), mà hai bộ chọn cùng độ ưu tiên (0,1,0) nên cái viết SAU
+     thắng — khai ở đây là chốt chặn kia **im lặng về 0px**. Đã dính: đo ở
+     1280 ra `min-height: 0px` trong khi CSS ghi `fit-content`. */
+  overflow: hidden;
+  border: 1px solid #e6c276;
+  border-radius: 16px;
+  background: #130d09;
+  /* Khung vàng do CSS vẽ (02_chot §3-E); ảnh dùng bản `-inner` đã cắt khung,
+     nên không bao giờ có hai viền chồng nhau. */
+  container-type: inline-size;
+  isolation: isolate;
+  transition:
+    transform 300ms var(--ease-sora),
+    border-color 300ms var(--ease-sora),
+    box-shadow 300ms var(--ease-sora);
+}
+.sora-the-dm--lon {
+  border-width: 2px;
+  border-radius: 20px;
+}
+.sora-the-dm:hover,
+.sora-the-dm:has(:focus-visible) {
+  transform: translateY(-4px);
+  border-color: #f0d292;
+  /* Bóng hổ phách nhẹ (mục 9). KHÔNG phải glow: không lan rộng, không nhấp
+     nháy theo thời gian. */
+  box-shadow: 0 10px 28px rgba(216, 173, 88, 0.14);
+}
+
+.sora-the-dm-anh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.sora-the-dm-anh img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms var(--ease-sora);
+}
+.sora-the-dm:hover .sora-the-dm-anh img,
+.sora-the-dm:has(:focus-visible) .sora-the-dm-anh img {
+  /* Đúng 1,035 theo mục 9 — "không zoom quá mạnh". */
+  transform: scale(1.035);
+}
+
+.sora-the-dm-noi {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/*
+ * NHỊP DỌC TRONG THẺ — tất cả tính theo `cqw` (1% bề ngang thẻ).
+ *
+ * Dùng được vì tỉ lệ thẻ KHOÁ CỨNG bằng `aspect-ratio` (1,635 cho thẻ lớn,
+ * 2,07 cho thẻ nhỏ) đúng bằng tỉ lệ trên ảnh mẫu — nên % bề ngang và % chiều
+ * cao quy đổi được cho nhau, và cả cụm chữ co giãn NGUYÊN KHỐI theo thẻ ở mọi
+ * khổ màn. Đó là cách duy nhất "không căn bằng mắt" như mục 11 đòi.
+ *
+ * Số gốc (ảnh mẫu, thẻ SUSHI 611×374 — toạ độ tính từ góc trong của khung):
+ *   寿司 đỉnh 101 (27,0% cao) · tiêu đề đỉnh cap 138 (36,9%) ·
+ *   chữ phụ đỉnh cap 194 (51,9%) · gạch vàng 231 (61,8%) ·
+ *   nút 258→301 (69,0→80,5%) · chừa đáy 73 (19,5%)
+ * Thẻ nhỏ lấy từ `01_spec.md` §1.5 (trung bình 4 thẻ mẫu rời).
+ */
+
+/* --- thẻ lớn SUSHI: chữ bên TRÁI --- */
+.sora-the-dm--lon .sora-the-dm-noi {
+  padding: 16.5cqw 0 11.9cqw 6.7cqw;
+  width: 62%;
+}
+.sora-the-dm--lon .sora-the-dm-han {
+  font-size: 4.8cqw;
+}
+.sora-the-dm--lon .sora-the-dm-tua {
+  /* Khe 1,4 -> 0,2cqw và khe chữ phụ 2 -> 0,2cqw (07/10, đo thật ở 1920).
+     Hộp dòng của Playfair/Inter đã tự mang sẵn phần thở; cộng thêm lề là cả
+     cụm tụt xuống: đo ra gạch vàng ở 68,1% thay vì 61,8% như ảnh mẫu, dính
+     gần sát nút. Nút neo đáy bằng margin-top:auto nên nó vẫn đúng chỗ, chỉ
+     ba dòng trên trôi — nhìn ảnh ghép cạnh mẫu mới thấy. */
+  margin-top: 0.2cqw;
+  font-size: 8.4cqw;
+}
+.sora-the-dm--lon .sora-the-dm-phu {
+  margin-top: 0.2cqw;
+  font-size: max(13px, 2.25cqw);
+}
+.sora-the-dm--lon .sora-the-dm-gach {
+  margin-top: 2.6cqw;
+  width: 18.3cqw;
+}
+.sora-the-dm--lon .sora-the-dm-nut {
+  height: max(34px, 7cqw);
+  /* Đệm ngang chỉnh theo bề ngang nút đo trên ảnh mẫu: 26,7% bề rộng thẻ
+     (01_spec §1.5). Ở 3,2cqw nút chỉ ra 22,3%. */
+  padding: 0 5.4cqw;
+  gap: 2.5cqw;
+  font-size: max(12px, 2.1cqw);
+}
+
+/* --- 4 thẻ nhỏ: chữ bên PHẢI (mép trái cụm chữ ở 58% bề rộng thẻ) --- */
+.sora-the-dm--nho .sora-the-dm-noi {
+  /* 55% chứ không 58% như 01_spec §1.5: đo thật ở 1920 thì cột 42% chỉ còn
+     168px, mà "VIETNAMESISCHE" ở Playfair 20px cần 174px -> tiêu đề gãy
+     GIỮA TỪ ("VIETNAMESISCH / E KÜCHE"). Nới 3% là đủ, và vẫn nằm trong
+     khoảng 58–62,5% mà bốn thẻ mẫu dùng khi tính cả phần chữ tràn sang. */
+  padding: 11.3cqw 3.2cqw 9.1cqw 0;
+  margin-left: 55%;
+  width: 45%;
+}
+.sora-the-dm--nho .sora-the-dm-han {
+  font-size: 4.15cqw;
+}
+.sora-the-dm--nho .sora-the-dm-tua {
+  margin-top: 1.5cqw;
+  font-size: 4.6cqw;
+}
+.sora-the-dm--nho .sora-the-dm-phu {
+  margin-top: 1.8cqw;
+  font-size: max(11px, 2.76cqw);
+}
+.sora-the-dm--nho .sora-the-dm-nut {
+  height: max(26px, 7.1cqw);
+  /* Mẫu: nút rộng 31,6–32,8% bề rộng thẻ. Ở 3,4cqw đo ra 27,0%. */
+  padding: 0 6cqw;
+  gap: 2.4cqw;
+  font-size: max(11px, 2.76cqw);
+}
+
+/* --- chữ trong thẻ, dùng chung --- */
+.sora-the-dm-han {
+  font-family: var(--font-cjk);
+  font-weight: 500;
+  /* 1 làm chữ Hán cao hơn hộp 4–7px ở mọi khổ (do-hop.cjs): ô chữ CJK gần
+     như lấp kín em-box nên không có chỗ thở như chữ Latin. */
+  line-height: 1.25;
+  letter-spacing: 0.08em;
+  color: #e6c276;
+  /* Cùng lý do với `.sora-the-dm-tua`: nới hộp rồi trừ lại, bố cục không đổi.
+     Font CJK dự phòng của mỗi hệ điều hành có vùng mực khác nhau nên 1,25 đủ
+     ở khổ này lại thiếu 4px ở khổ khác (do-hop.cjs bắt ở 1024). */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+.sora-the-dm-tua {
+  font-family: var(--font-display);
+  font-weight: 500;
+  /* 1,12 = bước dòng đo trên mau-5 (72/64,3), nhưng vùng mực Playfair cao
+     hơn: do-hop.cjs bắt "SUSHI" cao hơn hộp 5px ở 1920. */
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  /* Gradient vàng DỌC đúng mẫu (đỉnh chữ #F5E4B1 -> chân #F9C96A).
+     `background-clip: text` — không glow, không viền. */
+  background: linear-gradient(180deg, #f0d292 0%, #e6c276 55%, #d8ad58 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Từ ghép tiếng Đức dài ("VIETNAMESISCHE KÜCHE") phải xuống dòng được,
+     nhưng `anywhere` thì nó cắt GIỮA TỪ ngay cả khi còn chỗ ngắt ở dấu cách
+     — đã ra "VIETNAMESISCH / E KÜCHE". `break-word` ưu tiên dấu cách
+     trước, chỉ cắt trong từ khi một từ dài hơn cả dòng. */
+  overflow-wrap: break-word;
+  hyphens: auto;
+  /*
+   * NỚI HỘP MÀ KHÔNG ĐỔI BỐ CỤC.
+   *
+   * Playfair có tổng vùng mực 1,34em (ascender 1,082 + descender 0,256) nên
+   * MỌI bước dòng nhỏ hơn 1,34 đều làm "nội dung cao hơn hộp" — do-hop.cjs
+   * báo đúng 4px ở tiêu đề SUSHI 59,6px. Nhìn mắt thì không có gì bị cắt
+   * (chữ hoa không có đuôi), nhưng để công cụ còn bắt được lỗi THẬT thì không
+   * nên để một cảnh báo thường trực làm nền.
+   *
+   * Nâng bước dòng là cả cụm chữ tụt xuống, hỏng nhịp dọc vừa đo xong. Nên
+   * nới hộp bằng `padding` rồi trừ lại đúng ngần ấy bằng `margin` âm: hộp đủ
+   * cao để ôm vùng mực, còn chỗ nó chiếm trong dòng chảy thì y như cũ.
+   */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+.sora-the-dm-phu {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: #fff7ea;
+  text-wrap: balance;
+}
+.sora-the-dm-gach {
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    #e6c276 0%,
+    rgba(230, 194, 118, 0.55) 62%,
+    rgba(230, 194, 118, 0) 100%
+  );
+}
+.sora-the-dm-nut {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Pill bo tròn hoàn toàn, nền TRONG SUỐT — đo trên ảnh mẫu: màu trong nút
+     và ngoài nút lệch ≤2 mức (01_spec §1.3). */
+  border: 1px solid #e6c276;
+  border-radius: 9999px;
+  background: transparent;
+  color: #f0d292;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    border-color 250ms var(--ease-sora),
+    background 250ms var(--ease-sora);
+}
+.sora-the-dm:hover .sora-the-dm-nut,
+.sora-the-dm:has(:focus-visible) .sora-the-dm-nut {
+  border-color: #f0d292;
+  background: rgba(216, 173, 88, 0.08);
+}
+.sora-the-dm-nut .sora-tc-mui-ten {
+  transition: transform 250ms var(--ease-sora);
+}
+.sora-the-dm:hover .sora-the-dm-nut .sora-tc-mui-ten,
+.sora-the-dm:has(:focus-visible) .sora-the-dm-nut .sora-tc-mui-ten {
+  transform: translateX(5px);
+}
+
+/* ------------------------------------------------------- MÁY BẢNG / ĐT -- */
+
+/*
+ * DƯỚI 1200: SUSHI chiếm cả hàng, 4 thẻ nhỏ 2×2 bên dưới (02_chot §3-K),
+ * và THẺ XẾP DỌC — ảnh trên, chữ dưới, KHÔNG chồng chữ lên món.
+ *
+ * VÌ SAO ĐỔI HẲN CÁCH DỰNG CHỨ KHÔNG CHỈ CHỈNH CỠ CHỮ (đã chụp trang ra nhìn
+ * ở 768 và 390 mới thấy, do-hop.cjs không bắt được vì đây không phải lỗi hộp):
+ *
+ * 1. Trong năm ảnh thẻ, món ăn chiếm từ ~30% bề ngang trở đi. Chỗ đặt chữ là
+ *    dải tối còn lại, rộng chừng 40% khung. Ở 1920 thì 40% của thẻ là
+ *    170–285px — đủ. Ở 768 thẻ nhỏ chỉ rộng 332px nên còn 133px, mà chữ phải
+ *    giữ sàn đọc 13px: cụm chữ rộng hơn chỗ trống và LUÔN đè lên món.
+ *    `object-fit: cover` không cứu được — muốn đẩy món sang phải thì phải cắt
+ *    bớt bên trái, mà cắt bên trái lại kéo món sang TRÁI.
+ * 2. Thẻ SUSHI dưới 1200 trải hết bề ngang (936px ở 1024) trong khi cỡ chữ
+ *    tính theo `cqw` của chính thẻ -> tiêu đề phình lên 78px trong một thẻ chỉ
+ *    cao 390px. Tỉ lệ thẻ đã đổi (1,635 -> 2,4) nên `cqw` không còn quy đổi
+ *    được sang % chiều cao nữa.
+ *
+ * Đè chữ lên ảnh món là phạm đúng luật dự án đã ghi ở `TeaserCard` vòng 1.
+ * Mục 16 lời Sếp cũng để ngỏ ("Mobile: 1 column hoặc horizontal swipe cards").
+ * Khổ ≥1200 — khổ Sếp duyệt — giữ nguyên bố cục chồng đúng ảnh mẫu.
+ */
+@media (max-width: 1199px) {
+  .sora-tc-luoi {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sora-the-dm--lon,
+  .sora-the-dm--nho {
+    /* Chiều cao theo nội dung; tỉ lệ khoá ở `.visual` chứ không ở cả thẻ. */
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  /* `.visual` thôi làm lớp nền tuyệt đối, thành một khối có tỉ lệ ở trên.
+     `<Image fill>` bên trong vẫn định vị theo khối này nên phía component
+     không phải đổi gì. Ảnh giữ nguyên tỉ lệ, chỉ cắt mép — không méo. */
+  .sora-the-dm-anh {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+  .sora-the-dm--lon .sora-the-dm-anh {
+    aspect-ratio: 2.6;
+  }
+  .sora-the-dm--nho .sora-the-dm-anh {
+    aspect-ratio: 16 / 9;
+  }
+  .sora-the-dm--lon .sora-the-dm-noi,
+  .sora-the-dm--nho .sora-the-dm-noi {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    padding: 16px 20px 20px;
+  }
+  /* Thẻ đổi tỉ lệ nên `cqw` hết dùng được; khoá cỡ chữ theo px. */
+  .sora-the-dm--lon .sora-the-dm-han,
+  .sora-the-dm--nho .sora-the-dm-han {
+    font-size: 15px;
+  }
+  .sora-the-dm--lon .sora-the-dm-tua,
+  .sora-the-dm--nho .sora-the-dm-tua {
+    margin-top: 6px;
+    font-size: 24px;
+  }
+  .sora-the-dm--lon .sora-the-dm-phu,
+  .sora-the-dm--nho .sora-the-dm-phu {
+    margin-top: 6px;
+    font-size: 13px;
+  }
+  .sora-the-dm--lon .sora-the-dm-gach {
+    margin-top: 12px;
+    width: 34%;
+  }
+  .sora-the-dm--lon .sora-the-dm-nut,
+  .sora-the-dm--nho .sora-the-dm-nut {
+    margin-top: 14px;
+    height: 36px;
+    font-size: 13px;
+    padding: 0 18px;
+    gap: 10px;
+  }
+
+  /* Cột chữ hero 46 -> 54% (01_spec §5: 768–1279 chia 46/54).
+     Ở 1024 cột 46% chỉ còn 431px nên hàng hai nút rộng hơn hộp 12px. */
+  .sora-tc-hero-chu {
+    width: 54%;
+  }
+  /*
+   * Tiêu đề hero phải thêm TRẦN THEO BỀ NGANG, không chỉ theo chiều cao.
+   *
+   * `--tc-k` co theo chiều cao hero, mà ở máy bảng màn lại CAO và HẸP
+   * (768×1024): hệ số gần như không co (0,95 -> chữ 41,6px) trong khi cột chữ
+   * chỉ còn 367px. "Mitten in Bad Säckingen." cần ~450px -> rớt thành 4 dòng
+   * và tràn ra ngoài khung hero. 4,3vw ở 768 ra 33px, vừa đúng một dòng.
+   */
+  .sora-tc-tieu-de {
+    font-size: min(calc(44 * var(--tc-k)), 4.3vw);
+  }
+}
+
+/* <768px: lưới thẻ nhỏ về MỘT cột; thẻ đã xếp dọc từ khối trên. */
+@media (max-width: 767px) {
+  .sora-tc-luoi-nho {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+  .sora-the-dm--lon .sora-the-dm-anh {
+    aspect-ratio: 16 / 9;
+  }
+  .sora-the-dm--lon .sora-the-dm-noi,
+  .sora-the-dm--nho .sora-the-dm-noi {
+    padding: 14px 18px 18px;
+  }
+  .sora-the-dm--lon .sora-the-dm-tua,
+  .sora-the-dm--nho .sora-the-dm-tua {
+    font-size: 22px;
+  }
+}
+
+
+/* ------------------------------------------------- HERO Ở KHỔ ĐIỆN THOẠI --
+ *
+ * Mục 16 lời Sếp: *"Hero mobile: text trước, food sau"*. Nên ở <768px hero
+ * KHÔNG chồng chữ lên ảnh nữa: một khối chữ trên nền tối, rồi tới một khối
+ * ảnh riêng có đĩa sushi tràn góc phải dưới. Ở 390px không đủ chỗ để chữ và
+ * ảnh cùng tồn tại mà vẫn đọc được — cùng lý do `PageHero` đã tách từ vòng 1.
+ *
+ * `--tc-k` ở khổ này là 1px (mặc định) vì `container-type: size` chỉ bật từ
+ * 768px, nên mọi cỡ chữ phải khai lại bằng px ở đây.
+ */
+@media (max-width: 767px) {
+  .sora-tc-hero {
+    height: auto;
+    border-bottom: none;
+    background: var(--color-bg);
+  }
+  .sora-tc-hero-chu {
+    width: 100%;
+    height: auto;
+    padding: 24px var(--tc-pad) 20px;
+  }
+  .sora-tc-wordmark {
+    margin-bottom: 10px;
+  }
+  .sora-tc-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    white-space: normal;
+  }
+  .sora-tc-gach-do {
+    margin-top: 8px;
+    width: 64%;
+  }
+  .sora-tc-tieu-de {
+    margin-top: 12px;
+    font-size: 26px;
+  }
+  .sora-tc-phu {
+    margin-top: 10px;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+  }
+  .sora-tc-nut-hang {
+    margin-top: 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .sora-tc-nut {
+    /* Mỗi nút MỘT HÀNG: ở 358px cột chữ, hai nút chia đôi chỉ được 174px
+       trong khi "Speisekarte entdecken" cần 177px — đã đo ở vòng 1. */
+    flex: 1 1 100%;
+    justify-content: center;
+    height: 44px;
+    padding: 0 14px;
+    font-size: 11.5px;
+    gap: 8px;
+  }
+  .sora-tc-doc {
+    display: none;
+  }
+  .sora-tc-anh-dt {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-top: 1px solid rgba(216, 178, 106, 0.4);
+    border-bottom: 1px solid rgba(216, 178, 106, 0.4);
+  }
+  .sora-tc-anh-dt .sora-tc-dia {
+    width: 56%;
+    right: 3%;
+    bottom: -3%;
+  }
+}
+
+/* ------------------------------------------------------- HIỆN KHI CUỘN -- */
+
+/*
+ * Nguồn: `_w-agent/trang-chu-v2/01_tra-kho.md` §7 — CSS thuần, 0 phụ thuộc.
+ * Hai câu `@media` cuối là bắt buộc: không có chúng thì máy tìm kiếm và người
+ * tắt JS thấy trang TRỐNG.
+ */
+.sora-hien {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s var(--ease-sora),
+    transform 0.6s var(--ease-sora);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.sora-hien.sora-da-vao {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sora-hien {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+@media (scripting: none) {
+  .sora-hien {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Short, quiet feedback for drawers; respect reduced motion. */
+@keyframes soraDialogEnter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.sora-dialog-enter { animation: soraDialogEnter 180ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sora-dialog-enter { animation: none; }
+}
+
+.sora-menu-trai { background: #070605; border-right-color: #d8ad581a; }
+.sora-menu-trai > span:first-child { opacity: .5; }
+.sora-sidebar-social { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
+.sora-sidebar-social a { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #15110d; color: #d8ad58; transition: color .2s, background .2s, transform .2s; }
+.sora-sidebar-social a:hover { color: #fff0c5; background: #292015; transform: translateY(-2px); }
+.sora-sidebar-social a:focus-visible { outline: 2px solid #f0d292; outline-offset: 3px; }
+@media (min-width:768px) and (max-width:1199px) { .sora-sidebar-social { flex-direction: column; align-items: center; gap: 8px; } }
+
+.sora-menu-trai::after { content: ''; position: absolute; top: 0; right: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, #91652a22, #d5a54c99 22%, #ffdda4 52%, #b5843999 82%, #91652a22); box-shadow: 1px 0 5px #d8ad5822; pointer-events: none; }
+.sora-sidebar-social span[aria-disabled=true] { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #d8ad58; background: #15110d; }
+
+/* Utility controls now live in the left menu. */
+:root { --rail-lane: 0px; }
+
+/*
+ * Banner trang con. CHIỀU CAO XÁC ĐỊNH (`height`, không `min-height`) vì khung
+ * này là `container-type: size`: tiêu đề nét cọ tự co theo chiều cao banner
+ * (`cqh`, xem magic-banner-title.module.css) nên banner thấp tới đâu chữ cũng
+ * nằm trọn bên trong, không bị `overflow: hidden` của banner cắt chân.
+ * `--banner-h` để trang một-màn (`.sora-mot-man`) co banner theo chiều cao màn.
+ */
+.sora-subpage-magic-hero { position: relative; isolation: isolate; height: var(--banner-h, 340px); container-type: size; border-bottom: 1px solid var(--border-gold); }
+.sora-subpage-magic-background { object-fit: cover; object-position: center top; z-index: -1; filter: brightness(.58); }
+/* Đệm dưới lớn hơn đệm trên: chừa chỗ cho dòng eyebrow / hàng nút nằm ở chân banner. */
+.sora-subpage-magic-heading { position: absolute; inset: 0; display: grid; place-items: center; padding: min(30px, 8cqh) var(--page-pad) min(44px, 13cqh); pointer-events: none; }
+.sora-subpage-magic-copy { position: absolute; bottom: 15px; left: var(--page-pad); right: var(--page-pad); text-align: center; }
+.sora-subpage-magic-hero, [data-menu-hero] { overflow: hidden; }
+.sora-subpage-petals { z-index: 1; }
+.sora-subpage-magic-heading, .sora-subpage-magic-copy { z-index: 2; }
+[data-menu-hero] > div:has([data-magic-title]) { z-index: 2; }
+@media(max-width:767px) {
+  .sora-app-main { padding-top: calc(64px + env(safe-area-inset-top)); padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
+  html { scroll-padding-top: calc(78px + env(safe-area-inset-top)); }
+  input, textarea, select { font-size: 16px !important; }
+  .sora-field { min-height: 48px; border-radius: 10px; }
+  .sora-btn-primary, .sora-btn-secondary { min-height: 44px; border-radius: 10px; }
+  .sora-subpage-magic-hero { --banner-h: 230px; }
+}
+@media(max-width:767px) { #ct-bat, #ct-bang { display: none !important; } }
+@media(max-width:767px) { .sora-app-main { padding-top: 0; } html { scroll-padding-top: 16px; } }
+
+/*
+ * ── TRANG CON 11/10 ────────────────────────────────────────────────────────
+ * `--sau-banner`: MỘT khoảng cách từ chân banner tới khối nội dung đầu tiên,
+ * dùng chung cho mọi trang con (trước: Speisekarte 10 · Galerie 16 · Über uns
+ * 22 · Kontakt/Reservierung 32). Sếp: «layout trang con phải cân bằng sát mép
+ * chân banner».
+ */
+:root { --sau-banner: 16px; }
+
+/*
+ * TRANG MỘT MÀN (`.sora-mot-man`) — trang ít nội dung (Kontakt) vừa khít chiều
+ * cao màn hình, không thừa trên thừa dưới, không cuộn (Sếp 11/10).
+ *
+ * Cách làm: cột flex cao đúng 100dvh; banner co theo chiều cao màn
+ * (340px ở màn ≥ 945 cao, xuống 140px ở màn 657 cao); thân trang `flex: 1` nhận
+ * hết phần còn lại và các thẻ bên trong giãn lấp chỗ. KHÔNG `overflow: hidden`
+ * ở đây: nội dung mà không vừa thì trang tự dài ra và cuộn lại được, không có
+ * gì bị cắt mất.
+ *
+ * NGƯỠNG (đo 11/10 trên Kontakt, banner đã co hết cỡ còn 140px):
+ *   ≥1366 rộng: vừa tới 632px cao  -> khoá từ 640px
+ *   1024–1365 : thẻ thông tin hẹp nên cao hơn, vừa tới 694px -> khoá từ 704px
+ * Thấp hơn ngưỡng thì trả về trang cuộn thường (banner 340px). Điện thoại và
+ * máy tính bảng dọc (<1024): cuộn thường.
+ * Thẻ bản đồ giữ `min-height: auto` (không ép về 0): lỡ nội dung dài hơn dự
+ * tính thì trang dài ra chứ `overflow: hidden` của thẻ không cắt mất chữ.
+ * Cấu trúc cột flex cao trọn màn lấy từ kho: hyperui
+ * `application/side-menu/1-dark.html` (`flex h-screen flex-col`), đổi
+ * `h-screen` -> `100dvh` và cho phần thân `flex: 1`.
+ */
+@media (min-width: 1024px) and (min-height: 704px), (min-width: 1366px) and (min-height: 640px) {
+  .sora-mot-man { position: relative; display: flex; flex-direction: column; height: 100dvh; --banner-h: clamp(140px, calc(72dvh - 340px), 340px); }
+  .sora-mot-man > .sora-subpage-magic-hero { flex: none; }
+  /*
+   * LỚP TRANG TRÍ PHẢI TỰ CẮT (vòng 2, 11/10). Cành hoa `SakuraEdge` dài quá đáy
+   * khung 340px; `body` mang `overflow-x: hidden` nên chính <body> thành khung
+   * cuộn dọc -> lăn chuột là banner trượt mất 340px dù `html.scrollHeight` vẫn
+   * bằng màn hình (phép đo vòng 1 mù đúng chỗ này). Mỏ neo trang trí thành một
+   * lớp phủ từ chân banner tới đáy khung, `overflow: hidden` — chỉ hoạ tiết bị
+   * cắt, nội dung thật không nằm trong lớp này.
+   */
+  .sora-mot-man > [data-decor] { position: absolute; top: var(--banner-h); right: 0; bottom: 0; left: 0; height: auto; overflow: hidden; }
+  /* Mỏ neo đứng SAU thân trang vốn nằm ở đáy trang, hoạ tiết của nó vẽ xuống
+     DƯỚI đáy (ngoài màn). Kéo nó thành lớp phủ như trên là vân sóng nhảy lên
+     đè mặt các thẻ — nên ở trang một màn thì bỏ hẳn, đúng như mắt vẫn thấy. */
+  .sora-mot-man > .sora-mot-man-than ~ [data-decor] { display: none; }
+  .sora-mot-man-than { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
+  .sora-mot-man-than > * { flex: 1 1 0; min-height: 0; }
+  /* Bản đồ giãn lấp chiều cao còn lại; sàn thấp để màn 657 cao vẫn vừa. */
+  .sora-mot-man [data-ban-do] { min-height: auto; }
+  .sora-mot-man [data-anh-ban-do] { min-height: 130px; }
+  .sora-mot-man [data-ban-do] iframe { min-height: 140px; }
+}
+/*
+ * Biến thể cho trang mục Über uns (Angebote / Neuheiten / SoRa erleben): banner
+ * có thêm dòng phụ đề + hàng nút nên không co dưới 300px, nội dung cần ≥ 560px
+ * -> chỉ khoá ở màn ≥1200 rộng VÀ ≥880 cao (1920×945, 1440×900). Thấp hơn:
+ * cuộn thường như trước.
+ */
+@media (min-width: 1200px) and (min-height: 880px) {
+  .sora-mot-man-cao { display: flex; flex-direction: column; height: 100dvh; }
+  .sora-mot-man-cao > :first-child { flex: none; }
+  .sora-mot-man-cao .sora-subpage-magic-hero { --banner-h: clamp(300px, calc(72dvh - 340px), 340px); }
+}
+/* Màn THẤP (≤760 cao): rút đệm dọc của thẻ để ảnh bản đồ còn ≥150px — thấp hơn
+   thì cái ghim (cao 61px phía trên tâm ảnh) chạm mép trên khung. */
+@media (min-width: 1024px) and (min-height: 640px) and (max-height: 760px) {
+  .sora-mot-man-than li.sora-card { padding: 12px 16px; }
+  .sora-mot-man [data-ban-do-dau], .sora-mot-man [data-ban-do-nut] { padding-block: 8px; }
+}
+
+/*
+ * ── SIDEBAR Ở MÀN THẤP (vòng 2, 11/10) ─────────────────────────────────────
+ * Sidebar rộng cần 773px chiều cao, bản 88px cần 760px, và `aside` không cuộn
+ * được: ở 1366×657 DE|VI + Impressum/Datenschutz nằm ngoài màn — trên trang đã
+ * khoá cuộn (Kontakt) là hết đường đổi ngôn ngữ.
+ * CHỈ áp dưới ngưỡng đó; từ 780px cao (bản 88px: từ 768px) không đổi một điểm
+ * ảnh. Nén logo + khoảng cách cho vừa 625px; thấp hơn nữa thì riêng sidebar
+ * cuộn dọc.
+ */
+@media (min-width: 1200px) and (max-height: 779px) {
+  .sora-menu-trai { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #d8b26a55 transparent; }
+  .sora-menu-trai > a { margin-top: 12px; }
+  .sora-menu-trai [data-sora-logo] { width: 104px !important; height: 104px !important; }
+  .sora-menu-trai > nav { margin-top: 12px; }
+  .sora-menu-trai > nav > a { height: 40px; flex-shrink: 0; }
+  .sora-menu-trai > div:last-child { padding-bottom: 12px; }
+}
+@media (min-width: 768px) and (max-width: 1199px) and (max-height: 767px) {
+  .sora-menu-trai { overflow-y: auto; scrollbar-width: none; }
+  .sora-menu-trai > a { margin-top: 12px; }
+  .sora-menu-trai > nav { margin-top: 12px; }
+  .sora-menu-trai > nav > a { height: 40px; flex-shrink: 0; }
+  .sora-menu-trai > div:last-child { padding-bottom: 12px; }
 }

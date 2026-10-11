@@ -9,6 +9,7 @@
 import type { SVGProps } from "react";
 
 const STROKE: Record<string, string> = {
+  "shopping-cart": "M3 4h2l2.5 12h11l2-8H6M9 20h.01M17 20h.01",
   home: "M3 10.5 12 3l9 7.5M5.5 9.5V20a1 1 0 0 0 1 1h4v-6h3v6h4a1 1 0 0 0 1-1V9.5",
   utensils: "M4 3v6a2.5 2.5 0 0 0 5 0V3M6.5 11.5V21M16 3c-1.5 1.5-2 3.5-2 5.5 0 1.7.8 3 2 3.5V21",
   calendar:

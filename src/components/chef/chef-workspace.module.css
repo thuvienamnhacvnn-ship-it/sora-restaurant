@@ -1,0 +1,22 @@
+.workspace { padding: 30px var(--page-pad) 48px; max-width: 1800px; margin: auto; }
+.intro { display: flex; align-items: center; justify-content: space-between; gap: 24px; color: #d8b26a; }
+.intro h2 { font-family: var(--font-serif); font-size: clamp(28px,3vw,44px); margin: 10px 0; color: #f3e6cd; }
+.intro p:not(:first-child) { max-width: 760px; font-size: 15px; line-height: 1.7; color: #c4b39a; }
+.intro > svg { flex-shrink: 0; }
+.choices { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0; }
+.choices button { display: inline-flex; gap: 8px; align-items: center; padding: 12px 17px; border: 1px solid #d8b26a66; border-radius: 5px; background: #15110b; color: #e8d4ae; }
+.choices button[aria-pressed=true] { color: #171008; background: #d8b26a; }
+.resultsHead { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-bottom: 17px; }
+.resultsHead h3,.conversation h3 { font-family: var(--font-serif); color: #efdfc0; font-size: 25px; }
+.resultsHead button { display: inline-flex; align-items: center; gap: 8px; color: #d8b26a; font-size: 14px; min-height: 44px; }
+.conversation { margin-top: 34px; padding: 28px; border: 1px solid #d8b26a44; border-radius: 9px; background: #15110b; }
+.conversation form { display: flex; align-items: stretch; gap: 12px; margin-top: 22px; }
+.conversation textarea { flex: 1; min-width: 0; background: #0d0b08; border: 1px solid #d8b26a66; border-radius: 5px; padding: 15px; color: #e9dfcc; resize: vertical; }
+.conversation button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 5px; padding: 12px 22px; background: #d8b26a; color: #161008; font-weight: 600; }
+.conversation button:disabled { opacity: .5; cursor: default; }
+.note { margin-top: 15px; color: #ab9b83; font-size: 12px; line-height: 1.6; }
+.answer { margin-top: 23px; color: #cabcaa; line-height: 1.7; }
+.answer > p { margin-bottom: 16px; }
+.question { width: fit-content; margin-left: auto; padding: 12px 18px; background: #d8b26a19; border-radius: 7px; color: #efddbc; }
+.answer > a { color: #d8b26a; text-decoration: underline; }
+@media(max-width:767px) { .intro > svg { display: none; } .conversation { padding: 20px; } .conversation form { flex-direction: column; } .choices button { font-size: 13px; padding: 11px 13px; } }

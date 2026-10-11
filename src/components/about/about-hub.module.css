@@ -1,0 +1,139 @@
+.hub { padding: 22px var(--page-pad) 48px; max-width: 1800px; margin: auto; }
+.banner { position: relative; }
+.banner :global(.sora-subpage-magic-heading) { padding-bottom: 80px; }
+.bannerTitle { position: absolute; bottom: 80px; left: var(--page-pad); right: var(--page-pad); display: flex; justify-content: center; align-items: center; gap: 15px; z-index: 3; color: #f3e0b9; text-align: center; text-shadow: 0 2px 3px #000; }
+.bannerTitle h2 { font-family: var(--font-serif); font-size: 22px; line-height: 1.3; }
+.bannerTitle > span { width: 35px; height: 2px; background: #c9172a; flex-shrink: 0; }
+.bannerNav { position: absolute; left: var(--page-pad); right: var(--page-pad); bottom: 16px; z-index: 4; }
+.bannerNav .sectionNav { justify-content: center; padding: 0; border: 0; }
+.bannerNav .sectionNav a { background: #100c09e8; border-color: #d8b26a70; }
+.bannerNav .sectionNav a:hover,.bannerNav .sectionNav a[aria-current] { background: #a71224; color: #fff0d5; border-color: #d8b26a; }
+.redRibbon { position: absolute; z-index: 2; top: 0; width: 28px; height: 94px; pointer-events: none; background: linear-gradient(90deg,#790919,#d21a2d 40%,#95101f); border-left: 1px solid #e6c17888; border-right: 1px solid #e6c17888; clip-path: polygon(0 0,100% 0,100% 100%,50% 87%,0 100%); }
+.ribbonLeft { left: 26px; transform: rotate(-7deg); }
+.ribbonRight { right: 26px; transform: rotate(7deg); }
+.hub > .section:first-of-type { margin-top: 0; }
+.hiddenHead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.back,.textLink,.contact { display: inline-flex; gap: 8px; align-items: center; color: var(--color-gold); }
+.back { margin-bottom: 16px; font-size: 14px; }
+.sectionNav { display: flex; flex-wrap: wrap; gap: 10px; padding-bottom: 22px; border-bottom: 1px solid #d8b26a2b; }
+.sectionNav a { display: inline-flex; align-items: center; gap: 8px; padding: 11px 17px; border: 1px solid #d8b26a38; background: #15110b; border-radius: 6px; color: #eee4d2; font-size: 14px; }
+.sectionNav a:hover,.sectionNav a[aria-current] { background: #d8b26a; color: #171008; }
+.section { margin-top: 38px; }
+.sectionPanel { min-width: 0; padding: clamp(16px,2vw,28px); border: 1px solid #d8b26a38; border-radius: 9px; background: #15110b; }
+.sectionPanel .sectionHead { margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #d8b26a26; }
+.sectionHead > div { min-width: 0; }
+.sectionPanel h2 { font-size: clamp(24px,2.5vw,36px); overflow-wrap: anywhere; }
+.sectionPanel h2 + .eyebrow { margin-top: 9px; margin-bottom: 0; }
+.sectionHead { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 22px; }
+.eyebrow { color: #d8b26a; text-transform: uppercase; letter-spacing: .15em; font-size: 11px; line-height: 1.6; margin-bottom: 9px; }
+.section h2 { font-family: var(--font-serif); color: #f4ead6; font-size: clamp(28px,3.1vw,46px); line-height: 1.12; font-weight: 400; }
+.section h2 em { color: #d8b26a; font-style: italic; }
+.duration { display: inline-flex; gap: 7px; align-items: center; font-size: 13px; color: #dfccaa; border: 1px solid #d8b26a38; padding: 9px 13px; border-radius: 4px; }
+.offerGrid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.offerCard { position: relative; overflow: hidden; border-radius: 7px; border: 1px solid #f3ce83; background: #801324; box-shadow: 0 8px 20px #0004; }
+.offerCard::before { content: ''; position: absolute; z-index: 3; inset: 0 0 auto; height: 5px; background: repeating-linear-gradient(110deg,#f9da92 0 20px,#c9192f 20px 40px); pointer-events: none; }
+.offerPoster { display: grid; grid-template-columns: 40% minmax(0,1fr); min-height: 242px; }
+.offerHeadline { position: relative; display: flex; flex-direction: column; justify-content: center; padding: 26px 20px 20px; background: radial-gradient(ellipse at top left,#f55547 0%,#d92136 40%,#9c1024 100%); color: #fff0c6; }
+.sushi .offerHeadline { background: radial-gradient(ellipse at top left,#ffedb4,#e6b64f 55%,#be7c21); color: #651223; }
+.posterLabel { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; line-height: 1.5; margin-bottom: 12px; }
+.benefit { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.benefit > strong { font-family: var(--font-serif); font-size: clamp(64px,6.3vw,96px); line-height: .85; font-weight: 500; letter-spacing: -.04em; white-space: nowrap; }
+.benefit strong span { font-size: .48em; padding-left: 2px; }
+.benefit h3 { font-family: var(--font-serif); font-size: clamp(19px,1.65vw,26px); line-height: 1.1; margin-top: 6px; overflow-wrap: anywhere; }
+.benefit p { font-size: 12px; line-height: 1.4; }
+.posterRule { width: 38px; height: 2px; margin-top: 16px; background: currentColor; opacity: .75; }
+.offerPhoto { position: relative; min-height: 242px; overflow: hidden; }
+.offerPhoto img,.dishImage img,.discoveryPhoto img,.experiencePhoto img { object-fit: cover; transition: transform 250ms ease; }
+.offerPhoto img { object-position: center; }
+.offerCard:hover .offerPhoto img,.dishCard:hover img { transform: scale(1.025); }
+.offerStamp { position: absolute; top: 18px; right: 15px; display: flex; align-items: center; gap: 5px; padding: 8px 11px; border: 1px solid #f4cd80; border-radius: 4px; background: #a40f25; color: #fff2cb; font-family: var(--font-serif); font-size: 27px; line-height: 1; box-shadow: 0 3px 10px #0004; }
+.offerStamp small { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+.offerCopy { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 15px 18px; background: #741324; border-top: 1px solid #f3ce8344; }
+.sushi .offerCopy { background: #5c1923; }
+.offerTiming { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; color: #e7d6b1; font-size: 12px; margin: 18px 0; }
+.offerCopy .offerTiming { margin: 0; max-width: 58%; font-size: 11px; }
+.offerTiming b { font-weight: 500; padding: 3px 7px; background: #d8b26a20; border-radius: 3px; }
+.offerCopy .primary { min-height: 40px; padding: 9px 12px; font-size: 12px; }
+.primary,.secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 20px; min-height: 46px; border-radius: 5px; font-size: 14px; font-weight: 600; text-align: center; }
+.primary { background: #d8b26a; color: #170e05; border: 1px solid #d8b26a; }
+.primary:hover { background: #efcc8b; }
+.secondary { border: 1px solid #d8b26a66; color: #e8cb97; }
+.secondary:hover { background: #d8b26a12; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.dishGrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+.dishCard { background: #15110b; border: 1px solid #d8b26a35; border-radius: 8px; overflow: hidden; }
+.dishCard:hover { border-color: #d8b26a99; }
+.dishImage { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+.dishCopy { padding: 17px; }
+.dishCopy h3 { font-family: var(--font-serif); font-size: 22px; color: #eee1c8; }
+.dishCopy p { color: #bfae96; margin-top: 7px; font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 39px; }
+.dishBottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 18px; border-top: 1px solid #d8b26a20; padding-top: 13px; color: #e4c285; }
+.dishBottom > span { display: inline-flex; gap: 5px; align-items: center; font-size: 12px; }
+.discovery,.experience { display: grid; grid-template-columns: 40% minmax(0,1fr); overflow: hidden; border: 1px solid #d8b26a38; border-radius: 9px; background: #15110b; }
+.discoveryPhoto,.experiencePhoto { position: relative; min-height: 290px; }
+.discovery > div:last-child,.experienceCopy { padding: 32px; align-self: center; }
+.discovery h3 { color: #f2e6ce; font-size: 32px; font-family: var(--font-serif); }
+.discovery p:not(.eyebrow),.experienceCopy > p:not(.eyebrow) { color: #c5b59c; line-height: 1.7; max-width: 550px; margin-top: 14px; }
+.experience { grid-template-columns: 55% minmax(0,1fr); }
+.experiencePhoto { min-height: 390px; }
+.contact { margin-top: 20px; font-size: 14px; }
+.detail { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(300px,.8fr); gap: 28px; margin-top: 30px; align-items: start; }
+.detailMain { background: #15110b; border: 1px solid #d8b26a38; border-radius: 9px; overflow: hidden; }
+.detailPhoto { position: relative; aspect-ratio: 16/9; }
+.detailPhoto img { object-fit: cover; }
+.detailCopy { padding: 28px; }
+.detailCopy h2 { font-family: var(--font-serif); font-size: 34px; color: #f4dfb4; line-height: 1.2; }
+.detailCopy > p { color: #c8b99f; margin: 16px 0; line-height: 1.7; }
+.terms { padding-top: 18px; margin-top: 18px; border-top: 1px solid #d8b26a30; }
+.terms h3 { font-size: 18px; color: #efdab2; margin-bottom: 10px; }
+.terms ul { padding-left: 20px; list-style: disc; color: #c8b99f; line-height: 1.8; font-size: 14px; }
+.calculator { padding: 25px; border: 1px solid #d8b26a66; border-radius: 9px; background: #1b160f; }
+.calculator h3 { color: #f1ddbb; font-family: var(--font-serif); font-size: 25px; line-height: 1.2; margin-bottom: 23px; }
+.calculator label { display: block; color: #cfb991; font-size: 13px; margin-bottom: 8px; }
+.amount { display: flex; align-items: center; gap: 12px; border: 1px solid #d8b26a60; border-radius: 5px; padding: 10px 14px; background: #0d0b08; }
+.amount input { width: 100%; min-width: 0; background: transparent; color: #f3e8d2; outline: none; font-size: 26px; }
+.amount:focus-within { outline: 2px solid #d8b26a; outline-offset: 3px; }
+.amount span { color: #d8b26a; font-size: 25px; }
+.calculation { padding: 18px 0; color: #cfbea0; line-height: 1.7; }
+.calculation strong { color: #f0cf95; }
+.calculator small { display: block; color: #a89981; line-height: 1.6; font-size: 12px; }
+@media(max-width:1199px) { .dishGrid { grid-template-columns: repeat(2,minmax(0,1fr)); }  .detail { grid-template-columns: minmax(0,1fr); } }
+@media(max-width:767px) { .hub { padding-top: 16px; } .sectionNav { gap: 7px; } .sectionNav a { padding: 10px 12px; font-size: 12px; } .section { margin-top: 28px; } .offerGrid,.dishGrid,.discovery,.experience { grid-template-columns: minmax(0,1fr); }  .discoveryPhoto { min-height: 210px; } .experiencePhoto { min-height: 260px; } .discovery > div:last-child,.experienceCopy,.detailCopy { padding: 23px; } .dishImage { aspect-ratio: 16/10; } .primary,.secondary { padding: 12px 16px; } .detailCopy h2 { font-size: 28px; } }
+@media(prefers-reduced-motion:reduce) { .offerPhoto img,.dishImage img { transition: none; } }
+@media(min-width:768px) and (max-width:959px) { .banner :global(.sora-subpage-magic-hero) { min-height: 400px; } .banner :global(.sora-subpage-magic-heading) { padding-bottom: 125px; } .bannerTitle { bottom: 135px; } }
+@media(max-width:767px) { .banner :global(.sora-subpage-magic-hero) { min-height: 390px; } .banner :global(.sora-subpage-magic-heading) { padding-bottom: 150px; } .bannerTitle { bottom: 170px; gap: 7px; } .bannerTitle h2 { font-size: 17px; } .bannerTitle > span { width: 15px; } .bannerNav .sectionNav { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; } .bannerNav .sectionNav a { justify-content: center; padding: 10px 6px; min-height: 40px; } .bannerNav .sectionNav a:last-child { grid-column: 1 / -1; } .redRibbon { width: 19px; height: 64px; } .ribbonLeft { left: 14px; } .ribbonRight { right: 14px; }  }
+
+@media(max-width:1199px) and (min-width:768px) { .offerPoster { grid-template-columns: 43% minmax(0,1fr); } .offerHeadline { padding-inline: 14px; } .benefit > strong { font-size: 66px; } .benefit h3 { font-size: 19px; } .offerCopy .offerTiming { max-width: none; } }
+@media(max-width:767px) { .offerGrid { gap: 14px; } .offerPoster { grid-template-columns: 43% minmax(0,1fr); min-height: 215px; } .offerHeadline { padding: 23px 14px 17px; } .offerPhoto { min-height: 215px; } .benefit > strong { font-size: 64px; } .benefit h3 { font-size: 19px; } .benefit p { font-size: 11px; } .posterLabel { font-size: 9px; margin-bottom: 10px; } .posterRule { margin-top: 12px; } .offerStamp { top: 14px; right: 10px; padding: 7px 9px; font-size: 23px; } .offerCopy { padding: 12px; gap: 8px; } .offerCopy .offerTiming { max-width: 54%; font-size: 10px; } .offerCopy .primary { padding: 9px; font-size: 11px; } }
+@media(max-width:767px) {
+ .dishGrid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+ .dishImage { aspect-ratio: 4/3; }
+ .dishCopy { padding: 12px; }
+ .dishCopy h3 { font-size: 17px; line-height: 1.3; min-height: 44px; overflow-wrap: anywhere; }
+ .dishCopy p { font-size: 11px; line-height: 1.5; min-height: 33px; }
+ .dishBottom { margin-top: 12px; gap: 8px; padding-top: 10px; }
+ .dishBottom .primary { width: 100%; padding: 8px; font-size: 11px; min-height: 44px; }
+ .offerCopy .primary, .bannerNav .sectionNav a { min-height: 44px; }
+}
+/* 11/10: khối đầu cách chân banner đúng --sau-banner (16px) như mọi trang con; trước 22px. */
+.hub { padding-top: var(--sau-banner); }
+/* 11/10: trang mục ít nội dung vừa khít một màn (cùng ngưỡng với `.sora-mot-man-cao` ở globals.css).
+   Thân trang nhận hết phần còn lại dưới banner, thẻ bên trong giãn theo; `flex: 1 0 auto` = không co dưới
+   cỡ nội dung, nên thiếu chỗ thì trang dài ra chứ không cắt. */
+@media (min-width: 1200px) and (min-height: 880px) {
+  .hubMotMan { flex: 1 0 auto; display: flex; flex-direction: column; width: 100%; margin: 0 auto; padding-bottom: var(--sau-banner); }
+  .hubMotMan > .back { align-self: flex-start; }
+  .hubMotMan > .section { flex: 1 0 auto; }
+  .hubMotMan > .sectionPanel { display: flex; flex-direction: column; }
+  .hubMotMan .offerGrid, .hubMotMan .discovery { flex: 1 0 auto; }
+  .hubMotMan .offerCard { display: flex; flex-direction: column; }
+  .hubMotMan .offerPoster { flex: 1 0 auto; }
+}
+/* Vòng 2, 11/10: lối quay lại lên banner ở ≥768; link trong thân trang chỉ còn cho điện thoại.
+   Trang Aktion: nút "Angebote" đang sáng trên banner chính là lối về danh sách ưu đãi. */
+.sectionNav a.navBack { display: none; }
+@media (min-width: 768px) {
+  .bannerNav .sectionNav a.navBack { display: inline-flex; border-style: dashed; }
+  .backMobile { display: none; }
+  .backMobile + .detail { margin-top: 0; }
+}

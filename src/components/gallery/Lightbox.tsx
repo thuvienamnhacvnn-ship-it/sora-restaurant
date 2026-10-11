@@ -47,6 +47,13 @@ export function Lightbox({
     if (!open && el.open) el.close();
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [open]);
+
   const go = useCallback(
     (step: number) => {
       if (index === null || photos.length === 0) return;
@@ -88,7 +95,9 @@ export function Lightbox({
     >
       {current && (
         <div className="relative flex h-full w-full flex-col">
-          <div className="relative min-h-0 flex-1">
+          <div className="relative min-h-0 flex-1" onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}>
             {photos.map((p, i) => {
               // Chỉ gắn ảnh kề bên: đủ để crossfade mà không tải cả bộ.
               const near =
@@ -97,19 +106,30 @@ export function Lightbox({
                   Math.abs(i - index) === photos.length - 1);
               if (!near) return null;
               return (
-                <Image
+                /*
+                 * KHÔNG KÉO ẢNH QUÁ CỠ GỐC. Hộp bọc bị chặn ở đúng
+                 * `width × height` của tệp và căn giữa (`inset-0 m-auto`);
+                 * ảnh `contain` trong hộp đó. Ảnh món gốc chỉ 560×420 — để
+                 * `fill` trọn màn như trước là phóng 2–3 lần, vỡ hạt.
+                 */
+                <div
                   key={p.id}
-                  src={p.src}
-                  alt={i === index ? p.alt : ""}
-                  fill
-                  sizes="100vw"
-                  className="transition-opacity duration-300 ease-[var(--ease-sora)]"
+                  className="absolute inset-0 m-auto transition-opacity duration-300 ease-[var(--ease-sora)]"
                   style={{
-                    objectFit: "contain",
+                    maxWidth: p.width,
+                    maxHeight: p.height,
                     opacity: i === index ? 1 : 0,
                   }}
                   aria-hidden={i === index ? undefined : true}
-                />
+                >
+                  <Image
+                    src={p.src}
+                    alt={i === index ? p.alt : ""}
+                    fill
+                    sizes={`(max-width: ${p.width}px) 100vw, ${p.width}px`}
+                    style={{ objectFit: "contain" }}
+                  />
+                </div>
               );
             })}
           </div>

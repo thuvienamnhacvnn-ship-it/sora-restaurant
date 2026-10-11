@@ -1,0 +1,315 @@
+.home { --rail-lane: 0px; }
+.home :global(.sora-tc) { height: auto; overflow: visible; }
+.home :global(.sora-hien) { opacity: 1; transform: none; }
+.home :global(.sora-the-dm-noi) { pointer-events: none; }
+.home :global(.sora-the-dm-nut) { position: relative; z-index: 12; pointer-events: auto; text-decoration: none; }
+.select { position: absolute; inset: 0; z-index: 10; cursor: pointer; border: 0; background: transparent; border-radius: inherit; }
+.select[aria-pressed="true"] { outline: 2px solid #f0d292; outline-offset: -5px; }
+.select:focus-visible { outline: 3px solid #fff7ea; outline-offset: -5px; }
+.platter { position: absolute; z-index: 1; right: 15%; bottom: 2%; width: 28%; pointer-events: none; }
+.appear { position: relative; animation: materialize 6s ease-in-out infinite; }
+.dish { width: 100%; height: auto; position: relative; z-index: 1; object-fit: contain; }
+.warmth { position: absolute; bottom: 12%; left: 10%; width: 80%; height: 18%; border-radius: 50%; background: radial-gradient(ellipse, rgba(240,210,146,.5), rgba(216,173,88,.13) 45%, transparent 72%); animation: warmth 6s ease-in-out infinite; }
+.sparks { position: absolute; inset: 0; }
+.sparks i { position: absolute; left: calc(22% + var(--spark) * 13%); bottom: 22%; width: 3px; height: 3px; border-radius: 50%; background: #e6c276; opacity: 0; animation: spark 6s ease-out infinite; animation-delay: calc(var(--spark) * 80ms); }
+.mobile { display: none; }
+.controls { position: relative; margin-top: -6%; width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; color: #fff7ea; font-size: 12px; text-shadow: none; pointer-events: auto; }
+.controls span { background: #130d09; border: 1px solid #d8ad5840; border-radius: 4px; padding: 7px 10px; }
+.controls button { width: 36px; height: 36px; border: 1px solid #d8ad58; background: #130d09; border-radius: 50%; cursor: pointer; }
+.controls button:hover { background: #302113; }
+.controls button:focus-visible { outline: 2px solid #fff7ea; outline-offset: 3px; }
+.appear[data-paused="true"] { animation: none; }
+.appear[data-paused="true"] .warmth, .appear[data-paused="true"] .sparks { display: none; }
+@keyframes materialize { 0% { opacity: 0; transform: translateY(12px) scale(.96); } 12% { opacity: 1; transform: translateY(-3px) scale(1.01); } 23%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(8px) scale(.98); } }
+@keyframes warmth { 0%, 100% { opacity: 0; transform: scale(.6); } 9% { opacity: .85; transform: scale(1); } 27%, 85% { opacity: .12; transform: scale(.9); } 94% { opacity: .55; transform: scale(1); } }
+@keyframes spark { 0%, 12%, 40%, 100% { opacity: 0; transform: translateY(0); } 16% { opacity: .7; } 35% { opacity: 0; transform: translateY(-45px); } }
+@media (min-width: 768px) {
+  .home :global(.sora-tc-hero) { height: 66.6667svh; --tc-k: min(1px, calc(100cqh / 558), calc((100vw - var(--sidebar-w)) / 1442)); }
+  .home :global(.sora-tc-hero-nen) { object-position: center top; }
+  .home :global(.sora-tc-hero-chu) { justify-content: center; padding-top: 32px; padding-bottom: 32px; }
+  .desktop { bottom: 5%; }
+}
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .home :global(.sora-tc-luoi) { grid-template-columns: minmax(0, 1fr); }
+  .home :global(.sora-the-dm--lon) { display: grid; grid-template-columns: 55% minmax(0, 1fr); }
+  .home :global(.sora-the-dm--lon) { align-self: start; }
+  .home :global(.sora-the-dm) { flex-direction: column; aspect-ratio: auto; }
+  .home :global(.sora-the-dm-anh) { position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 9; }
+  .home :global(.sora-the-dm-noi) { width: 100%; height: auto; margin-left: 0; padding: 16px 18px 20px; }
+  .home :global(.sora-the-dm-han) { font-size: 15px; }
+  .home :global(.sora-the-dm-tua) { font-size: 22px; margin-top: 6px; }
+  .home :global(.sora-the-dm-phu) { font-size: 13px; margin-top: 6px; }
+  .home :global(.sora-the-dm-nut) { font-size: 13px; margin-top: 16px; height: 36px; padding: 0 18px; gap: 10px; }
+  .home :global(.sora-the-dm-gach) { margin-top: 12px; width: 30%; }
+  .home :global(.sora-the-dm--lon .sora-the-dm-anh) { aspect-ratio: 1.82; }
+  .home :global(.sora-the-dm--lon .sora-the-dm-noi) { justify-content: center; padding: 24px; }
+  .home :global(.sora-the-dm--lon .sora-the-dm-tua) { font-size: 36px; }
+  .home :global(.sora-the-dm--lon .sora-the-dm-nut) { margin-top: 20px; }
+}
+@media (max-width: 767px) {
+  .desktop { display: none; }
+  .mobile { display: block; width: 65%; bottom: 12%; right: 6%; }
+  .controls { gap: 4px; }
+  .controls span { font-size: 10px; padding: 4px; }
+  .controls button { min-width: 28px; height: 28px; }
+  .home :global(.sora-tc-anh-dt) { aspect-ratio: 1672 / 941; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .appear { animation: none; }
+  .warmth, .sparks { display: none; }
+}
+
+/* Home: the banner and all five categories share one viewport. */
+.home { height: 100dvh; }
+.home :global(.sora-tc) { height: 100%; display: grid; grid-template-rows: minmax(0, 2fr) minmax(0, 1fr); overflow: hidden; }
+.home :global(.sora-tc-hero) { height: 100%; min-height: 0; }
+.home :global(.sora-tc-dm) { display: block; min-height: 0; padding: 12px 20px; }
+.home :global(.sora-tc-luoi) { height: 100%; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; }
+.home :global(.sora-tc-luoi-nho) { height: 100%; min-height: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.home :global(.sora-the-dm) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); height: 100%; min-height: 0; aspect-ratio: auto; align-self: stretch; border-radius: 12px; }
+.home :global(.sora-the-dm .sora-the-dm-anh) { position: relative; inset: auto; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto; }
+.home :global(.sora-the-dm-anh img) { object-fit: cover; }
+.home :global(.sora-the-dm .sora-the-dm-noi) { width: 100%; height: 100%; min-height: 0; margin: 0; padding: 8px 10px; justify-content: center; gap: 4px; }
+.home :global(.sora-the-dm .sora-the-dm-han) { display: none; }
+.home :global(.sora-the-dm .sora-the-dm-tua) { font-size: clamp(12px, 1vw, 19px); line-height: 1.2; margin: 0; padding: 0; }
+.home :global(.sora-the-dm .sora-the-dm-phu) { font-size: 11px; line-height: 1.25; margin: 0; }
+.home :global(.sora-the-dm .sora-the-dm-gach) { display: none; }
+.home :global(.sora-the-dm .sora-the-dm-nut) { height: 26px; min-height: 26px; margin-top: 4px; padding: 0 9px; font-size: 11px; gap: 5px; }
+.home :global(.sora-the-dm--lon .sora-the-dm-tua) { font-size: clamp(20px, 2vw, 34px); }
+.home :global(.sora-the-dm--lon .sora-the-dm-noi) { padding: 16px; gap: 10px; }
+.home :global(.sora-the-dm--lon .sora-the-dm-nut) { height: 32px; min-height: 32px; padding: 0 15px; font-size: 13px; }
+@media (max-height: 800px) { .home :global(.sora-the-dm--nho .sora-the-dm-phu) { display: none; } }
+@media (max-width: 767px) {
+ .home { height: calc(100dvh - 120px - env(safe-area-inset-bottom)); }
+ :global(main):has(.home) { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+ .home :global(.sora-tc-hero) { position: relative; container-type: size; border-bottom: 1px solid #d8ad5866; }
+ .home :global(.sora-tc-hero > div.absolute[aria-hidden]) { display: block; }
+ .home :global(.sora-tc-hero-nen) { object-position: center top; }
+ .home :global(.sora-tc-hero-chu) { position: relative; z-index: 2; width: 100%; height: 100%; padding: 14px 16px; justify-content: flex-start; --tc-k: .45px; }
+ .home :global(.sora-tc-wordmark) { margin-bottom: 6px; }
+ .home :global(.sora-tc-eyebrow) { font-size: 8px; }
+ .home :global(.sora-tc-tieu-de) { font-size: 19px; margin-top: 10px; }
+ .home :global(.sora-tc-phu) { display: none; }
+ .home :global(.sora-tc-nut-hang) { width: 100%; margin-top: 10px; gap: 6px; flex-wrap: nowrap; }
+ .home :global(.sora-tc-nut) { flex: 1 1 0; min-width: 0; height: 30px; padding: 0 5px; font-size: 8px; letter-spacing: 0; gap: 4px; }
+ .home :global(.sora-tc-nut svg), .home :global(.sora-tc-nut .sora-tc-mui-ten) { display: none; }
+ .home :global(.sora-tc-anh-dt) { display: none; }
+ .desktop { display: block; right: 8%; bottom: 3%; width: 54%; z-index: 3; }
+ .mobile { display: none; }
+ .controls span { display: none; }
+ .home :global(.sora-tc-dm) { padding: 8px; }
+ .home :global(.sora-tc-luoi) { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 6px; }
+ .home :global(.sora-tc-luoi-nho) { gap: 6px; }
+ .home :global(.sora-the-dm) { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; border-radius: 8px; }
+ .home :global(.sora-the-dm .sora-the-dm-noi), .home :global(.sora-the-dm--lon .sora-the-dm-noi) { height: auto; padding: 4px; gap: 3px; }
+ .home :global(.sora-the-dm .sora-the-dm-tua) { font-size: 9px; line-height: 1.1; }
+ .home :global(.sora-the-dm--lon .sora-the-dm-tua) { font-size: 14px; }
+ .home :global(.sora-the-dm .sora-the-dm-phu) { display: none; }
+ .home :global(.sora-the-dm .sora-the-dm-nut) { height: 24px; min-height: 24px; padding: 0 5px; font-size: 9px; margin: 0; gap: 3px; }
+}
+
+/* Category photos fill the entire card. */
+.home :global(.sora-the-dm) { position: relative; display: block; overflow: hidden; }
+.home :global(.sora-the-dm .sora-the-dm-anh) { position: absolute; inset: 0; width: 100%; height: 100%; }
+.home :global(.sora-the-dm .sora-the-dm-noi) { position: relative; z-index: 1; justify-content: flex-end; align-items: flex-start; padding: 12px; background: linear-gradient(0deg, #080503eb, #08050370 45%, transparent 80%); }
+.home :global(.sora-the-dm--lon .sora-the-dm-noi) { padding: 20px; }
+@media (max-width: 767px) {
+.home :global(.sora-the-dm .sora-the-dm-noi) { height: 100%; padding: 5px; gap: 3px; }
+.home :global(.sora-the-dm--lon .sora-the-dm-noi) { padding: 8px; }
+}
+
+/* Text follows the empty dark area in each category photograph. */
+.home :global(.sora-the-dm .sora-the-dm-noi) { width: 42%; margin-left: 58%; justify-content: center; padding: 10px 12px; background: none; }
+.home :global(.sora-the-dm--lon .sora-the-dm-noi) { width: 37%; margin-left: 0; padding: 16px 20px; }
+.home :global(.sora-the-dm .sora-the-dm-tua) { overflow-wrap: anywhere; }
+@media (max-width: 767px) {
+.home :global(.sora-the-dm .sora-the-dm-noi) { position: absolute; inset: auto 0 0; width: 100%; height: 48px; margin: 0; padding: 4px 5px; background: #100c08; justify-content: center; }
+.home :global(.sora-the-dm--lon .sora-the-dm-noi) { height: 64px; padding: 8px; }
+}
+
+/* Golden marble stage, two dishes and their arrival lights. */
+.home :global(.sora-tc-hero > div.absolute[aria-hidden]) { overflow: hidden; }
+.home :global(.sora-tc-hero-nen) { height: 165% !important; max-height: none; object-position: center top; }
+.home :global(.sora-tc-ban-da) { position: absolute; z-index: 1; width: 100%; right: 0; bottom: -10%; pointer-events: none; }
+.home :global(.sora-tc-ban-da img) { width: 100%; height: auto; display: block; }
+.desktop { width: 46%; right: 3%; bottom: 8%; z-index: 2; }
+.pair { display: flex; align-items: flex-end; gap: 1%; }
+.pair .appear { width: 49.5%; flex-shrink: 0; }
+.pair .appear:nth-child(2) { top: 15px; }
+.controls { margin-top: 30px; }
+.magicRing { position: absolute; z-index: 0; left: 9%; bottom: 12%; width: 82%; height: 20%; border: 2px solid #ffe2a0; border-radius: 50%; box-shadow: 0 0 18px #ffc24b, inset 0 0 16px #ffbd45; animation: summonRing 6s ease-out infinite; }
+.magicBeam { position: absolute; z-index: 0; inset: 12% 17% 16%; background: conic-gradient(from 180deg at 50% 100%, transparent 0deg, #ffcb6530 18deg, transparent 34deg, #ffe9a34d 48deg, transparent 65deg); filter: blur(8px); animation: summonBeam 6s ease-out infinite; }
+.sparks i { left: calc(10% + var(--spark) * 12%); width: 4px; height: 4px; box-shadow: 0 0 8px 2px #ffd26c; }
+@keyframes summonRing { 0% { opacity: 0; transform: scale(.35); } 9% { opacity: 1; transform: scale(1.12); } 25% { opacity: .7; transform: scale(1); } 45%, 100% { opacity: 0; transform: scale(1.25); } }
+@keyframes summonBeam { 0%, 45%, 100% { opacity: 0; transform: scaleY(.3); transform-origin: bottom; } 10% { opacity: 1; transform: scaleY(1.2); } 25% { opacity: .4; transform: scaleY(1); } }
+.appear[data-paused=true] .magicRing, .appear[data-paused=true] .magicBeam { display: none; }
+@media (max-width: 767px) {
+.home :global(.sora-tc-ban-da) { width: 180%; right: -4%; bottom: -6%; }
+.desktop { width: 84%; right: 2%; bottom: 2.5%; }
+.pair .appear:nth-child(2) { top: 0; }
+.controls { margin-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .magicRing, .magicBeam { display: none; } }
+
+
+/* Natural stone silhouette and grounded, staggered plates. */
+.home :global(.sora-tc-hero) { overflow: visible; border: 0; z-index: 2; }
+.home :global(.sora-the-dm) { border: 0; box-shadow: none; }
+.home :global(.sora-tc-ban-da) { bottom: 0; aspect-ratio: auto; overflow: visible; background: none; transform: translateY(calc(13.54% + 28px)); z-index: 3; }
+.home :global(.sora-tc-ban-da img) { position: static; width: 100%; height: auto; max-width: none; filter: drop-shadow(0 7px 5px #0009); }
+.desktop { z-index: 4; bottom: calc((100vw - var(--sidebar-w)) * 296 / 2172 - 38px); }
+.pair { gap: 4%; }
+.pair .appear { width: 57%; aspect-ratio: 1; animation: plateArrival 6s ease-in-out infinite; }
+.pair .appear:nth-child(2) { width: 39%; top: 35px; animation-name: plateArrivalSecond; }
+.dish { position: absolute; bottom: 0; left: 0; width: 100%; height: auto; transform: translateY(var(--plate-foot)); filter: drop-shadow(0 5px 3px #000e); }
+.contactShadow { position: absolute; z-index: 0; width: 78%; height: 10%; left: 11%; bottom: -5%; border-radius: 50%; background: radial-gradient(ellipse, #000 0 42%, #000c 58%, transparent 75%); filter: blur(4px); }
+.magicRing, .warmth { bottom: -3%; }
+.controls { position: absolute; top: 100%; left: 0; margin-top: 55px; }
+@keyframes plateArrival { 0% { opacity: 0; transform: translateY(7px) scale(.98); } 12%, 89% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+@keyframes plateArrivalSecond { 0%, 16% { opacity: 0; transform: translateY(7px) scale(.98); } 29%, 89% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+.pair .appear:nth-child(2) .magicRing { animation-delay: 1s; }
+.pair .appear:nth-child(2) .magicBeam { animation-delay: 1s; }
+.pair .appear:nth-child(2) .sparks { animation-delay: 1s; }
+.appear[data-paused=true] { animation: none; }
+@media (max-width: 767px) {
+.home :global(.sora-tc-ban-da) { bottom: 0; transform: translateY(calc(13.54% + 18px)); }
+.desktop { bottom: calc(180vw * 296 / 2172 - 28px); }
+.pair .appear:nth-child(2) { top: 16px; }
+.controls { margin-top: 25px; }
+}
+@media (prefers-reduced-motion: reduce) { .pair .appear { animation: none; } }
+
+@media (min-width: 768px) { .home :global(.sora-the-dm--nho .sora-the-dm-tua) { overflow-wrap: normal; font-size: clamp(10px, .85vw, 18px); } .home :global(.sora-the-dm--nho .sora-the-dm-noi) { padding-inline: 8px; } }
+
+/* Match the flatter camera angle of the marble platforms. */
+.dish { transform-origin: center bottom; transform: translateY(calc(var(--plate-foot) * .76)) scaleY(.76); }
+.desktop { bottom: calc((100vw - var(--sidebar-w)) * 296 / 2172 - 50px); }
+.pair .appear:nth-child(2) { left: 2%; top: 35px; }
+.contactShadow { height: 7%; bottom: -3.5%; filter: blur(3px); background: radial-gradient(ellipse, #000 0 48%, #000e 62%, transparent 78%); }
+@media (max-width: 767px) { .desktop { bottom: calc(180vw * 296 / 2172 - 34px); } .pair .appear:nth-child(2) { top: 16px; } }
+
+/* Soft alpha shadow follows the curved plate rim, rather than an ellipse. */
+.pair .appear:first-child { left: 5%; }
+.pair .appear:nth-child(2) { left: -2%; }
+.plateShadow { position: absolute; z-index: 0; bottom: 0; left: 0; width: 100%; height: auto; object-fit: contain; transform-origin: center bottom; transform: translateY(calc(var(--plate-foot) * .76 + 5px)) scaleY(.76); filter: brightness(0) blur(5px); opacity: .48; mask-image: linear-gradient(to bottom, transparent 0 67%, #000 81%); pointer-events: none; }
+.dish { filter: drop-shadow(0 2px 1px #0006); }
+@media (max-width: 767px) { .pair .appear:first-child { left: 0; } .pair .appear:nth-child(2) { left: -2%; } .plateShadow { filter: brightness(0) blur(3px); transform: translateY(calc(var(--plate-foot) * .76 + 3px)) scaleY(.76); } }
+
+/* Summoning sequence: light scan, rim halos, gold particles, then solid food. */
+.pair .appear { animation: none; }
+.dish { animation: enchantedDish 6s ease-in-out infinite; }
+.pair .appear:nth-child(2) .dish { animation-name: enchantedDishSecond; }
+.plateShadow { animation: enchantedShadow 6s ease-in-out infinite; }
+.pair .appear:nth-child(2) .plateShadow { animation-name: enchantedShadowSecond; }
+.magicRing { height: 15%; left: 5%; width: 90%; bottom: -2%; border-color: #ffe9ba; box-shadow: 0 0 14px #ffd16d, 0 0 35px #ffae4540, inset 0 0 12px #ffc24b; }
+.magicRing::before, .magicRing::after { content: none; }
+.magicRing::before { content: ''; position: absolute; inset: -25% -5%; border: 1px dashed #ffe4a0; border-radius: 50%; transform: rotate(-7deg); }
+.magicRing::after { content: ''; position: absolute; inset: 18% 10%; border: 1px solid #fff3d1; border-radius: 50%; }
+.magicBeam { inset: -10% 5% 0; filter: blur(4px); background: conic-gradient(from 180deg at 50% 100%, transparent 0deg, #ffbd5038 12deg, transparent 20deg, #ffe9b56b 28deg, transparent 39deg, #ffc85b48 50deg, transparent 64deg); }
+.pair .appear::after { content: ''; position: absolute; z-index: 3; left: 7%; bottom: 0; width: 86%; height: 2%; border-radius: 50%; background: #fff3c3; box-shadow: 0 0 12px 4px #ffce67, 0 0 30px 10px #eaa24055; pointer-events: none; animation: summoningScan 6s ease-out infinite; }
+.pair .appear:nth-child(2)::after { animation-delay: 1s; }
+.sparks i { bottom: 3%; animation-name: enchantedSpark; animation-delay: calc(var(--spark) * 95ms); }
+.pair .appear:nth-child(2) .sparks i { animation-delay: calc(1s + var(--spark) * 95ms); }
+@keyframes enchantedDish { 0%, 3% { opacity: 0; clip-path: inset(100% 0 0); filter: brightness(2.5) blur(10px); } 9% { opacity: .8; clip-path: inset(45% 0 0); filter: brightness(1.8) blur(4px); } 18%, 85% { opacity: 1; clip-path: inset(0); filter: drop-shadow(0 2px 1px #0006); } 100% { opacity: 0; clip-path: inset(0); filter: brightness(1.4) blur(5px); } }
+@keyframes enchantedDishSecond { 0%, 19% { opacity: 0; clip-path: inset(100% 0 0); filter: brightness(2.5) blur(10px); } 25% { opacity: .8; clip-path: inset(45% 0 0); filter: brightness(1.8) blur(4px); } 34%, 85% { opacity: 1; clip-path: inset(0); filter: drop-shadow(0 2px 1px #0006); } 100% { opacity: 0; clip-path: inset(0); filter: brightness(1.4) blur(5px); } }
+@keyframes enchantedShadow { 0% { opacity: 0; } 18%, 85% { opacity: .48; } 100% { opacity: 0; } }
+@keyframes enchantedShadowSecond { 0%, 19% { opacity: 0; } 34%, 85% { opacity: .48; } 100% { opacity: 0; } }
+@keyframes summoningScan { 0%, 3% { opacity: 0; transform: translateY(0) scaleX(.4); } 6% { opacity: 1; transform: translateY(-10px) scaleX(1); } 18% { opacity: .7; transform: translateY(-170px) scaleX(.5); } 25%, 100% { opacity: 0; transform: translateY(-220px) scaleX(.1); } }
+@keyframes enchantedSpark { 0%, 4% { opacity: 0; transform: translateY(0) scale(.2); } 8% { opacity: 1; transform: translateY(-12px) scale(1.4); } 28% { opacity: .8; transform: translateY(-110px) scale(.7); } 38%, 100% { opacity: 0; transform: translateY(-150px) scale(.1); } }
+.appear[data-paused=true] .dish, .appear[data-paused=true] .plateShadow { animation: none; }
+.appear[data-paused=true]::after { display: none; }
+@media (prefers-reduced-motion: reduce) { .dish, .plateShadow { animation: none; } .pair .appear::after { display: none; } }
+
+/* Separate restaurant backdrop and transparent blossom canopy. */
+.home :global(.sora-tc-hero-nen) { height: 100% !important; object-position: center center; }
+.home :global(.sora-tc-hoa-dao) { position: absolute; top: 0; left: 0; width: 100%; z-index: 1; pointer-events: none; }
+.home :global(.sora-tc-hoa-dao img) { width: 100%; height: auto; display: block; }
+.home :global(.sora-tc-hero-chu) { z-index: 2; }
+@media (max-width: 767px) { .home :global(.sora-tc-hoa-dao) { width: 150%; left: -8%; } }
+
+/* Center the plate footprints on the platform tops, away from the back edge. */
+.desktop { bottom: calc((100vw - var(--sidebar-w)) * 171 / 2172 - 50px); }
+.pair .appear:nth-child(2) { left: 8%; }
+@media (max-width: 767px) { .desktop { bottom: calc(180vw * 296 / 2172 - 68px); } .pair .appear:first-child { left: 7%; } .pair .appear:nth-child(2) { left: 0; } .controls { top: auto; bottom: -20px; left: -20%; width: 70%; } }
+@media (prefers-reduced-motion: reduce) { .pair .appear .dish, .pair .appear .plateShadow { animation: none; } }
+
+@media (prefers-reduced-motion: reduce) { .pair .appear .dish, .pair .appear .plateShadow { animation: none !important; } }
+
+/* Dim the setting and stone separately, keeping dishes fully illuminated. */
+.home :global(.sora-tc-hero-nen), .home :global(.sora-tc-anh-dt > img) { filter: brightness(.43) saturate(.85); }
+.home :global(.sora-home-backdrop)::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 56%, transparent 25%, #09040138 67%, #090401b0 100%), linear-gradient(to top, #07030255, transparent 35%); pointer-events: none; }
+.home :global(.sora-home-backdrop .sora-tc-hero-nen) { filter: brightness(.68) saturate(1.34) contrast(1.07); object-position: center 65%; }
+.home :global(.sora-tc-desktop-nen) { display: none; }
+@media(min-width:768px) {
+ .home :global(.sora-tc-mobile-nen) { display: none; }
+ .home :global(.sora-tc-desktop-nen) { display: block; }
+ .home :global(.sora-home-backdrop) { background: radial-gradient(ellipse at 76% 45%, #4a2313 0, #190e08 45%, #090604 85%); }
+ .home :global(.sora-home-backdrop) { overflow: hidden; }
+ .home :global(.sora-home-backdrop .sora-tc-hero-nen) { width: 100% !important; height: 144% !important; top: -44% !important; left: 0 !important; object-fit: cover; object-position: center bottom; transform: none; }
+}
+.home :global(.sora-tc-ban-da img) { filter: brightness(.58) contrast(1.06) drop-shadow(0 7px 5px #0009); }
+
+/* Keep headline actions above the stone; petals pass in front of food. */
+.home :global(.sora-tc-hero-chu) { transform: translateY(clamp(-64px, -6svh, -28px)); z-index: 6; }
+.home :global(.sora-tc-canh-roi) { z-index: 5; bottom: -40px; }
+.home :global(.sora-tc-canh-roi > span) { --dy: calc(100cqh + 40px) !important; }
+.home :global(.sora-tc-canh-dong) { z-index: 5; }
+@media (max-width: 767px) { .home :global(.sora-tc-hero-chu) { transform: translateY(-10px); } }
+
+/* Candlelit place setting on the open left-hand marble ledge. */
+.tableSetting { position: absolute; z-index: 4; left: 17%; bottom: -3px; height: clamp(185px, 29svh, 280px); aspect-ratio: 3 / 2; margin: 0; outline: none; transition: transform .4s ease, filter .4s ease; filter: brightness(.94); --wick-x: 18%; --wick-y: 57%; }
+.tableSetting > img { width: 100%; height: 100%; object-fit: contain; }
+.tableSetting:hover, .tableSetting:focus-visible { transform: translateY(-3px); filter: brightness(1.08) drop-shadow(0 0 9px #ffb84c30); }
+.tableSetting:focus-visible { outline: 1px solid #e9c481; outline-offset: 4px; border-radius: 12px; }
+.tableSetting::after { content: ''; position: absolute; width: 40%; height: 13%; left: 0; bottom: 9%; border-radius: 50%; background: radial-gradient(ellipse, #ffc65f30, transparent 72%); mix-blend-mode: screen; pointer-events: none; animation: candleBreath 3.2s ease-in-out infinite; }
+.candleGlow { position: absolute; left: var(--wick-x); top: var(--wick-y); width: 20%; aspect-ratio: 1; transform: translate(-50%, -50%); background: radial-gradient(circle, #fff3b566 0, #ffc04e30 25%, transparent 70%); mix-blend-mode: screen; pointer-events: none; animation: flameGlow 2.7s ease-in-out infinite; }
+.candleFlame { position: absolute; left: var(--wick-x); top: var(--wick-y); width: 2.3%; height: 7%; min-width: 7px; transform-origin: 50% 100%; translate: -50% -100%; border-radius: 60% 40% 45% 45% / 75% 75% 25% 25%; background: radial-gradient(ellipse at 50% 77%, #fffef2 0 20%, #ffe199 45%, #ffae32 68%, #f47512b0 85%, transparent); filter: drop-shadow(0 0 3px #ffb649); pointer-events: none; animation: flameFlicker 1.83s ease-in-out infinite; }
+.candleFlame i { position: absolute; bottom: 7%; left: 33%; width: 34%; height: 56%; border-radius: 50% 50% 40% 40%; background: #fffbe3; }
+@keyframes flameFlicker { 0%,100% { transform: rotate(-3deg) scale(.94,1); opacity: .95; } 16% { transform: rotate(4deg) scale(.86,1.12); opacity: 1; } 31% { transform: rotate(-5deg) scale(1.05,.89); opacity: .86; } 48% { transform: rotate(2deg) scale(.93,1.07); opacity: 1; } 73% { transform: rotate(-1deg) scale(1.07,.95); opacity: .93; } 89% { transform: rotate(4deg) scale(.9,1.14); opacity: 1; } }
+@keyframes flameGlow { 0%,100% { opacity: .72; } 17% { opacity: .96; } 39% { opacity: .68; } 61% { opacity: .9; } 82% { opacity: .76; } }
+.tableStars { position: absolute; inset: -10%; pointer-events: none; }
+.tableStars i { position: absolute; left: calc(5% + var(--star) * 15%); top: calc(20% + mod(var(--star) * 23%, 65%)); width: 7px; height: 7px; background: #fff0b5; clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); filter: drop-shadow(0 0 5px #ffd080); animation: tableTwinkle 3.4s ease-in-out infinite; animation-delay: calc(var(--star) * -.47s); }
+@keyframes candleBreath { 0%, 100% { opacity: .6; transform: scale(.94); } 45% { opacity: 1; transform: scale(1.1); } 68% { opacity: .78; transform: scale(1); } }
+@keyframes tableTwinkle { 0%, 100% { opacity: .12; transform: scale(.4) rotate(0); } 46% { opacity: 1; transform: scale(1.2) rotate(45deg); } 70% { opacity: .3; transform: scale(.7) rotate(70deg); } }
+@media (max-width: 767px) { .tableSetting { left: 0; height: 85px; bottom: -3px; } .tableStars i { width: 4px; height: 4px; } }
+@media (prefers-reduced-motion: reduce) { .tableSetting, .tableSetting::after, .tableStars i, .candleGlow, .candleFlame { animation: none; transition: none; } }
+@media(max-width:767px) {
+ .home { height: calc(100dvh - 156px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+ :global(.sora-app-main):has(.home) { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+ .home :global(.sora-tc-nut) { min-height: 44px; border-radius: 9px; font-size: 10px; }
+ .home :global(.sora-tc-dm) { padding: 10px 12px; }
+ .home :global(.sora-tc-luoi), .home :global(.sora-tc-luoi-nho) { gap: 8px; }
+ .home :global(.sora-the-dm) { border-radius: 10px; }
+ .controls button { min-width: 34px; height: 34px; }
+}
+.home :global(.sora-mobile-home-brand), .home :global(.sora-mobile-home-stone) { display: none; }
+.home :global(.sora-mobile-home-social) { display: none; }
+@media(max-width:767px) {
+ .home :global(.sora-mobile-home-social) { display: flex; justify-content: center; align-items: center; width: 100%; gap: 12px; margin-top: 8px; }
+ .home :global(.sora-mobile-home-social .sora-sidebar-social) { display: flex; align-items: center; gap: 12px; margin: 0; }
+ .home :global(.sora-mobile-home-social .sora-sidebar-social > *), .home :global(.sora-mobile-home-social > a) { display: flex; justify-content: center; align-items: center; width: 44px; height: 44px; border: 1px solid #c6a36366; border-radius: 50%; background: #17120fca; color: #edcf96; text-decoration: none; }
+ .home :global(.sora-mobile-home-social > a) { position: relative; }
+ .home :global(.sora-mobile-home-social > a > span) { position: absolute; right: -3px; bottom: -1px; font-size: 8px; line-height: 13px; padding: 0 3px; border-radius: 5px; background: #cfa660; color: #21160a; }
+ .home { height: calc(100dvh - 92px - env(safe-area-inset-bottom)); }
+ .home :global(.sora-tc) { display: block; }
+ .home :global(.sora-tc-dm), .home :global(.sora-tc-ban-da), .tableSetting { display: none; }
+ .home :global(.sora-mobile-home-brand) { position: absolute; z-index: 6; inset: clamp(16px,3dvh,28px) 16px auto; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+ .home :global(.sora-mobile-home-brand > [data-sora-logo]) { width: clamp(80px,13dvh,116px) !important; height: auto !important; }
+ .home :global(.sora-mobile-home-brand p) { color: #bbaa8e; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+ .home :global(.sora-tc-hero-chu) { position: absolute; left: 0; top: clamp(220px,32dvh,295px); width: 100%; height: auto; padding: 0 32px; transform: none; }
+ .home :global(.sora-tc-wordmark), .home :global(.sora-tc-eyebrow), .home :global(.sora-tc-gach-do), .home :global(.sora-tc-tieu-de), .home :global(.sora-tc-phu) { display: none; }
+ .home :global(.sora-tc-nut-hang) { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; margin: 0; max-width: 330px; margin-inline: auto; }
+ .home :global(.sora-tc-nut) { width: 100%; height: 48px; min-height: 48px; justify-content: center; font-size: 12px; letter-spacing: .04em; border-radius: 10px; padding: 0 15px; }
+ .home :global(.sora-tc-nut svg) { display: block; }
+ .home :global(.sora-mobile-home-stone) { display: block; position: absolute; z-index: 2; left: 0; bottom: 0; width: 100%; height: calc(100vw * .56); pointer-events: none; }
+ .home :global(.sora-mobile-home-stone img) { position: absolute; width: 310%; max-width: none; height: auto; left: -151%; bottom: -15%; filter: brightness(.64) contrast(1.08) drop-shadow(0 7px 5px #0009); }
+ .home :global(.sora-mobile-home-stone)::before { content: ''; position: absolute; inset: auto 0 0; height: 19vw; background: url('/hero/golden-marble-platform.png') left 72% / 500% auto no-repeat; filter: brightness(.48) contrast(1.08); }
+ .desktop { left: 12%; right: auto; width: 76%; bottom: calc(100vw * .19); }
+ .pair { display: block; }
+ .pair .appear:first-child { width: 100%; left: 0; }
+ .pair .appear:nth-child(2) { display: none; }
+ .controls { display: none; }
+ .home :global(.sora-tc-hoa-dao) { width: 165%; left: -32.5%; opacity: .9; }
+ .home :global(.sora-tc-hero-nen) { width: 100% !important; height: 125% !important; max-width: none; left: 0 !important; top: -8% !important; object-position: center bottom; }
+ .home :global(.sora-tc-canh-roi) { mask-image: none !important; -webkit-mask-image: none !important; }
+}
