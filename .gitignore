@@ -51,3 +51,6 @@ _w-agent/
 # Tệp tạm, thử nghiệm
 /.tmp-cmp/
 /public/mobile-preview.html
+
+.vercel
+.env*
