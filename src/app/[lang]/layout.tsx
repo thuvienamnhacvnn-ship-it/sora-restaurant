@@ -26,6 +26,7 @@ import { notFound } from "next/navigation";
 import { Inter, Lora, Playfair_Display } from "next/font/google";
 import "../globals.css";
 import { AppShell } from "@/components/shell/AppShell";
+import { ChuyenTrangHoaDao } from "@/components/decor/ChuyenTrangHoaDao";
 import { DEFAULT_LOCALE, LOCALES, getT, isLocale } from "@/lib/i18n";
 import { SITE_URL } from "@/data/site";
 
@@ -106,6 +107,7 @@ export default async function RootLayout({
           {t("nav.skipToContent")}
         </a>
         <AppShell locale={lang}>{children}</AppShell>
+        <ChuyenTrangHoaDao />
 
         {/*
           Công cụ "Chỉnh tay" — Sếp kéo thả trực tiếp trên trang rồi bấm LƯU,
