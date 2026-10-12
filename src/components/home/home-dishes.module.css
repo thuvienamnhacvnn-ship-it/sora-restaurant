@@ -324,3 +324,29 @@
  .dish, .pair .appear:nth-child(2) .dish { filter: none; animation-name: enchantedDishMobile; }
 }
 @keyframes enchantedDishMobile { 0%, 3% { opacity: 0; clip-path: inset(100% 0 0); } 9% { opacity: .8; clip-path: inset(45% 0 0); } 18%, 85% { opacity: 1; clip-path: inset(0); } 100% { opacity: 0; clip-path: inset(0); } }
+
+/* TRANG CHỦ ĐIỆN THOẠI — Sếp 12/10: bỏ hai nút, logo quay to thêm 15%, tên quán
+   + slogan to và cân hơn ("Restaurant" to đậm), tấm đá hạ sát thanh Menu, đĩa
+   lùi xuống và to thêm 10% (76% -> 84%), món nóng có khói. */
+.steam { display: none; }
+@media (max-width: 767px) {
+ .home :global(.sora-tc-nut-hang) { display: none; }
+ .home :global(.sora-mobile-home-brand) { gap: 7px; }
+ .home :global(.sora-mobile-home-brand > [data-sora-logo]) { width: clamp(92px,15dvh,134px) !important; }
+ .home :global(.sora-mobile-home-brand h1) { font-size: clamp(27px,7.6vw,32px); }
+ .home :global(.sora-mobile-home-brand h1) > :global(*):nth-child(2) { --chu-tran: clamp(150px,43vw,178px); }
+ .home :global(.sora-mobile-home-brand h1) > span:last-child { font-weight: 700; font-size: .62em; letter-spacing: .27em; text-indent: .27em; margin-top: .3em; }
+ .home :global(.sora-mobile-home-brand p) { font-size: 12px; letter-spacing: .13em; text-indent: .13em; color: #d2c1a2; }
+ .home :global(.sora-tc-hero-chu) { top: calc(clamp(92px,15dvh,134px) + clamp(16px,3dvh,28px) + 162px); }
+ .home :global(.sora-mobile-home-stone img) { bottom: -33%; }
+ .home :global(.sora-mobile-home-stone)::before { height: 9vw; }
+ .desktop { left: 8%; width: 84%; bottom: calc(100vw * .085); }
+ .steam { display: block; position: absolute; z-index: 2; left: 20%; right: 20%; bottom: 27%; height: 58%; pointer-events: none; mix-blend-mode: screen; animation: enchantedSteam 6s ease-in-out infinite; }
+ .steam i { position: absolute; bottom: 0; left: calc(2% + var(--wisp) * 20%); width: 17%; height: 62%; border-radius: 50% 50% 46% 54% / 62% 58% 42% 38%; background: radial-gradient(ellipse at 50% 68%, #fffaf0c7 0, #fff3dd6b 36%, transparent 68%); filter: blur(4px); opacity: 0; animation: steamRise 2.9s ease-out infinite; animation-delay: calc(var(--wisp) * -.63s); }
+ .steam i:nth-child(even) { animation-name: steamRiseAlt; animation-duration: 3.4s; }
+ .appear[data-paused=true] .steam { animation: none; }
+}
+@keyframes enchantedSteam { 0%, 20% { opacity: 0; } 32%, 82% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes steamRise { 0% { opacity: 0; transform: translate(0, 12%) scale(.45, .6); } 22% { opacity: .95; } 100% { opacity: 0; transform: translate(-30%, -105%) scale(1.5, 1.5) rotate(-8deg); } }
+@keyframes steamRiseAlt { 0% { opacity: 0; transform: translate(0, 12%) scale(.4, .55); } 25% { opacity: .85; } 100% { opacity: 0; transform: translate(34%, -118%) scale(1.4, 1.7) rotate(9deg); } }
+@media (prefers-reduced-motion: reduce) { .steam { display: none; } }

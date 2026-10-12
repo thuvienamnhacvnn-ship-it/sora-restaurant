@@ -53,6 +53,7 @@ export function HeroDishes({ locale, mobile = false }: { locale: Locale; mobile?
         <span aria-hidden="true" className={styles.magicBeam} />
         <Image src={`/dishes/${plate.id}.webp`} alt={String()} aria-hidden={true} width={plate.width} height={plate.height} sizes="(max-width: 767px) 45vw, 28vw" unoptimized priority={step === 0} className={styles.plateShadow} style={{ "--plate-foot": `${plate.foot}%` } as React.CSSProperties} />
         <Image src={`/dishes/${plate.id}.webp`} alt={plate[locale]} width={plate.width} height={plate.height} sizes="(max-width: 767px) 45vw, 28vw" unoptimized priority={step === 0} className={styles.dish} style={{ "--plate-foot": `${plate.foot}%` } as React.CSSProperties} />
+        {plate.nong && <span aria-hidden="true" className={styles.steam}>{[0, 1, 2, 3, 4].map((n) => <i key={n} style={{ "--wisp": n } as React.CSSProperties} />)}</span>}
         <span aria-hidden="true" className={styles.sparks}>{[0, 1, 2, 3, 4, 5, 6].map((n) => <i key={n} style={{ "--spark": n } as React.CSSProperties} />)}</span>
       </div>)}
       </div>

@@ -15,7 +15,8 @@
       "vi": "Sushi & sashimi thập cẩm",
       "foot": 16.27,
       "width": 1100,
-      "height": 1100
+      "height": 1100,
+      "nong": false
     },
     {
       "id": "thunfisch-tataki",
@@ -24,7 +25,8 @@
       "vi": "Cá ngừ tataki",
       "foot": 8.73,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": false
     },
     {
       "id": "tempura-platte",
@@ -33,7 +35,8 @@
       "vi": "Tempura chiên giòn",
       "foot": 8.36,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": true
     },
     {
       "id": "curry-rot-haehnchen",
@@ -42,7 +45,8 @@
       "vi": "Cà ri đỏ gà",
       "foot": 8.12,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": true
     },
     {
       "id": "ente-curry",
@@ -51,7 +55,8 @@
       "vi": "Vịt cà ri",
       "foot": 8.61,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": true
     },
     {
       "id": "rind-pak-choi",
@@ -60,7 +65,8 @@
       "vi": "Bò xào cải thìa",
       "foot": 12,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": true
     },
     {
       "id": "garnelen-reis",
@@ -69,7 +75,8 @@
       "vi": "Tôm rang cơm",
       "foot": 8.97,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": true
     },
     {
       "id": "ente-gemuese",
@@ -78,7 +85,8 @@
       "vi": "Vịt xào rau",
       "foot": 8.36,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": true
     },
     {
       "id": "pho-rind",
@@ -87,7 +95,8 @@
       "vi": "Phở bò",
       "foot": 15.27,
       "width": 1100,
-      "height": 1100
+      "height": 1100,
+      "nong": true
     },
     {
       "id": "gebratene-nudeln-garnelen",
@@ -96,7 +105,8 @@
       "vi": "Mì xào tôm",
       "foot": 18.64,
       "width": 1100,
-      "height": 1100
+      "height": 1100,
+      "nong": true
     },
     {
       "id": "fruehlingsrollen",
@@ -105,7 +115,8 @@
       "vi": "Nem rán",
       "foot": 11.52,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": true
     },
     {
       "id": "dessert-teller",
@@ -114,8 +125,10 @@
       "vi": "Đĩa tráng miệng",
       "foot": 8.24,
       "width": 1100,
-      "height": 825
+      "height": 825,
+      "nong": false
     }
   ],
-  "_thieu": "Nhóm getraenke chưa có đĩa nào trong bộ 12 — bấm vào thẻ GETRÄNKE hiện tại sẽ không có món riêng để hiện."
+  "_thieu": "Nhóm getraenke chưa có đĩa nào trong bộ 12 — bấm vào thẻ GETRÄNKE hiện tại sẽ không có món riêng để hiện.",
+  "_ghiChuNong": "nong = món nóng, có khói bốc trên đĩa (Sếp 12/10). Đội tự phân theo tên món — sai thì sửa thẳng ở đây."
 }
