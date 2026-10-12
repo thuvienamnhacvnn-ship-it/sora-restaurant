@@ -9,9 +9,13 @@
  * một canvas phủ màn, một vòng rAF chỉ chạy trong lúc chuyển trang, link vẫn
  * để next/link xử lý — trang đổi NGAY, cánh hoa chỉ bay kèm.
  *
+ * Sếp 12/10 bảo thêm đủ như HPHUONG: *"thêm lớp phủ tối màu, mờ nhạt dần và
+ * đường line như dự án HPhuong"*. Nên có lớp màn TỐI hiện nhanh rồi tan dần
+ * (`MAN`, không bao giờ che kín trang) và nét vẽ bông hoa màu vàng mở ra từ
+ * chỗ bấm (`NET`). Bản đầu 11/10 cố ý bỏ hai thứ này vì luật cấm phủ lớp —
+ * lệnh 12/10 là ngoại lệ Sếp cho riêng hiệu ứng chuyển trang.
+ *
  * Khác bản HPHUONG, có chủ ý:
- *   - KHÔNG có lớp màn mờ phủ trang và KHÔNG có nét vẽ bông hoa: luật của Sếp
- *     cấm phủ lớp lên ảnh, và Sếp chỉ tả cánh hoa.
  *   - Cánh KHÔNG rải đều khắp màn. Phần lớn dừng gần chỗ bấm, càng ra xa càng
  *     thưa (`TAP_TRUNG`), và cánh được nhả dần trong `NHA` ms nên tâm vẫn dày
  *     trong lúc lớp ngoài đã loãng.
@@ -27,6 +31,12 @@ const THOI_LUONG = 2600; // ms, cả lượt
 const NHA = 1000; // ms, khoảng thời gian tâm còn nhả cánh
 const MO_TU = 1500; // ms, cánh bắt đầu mờ dần
 const TAP_TRUNG = 2.2; // số mũ càng lớn cánh càng dồn về tâm
+const MAN = 0.62; // độ đậm lớn nhất của lớp màn tối (không che kín trang)
+const MAN_MAU = "#0a0605";
+const MAN_TAN = 1500; // ms, lúc màn tan hết
+const NET = [7, 8, 9]; // số cánh mỗi vòng của bông hoa nét vẽ
+const NET_MAU = "#e6c38a";
+const NET_LAU = 1500; // ms, một vòng nét mở từ tâm ra tới mép
 const DIEM_ANH_TOI_DA = 3.2e6; // trần bộ đệm canvas, giữ màn 4K mượt
 const TAM = "/decor/sakura-petals-do.webp";
 
@@ -44,6 +54,24 @@ const CANH = [
 
 const kep01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const raBac3 = (t: number) => 1 - Math.pow(1 - t, 3);
+
+/** Đường viền một bông hoa: hai vòng cánh nhọn quanh tâm (chép từ HPHUONG). */
+function netHoa(ctx: CanvasRenderingContext2D, ox: number, oy: number, dai: number, n: number, quay: number) {
+  ctx.beginPath();
+  for (let vong = 0; vong < 2; vong++) {
+    const l = dai * (vong ? 0.82 : 1);
+    const c = l * Math.tan(Math.PI / n) * 1.7;
+    for (let i = 0; i < n; i++) {
+      const a = quay + ((i + vong * 0.5) / n) * Math.PI * 2;
+      const cos = Math.cos(a);
+      const sin = Math.sin(a);
+      const tai = (x: number, y: number): [number, number] => [ox + x * cos - y * sin, oy + x * sin + y * cos];
+      ctx.moveTo(ox, oy);
+      ctx.bezierCurveTo(...tai(l * 0.18, -c), ...tai(l * 0.72, -c * 0.82), ...tai(l, 0));
+      ctx.bezierCurveTo(...tai(l * 0.72, c * 0.82), ...tai(l * 0.18, c), ox, oy);
+    }
+  }
+}
 
 type Canh = {
   hinh: number;
@@ -138,6 +166,7 @@ export function ChuyenTrangHoaDao() {
         });
       }
       ds.sort((a, b) => a.sau - b.sau);
+      const quayGoc = Math.random() * Math.PI * 2;
 
       let batDau = 0;
       const khung = (luc: number) => {
@@ -151,6 +180,26 @@ export function ChuyenTrangHoaDao() {
         }
         const rp = kep01((t - MO_TU) / (THOI_LUONG - MO_TU));
         const mo = 1 - Math.pow(rp, 1.6);
+
+        // Màn tối: lên trong 1/4 giây đầu, rồi tan dần.
+        const man = MAN * Math.min(kep01(t / 240), 1 - kep01((t - 380) / (MAN_TAN - 380)));
+        if (man > 0.005) {
+          ctx.globalAlpha = man;
+          ctx.fillStyle = MAN_MAU;
+          ctx.fillRect(0, 0, W, H);
+        }
+        // Nét bông hoa mở từ chỗ bấm, mảnh dần khi ra tới mép.
+        ctx.strokeStyle = NET_MAU;
+        ctx.lineWidth = 1.2;
+        NET.forEach((n, k) => {
+          const p = kep01((t - k * 110) / NET_LAU);
+          if (p <= 0 || p >= 1) return;
+          const e = raBac3(p);
+          netHoa(ctx, ox, oy, (xaNhat / 0.6) * e, n, quayGoc + (k % 2 ? -0.4 : 0.5) * e);
+          ctx.globalAlpha = 0.55 * Math.min(kep01(p * 6), 1 - p);
+          ctx.stroke();
+        });
+        ctx.globalAlpha = 1;
 
         for (const p of ds) {
           const lt = t - p.tre;

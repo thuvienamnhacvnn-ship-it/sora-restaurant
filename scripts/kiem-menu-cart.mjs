@@ -9,7 +9,7 @@ const b=await dungKhung();
 fs.mkdirSync('_w-agent/menu-cart',{recursive:true});
 const url='http://127.0.0.1:3160/de/speisekarte';
 const ready="return !!document.querySelector('[data-cart-toggle]') && document.querySelectorAll('[data-so-mon] li[data-mon]').length===207";
-async function select(key){await b.js(`const e=document.querySelector('[data-purchase-option]');e.value=${JSON.stringify(key)};e.dispatchEvent(new Event('change',{bubbles:true}));return e.value`);await cho(100);}
+async function select(key){await b.js(`const e=[...document.querySelectorAll('[data-purchase-option]')].find(x=>x.dataset.purchaseOption===${JSON.stringify(key)});e.click();return e.getAttribute('aria-checked')`);await cho(100);}
 async function shot(name){const r=await b.cmd('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});fs.writeFileSync('_w-agent/menu-cart/'+name+'.png',Buffer.from(r.data,'base64'));}
 try{
  await b.khoKhung(1440,900);await b.go(url,{san:ready});
