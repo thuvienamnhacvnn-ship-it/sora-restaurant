@@ -31,9 +31,10 @@ const THOI_LUONG = 2600; // ms, cả lượt
 const NHA = 1000; // ms, khoảng thời gian tâm còn nhả cánh
 const MO_TU = 1500; // ms, cánh bắt đầu mờ dần
 const TAP_TRUNG = 2.2; // số mũ càng lớn cánh càng dồn về tâm
-const MAN = 0.62; // độ đậm lớn nhất của lớp màn tối (không che kín trang)
+const MAN = 0.5; // độ đậm lớn nhất của lớp màn tối — Sếp chốt 50% (12/10)
+const MAN_GIU = 900; // ms, màn giữ nguyên 50% tới lúc này rồi mới tan
 const MAN_MAU = "#0a0605";
-const MAN_TAN = 1500; // ms, lúc màn tan hết
+const MAN_TAN = 2000; // ms, lúc màn tan hết
 const NET = [7, 8, 9]; // số cánh mỗi vòng của bông hoa nét vẽ
 const NET_MAU = "#e6c38a";
 const NET_LAU = 1500; // ms, một vòng nét mở từ tâm ra tới mép
@@ -181,8 +182,8 @@ export function ChuyenTrangHoaDao() {
         const rp = kep01((t - MO_TU) / (THOI_LUONG - MO_TU));
         const mo = 1 - Math.pow(rp, 1.6);
 
-        // Màn tối: lên trong 1/4 giây đầu, rồi tan dần.
-        const man = MAN * Math.min(kep01(t / 240), 1 - kep01((t - 380) / (MAN_TAN - 380)));
+        // Màn tối: lên trong 1/4 giây đầu, giữ 50%, rồi tan dần.
+        const man = MAN * Math.min(kep01(t / 240), 1 - kep01((t - MAN_GIU) / (MAN_TAN - MAN_GIU)));
         if (man > 0.005) {
           ctx.globalAlpha = man;
           ctx.fillStyle = MAN_MAU;

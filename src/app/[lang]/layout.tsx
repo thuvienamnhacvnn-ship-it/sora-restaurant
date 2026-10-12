@@ -27,6 +27,7 @@ import { Inter, Lora, Playfair_Display } from "next/font/google";
 import "../globals.css";
 import { AppShell } from "@/components/shell/AppShell";
 import { ChuyenTrangHoaDao } from "@/components/decor/ChuyenTrangHoaDao";
+import { VeDauTrang } from "@/components/shell/VeDauTrang";
 import { DEFAULT_LOCALE, LOCALES, getT, isLocale } from "@/lib/i18n";
 import { SITE_URL } from "@/data/site";
 
@@ -93,6 +94,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
+      data-scroll-behavior="smooth"
       className={`${lora.variable} ${playfair.variable} ${inter.variable}`}
     >
       <body>
@@ -108,6 +110,7 @@ export default async function RootLayout({
         </a>
         <AppShell locale={lang}>{children}</AppShell>
         <ChuyenTrangHoaDao />
+        <VeDauTrang />
 
         {/*
           Công cụ "Chỉnh tay" — Sếp kéo thả trực tiếp trên trang rồi bấm LƯU,
