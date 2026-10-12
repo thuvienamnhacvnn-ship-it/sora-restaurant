@@ -313,3 +313,14 @@
  .home :global(.sora-tc-hero-nen) { width: 100% !important; height: 125% !important; max-width: none; left: 0 !important; top: -8% !important; object-position: center bottom; }
  .home :global(.sora-tc-canh-roi) { mask-image: none !important; -webkit-mask-image: none !important; }
 }
+
+/* Điện thoại: món ăn hiện ra KHÔNG qua `filter`. Bản máy tính cho món "tan" ra
+   từ blur(10px) rồi chuyển sang drop-shadow; trên điện thoại (Safari iOS nhất
+   là vậy) lớp có filter đang chạy animation bị vẽ ở độ phân giải thấp và hai
+   danh sách filter khác nhau không nội suy được, nên món đứng mờ suốt — Sếp
+   12/10: "hình ảnh món ăn bị mờ blur nặng". Chỉ còn opacity + clip-path; bóng
+   dưới đĩa đã có `.plateShadow` lo. */
+@media (max-width: 767px) {
+ .dish, .pair .appear:nth-child(2) .dish { filter: none; animation-name: enchantedDishMobile; }
+}
+@keyframes enchantedDishMobile { 0%, 3% { opacity: 0; clip-path: inset(100% 0 0); } 9% { opacity: .8; clip-path: inset(45% 0 0); } 18%, 85% { opacity: 1; clip-path: inset(0); } 100% { opacity: 0; clip-path: inset(0); } }
