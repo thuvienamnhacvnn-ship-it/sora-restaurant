@@ -23,10 +23,10 @@
  */
 import { useEffect, useRef } from "react";
 
-const THOI_LUONG = 1900; // ms, cả lượt
-const NHA = 620; // ms, khoảng thời gian tâm còn nhả cánh
-const MO_TU = 800; // ms, cánh bắt đầu mờ dần
-const TAP_TRUNG = 2.7; // số mũ càng lớn cánh càng dồn về tâm
+const THOI_LUONG = 2600; // ms, cả lượt
+const NHA = 1000; // ms, khoảng thời gian tâm còn nhả cánh
+const MO_TU = 1500; // ms, cánh bắt đầu mờ dần
+const TAP_TRUNG = 2.2; // số mũ càng lớn cánh càng dồn về tâm
 const DIEM_ANH_TOI_DA = 3.2e6; // trần bộ đệm canvas, giữ màn 4K mượt
 const TAM = "/decor/sakura-petals-do.webp";
 
@@ -115,7 +115,7 @@ export function ChuyenTrangHoaDao() {
       );
 
       const hinh = napTam();
-      const soCanh = nho ? 140 : 280;
+      const soCanh = nho ? 300 : 720;
       const ds: Canh[] = [];
       for (let i = 0; i < soCanh; i++) {
         const sau = Math.random();
@@ -125,8 +125,8 @@ export function ChuyenTrangHoaDao() {
           goc: Math.random() * Math.PI * 2,
           xa: xaNhat * (0.02 + 0.98 * Math.pow(u, TAP_TRUNG)),
           tre: Math.random() * NHA,
-          bay: 1100 + Math.random() * 600,
-          rong: (nho ? 13 : 16) + sau * sau * (nho ? 24 : 40),
+          bay: 1300 + Math.random() * 700,
+          rong: (nho ? 20 : 26) + sau * sau * (nho ? 44 : 78),
           sau,
           xoay: Math.random() * Math.PI * 2,
           xoayTocDo: (Math.random() - 0.5) * 2.4,
@@ -168,7 +168,7 @@ export function ChuyenTrangHoaDao() {
           const h = (w * c.h) / c.w;
           ctx.save();
           // Càng xa tâm càng nhạt: lớp ngoài mỏng dần, tâm vẫn đậm.
-          ctx.globalAlpha = kep01(lt / 90) * mo * (0.7 + 0.3 * p.sau) * (1 - 0.55 * (ra / xaNhat));
+          ctx.globalAlpha = kep01(lt / 90) * mo * (0.86 + 0.14 * p.sau) * (1 - 0.45 * (ra / xaNhat));
           ctx.translate(x, y);
           ctx.rotate(p.xoay + p.xoayTocDo * s);
           ctx.scale(1, lat);
