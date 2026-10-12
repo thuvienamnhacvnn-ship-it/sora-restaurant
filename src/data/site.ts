@@ -48,7 +48,7 @@ export const HERO_BANNER: Record<NavKey, string> = {
   contact: "kontakt_hero",
 };
 
-export const SITE_URL = "https://sora-restaurant.example";
+export const SITE_URL = "https://sora-restaurant.de";
 
 export function localeName(locale: Locale): string {
   return locale === "de" ? "DE" : "VI";
