@@ -19,7 +19,7 @@ export const restaurant = {
   email: raw.email as string | null,
   whatsapp: raw.whatsapp as string | null,
   instagram: raw.instagram as string | null,
-  facebook: raw.facebook as string | null,
+  tiktok: raw.tiktok as string | null,
   /*
    * CÔNG TẮC khối bản đồ, không mang địa chỉ. Trước đây chỗ này là
    * `googleMapsUrl` + `googleMapsPlaceUrl`, mỗi trường chứa sẵn một URL có
@@ -38,7 +38,7 @@ export const restaurant = {
 export const hasEmail = () => Boolean(restaurant.email);
 export const hasWhatsapp = () => Boolean(restaurant.whatsapp);
 export const hasInstagram = () => Boolean(restaurant.instagram);
-export const hasFacebook = () => Boolean(restaurant.facebook);
+export const hasTiktok = () => Boolean(restaurant.tiktok);
 export const hasMap = () => restaurant.banDoDaXacNhan === true;
 
 /*

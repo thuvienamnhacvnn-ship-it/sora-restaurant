@@ -30,8 +30,8 @@
 
   "email": null,
   "whatsapp": null,
-  "instagram": null,
-  "facebook": null,
+  "instagram": "sorarestaurant.de",
+  "tiktok": "raso63776",
 
   "_nguonThuBa": "XÁC MINH ĐỘC LẬP 05/10/2026 — hồ sơ Google Business của quán, mở bằng `googleMapsFtid`, đã xem tận mắt ảnh chụp. Tên trên hồ sơ là `Sora Asia Cuisine Bad Säckingen` (KHÁC tên in trên bìa thực đơn `SoRa — Japanese & Vietnamese Cuisine`; web bám bìa thực đơn, đó mới là thương hiệu Sếp đặt, đừng đổi theo Google). Ba dữ liệu khớp với bìa thực đơn: địa chỉ `Rheinbrückstraße 24, 79713 Bad Säckingen`; giờ `Đóng cửa vào 22:30`; điện thoại `0162 2979999` — CÙNG dãy chữ số với `01622 979999` trên bìa, chỉ nhóm số khác, nên e164 `+491622979999` là đúng. Toạ độ 47.5521553, 7.9487089. Plus code HW2X+VF. Tức địa chỉ + giờ + số di động giờ có HAI nguồn độc lập, không còn là chép một chỗ. Hồ sơ CHƯA khai website (site lên thì nên khai) và có 51 ảnh thật của quán — ảnh đó là của quán, phải hỏi Sếp trước khi dùng, KHÔNG tự tải.",
   "banDoDaXacNhan": true,
@@ -43,9 +43,7 @@
 
   "_CAN_HOI_SEP": [
     "email — thực đơn in không có",
-    "số WhatsApp — có thể chính là số mobil 01622 979999 nhưng CHƯA ai xác nhận; KIT bắt buộc có nút WhatsApp nên cần Sếp chốt",
-    "tài khoản Instagram — KIT bắt buộc có nút Instagram",
-    "có Facebook không"
+    "số WhatsApp — có thể chính là số mobil 01622 979999 nhưng CHƯA ai xác nhận; KIT bắt buộc có nút WhatsApp nên cần Sếp chốt"
   ],
 
   "_KHONG_DUOC_LAM": "Mọi trường đang null thì ẨN khối tương ứng trên web, không điền số giả, không suy đoán."
