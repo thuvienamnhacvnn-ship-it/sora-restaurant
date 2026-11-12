@@ -23,7 +23,7 @@ import {
   DecorAnchor,
   SakuraEdge,
   SeigaihaWash,
-} from "@/components/decor/Decor";
+} from "@/components/decor/Mua";
 import {
   addressLines,
   hasEmail,

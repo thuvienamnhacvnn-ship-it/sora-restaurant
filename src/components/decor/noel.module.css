@@ -1,0 +1,68 @@
+.tuyet { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 3; }
+.hat {
+  position: absolute; top: -12px; border-radius: 50%; background: #fff;
+  animation: roi var(--d) linear var(--t) infinite;
+}
+@keyframes roi {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: var(--o); }
+  50% { transform: translate3d(var(--x), 52vh, 0); }
+  92% { opacity: var(--o); }
+  100% { transform: translate3d(calc(var(--x) * -0.6), 108vh, 0); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hat { animation: none; top: calc(var(--y) * 1%); opacity: var(--o); }
+}
+.canh { position: absolute; pointer-events: none; user-select: none; background-repeat: no-repeat; background-size: 100% 100%; }
+.mep { position: absolute; pointer-events: none; user-select: none; background-repeat: no-repeat; background-size: auto 100%; }
+.tam { position: absolute; pointer-events: none; user-select: none; display: block; }
+.lop { position: absolute; inset: 0; background-repeat: no-repeat; background-size: 100% 100%; }
+/* Lớp đồ trang trí đổi màu được: --noel-hue / --noel-sat do NoelMauSac đặt trên <html> */
+.do { filter: hue-rotate(var(--noel-hue, 0deg)) saturate(var(--noel-sat, 1)); }
+
+/* mobile: tán thấp cao ~120px, lấy phần giữa thay vì co nhỏ */
+@media (max-width: 767px) {
+  .thap { aspect-ratio: auto !important; height: 120px; }
+  .thap .lop { background-size: auto 100%; background-position: center top; }
+}
+
+/* ===== Header Noel kieu Tay (ban day): girlande day + no do + den LED nhap nhay + tuyet day banner ===== */
+.hd { display: block; position: absolute; left: 0; top: 0; width: 100%; height: 300px; pointer-events: none; user-select: none; z-index: 2; --k: 1; }
+.hdHome { position: relative; }
+.hdLow .girl { height: 112px; background-size: auto 112px; }
+.hdLow .luz, .hdLow .luzB { top: 88px; }
+.girl { position: absolute; left: 0; top: -6px; width: 100%; height: 150px; background: url(/decor/noel/rich-gar-tile.webp) repeat-x left top; background-size: auto 150px; }
+.luz { position: absolute; left: 0; top: 84px; width: 100%; height: 26px; background: url(/decor/noel/rich-den.webp) repeat-x left top; background-size: auto 26px; filter: hue-rotate(var(--noel-hue, 0deg)) saturate(var(--noel-sat, 1)); animation: led 1.6s steps(1, end) infinite; }
+.luzB { left: 18px; top: 84px; animation-delay: -0.8s; }
+@keyframes led { 0% { opacity: 1; } 50% { opacity: .3; } }
+.no { position: absolute; left: 50%; top: -6px; height: 118px; aspect-ratio: 410 / 451; transform: translateX(-50%); background: url(/decor/noel/rich-no.webp) no-repeat center / 100% 100%; transform-origin: 50% 8%; animation: noDung 5s ease-in-out infinite alternate; }
+@keyframes noDung { 0% { transform: translateX(-50%) rotate(-1.6deg); } 100% { transform: translateX(-50%) rotate(1.6deg); } }
+.treo { top: 84px; height: calc(var(--h) * var(--k) * 1.3px); }
+.gocTl { position: absolute; left: 0; top: 40px; width: 250px; aspect-ratio: 394 / 441; background: url(/decor/noel/rich-goc-tl.webp) no-repeat left top / 100% 100%; pointer-events: none; z-index: 2; }
+.gocBr { position: absolute; right: 0; bottom: 10px; width: 300px; aspect-ratio: 500 / 358; background: url(/decor/noel/rich-goc-br.webp) no-repeat right bottom / 100% 100%; pointer-events: none; z-index: 2; }
+.mu2 { position: absolute; right: 16%; bottom: 8px; width: 150px; aspect-ratio: 406 / 290; background: url(/decor/noel/rich-mu.webp) no-repeat center / 100% 100%; transform: rotate(8deg); pointer-events: none; z-index: 2; }
+.anim { position: absolute; pointer-events: none; user-select: none; }
+.animGar { left: 50%; top: 8px; transform: translateX(-50%); height: 168px; width: auto; }
+.hd:has(.animGar) .luz, .hd:has(.animGar) .luzB { display: none; }
+.hdLow ~ .gocTl { width: 190px; }
+.hdLow ~ .gocBr { width: 250px; }
+.drift { position: absolute; left: 0; bottom: 0; width: 100%; height: 22px; background: url(/decor/noel/rich-tuyet.webp) repeat-x left bottom; background-size: auto 22px; pointer-events: none; z-index: 2; }
+.mu { position: absolute; left: 12%; top: -27%; width: 68%; aspect-ratio: 373 / 314; background: url(/decor/noel/mu-ong-gia.webp) no-repeat center / 100% 100%; transform: rotate(-4deg); pointer-events: none; z-index: 3; }
+@media (max-width: 767px) {
+  .hd { height: 200px; }
+  .girl { height: 104px; background-size: auto 104px; }
+  .animGar { height: 112px; }
+  .gocTl { width: 130px; top: 30px; }
+  .gocBr { width: 160px; }
+  .mu2 { width: 90px; }
+  .luz, .luzB { top: 62px; height: 20px; background-size: auto 20px; }
+  .no { height: 84px; }
+  .drift { height: 16px; background-size: auto 16px; }
+}
+@media (max-width: 767px) {
+  .hdLow .girl { height: 84px; background-size: auto 84px; }
+  .hdLow .luz, .hdLow .luzB { top: 66px; }
+  .hdLow ~ .gocTl { width: 80px; top: 54px; }
+  .hdLow ~ .gocBr { width: 96px; bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .luz, .no { animation: none; } }

@@ -30,7 +30,9 @@ import {
   FallingPetals,
   NE_CHU_HERO,
   PetalsSettled,
-} from "@/components/decor/Decor";
+  MUA,
+  NoelCanopyBig,
+} from "@/components/decor/Mua";
 import { MasterChefCard } from "@/components/shell/MasterChefCard";
 import { Icon } from "@/components/ui/Icon";
 import { href, type Locale } from "@/lib/i18n";
@@ -68,17 +70,46 @@ export function HomeHero({
       {/* --- lớp 0: ảnh nhà hàng (chỉ khổ máy tính; điện thoại có khối riêng
           phía dưới, đúng mục 16 "text trước, food sau") --- */}
       <div aria-hidden="true" className="sora-home-backdrop absolute inset-0 z-0 hidden md:block">
-        <Image
-          src={NEN}
-          alt=""
-          fill
-          /* Trừ sidebar — khối này nằm trong `<main>` có `md:ml-[var(--sidebar-w)]`
-             nên chưa bao giờ rộng đúng 100vw ở khổ máy tính. Khai 100vw làm
-             Next chọn ảnh to hơn mức cần và in cảnh báo mỗi lần dựng trang. */
-          sizes="(max-width: 767px) 100vw, (max-width: 1199px) calc(100vw - 88px), calc(100vw - 250px)"
-          className="sora-tc-hero-nen sora-tc-mobile-nen"
-        />
-        <Image src="/hero/cinematic-dining-room-v1.png" alt="" fill sizes="(max-width: 1199px) calc(100vw - 88px), calc(100vw - 250px)" className="sora-tc-hero-nen sora-tc-desktop-nen" />
+        {MUA === "noel" ? (
+          <video
+            className="sora-tc-hero-nen sora-tc-mobile-nen"
+            src="/hero/noel-mobile-loop.mp4"
+            poster="/hero/noel-mobile-poster.webp"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        ) : (
+          <Image
+            src={NEN}
+            alt=""
+            fill
+            /* Trừ sidebar — khối này nằm trong `<main>` có `md:ml-[var(--sidebar-w)]`
+               nên chưa bao giờ rộng đúng 100vw ở khổ máy tính. Khai 100vw làm
+               Next chọn ảnh to hơn mức cần và in cảnh báo mỗi lần dựng trang. */
+            sizes="(max-width: 767px) 100vw, (max-width: 1199px) calc(100vw - 88px), calc(100vw - 250px)"
+            className="sora-tc-hero-nen sora-tc-mobile-nen"
+          />
+        )}
+        {MUA === "noel" ? (
+          /* Video nền Noel: camera cố định, tốc độ thật (không tua), lặp liền. */
+          <video
+            className="sora-tc-hero-nen sora-tc-desktop-nen"
+            src="/hero/noel-quan-loop.mp4"
+            poster="/hero/noel-quan-poster.webp"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        ) : (
+          <Image src="/hero/cinematic-dining-room-v1.png" alt="" fill sizes="(max-width: 1199px) calc(100vw - 88px), calc(100vw - 250px)" className="sora-tc-hero-nen sora-tc-desktop-nen" />
+        )}
       </div>
 
       <div aria-hidden="true" className="sora-tc-ban-da">
@@ -86,7 +117,7 @@ export function HomeHero({
       </div>
 
       <div aria-hidden="true" className="sora-tc-hoa-dao">
-        <Image src="/hero/cherry-blossoms.png" alt="" width={1672} height={409} sizes="100vw" priority />
+        {MUA === "noel" ? <NoelCanopyBig /> : <Image src="/hero/cherry-blossoms.png" alt="" width={1672} height={409} sizes="100vw" priority />}
       </div>
 
       {/* Cánh hoa rơi + cánh đã đọng — GIỮ NGUYÊN bộ của dự án (mục 4).

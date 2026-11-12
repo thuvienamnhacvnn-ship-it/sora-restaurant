@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import styles from "./logo.module.css";
+import { MUA } from "@/components/decor/cau-hinh-mua";
+import { NoelHat } from "@/components/decor/Noel";
 
 /*
  * Logo tròn. Dùng bản đã trim + xuất nhẹ trong public/logo.
@@ -92,6 +94,7 @@ export function SoRaLogo({
       <Image src="/logo/sora-spin-poster-v1.png" alt="" width={size} height={size} priority={priority} sizes={`${size}px`} className={styles.poster}/>
       <video ref={videoRef} className={styles.video} aria-hidden="true" autoPlay muted loop playsInline preload="none" disablePictureInPicture controls={false} />
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
+      {MUA === "noel" && size >= 100 && <NoelHat />}
     </span>
   );
 }

@@ -1,0 +1,70 @@
+/* Noel (Sếp 12/11/2026): tuyết đọng trên nút. Chỉ chạy khi <body> có class mua-noel (xem layout + cau-hinh-mua.ts). */
+body.mua-noel :is(
+  .sora-tc-nut,
+  .sora-btn-gold,
+  [class*="menu_tab"],
+  [class*="reservation_copy"],
+  button.inline-flex[class*="radius-btn"],
+  button[type="submit"]
+) {
+  position: relative;
+  overflow: visible;
+}
+body.mua-noel :is(
+  .sora-tc-nut,
+  .sora-btn-gold,
+  [class*="menu_tab"],
+  [class*="reservation_copy"],
+  button.inline-flex[class*="radius-btn"],
+  button[type="submit"]
+)::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: -7px;
+  height: 15px;
+  pointer-events: none;
+  z-index: 2;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='16' viewBox='0 0 64 16'%3E%3Cpath d='M0 11C6 5 14 2 22 5C30 1 42 1 50 5C56 3 62 6 64 11Q60 14 56 11Q50 16 44 11Q36 14 28 11Q20 15 14 11Q8 13 4 11Z' fill='%23f6f9ff'/%3E%3C/svg%3E") left top / auto 100% repeat-x;
+}
+
+/* tuyết rơi phủ cả trang, đứng trên nội dung nhưng không bắt chuột */
+.noel-tuyet-toan-trang { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
+.noel-tuyet-toan-trang > span { position: absolute; inset: 0; }
+
+/* bộ chọn màu đồ trang trí */
+.noel-mau { position: fixed; left: 62px; bottom: 250px; z-index: 70; display: flex; gap: 8px; padding: 4px; }
+.noel-mau-chip { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; padding: 0; cursor: pointer; }
+.noel-mau-chip[aria-pressed="true"] { border-color: #f6f9ff; }
+@media (max-width: 1199px) { .noel-mau { left: 8px; bottom: 150px; } }
+@media (max-width: 767px) { .noel-mau { left: auto; right: 10px; top: auto; bottom: 100px; flex-direction: row-reverse; } }
+
+.noel-mau-goc { outline: 2px solid rgba(246, 249, 255, 0.9); outline-offset: 1px; }
+.noel-mau-goc { position: relative; display: grid; place-items: center; width: 24px; height: 24px; }
+.noel-mau-sao { font-size: 13px; line-height: 1; color: #fff; }
+
+/* Video nền Noel trang chủ: cho thấy cả quán (không phóng to như ảnh tĩnh cũ) */
+body.mua-noel .sora-home-backdrop video.sora-tc-hero-nen { height: 100% !important; top: 0 !important; width: 100% !important; left: 0 !important; object-fit: cover; object-position: center 35% !important; }
+
+/* Trang chủ Noel (máy tính): hero cao cả màn để thấy không gian quán; bàn đá + đĩa nằm sát đáy;
+   khối thẻ món tự ẩn xuống dưới, cuộn xuống mới thấy. Chữ giữ nguyên cỡ (k tính theo 51,6% chiều cao như cũ). */
+@media (min-width: 768px) {
+  body.mua-noel .sora-tc-hero { height: 100svh; max-height: none; --tc-k: calc(51.6cqh / 558); }
+}
+@media (min-width: 768px) {
+  body.mua-noel .sora-tc-hero { flex: none; }
+  body.mua-noel .sora-tc-dm { flex: none; min-height: 320px; padding-top: 68px !important; }
+}
+
+/* Dây thông dọc đường giao thanh menu - banner (chỉ máy tính, ảnh tĩnh, không filter) */
+.noel-gar-doc { display: none; }
+@media (min-width: 1200px) {
+  body.mua-noel .noel-gar-doc { display: block; position: fixed; top: 0; bottom: 0; left: calc(var(--sidebar-w) - 26px); width: 52px; background: url(/decor/noel/rich-gar-doc.webp) repeat-y center top; background-size: 52px auto; pointer-events: none; z-index: 40; }
+}
+
+/* Sửa theo KT-PRO: trang chủ Noel cuộn được tới thẻ món; Master Chef nằm dưới vòng thông */
+@media (min-width: 768px) {
+  body.mua-noel .sora-tc { display: block !important; overflow-x: hidden !important; overflow-y: auto !important; height: 100% !important; scrollbar-width: thin; scrollbar-color: rgba(216,178,106,.5) transparent; }
+  body.mua-noel .sora-tc-hero > div.absolute.top-5.right-6 { top: 128px !important; }
+}

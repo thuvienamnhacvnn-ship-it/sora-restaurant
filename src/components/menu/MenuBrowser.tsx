@@ -44,7 +44,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { MagicBannerTitle } from "@/components/ui/MagicBannerTitle";
 import { KhungThongBao } from "@/components/ui/KhungThongBao";
-import { FallingPetals } from "@/components/decor/Decor";
+import { CanopyLow, FallingPetals } from "@/components/decor/Mua";
 import { Icon } from "@/components/ui/Icon";
 import { DishDetailModal } from "./DishDetailModal";
 import { HangCuon } from "./HangCuon";
@@ -278,6 +278,7 @@ export function MenuBrowser({
           chip chế độ ăn = `button[aria-pressed]` (chọn nhiều). */}
       <section className={s.menuHero} data-menu-hero="">
         <Image src="/banner/speisekarte_hero-1920.webp" alt="" fill priority sizes="(max-width:767px) 100vw, (max-width:1199px) calc(100vw - 88px), calc(100vw - 250px)" className={s.menuHeroImage} />
+        <CanopyLow />
         <FallingPetals className="sora-subpage-petals" />
         <div className={s.menuHeroTitle}><MagicBannerTitle nhan="menu" locale={locale} desktop={1.4} mobile={1.04} /></div>
       <div className={s.thanhLoc}>

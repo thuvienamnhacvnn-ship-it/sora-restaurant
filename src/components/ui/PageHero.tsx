@@ -19,7 +19,8 @@ import {
   FallingPetals,
   NE_CHU_HERO,
   PetalsSettled,
-} from "@/components/decor/Decor";
+  CanopyLow,
+} from "@/components/decor/Mua";
 import { ChuCo, WordmarkSora, type ChuNhan } from "@/components/chu/ChuCo";
 import { HERO_BANNER, type NavKey } from "@/data/site";
 import type { Locale } from "@/lib/i18n";
@@ -70,6 +71,7 @@ export function PageHero({
         <Image src={`/banner/${banner}-1920.webp`} alt="" fill priority
           sizes="(max-width:767px) 100vw, (max-width:1199px) calc(100vw - 88px), calc(100vw - 250px)"
           className="sora-subpage-magic-background" />
+        <CanopyLow />
         <FallingPetals className="sora-subpage-petals" />
         <div className="sora-subpage-magic-heading">
           <MagicBannerTitle nhan={CHU_TRANG[page]} locale={locale}

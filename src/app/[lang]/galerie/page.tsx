@@ -21,7 +21,7 @@ import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { ChoSepAn } from "@/components/ui/ChoSep";
 import { MobileFooter } from "@/components/shell/MobileFooter";
-import { DecorAnchor, SakuraEdge } from "@/components/decor/Decor";
+import { DecorAnchor, SakuraEdge } from "@/components/decor/Mua";
 import { GalleryBrowser } from "@/components/gallery/GalleryBrowser";
 import { foodPhotos } from "@/components/gallery/food";
 import { CHU_NHAN } from "@/components/chu/ChuCo";

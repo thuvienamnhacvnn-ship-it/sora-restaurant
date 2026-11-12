@@ -12,7 +12,7 @@
 import { Icon } from "@/components/ui/Icon";
 import type { Locale } from "@/lib/i18n";
 import { hasEmail, phoneLabel, restaurant, telHref } from "@/data/restaurant";
-import { CornerSakura, GoldWaveCorner } from "@/components/decor/Decor";
+import { CornerSakura, GoldWaveCorner } from "@/components/decor/Mua";
 
 export type ContactFormStrings = {
   title: string;

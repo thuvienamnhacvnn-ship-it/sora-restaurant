@@ -34,7 +34,7 @@ import Image from "next/image";
 import { Icon } from "@/components/ui/Icon";
 import { restaurant, telHref, phoneLabel } from "@/data/restaurant";
 import { getT, pick, type Locale } from "@/lib/i18n";
-import { CornerSakura } from "@/components/decor/Decor";
+import { CornerSakura } from "@/components/decor/Mua";
 import { RT } from "./text";
 
 export type ReservationStrings = {

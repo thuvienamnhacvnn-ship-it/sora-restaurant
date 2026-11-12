@@ -39,7 +39,8 @@ const NET = [7, 8, 9]; // số cánh mỗi vòng của bông hoa nét vẽ
 const NET_MAU = "#e6c38a";
 const NET_LAU = 1500; // ms, một vòng nét mở từ tâm ra tới mép
 const DIEM_ANH_TOI_DA = 3.2e6; // trần bộ đệm canvas, giữ màn 4K mượt
-const TAM = "/decor/sakura-petals-do.webp";
+import { MUA } from "./cau-hinh-mua";
+const TAM = MUA === "noel" ? "/decor/noel-tuyet.webp" : "/decor/sakura-petals-do.webp";
 
 /* Toạ độ từng cánh trong sprite 900×900 — chép từ `PETAL_SPRITE` (Decor.tsx). */
 const CANH = [

@@ -19,7 +19,7 @@ import {
   BrushPill,
   CornerSakura,
   SeigaihaWash,
-} from "@/components/decor/Decor";
+} from "@/components/decor/Mua";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { NAV, LEGAL_NAV, type NavKey } from "@/data/site";
 import { getT, href, type Locale, LOCALES } from "@/lib/i18n";

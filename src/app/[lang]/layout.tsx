@@ -25,6 +25,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Inter, Lora, Playfair_Display } from "next/font/google";
 import "../globals.css";
+import "../noel.css";
+import { MUA } from "@/components/decor/cau-hinh-mua";
+import { FallingSnow } from "@/components/decor/Noel";
+import { NoelMauSac } from "@/components/decor/NoelMauSac";
 import { AppShell } from "@/components/shell/AppShell";
 import { ChuyenTrangHoaDao } from "@/components/decor/ChuyenTrangHoaDao";
 import { VeDauTrang } from "@/components/shell/VeDauTrang";
@@ -97,7 +101,7 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
       className={`${lora.variable} ${playfair.variable} ${inter.variable}`}
     >
-      <body>
+      <body className={MUA === "noel" ? "mua-noel" : undefined}>
         <a
           href="#inhalt"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-[6px] focus:bg-elevated focus:px-4 focus:py-2 focus:text-gold-bright"
@@ -109,6 +113,13 @@ export default async function RootLayout({
           {t("nav.skipToContent")}
         </a>
         <AppShell locale={lang}>{children}</AppShell>
+        {MUA === "noel" && (
+          <div aria-hidden="true" className="noel-tuyet-toan-trang">
+            <FallingSnow dense />
+          </div>
+        )}
+        {MUA === "noel" && <NoelMauSac />}
+        {MUA === "noel" && <div aria-hidden="true" className="noel-gar-doc" />}
         <ChuyenTrangHoaDao />
         <VeDauTrang />
 
