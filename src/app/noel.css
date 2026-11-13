@@ -54,7 +54,7 @@ body.mua-noel .sora-home-backdrop video.sora-tc-hero-nen { height: 100% !importa
 }
 @media (min-width: 768px) {
   body.mua-noel .sora-tc-hero { flex: none; }
-  body.mua-noel .sora-tc-dm { flex: none; min-height: 320px; padding-top: 68px !important; }
+  body.mua-noel .sora-tc-dm { flex: none; box-sizing: border-box; min-height: 0 !important; height: clamp(320px, 50svh, 600px) !important; padding: 8px 20px 10px !important; }
 }
 
 /* Dây thông dọc đường giao thanh menu - banner (chỉ máy tính, ảnh tĩnh, không filter) */
